@@ -10,3 +10,8 @@ Guia para el desarrollo del juego
 7-Implementar IA del boss
 8-Implementar sistema de oleadas
 9-Implementar ciclo del juego
+
+
+
+
+https://gafferongames.com/post/fix_your_timestep/

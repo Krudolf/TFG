@@ -1,3 +1,12 @@
-﻿  pch.cpp
-  Alphas.cpp
+﻿  Alphas.cpp
+  Game.cpp
+c:\users\krudolf\desktop\tfg\alphas\alphas\game.cpp(59): warning C4244: 'inicializando': conversión de 'const _Ty' a 'float'; posible pérdida de datos
+          with
+          [
+              _Ty=double
+          ]
+c:\users\krudolf\desktop\tfg\alphas\alphas\game.cpp(87): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudolf\desktop\tfg\alphas\alphas\game.cpp(94): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudolf\desktop\tfg\alphas\alphas\game.cpp(101): warning C4018: '<': no coinciden signed/unsigned
+  Generando código...
   Alphas.vcxproj -> C:\Users\Krudolf\Desktop\TFG\Alphas\Debug\Alphas.exe
