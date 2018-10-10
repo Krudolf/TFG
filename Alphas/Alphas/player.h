@@ -1,16 +1,19 @@
 #pragma once
 #include "entity.h"
-#include "movable.h"
 
+class Entity;
 
 class Player :
-	public Entity, public Movable
+	public Entity
 {
 public:
-	Player(sf::RenderWindow* p_window);
+	Player();
 	~Player();
 	
-	void move();
-	void update();
+	void move(float p_delteTime);
+	void update(float p_deltaTime);
+
+private:
+	int m_velocity;
 };
 

@@ -1,12 +1,17 @@
-﻿  Alphas.cpp
-  Game.cpp
-c:\users\krudolf\desktop\tfg\alphas\alphas\game.cpp(59): warning C4244: 'inicializando': conversión de 'const _Ty' a 'float'; posible pérdida de datos
+﻿  camera.cpp
+  EngineManager.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(35): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
-              _Ty=double
+              T=float
           ]
-c:\users\krudolf\desktop\tfg\alphas\alphas\game.cpp(87): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudolf\desktop\tfg\alphas\alphas\game.cpp(94): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudolf\desktop\tfg\alphas\alphas\game.cpp(101): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(62): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(86): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  entity.cpp
+  Game.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(77): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(85): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(93): warning C4018: '<': no coinciden signed/unsigned
+  player.cpp
   Generando código...
-  Alphas.vcxproj -> C:\Users\Krudolf\Desktop\TFG\Alphas\Debug\Alphas.exe
+  Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe

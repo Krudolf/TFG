@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de origen\managers">
+      <UniqueIdentifier>{4ab80bfc-8a2a-4ed5-aa0f-3726f39a8f20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\managers">
+      <UniqueIdentifier>{64d2b5d9-531f-4ba0-b963-37fb1fe39d2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\entities">
+      <UniqueIdentifier>{af48504c-f9cf-4d2c-895a-b64d3e4ef90f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\entities">
+      <UniqueIdentifier>{22c2b4ee-89fe-4e50-aab5-7f560a7f3675}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -24,14 +36,17 @@
     <ClInclude Include="game.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="movable.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="engineManager.h">
+      <Filter>Archivos de encabezado\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>Archivos de encabezado\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Archivos de encabezado\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,14 +62,17 @@
     <ClCompile Include="Game.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="movable.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineManager.cpp">
+      <Filter>Archivos de origen\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Archivos de origen\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>Archivos de origen\entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

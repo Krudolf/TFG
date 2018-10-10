@@ -1,24 +1,26 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+class EngineManager;
 
 class Entity
 {
 public:
-	Entity(sf::RenderWindow* p_window);
+	Entity();
 	~Entity();
 
-	virtual void update();
+	virtual void update(float p_deltaTime);
 	void draw();
 
-	sf::Vector2f getPosition() { return m_sprite->getPosition(); }
-
-private:
-	sf::RenderWindow* m_window;
+	float getPositionX() { return m_posX; };
+	float getPositionY() { return m_posY; };
 
 protected:
-	sf::Sprite*		m_sprite;
-	sf::Texture*	m_texture;
+	EngineManager*	m_engineManager;
 
+	int m_textureID;
+	int m_spriteID;
+
+	float m_lastPosX, m_lastPosY;
+	float m_posX, m_posY;
 };
 

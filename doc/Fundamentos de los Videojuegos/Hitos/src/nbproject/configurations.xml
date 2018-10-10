@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>Interfaz.h</itemPath>
+      <itemPath>Menu.h</itemPath>
+      <itemPath>aro.h</itemPath>
+      <itemPath>boss.h</itemPath>
+      <itemPath>enemigos.h</itemPath>
+      <itemPath>juego.h</itemPath>
+      <itemPath>mapGame.h</itemPath>
+      <itemPath>player.h</itemPath>
+      <itemPath>renderWindow.h</itemPath>
+      <itemPath>sprite.h</itemPath>
+      <itemPath>state.h</itemPath>
+      <itemPath>textura.h</itemPath>
+      <itemPath>vector2f.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>Interfaz.cpp</itemPath>
+      <itemPath>Menu.cpp</itemPath>
+      <itemPath>aro.cpp</itemPath>
+      <itemPath>boss.cpp</itemPath>
+      <itemPath>enemigos.cpp</itemPath>
+      <itemPath>juego.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+      <itemPath>mapGame.cpp</itemPath>
+      <itemPath>player.cpp</itemPath>
+      <itemPath>renderWindow.cpp</itemPath>
+      <itemPath>sprite.cpp</itemPath>
+      <itemPath>state.cpp</itemPath>
+      <itemPath>textura.cpp</itemPath>
+      <itemPath>vector2f.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <incDir>
+            <pElem>/usr/include/SFML</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>/usr/lib/x86_64-linux-gnu</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-audio.so</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-graphics.so</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-system.so</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-window.so</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libtinyxml.so</linkerLibFileItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="Interfaz.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Interfaz.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Menu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Menu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="aro.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="aro.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boss.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="boss.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="enemigos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="enemigos.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles">
+        <linkerTool>
+          <linkerDynSerch>
+            <pElem>.</pElem>
+            <pElem>.</pElem>
+          </linkerDynSerch>
+        </linkerTool>
+      </folder>
+      <item path="juego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="juego.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mapGame.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mapGame.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="player.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="renderWindow.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="renderWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="sprite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="sprite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="state.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="state.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="textura.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="textura.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="vector2f.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="vector2f.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>8</standard>
+          <incDir>
+            <pElem>/usr/include/SFML</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>SFML_STATIC</Elem>
+          </preprocessorList>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>/usr/lib/x86_64-linux-gnu</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-audio.so</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-graphics.so</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-system.so</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-window.so</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libtinyxml.so</linkerLibFileItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="Interfaz.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Interfaz.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Menu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Menu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="aro.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="aro.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boss.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="boss.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="enemigos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="enemigos.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles">
+        <linkerTool>
+          <linkerDynSerch>
+            <pElem>.</pElem>
+            <pElem>.</pElem>
+          </linkerDynSerch>
+        </linkerTool>
+      </folder>
+      <item path="juego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="juego.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mapGame.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mapGame.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="player.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="renderWindow.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="renderWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="sprite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="sprite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="state.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="state.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="textura.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="textura.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="vector2f.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="vector2f.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

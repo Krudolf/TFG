@@ -1,24 +1,27 @@
 #include "pch.h"
 #include "camera.h"
+#include "engineManager.h"
+#include "entity.h"
+
 #include <iostream>
 
-Camera::Camera(sf::RenderWindow* p_window)
+Camera::Camera()
 {
+	m_engineManager = &EngineManager::p();
+
 	//sf::View((target),(size of the rectangle));
-	m_view = new sf::View(sf::Vector2f(0, 0), sf::Vector2f(600, 480));
-	m_window = p_window;
-	m_window->setView(*m_view);
+	m_engineManager->createCameraView(0, 0, 600, 480);
+	m_engineManager->getWindow()->setView(*m_engineManager->getCameraView());
 }
 
 
 Camera::~Camera()
 {
-	delete m_view;
 }
 
 void Camera::update()
 {
 	//std::cout << m_target->getPosition().x << ", " << m_target->getPosition().y << std::endl;
-	m_view->setCenter(m_target->getPosition().x, m_target->getPosition().y);
-	m_window->setView(*m_view);
+	m_engineManager->getCameraView()->setCenter(m_target->getPositionX(), m_target->getPositionY());
+	m_engineManager->getWindow()->setView(*m_engineManager->getCameraView());
 }

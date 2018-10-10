@@ -1,15 +1,14 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <vector>
-#include "entity.h"
-#include "player.h"
-#include "camera.h"
+
+class EngineManager;
+class Camera;
+class Entity;
 
 class Game
 {
 public:
-	sf::RenderWindow* m_window;
 	static std::vector<Entity*> m_entityVector;
 	static std::vector<Entity*> m_playerVector;
 
@@ -17,23 +16,21 @@ public:
 	~Game();
 
 	void run();
-	void update();
+	void update(double p_time, float p_deltaTime);
 	void draw();
 	void deleteAndFree();
 
 	void createPlayer();
 
 private:
+	EngineManager* m_engineManager;
 	Camera* m_camera;
 
-	double m_time;
-	double m_dt;
-	double m_currentTime;
-	double m_newTime;
-	double m_frameTime;
+	float m_time;
+	float m_dt;
+	float m_currentTime;
+	float m_newTime;
+	float m_frameTime;
 	int FPS;
-
-	sf::Clock m_masterClock;
-
 };
 
