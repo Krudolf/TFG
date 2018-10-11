@@ -24,8 +24,10 @@ public:
 	/* ENTITY */
 	int loadTexture(const char* p_path);
 	int createSprite(int p_textureID, float p_scale, bool p_centerOrigin);
-	sf::Sprite* getSprite(int p_spriteID) { return m_spriteVector[p_spriteID]; };
+	sf::CircleShape* getSprite(int p_spriteID) { return m_spriteVector[p_spriteID]; };
 	void setSpriteFrame(int p_spriteID, int p_entity, int p_frame);
+
+	bool checkCollision(int p_spriteID1, int p_spriteID2);
 
 	/* MAP */
 	void createMap();
@@ -36,7 +38,7 @@ private:
 
 	std::vector<const char*>	m_textureNameVector;
 	std::vector<sf::Texture*>	m_textureVector;
-	std::vector<sf::Sprite*>	m_spriteVector;
+	std::vector<sf::CircleShape*>	m_spriteVector;
 
 	sf::RenderWindow*	m_window;
 	sf::View*			m_cameraView;

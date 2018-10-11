@@ -82,11 +82,16 @@ int EngineManager::createSprite(int p_textureID, float p_scale, bool p_centerOri
 {
 	int spriteID = -1;
 
-	sf::Sprite* t_sprite = new sf::Sprite();
-	t_sprite->setTexture(*m_textureVector[p_textureID]);
+	sf::CircleShape* t_sprite = new sf::CircleShape();
+	t_sprite->setRadius(64);
+	t_sprite->setTexture(m_textureVector[p_textureID]);
 	t_sprite->setTextureRect(sf::IntRect(0, 0, 128, 128));
 	t_sprite->setOrigin(t_sprite->getTextureRect().width / 2, t_sprite->getTextureRect().height / 2);
 	t_sprite->setScale(p_scale, p_scale);
+
+	/* DEBUG */
+	//t_sprite->setOutlineColor(sf::Color::Red);
+	//t_sprite->setOutlineThickness(2);
 
 	m_spriteVector.push_back(t_sprite);
 	spriteID = m_spriteVector.size() - 1;
@@ -97,6 +102,16 @@ int EngineManager::createSprite(int p_textureID, float p_scale, bool p_centerOri
 void EngineManager::setSpriteFrame(int p_spriteID, int p_entity, int p_frame)
 {
 	this->getSprite(p_spriteID)->setTextureRect(sf::IntRect(128 * p_frame, 128 * p_entity, 128, 128));
+}
+
+bool EngineManager::checkCollision(int p_spriteID1, int p_spriteID2)
+{
+	sf::CircleShape* t_sprite1 = m_spriteVector[p_spriteID1];
+	sf::CircleShape* t_sprite2 = m_spriteVector[p_spriteID2];
+
+	bool t_collide = t_sprite1->getGlobalBounds().intersects(t_sprite2->getGlobalBounds());
+
+	return t_collide;
 }
 
 void EngineManager::createMap()

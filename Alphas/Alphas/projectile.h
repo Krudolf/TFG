@@ -4,7 +4,7 @@ class Projectile :
 	public Entity
 {
 public:
-	Projectile(int p_textureID, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY);
+	Projectile(int p_textureID, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage);
 	~Projectile();
 
 	bool getReadyToDelete() { return m_readyToDelete; };
@@ -15,6 +15,8 @@ private:
 	int		m_velocity = 300;
 	int		m_moveX;
 	int		m_moveY;
+
+	float	m_damage;
 
 	float	m_lifeTime;
 	float	m_dieTime;

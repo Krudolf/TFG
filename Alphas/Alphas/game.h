@@ -5,13 +5,15 @@
 class EngineManager;
 class Camera;
 class Entity;
+class Player;
+class Enemy;
 
 class Game
 {
 public:
-	friend class Player;
-	static std::vector<Entity*> m_entityVector;
-	static std::vector<Entity*> m_playerVector;
+	//static std::vector<Entity*> m_entityVector;
+	static std::vector<Player*> m_playerVector;
+	static std::vector<Enemy*> m_enemyVector;
 
 	Game();
 	~Game();

@@ -2,20 +2,23 @@
 #include "player.h"
 #include "engineManager.h"
 #include "projectile.h"
-#include "game.h"
 
 #include <iostream>
 
 Player::Player(float p_posX, float p_posY, float p_velocity, const char* p_path) : Entity(p_path, Entities::PLAYER1)
 {
-	m_posX = p_posX;
-	m_posY = p_posY;
-	m_lastPosX = p_posX;
-	m_lastPosY = p_posY;
-	m_velocity = p_velocity;
+	m_posX		= p_posX;
+	m_posY		= p_posY;
+	m_lastPosX	= p_posX;
+	m_lastPosY	= p_posY;
+	m_velocity	= p_velocity;
+
+	m_health		= 100.f;
+	m_mana			= 100.f;
+	m_damage		= 10.f;
+	m_atackSpeed	= 0.25f;
 
 	m_basicInCooldown = false;
-	m_cooldownBasic = 0.25f;
 	m_nextBasic = m_engineManager->getMasterClockSeconds();
 }
 
@@ -80,9 +83,9 @@ void Player::launchProjectile(Direction p_dir)
 {
 	if (!m_basicInCooldown && m_basicProjectiles.size() < m_maxProjectiles) {
 		m_basicInCooldown = true;
-		m_nextBasic = m_engineManager->getMasterClockSeconds() + m_cooldownBasic;
+		m_nextBasic = m_engineManager->getMasterClockSeconds() + m_atackSpeed;
 
-		Projectile* t_projectile = new Projectile(m_textureID, Entities::BULLET1, p_dir, m_posX, m_posY);
+		Projectile* t_projectile = new Projectile(m_textureID, Entities::BULLET1, p_dir, m_posX, m_posY, m_damage);
 		m_basicProjectiles.push_back(t_projectile);
 	}
 }

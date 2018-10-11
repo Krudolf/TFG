@@ -23,9 +23,13 @@ public:
 private:
 	double	m_deltaTime;
 	float	m_velocity;
+
+	float	m_health;
+	float	m_mana;
+	float	m_damage;
+	float	m_atackSpeed;
 	
 	bool	m_basicInCooldown;
-	float	m_cooldownBasic;
 	float	m_nextBasic;
 	std::vector<Projectile*> m_basicProjectiles;
 	const int m_maxProjectiles = 10;

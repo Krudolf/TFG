@@ -38,7 +38,10 @@ void Game::run()
 	m_engineManager->createMap();
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 
-	createEnemy(250.f, 0);
+	createEnemy(200.f, 0.f);
+	createEnemy(-200.f, 0.f);
+	createEnemy(0.f, 200.f);
+	createEnemy(0.f, -200.f);
 
 	//Run the program while the window is open
 	while (m_engineManager->getWindow()->isOpen()){
@@ -75,38 +78,64 @@ void Game::run()
 void Game::update(double p_time, float p_deltaTime)
 {
 	m_camera->update();
-	for (int i = 0; i < m_entityVector.size(); i++) {
-		m_entityVector[i]->update(p_deltaTime);
+	
+	//Update the player/s
+	for (int i = 0; i < m_playerVector.size(); i++) {
+		m_playerVector[i]->update(p_deltaTime);
+	}
+
+	//Update the enemys
+	for (int i = 0; i < m_enemyVector.size(); i++) {
+		m_enemyVector[i]->update(p_deltaTime);
+		
+		if (m_enemyVector[i]->isDead()) {
+			std::cout << "Enemigo muerto" << std::endl;
+			delete m_enemyVector[i];
+			m_enemyVector.erase(m_enemyVector.begin() + i);
+		}
 	}
 }
 
 
 void Game::draw()
 {
-	for (int i = 0; i < m_entityVector.size(); i++) {
-		m_entityVector[i]->draw();
+	//Draw the player/s
+	for (int i = 0; i < m_playerVector.size(); i++) {
+		m_playerVector[i]->draw();
+	}
+
+	//Draw the enemys
+	for (int i = 0; i < m_enemyVector.size(); i++) {
+		m_enemyVector[i]->draw();
 	}
 }
 
 
 void Game::deleteAndFree()
 {
-	for (int i = 0; i < m_entityVector.size(); i++) {
-		delete m_entityVector[i];
-		m_entityVector[i] = nullptr;
+	for (int i = 0; i < m_playerVector.size(); i++) {
+		delete m_playerVector[i];
+		m_playerVector[i] = nullptr;
 	}
+	for (int i = 0; i < m_enemyVector.size(); i++) {
+		delete m_enemyVector[i];
+		m_enemyVector[i] = nullptr;
+	}
+	m_playerVector.clear();
+	m_enemyVector.clear();
 }
 
 
 void Game::createPlayer()
 {
 	Player* player = new Player(0, 0, 100, "assets/spritesheet.png");
-	m_entityVector.push_back(player);
+	//m_entityVector.push_back(player);
 	m_playerVector.push_back(player);
 }
 
 void Game::createEnemy(float p_posX, float p_posY)
 {
 	Enemy* enemy = new Enemy(p_posX, p_posY, 100, "assets/spritesheet.png");
-	m_entityVector.push_back(enemy);
+	//m_entityVector.push_back(enemy);
+	m_enemyVector.push_back(enemy);
 }
