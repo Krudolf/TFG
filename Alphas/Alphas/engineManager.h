@@ -31,10 +31,10 @@ public:
 	void createMap();
 	sf::Sprite* getMapSprite() { return mapSprite; };
 
-
 private:
 	EngineManager();
 
+	std::vector<const char*>	m_textureNameVector;
 	std::vector<sf::Texture*>	m_textureVector;
 	std::vector<sf::Sprite*>	m_spriteVector;
 

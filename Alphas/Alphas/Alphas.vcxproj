@@ -164,6 +164,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="projectile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Alphas.cpp" />
@@ -179,6 +180,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="projectile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

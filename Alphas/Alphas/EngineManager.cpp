@@ -10,12 +10,23 @@ EngineManager::EngineManager()
 
 EngineManager::~EngineManager()
 {
-
 	delete mapSprite;
 	delete mapTexture;
 
+	for (int i = 0; i < m_spriteVector.size(); i++) {
+		delete m_spriteVector[i];
+		m_spriteVector[i] = nullptr;
+	}
+	m_spriteVector.clear();
+
+	for (int i = 0; i < m_textureVector.size(); i++) {
+		delete m_textureVector[i];
+		m_textureVector[i] = nullptr;
+	}
+	m_textureVector.clear();
+
 	delete m_cameraView;
-	//Delete in last place
+
 	delete m_window;
 }
 
@@ -39,15 +50,30 @@ int EngineManager::loadTexture(const char * p_path)
 {
 	int textureID = -1;
 
-	sf::Texture* t_texture = new sf::Texture();
-	if (!t_texture->loadFromFile(p_path))
-	{
-		std::cout << "No se ha podido cargar la textura " << p_path << std::endl;
-		return textureID;
+	//Search if the texture is already loaded
+	bool isLoaded = false;
+	for (int i = 0; i < m_textureNameVector.size(); i++) {
+		//If is  loaded we return the ID
+		if ((std::strcmp(m_textureNameVector[i], p_path) == 0)) {
+			isLoaded = true;
+			textureID = i;
+			break;
+		}
 	}
+
+	//If not is loaded we create that texture and return its ID
+	if (!isLoaded) {
+		sf::Texture* t_texture = new sf::Texture();
+		if (!t_texture->loadFromFile(p_path))
+		{
+			std::cout << "No se ha podido cargar la textura " << p_path << std::endl;
+			return textureID;
+		}
 	
-	m_textureVector.push_back(t_texture);
-	textureID = m_textureVector.size()-1;
+		m_textureNameVector.push_back(p_path);
+		m_textureVector.push_back(t_texture);
+		textureID = m_textureVector.size()-1;
+	}
 
 	return textureID;
 }

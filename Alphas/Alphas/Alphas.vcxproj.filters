@@ -48,6 +48,9 @@
     <ClInclude Include="player.h">
       <Filter>Archivos de encabezado\entities</Filter>
     </ClInclude>
+    <ClInclude Include="projectile.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -73,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="enemy.cpp">
       <Filter>Archivos de origen\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="projectile.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

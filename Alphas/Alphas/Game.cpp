@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "entity.h"
 #include "player.h"
+#include "enemy.h"
 #include <iostream>
 
 Game::Game()
@@ -31,13 +32,13 @@ Game::~Game()
 void Game::run()
 {	
 	createPlayer();
-	//std::cout << "Total entity: " << m_entityVector.size() << std::endl;
-
 	m_camera->setTarget(m_playerVector[0]);
 
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 	m_engineManager->createMap();
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
+
+	createEnemy(250.f, 0);
 
 	//Run the program while the window is open
 	while (m_engineManager->getWindow()->isOpen()){
@@ -99,7 +100,13 @@ void Game::deleteAndFree()
 
 void Game::createPlayer()
 {
-	Player* player = new Player();
+	Player* player = new Player(0, 0, 100, "assets/spritesheet.png");
 	m_entityVector.push_back(player);
 	m_playerVector.push_back(player);
+}
+
+void Game::createEnemy(float p_posX, float p_posY)
+{
+	Enemy* enemy = new Enemy(p_posX, p_posY, 100, "assets/spritesheet.png");
+	m_entityVector.push_back(enemy);
 }

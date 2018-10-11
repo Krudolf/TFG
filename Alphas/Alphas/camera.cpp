@@ -17,6 +17,8 @@ Camera::Camera()
 
 Camera::~Camera()
 {
+	std::cout << "BORRAMOS CAMERA" << std::endl;
+
 }
 
 void Camera::update()

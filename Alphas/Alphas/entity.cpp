@@ -4,23 +4,32 @@
 #include "engineManager.h"
 #include <iostream>
 
-Entity::Entity()
+Entity::Entity(const char* p_path, Entities p_ent)
 {
 	m_engineManager = &EngineManager::p();
+	m_spriteSheetRow = static_cast<int>(p_ent);
 
 	/*
 	TODO: Handle what happens if textureID is -1
-	TODO: Pass the path as a variable
 	*/
-	m_textureID = m_engineManager->loadTexture("assets/spriteazul.png");
-
+	m_textureID = m_engineManager->loadTexture(p_path);
 	m_spriteID = m_engineManager->createSprite(m_textureID, 0.5, true);
+	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+}
+
+Entity::Entity(int p_textureID, Entities p_ent)
+{
+	m_engineManager = &EngineManager::p();
+	m_spriteSheetRow = static_cast<int>(p_ent);
+
+	m_textureID = p_textureID;
+	m_spriteID = m_engineManager->createSprite(m_textureID, 0.5, true);
+	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
 }
 
 
 Entity::~Entity()
 {
-
 }
 
 

@@ -9,6 +9,7 @@ class Entity;
 class Game
 {
 public:
+	friend class Player;
 	static std::vector<Entity*> m_entityVector;
 	static std::vector<Entity*> m_playerVector;
 
@@ -22,7 +23,10 @@ public:
 
 	void createPlayer();
 
+	void createEnemy(float p_posX, float p_posY);
+
 private:
+
 	EngineManager* m_engineManager;
 	Camera* m_camera;
 
