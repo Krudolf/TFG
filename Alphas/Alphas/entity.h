@@ -8,7 +8,7 @@ enum class Entities {
 	PLAYER2,
 	BULLET2,
 	ENEMY,
-	ITEM
+	POTION
 };
 
 enum class Direction {
@@ -22,9 +22,9 @@ class Entity
 {
 public:
 	Entity(const char* p_path, Entities p_ent);
-	Entity(int p_textureID, Entities p_ent);
 	virtual ~Entity();
 
+	virtual void update();
 	virtual void update(float p_deltaTime);
 	virtual void draw();
 
@@ -36,9 +36,9 @@ public:
 protected:
 	EngineManager*	m_engineManager;
 
-	int m_textureID;
-	int m_spriteID;
+	const char*	m_texturePath;
 
+	int m_spriteID;
 	int m_spriteSheetRow;
 
 	float m_posX, m_posY;

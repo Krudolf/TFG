@@ -1,8 +1,5 @@
-﻿  Game.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(83): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(88): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(103): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(108): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(116): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(120): warning C4018: '<': no coinciden signed/unsigned
+﻿  sceneMap.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\scenemap.cpp(25): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\scenemap.cpp(26): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\scenemap.cpp(65): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
   Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe

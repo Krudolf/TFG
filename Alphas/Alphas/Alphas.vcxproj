@@ -164,7 +164,13 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="potion.h" />
+    <ClInclude Include="potionHealth.h" />
+    <ClInclude Include="potionMana.h" />
+    <ClInclude Include="potionSpeed.h" />
     <ClInclude Include="projectile.h" />
+    <ClInclude Include="sceneMap.h" />
+    <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Alphas.cpp" />
@@ -180,7 +186,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="potion.cpp" />
+    <ClCompile Include="potionHealth.cpp" />
+    <ClCompile Include="potionMana.cpp" />
+    <ClCompile Include="potionSpeed.cpp" />
     <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="sceneMap.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

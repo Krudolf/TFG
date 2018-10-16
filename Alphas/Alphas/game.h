@@ -7,13 +7,16 @@ class Camera;
 class Entity;
 class Player;
 class Enemy;
+class Potion;
+class SceneMap;
 
 class Game
 {
 public:
 	//static std::vector<Entity*> m_entityVector;
-	static std::vector<Player*> m_playerVector;
-	static std::vector<Enemy*> m_enemyVector;
+	static std::vector<Player*>	m_playerVector;
+	static std::vector<Enemy*>	m_enemyVector;
+	static std::vector<Potion*> m_potionVector;
 
 	Game();
 	~Game();
@@ -29,8 +32,9 @@ public:
 
 private:
 
-	EngineManager* m_engineManager;
-	Camera* m_camera;
+	EngineManager*	m_engineManager;
+	Camera*			m_camera;
+	SceneMap*		m_sceneMap;
 
 	float m_time;
 	float m_dt;

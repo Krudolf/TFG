@@ -5,7 +5,7 @@ class Enemy :
 	public Entity
 {
 public:
-	Enemy(float p_posX, float p_posY, float p_velocity, const char* p_path);
+	Enemy(float p_posX, float p_posY, const char* p_path);
 	~Enemy();
 
 	void receiveDamage(float p_damage);
@@ -15,9 +15,14 @@ public:
 
 private:
 	float	m_velocity;
+	float	m_baseVelocity;
 	float	m_health;
+	float	m_maxHealth;
 	float	m_mana;
+	float	m_maxMana;
 	float	m_damage;
 	float	m_atackSpeed;
+
 	bool	m_dead;
+
 };

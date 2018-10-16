@@ -25,6 +25,12 @@
     <Filter Include="Archivos de encabezado\entities">
       <UniqueIdentifier>{22c2b4ee-89fe-4e50-aab5-7f560a7f3675}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\entities\potions">
+      <UniqueIdentifier>{33210650-293f-4f69-8c36-b39c48db3fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\entities\potions">
+      <UniqueIdentifier>{6ca50b8c-d8c7-4c7c-ab0b-0e0d08f4d6c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -49,6 +55,24 @@
       <Filter>Archivos de encabezado\entities</Filter>
     </ClInclude>
     <ClInclude Include="projectile.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="potion.h">
+      <Filter>Archivos de encabezado\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="potionHealth.h">
+      <Filter>Archivos de encabezado\entities\potions</Filter>
+    </ClInclude>
+    <ClInclude Include="potionMana.h">
+      <Filter>Archivos de encabezado\entities\potions</Filter>
+    </ClInclude>
+    <ClInclude Include="potionSpeed.h">
+      <Filter>Archivos de encabezado\entities\potions</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneMap.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -78,6 +102,24 @@
       <Filter>Archivos de origen\entities</Filter>
     </ClCompile>
     <ClCompile Include="projectile.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="potion.cpp">
+      <Filter>Archivos de origen\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="potionHealth.cpp">
+      <Filter>Archivos de origen\entities\potions</Filter>
+    </ClCompile>
+    <ClCompile Include="potionSpeed.cpp">
+      <Filter>Archivos de origen\entities\potions</Filter>
+    </ClCompile>
+    <ClCompile Include="potionMana.cpp">
+      <Filter>Archivos de origen\entities\potions</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneMap.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

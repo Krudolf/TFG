@@ -2,21 +2,28 @@
 #include "player.h"
 #include "engineManager.h"
 #include "projectile.h"
+#include "game.h"
+#include "potion.h"
 
 #include <iostream>
 
-Player::Player(float p_posX, float p_posY, float p_velocity, const char* p_path) : Entity(p_path, Entities::PLAYER1)
+Player::Player(float p_posX, float p_posY, const char* p_path) : Entity(p_path, Entities::PLAYER1)
 {
 	m_posX		= p_posX;
 	m_posY		= p_posY;
 	m_lastPosX	= p_posX;
 	m_lastPosY	= p_posY;
-	m_velocity	= p_velocity;
-
-	m_health		= 100.f;
-	m_mana			= 100.f;
-	m_damage		= 10.f;
+	
+	m_baseVelocity	= 100.f;
+	m_velocity		= m_baseVelocity;
+	m_maxHealth		= 100.f;
+	m_health		= m_maxHealth;
+	m_maxMana		= 100.f;
+	m_mana			= m_maxMana;
+	m_damage		= 50.f;
 	m_atackSpeed	= 0.25f;
+
+	m_speedPotionEfect = false;
 
 	m_basicInCooldown = false;
 	m_nextBasic = m_engineManager->getMasterClockSeconds();
@@ -30,6 +37,30 @@ Player::~Player()
 		m_basicProjectiles[i] = nullptr;
 	}
 	m_basicProjectiles.clear();
+}
+
+void Player::increaseHealth(float p_health)
+{
+	m_health += p_health;
+	std::cout << "Health: " <<  m_health << std::endl;
+}
+
+void Player::increaseMana(float p_mana)
+{
+	m_mana += p_mana;
+	std::cout << "Mana: " << m_mana << std::endl;
+}
+
+void Player::increaseSpeed(float p_duration)
+{
+	if (!m_speedPotionEfect) {
+		m_speedPotionEfect = true;
+		m_endOfSpeedPotionEffect = m_engineManager->getMasterClockSeconds() + p_duration;
+		m_velocity += 50;
+	}
+	else {
+		m_endOfSpeedPotionEffect = m_engineManager->getMasterClockSeconds() + p_duration;
+	}
 }
 
 
@@ -85,8 +116,17 @@ void Player::launchProjectile(Direction p_dir)
 		m_basicInCooldown = true;
 		m_nextBasic = m_engineManager->getMasterClockSeconds() + m_atackSpeed;
 
-		Projectile* t_projectile = new Projectile(m_textureID, Entities::BULLET1, p_dir, m_posX, m_posY, m_damage);
+		Projectile* t_projectile = new Projectile(m_texturePath, Entities::BULLET1, p_dir, m_posX, m_posY, m_damage);
 		m_basicProjectiles.push_back(t_projectile);
+	}
+}
+
+void Player::pickObject()
+{
+	for (int i = 0; i < Game::m_potionVector.size(); i++) {
+		if (m_engineManager->checkCollision(this->m_spriteID, Game::m_potionVector[i]->getSpriteID())) {
+			Game::m_potionVector[i]->setEffect(this);
+		}
 	}
 }
 
@@ -106,19 +146,32 @@ void Player::updateBasicAtack()
 	}
 }
 
+void Player::updatePotionEffects()
+{
+	float t_currentTime = m_engineManager->getMasterClockSeconds();
+	if (m_speedPotionEfect && t_currentTime >= m_endOfSpeedPotionEffect) {
+		m_speedPotionEfect = false;
+		m_velocity = m_baseVelocity;
+	}
+}
+
 void Player::update(float p_deltaTime) {
 	m_deltaTime = p_deltaTime;
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		pickObject();
+
+	updatePotionEffects();
 	updateBasicAtack();
 	move();
-	rangeAtack();
+	rangeAtack();	
 }
 
 void Player::draw()
 {
-	m_engineManager->getWindow()->draw(*m_engineManager->getSprite(m_spriteID));
+	m_engineManager->draw(m_engineManager->getSprite(m_spriteID));
 
 	for (int i = 0; i < m_basicProjectiles.size(); i++) {
-		m_engineManager->getWindow()->draw(*m_engineManager->getSprite(m_basicProjectiles[i]->getSpriteID()));
+		m_engineManager->draw(m_engineManager->getSprite(m_basicProjectiles[i]->getSpriteID()));
 	}
 }

@@ -4,7 +4,7 @@ class Projectile :
 	public Entity
 {
 public:
-	Projectile(int p_textureID, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage);
+	Projectile(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage);
 	~Projectile();
 
 	bool getReadyToDelete() { return m_readyToDelete; };

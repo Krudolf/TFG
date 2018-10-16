@@ -5,7 +5,13 @@
 #include "entity.h"
 #include "player.h"
 #include "enemy.h"
+#include "potion.h"
+#include "potionHealth.h"
+#include "potionMana.h"
+#include "potionSpeed.h"
 #include <iostream>
+
+#include "sceneMap.h"
 
 Game::Game()
 {
@@ -25,7 +31,7 @@ Game::Game()
 
 Game::~Game()
 {
-	delete m_camera;
+	deleteAndFree();
 }
 
 
@@ -35,7 +41,8 @@ void Game::run()
 	m_camera->setTarget(m_playerVector[0]);
 
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
-	m_engineManager->createMap();
+	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
+
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 
 	createEnemy(200.f, 0.f);
@@ -64,14 +71,12 @@ void Game::run()
 		}
 
 		m_engineManager->getWindow()->clear(sf::Color::Red);
-
-		m_engineManager->getWindow()->draw(*m_engineManager->getMapSprite());
+		m_sceneMap->draw();
 		draw();
 
 		m_engineManager->getWindow()->display();
 	}
 
-	deleteAndFree();
 }
 
 
@@ -79,34 +84,63 @@ void Game::update(double p_time, float p_deltaTime)
 {
 	m_camera->update();
 	
-	//Update the player/s
+	//Update player/s
 	for (int i = 0; i < m_playerVector.size(); i++) {
 		m_playerVector[i]->update(p_deltaTime);
 	}
 
-	//Update the enemys
+	//Update enemys
 	for (int i = 0; i < m_enemyVector.size(); i++) {
 		m_enemyVector[i]->update(p_deltaTime);
 		
 		if (m_enemyVector[i]->isDead()) {
-			std::cout << "Enemigo muerto" << std::endl;
+			int random = rand() % 101;	//Random between 0 and 100;
+			
+			Potion* t_potion;
+			if(random > 0 && random <= 50){
+				t_potion = new PotionHealth("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::HEALTH);
+			}
+			else if (random > 50 && random <= 75) {
+				t_potion = new PotionSpeed("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::SPEED);
+			}
+			else if (random > 75 && random <= 100) {
+				t_potion = new PotionMana("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::MANA);
+			}
+			m_potionVector.push_back(t_potion);
+
 			delete m_enemyVector[i];
+			m_enemyVector[i] = nullptr;
 			m_enemyVector.erase(m_enemyVector.begin() + i);
 		}
+	}
+
+	//Update potions
+	for (int i = 0; i < m_potionVector.size(); i++) {
+		m_potionVector[i]->update();
+		if (m_potionVector[i]->getEffectUsed()) {
+			delete m_potionVector[i];
+			m_potionVector[i] = nullptr;
+			m_potionVector.erase(m_potionVector.begin() + i);
+		}		
 	}
 }
 
 
 void Game::draw()
 {
-	//Draw the player/s
+	//Draw player/s
 	for (int i = 0; i < m_playerVector.size(); i++) {
 		m_playerVector[i]->draw();
 	}
 
-	//Draw the enemys
+	//Draw enemys
 	for (int i = 0; i < m_enemyVector.size(); i++) {
 		m_enemyVector[i]->draw();
+	}
+
+	//Draw potions
+	for (int i = 0; i < m_potionVector.size(); i++) {
+		m_potionVector[i]->draw();
 	}
 }
 
@@ -121,21 +155,31 @@ void Game::deleteAndFree()
 		delete m_enemyVector[i];
 		m_enemyVector[i] = nullptr;
 	}
+	
+	for (int i = 0; i < m_potionVector.size(); i++) {
+		delete m_potionVector[i];
+		m_potionVector[i] = nullptr;
+	}
+
 	m_playerVector.clear();
 	m_enemyVector.clear();
+	m_potionVector.clear();
+
+	delete m_sceneMap;
+	delete m_camera;
 }
 
 
 void Game::createPlayer()
 {
-	Player* player = new Player(0, 0, 100, "assets/spritesheet.png");
+	Player* player = new Player(0, 0, "assets/spritesheet.png");
 	//m_entityVector.push_back(player);
 	m_playerVector.push_back(player);
 }
 
 void Game::createEnemy(float p_posX, float p_posY)
 {
-	Enemy* enemy = new Enemy(p_posX, p_posY, 100, "assets/spritesheet.png");
+	Enemy* enemy = new Enemy(p_posX, p_posY, "assets/spritesheet.png");
 	//m_entityVector.push_back(enemy);
 	m_enemyVector.push_back(enemy);
 }

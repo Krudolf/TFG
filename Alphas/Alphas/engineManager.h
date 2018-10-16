@@ -12,6 +12,7 @@ public:
 	/* WINDOW */
 	void createWindow(int p_resolutionX, int p_resolutionY, const char* p_name);
 	sf::RenderWindow* getWindow() { return m_window; };
+	void draw(sf::Sprite* p_sprite);
 
 	/* VIEW */
 	void createCameraView(int centerX, int centerY, int width, int height);
@@ -22,23 +23,20 @@ public:
 	float		getMasterClockSeconds() { return m_masterClock.getElapsedTime().asSeconds(); };
 
 	/* ENTITY */
-	int loadTexture(const char* p_path);
-	int createSprite(int p_textureID, float p_scale, bool p_centerOrigin);
-	sf::CircleShape* getSprite(int p_spriteID) { return m_spriteVector[p_spriteID]; };
+	void loadTexture(const char* p_path);
+	sf::Texture* getTexture(const char* p_texturePath) { return  m_textureMap[p_texturePath]; };
+	int createSprite(const char* p_texturePath, float p_scale, bool p_centerOrigin);
+	sf::Sprite* getSprite(int p_spriteID) { return m_spriteVector[p_spriteID]; };
 	void setSpriteFrame(int p_spriteID, int p_entity, int p_frame);
 
 	bool checkCollision(int p_spriteID1, int p_spriteID2);
 
-	/* MAP */
-	void createMap();
-	sf::Sprite* getMapSprite() { return mapSprite; };
-
 private:
 	EngineManager();
 
-	std::vector<const char*>	m_textureNameVector;
-	std::vector<sf::Texture*>	m_textureVector;
-	std::vector<sf::CircleShape*>	m_spriteVector;
+	std::map<const char*, sf::Texture*> m_textureMap;
+	std::map<const char*, sf::Texture*>::iterator m_textureMapIterator;
+	std::vector<sf::Sprite*>	m_spriteVector;
 
 	sf::RenderWindow*	m_window;
 	sf::View*			m_cameraView;
