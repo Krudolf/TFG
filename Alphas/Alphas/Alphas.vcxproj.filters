@@ -75,6 +75,9 @@
     <ClInclude Include="tinyxml2.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="quadTree.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -120,6 +123,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="tinyxml2.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

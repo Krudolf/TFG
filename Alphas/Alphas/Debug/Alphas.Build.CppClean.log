@@ -2,7 +2,9 @@ c:\users\krudo\desktop\tfg\alphas\alphas\debug\alphas.pch
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\vc141.pdb
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\vc141.idb
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\pch.obj
+c:\users\krudo\desktop\tfg\alphas\alphas\debug\tinyxml2.obj
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\scenemap.obj
+c:\users\krudo\desktop\tfg\alphas\alphas\debug\quadtree.obj
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\projectile.obj
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\potionspeed.obj
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\potionmana.obj
@@ -15,11 +17,9 @@ c:\users\krudo\desktop\tfg\alphas\alphas\debug\enginemanager.obj
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\enemy.obj
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\camera.obj
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\alphas.obj
-c:\users\krudo\desktop\tfg\alphas\alphas\debug\tinyxml2.obj
 c:\users\krudo\desktop\tfg\alphas\debug\alphas.exe
 c:\users\krudo\desktop\tfg\alphas\debug\alphas.ilk
 c:\users\krudo\desktop\tfg\alphas\debug\alphas.pdb
-c:\users\krudo\desktop\tfg\alphas\alphas\debug\scenemap.obj.enc
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\alphas.tlog\cl.command.1.tlog
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\alphas.tlog\cl.read.1.tlog
 c:\users\krudo\desktop\tfg\alphas\alphas\debug\alphas.tlog\cl.write.1.tlog

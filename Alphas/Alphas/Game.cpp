@@ -9,9 +9,11 @@
 #include "potionHealth.h"
 #include "potionMana.h"
 #include "potionSpeed.h"
+#include "quadTree.h"
 #include <iostream>
 
 #include "sceneMap.h"
+
 
 Game::Game()
 {
@@ -32,6 +34,10 @@ Game::Game()
 Game::~Game()
 {
 	deleteAndFree();
+
+	delete m_sceneMap;
+	delete m_camera;
+	delete m_quadTree;
 }
 
 
@@ -42,13 +48,13 @@ void Game::run()
 
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
+	m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
 
-	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
-
-	createEnemy(200.f, 0.f);
-	createEnemy(-200.f, 0.f);
-	createEnemy(0.f, 200.f);
-	createEnemy(0.f, -200.f);
+	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
+	createEnemy(1000.f, 400.f);
+	createEnemy(600.f, 400.f);
+	createEnemy(800.f, 600.f);
+	createEnemy(800.f, 200.f);
 
 	//Run the program while the window is open
 	while (m_engineManager->getWindow()->isOpen()){
@@ -70,13 +76,16 @@ void Game::run()
 			m_time += t_deltaTime;
 		}
 
+		m_quadTree->clear();
+		m_engineManager->fillQuadTree(m_quadTree);
+
 		m_engineManager->getWindow()->clear(sf::Color::Red);
 		m_sceneMap->draw();
+		m_quadTree->debug();
 		draw();
 
 		m_engineManager->getWindow()->display();
 	}
-
 }
 
 
@@ -164,15 +173,12 @@ void Game::deleteAndFree()
 	m_playerVector.clear();
 	m_enemyVector.clear();
 	m_potionVector.clear();
-
-	delete m_sceneMap;
-	delete m_camera;
 }
 
 
 void Game::createPlayer()
 {
-	Player* player = new Player(0, 0, "assets/spritesheet.png");
+	Player* player = new Player(800, 400, "assets/spritesheet.png");
 	//m_entityVector.push_back(player);
 	m_playerVector.push_back(player);
 }

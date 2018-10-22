@@ -169,6 +169,7 @@
     <ClInclude Include="potionMana.h" />
     <ClInclude Include="potionSpeed.h" />
     <ClInclude Include="projectile.h" />
+    <ClInclude Include="quadTree.h" />
     <ClInclude Include="sceneMap.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
@@ -191,6 +192,7 @@
     <ClCompile Include="potionMana.cpp" />
     <ClCompile Include="potionSpeed.cpp" />
     <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="sceneMap.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>

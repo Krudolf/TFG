@@ -1,5 +1,22 @@
-﻿  sceneMap.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\scenemap.cpp(25): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\scenemap.cpp(26): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\scenemap.cpp(65): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+﻿  Game.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(51): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(98): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(103): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(128): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(142): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(147): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(152): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(160): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(164): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(169): warning C4018: '<': no coinciden signed/unsigned
+  QuadTree.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(31): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(95): warning C4018: '>': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(100): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(132): warning C4018: '<': no coinciden signed/unsigned
+  Generando código...
   Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe

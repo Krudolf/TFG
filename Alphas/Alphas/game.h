@@ -9,6 +9,7 @@ class Player;
 class Enemy;
 class Potion;
 class SceneMap;
+class QuadTree;
 
 class Game
 {
@@ -35,6 +36,7 @@ private:
 	EngineManager*	m_engineManager;
 	Camera*			m_camera;
 	SceneMap*		m_sceneMap;
+	QuadTree*		m_quadTree;
 
 	float m_time;
 	float m_dt;

@@ -1,7 +1,10 @@
 #pragma once
 
+#include "tinyxml2.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
+
+class QuadTree;
 
 class EngineManager
 {
@@ -29,6 +32,14 @@ public:
 	sf::Sprite* getSprite(int p_spriteID) { return m_spriteVector[p_spriteID]; };
 	void setSpriteFrame(int p_spriteID, int p_entity, int p_frame);
 
+	/* MAP */
+	void loadMap(const char* p_urlXML, const char* p_urlTexture);
+	void deleteMap();
+	void drawMap();
+	void fillQuadTree(QuadTree* p_quadTree);
+	int getMapWidth() { return (m_width*m_tileWidth); };
+	int getMapHeight() { return (m_height*m_tileHeight); };
+
 	bool checkCollision(int p_spriteID1, int p_spriteID2);
 
 private:
@@ -45,5 +56,19 @@ private:
 	sf::Texture* mapTexture;
 	sf::Sprite* mapSprite;
 
+	/* MAP */
+	sf::Sprite**** m_mapMatrix4D;
+
+	tinyxml2::XMLDocument*	m_mapDocument;
+	tinyxml2::XMLElement*	m_rootElement;
+	tinyxml2::XMLElement*	m_firstLayerElement;
+	tinyxml2::XMLElement*	m_layerElement;
+	tinyxml2::XMLElement*	m_tileElement;
+
+	int m_width;
+	int m_height;
+	int m_tileWidth;
+	int m_tileHeight;
+	int m_totalLayers;
 };
 
