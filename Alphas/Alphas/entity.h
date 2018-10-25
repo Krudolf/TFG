@@ -21,7 +21,8 @@ enum class Direction {
 class Entity
 {
 public:
-	Entity(const char* p_path, Entities p_ent);
+	Entity(const char* p_path, Entities p_entity);
+	Entity(const char* p_path, int p_textureLeft, int p_textureTop, int p_textureWidth, int p_textureHeight, float p_posX, float p_posY);
 	virtual ~Entity();
 
 	virtual void update();

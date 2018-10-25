@@ -10,6 +10,7 @@
 #include "potionMana.h"
 #include "potionSpeed.h"
 #include "quadTree.h"
+#include "tile.h"
 #include <iostream>
 
 #include "sceneMap.h"
@@ -49,6 +50,7 @@ void Game::run()
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
 	m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
+	std::vector<Entity*> t_returnObjects;
 
 	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
 	createEnemy(1000.f, 400.f);
@@ -68,6 +70,31 @@ void Game::run()
 		m_newTime = m_engineManager->getMasterClockSeconds();
 		m_frameTime = m_newTime - m_currentTime;
 		m_currentTime = m_newTime;
+		
+		/* QUADTREE */
+		m_quadTree->clear();
+
+		for (int i = 0; i < m_entityVector.size(); i++) {
+			m_quadTree->insert(m_entityVector[i]);
+		}
+
+		for (auto t_player : m_playerVector) {
+			t_returnObjects.clear();
+			t_returnObjects = m_quadTree->retrieve(t_returnObjects, t_player);
+
+			int x = 0;
+			for (auto t_objects : t_returnObjects) {
+				if (static_cast<Tile*>(t_objects)->getGID() == 15) {
+					//std::cout << "Hay un borde cerca" << std::endl;
+					x++;
+				}
+				//std::cout << static_cast<Tile*>(t_objects)->getGID() << std::endl;
+			}
+			//std::cout << x << std::endl;
+		}
+		//std::cout << "++++++++" << std::endl;
+
+		
 		while (m_frameTime > 0.0) {
 			float t_deltaTime = std::min(m_frameTime, m_dt);
 			update(m_time, t_deltaTime);
@@ -76,12 +103,8 @@ void Game::run()
 			m_time += t_deltaTime;
 		}
 
-		m_quadTree->clear();
-		m_engineManager->fillQuadTree(m_quadTree);
-
 		m_engineManager->getWindow()->clear(sf::Color::Red);
-		m_sceneMap->draw();
-		m_quadTree->debug();
+
 		draw();
 
 		m_engineManager->getWindow()->display();
@@ -130,49 +153,54 @@ void Game::update(double p_time, float p_deltaTime)
 			delete m_potionVector[i];
 			m_potionVector[i] = nullptr;
 			m_potionVector.erase(m_potionVector.begin() + i);
-		}		
+		}
 	}
 }
 
 
 void Game::draw()
 {
+	//Draw the map
+	m_sceneMap->draw();
+	m_quadTree->debug();
+
 	//Draw player/s
-	for (int i = 0; i < m_playerVector.size(); i++) {
-		m_playerVector[i]->draw();
+	for (auto t_player : m_playerVector) {
+		t_player->draw();
 	}
 
 	//Draw enemys
-	for (int i = 0; i < m_enemyVector.size(); i++) {
-		m_enemyVector[i]->draw();
+	for (auto t_enemy : m_enemyVector) {
+		t_enemy->draw();
 	}
 
 	//Draw potions
-	for (int i = 0; i < m_potionVector.size(); i++) {
-		m_potionVector[i]->draw();
+	for (auto t_potion : m_potionVector) {
+		t_potion->draw();
 	}
 }
 
 
 void Game::deleteAndFree()
 {
-	for (int i = 0; i < m_playerVector.size(); i++) {
-		delete m_playerVector[i];
-		m_playerVector[i] = nullptr;
+	for (auto t_player : m_playerVector) {
+		delete t_player;
+		t_player = nullptr;
 	}
-	for (int i = 0; i < m_enemyVector.size(); i++) {
-		delete m_enemyVector[i];
-		m_enemyVector[i] = nullptr;
+	for (auto t_enemy : m_enemyVector) {
+		delete t_enemy;
+		t_enemy = nullptr;
 	}
 	
-	for (int i = 0; i < m_potionVector.size(); i++) {
-		delete m_potionVector[i];
-		m_potionVector[i] = nullptr;
+	for (auto t_potion : m_potionVector) {
+		delete t_potion;
+		t_potion = nullptr;
 	}
 
 	m_playerVector.clear();
 	m_enemyVector.clear();
 	m_potionVector.clear();
+	m_entityVector.clear();
 }
 
 

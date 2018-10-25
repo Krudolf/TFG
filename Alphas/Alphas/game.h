@@ -14,7 +14,7 @@ class QuadTree;
 class Game
 {
 public:
-	//static std::vector<Entity*> m_entityVector;
+	static std::vector<Entity*> m_entityVector;
 	static std::vector<Player*>	m_playerVector;
 	static std::vector<Enemy*>	m_enemyVector;
 	static std::vector<Potion*> m_potionVector;

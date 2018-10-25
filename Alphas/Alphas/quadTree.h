@@ -2,9 +2,12 @@
 
 #include <vector>
 #include <array>
-#include <SFML/Graphics.hpp>
+
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 class EngineManager;
+class Entity;
 
 class QuadTree
 {
@@ -14,9 +17,9 @@ public:
 
 	void clear();
 	void split();
-	int getIndex(sf::FloatRect p_rectangle);
-	void insert(sf::Sprite* p_sprite);
-	std::vector<sf::Sprite*> retrieve(std::vector<sf::Sprite*> p_returnObjects, sf::FloatRect p_rectangle);
+	int getIndex(Entity* p_entity);
+	void insert(Entity* p_entity);
+	std::vector<Entity*> retrieve(std::vector<Entity*> p_returnObjects, Entity* p_entity);
 
 	void debug();
 
@@ -24,11 +27,13 @@ private:
 	EngineManager* m_engineManager;
 	sf::RectangleShape* m_debug;
 
-	const int MAX_OBJECTS = 50;
+	const int MAX_OBJECTS = 100;
 	const int MAX_LEVELS = 5;
 
 	int m_level;
-	std::vector<sf::Sprite*> m_objects;
+	std::vector<Entity*> m_objects;
 	sf::FloatRect m_bounds;
 	std::array<QuadTree*, 4> m_nodes;
+
+	bool m_playerInQuadrant;
 };
