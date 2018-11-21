@@ -74,19 +74,22 @@ void Player::move() {
 		t_sprint = 2;
 	}
 
+	/* DELETE CUANDO SE CALCULE BIEN EL MOVIMIENTO */
+	m_deltaTime = 0.02;
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		m_posX = m_lastPosX + m_deltaTime * m_velocity * t_sprint;
+		m_posX = m_lastPosX + (m_deltaTime * m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 2);
 	}else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		m_posX = m_lastPosX + m_deltaTime * -m_velocity * t_sprint;
+		m_posX = m_lastPosX + (m_deltaTime * -m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 3);
 	}
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		m_posY = m_lastPosY + m_deltaTime * m_velocity * t_sprint;
+		m_posY = m_lastPosY + (m_deltaTime * m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
 	}else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		m_posY = m_lastPosY + m_deltaTime * -m_velocity * t_sprint;
+		m_posY = m_lastPosY + (m_deltaTime * -m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 	}
 	
@@ -118,6 +121,7 @@ void Player::launchProjectile(Direction p_dir)
 
 		Projectile* t_projectile = new Projectile(m_texturePath, Entities::BULLET1, p_dir, m_posX, m_posY, m_damage);
 		m_basicProjectiles.push_back(t_projectile);
+		Game::m_entityVector.push_back(t_projectile);
 	}
 }
 
@@ -140,6 +144,11 @@ void Player::updateBasicAtack()
 		m_basicProjectiles[i]->update(m_deltaTime);
 
 		if (m_basicProjectiles[i]->getReadyToDelete()) {
+			//Delete the projectile from the game vector
+			auto it = std::find(Game::m_entityVector.begin(), Game::m_entityVector.end(), m_basicProjectiles[i]);
+			Game::m_entityVector.erase(it);
+
+			//Delete the projectile from the player vector os projectiles
 			delete m_basicProjectiles[i];
 			m_basicProjectiles.erase(m_basicProjectiles.begin() + i);
 		}

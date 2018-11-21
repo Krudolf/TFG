@@ -1,17 +1,38 @@
 ﻿  Game.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(52): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(53): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(77): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(120): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(125): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(150): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(78): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(121): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(126): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(151): warning C4018: '<': no coinciden signed/unsigned
   QuadTree.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(31): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(98): warning C4018: '>': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(103): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(141): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(33): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(47): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(48): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(49): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(50): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(98): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(104): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\quadtree.cpp(161): warning C4018: '<': no coinciden signed/unsigned
   Generando código...
+  LINK : no se encontró C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
   Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe

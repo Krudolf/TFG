@@ -49,14 +49,15 @@ void Game::run()
 
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
+	//m_sceneMap = new SceneMap("assets/map/map2.tmx", "assets/map2.png");
 	m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
 	std::vector<Entity*> t_returnObjects;
 
 	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
-	createEnemy(1000.f, 400.f);
-	createEnemy(600.f, 400.f);
-	createEnemy(800.f, 600.f);
-	createEnemy(800.f, 200.f);
+	//createEnemy(1000.f, 400.f);
+	//createEnemy(600.f, 400.f);
+	//createEnemy(800.f, 600.f);
+	//createEnemy(800.f, 200.f);
 
 	//Run the program while the window is open
 	while (m_engineManager->getWindow()->isOpen()){
@@ -80,19 +81,19 @@ void Game::run()
 
 		for (auto t_player : m_playerVector) {
 			t_returnObjects.clear();
-			t_returnObjects = m_quadTree->retrieve(t_returnObjects, t_player);
+			m_quadTree->retrieve(t_returnObjects, t_player);
+			std::cout << t_returnObjects.size() << std::endl;
+			
 
-			int x = 0;
+			/*int x = 0;
 			for (auto t_objects : t_returnObjects) {
 				if (static_cast<Tile*>(t_objects)->getGID() == 15) {
 					//std::cout << "Hay un borde cerca" << std::endl;
 					x++;
 				}
 				//std::cout << static_cast<Tile*>(t_objects)->getGID() << std::endl;
-			}
-			//std::cout << x << std::endl;
+			}*/
 		}
-		//std::cout << "++++++++" << std::endl;
 
 		
 		while (m_frameTime > 0.0) {
@@ -206,7 +207,8 @@ void Game::deleteAndFree()
 
 void Game::createPlayer()
 {
-	Player* player = new Player(800, 400, "assets/spritesheet.png");
+	//Player* player = new Player(800, 400, "assets/spritesheet.png");
+	Player* player = new Player(0, 0, "assets/spritesheet.png");
 	//m_entityVector.push_back(player);
 	m_playerVector.push_back(player);
 }

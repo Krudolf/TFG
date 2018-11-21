@@ -93,7 +93,7 @@ int EngineManager::createSprite(const char * p_texturePath, float p_scale, bool 
 	sf::Sprite* t_sprite = new sf::Sprite();
 	t_sprite->setTexture(*m_textureMap[p_texturePath]);
 	t_sprite->setTextureRect(sf::IntRect(p_textureLeft, p_textureTop, p_textureWidth, p_textureHeight));
-	t_sprite->setOrigin(t_sprite->getTextureRect().width / 2, t_sprite->getTextureRect().height / 2);
+	//t_sprite->setOrigin(t_sprite->getTextureRect().width / 2, t_sprite->getTextureRect().height / 2);
 	t_sprite->setScale(p_scale, p_scale);
 	t_sprite->setPosition(p_posX, p_posY);
 

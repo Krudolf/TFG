@@ -11,29 +11,40 @@ class Entity;
 
 class QuadTree
 {
+	enum Quadrant {
+		NotFound = -1,
+		TopLeft,
+		TopRight,
+		BottomLeft,
+		BottomRight,
+	};
+
 public:
 	QuadTree(int p_level, sf::FloatRect p_bounds);
 	~QuadTree();
 
 	void clear();
-	void split();
-	int getIndex(Entity* p_entity);
 	void insert(Entity* p_entity);
-	std::vector<Entity*> retrieve(std::vector<Entity*> p_returnObjects, Entity* p_entity);
+	void retrieve(std::vector<Entity*>& p_returnObjects, Entity* p_entity);
 
 	void debug();
 
 private:
+	void split();
+	Quadrant getIndex(Entity* p_entity);
+	bool insertInChild(Entity* p_entity);
+	bool hasChildren();
+
+
 	EngineManager* m_engineManager;
 	sf::RectangleShape* m_debug;
 
-	const int MAX_OBJECTS = 100;
-	const int MAX_LEVELS = 5;
+	const int MAX_OBJECTS = 50;
+	const int MAX_LEVELS = 4;
 
 	int m_level;
-	std::vector<Entity*> m_objects;
 	sf::FloatRect m_bounds;
-	std::array<QuadTree*, 4> m_nodes;
 
-	bool m_playerInQuadrant;
+	std::vector<Entity*> m_objects;
+	std::array<QuadTree*, 4> m_nodes;
 };
