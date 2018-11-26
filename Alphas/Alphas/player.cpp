@@ -2,6 +2,10 @@
 #include "player.h"
 #include "engineManager.h"
 #include "projectile.h"
+#include "projectileStraight.h"
+#include "projectileSpin.h"
+#include "projectileStraightSpin.h"
+#include "projectileConus.h"
 #include "game.h"
 #include "potion.h"
 
@@ -20,13 +24,20 @@ Player::Player(float p_posX, float p_posY, const char* p_path) : Entity(p_path, 
 	m_health		= m_maxHealth;
 	m_maxMana		= 100.f;
 	m_mana			= m_maxMana;
-	m_damage		= 50.f;
+	m_damage		= 1.f;
 	m_atackSpeed	= 0.25f;
 
 	m_speedPotionEfect = false;
 
+	m_faceDirection = Direction::RIGHT;
+
 	m_basicInCooldown = false;
 	m_nextBasic = m_engineManager->getMasterClockSeconds();
+
+	m_hability1Launched = false;
+	m_hability2Launched = false;
+	m_hability3Launched = false;
+	m_hability4Launched = false;
 }
 
 
@@ -74,21 +85,24 @@ void Player::move() {
 		t_sprint = 2;
 	}
 
-	/* DELETE CUANDO SE CALCULE BIEN EL MOVIMIENTO */
-	m_deltaTime = 0.02;
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		m_faceDirection = Direction::RIGHT;
 		m_posX = m_lastPosX + (m_deltaTime * m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 2);
-	}else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		m_faceDirection = Direction::LEFT;
 		m_posX = m_lastPosX + (m_deltaTime * -m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 3);
 	}
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		m_faceDirection = Direction::DOWN;
 		m_posY = m_lastPosY + (m_deltaTime * m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
-	}else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		m_faceDirection = Direction::UP;
 		m_posY = m_lastPosY + (m_deltaTime * -m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 	}
@@ -99,27 +113,72 @@ void Player::move() {
 void Player::rangeAtack()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+		m_faceDirection = Direction::RIGHT;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 2);
-		launchProjectile(Direction::RIGHT);
-	}else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+		launchProjectile(m_faceDirection, ProjectileType::STRAIGHT);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+		m_faceDirection = Direction::LEFT;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 3);
-		launchProjectile(Direction::LEFT);
-	}else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+		launchProjectile(m_faceDirection, ProjectileType::STRAIGHT);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+		m_faceDirection = Direction::DOWN;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
-		launchProjectile(Direction::DOWN);
-	}else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+		launchProjectile(m_faceDirection, ProjectileType::STRAIGHT);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+		m_faceDirection = Direction::UP;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		launchProjectile(Direction::UP);
+		launchProjectile(m_faceDirection, ProjectileType::STRAIGHT);
+	}
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !m_hability1Launched) {
+		hability1();
+	}
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !m_hability2Launched) {
+		hability2();
+	}
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F) && !m_hability3Launched) {
+		hability3();
 	}
 }
 
-void Player::launchProjectile(Direction p_dir)
+void Player::hability1()
+{
+	m_hability1Launched = true;
+	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+	m_hability1 = new ProjectileSpin(m_texturePath, Entities::BULLET1, Direction::NONE, m_posX, m_posY, m_damage / 10, this);
+}
+
+void Player::hability2()
+{
+	m_hability2Launched = true;
+	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+	m_hability2 = new ProjectileStraightSpin(m_texturePath, Entities::BULLET1, m_faceDirection, m_posX, m_posY, m_damage);
+}
+
+void Player::hability3()
+{
+	m_hability3Launched = true;
+	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+	m_hability3 = new ProjectileConus(m_texturePath, Entities::BULLET1, m_faceDirection, m_posX, m_posY, m_damage);
+}
+
+void Player::hability4()
+{
+}
+
+void Player::launchProjectile(Direction p_dir, ProjectileType p_projectileType)
 {
 	if (!m_basicInCooldown && m_basicProjectiles.size() < m_maxProjectiles) {
 		m_basicInCooldown = true;
 		m_nextBasic = m_engineManager->getMasterClockSeconds() + m_atackSpeed;
 
-		Projectile* t_projectile = new Projectile(m_texturePath, Entities::BULLET1, p_dir, m_posX, m_posY, m_damage);
+		Projectile* t_projectile = new ProjectileStraight(m_texturePath, Entities::BULLET1, p_dir, m_posX, m_posY, m_damage);
+
 		m_basicProjectiles.push_back(t_projectile);
 		Game::m_entityVector.push_back(t_projectile);
 	}
@@ -141,7 +200,7 @@ void Player::updateBasicAtack()
 		m_basicInCooldown = false;
 
 	for (int i = 0; i < m_basicProjectiles.size(); i++) {
-		m_basicProjectiles[i]->update(m_deltaTime);
+		m_basicProjectiles[i]->update(m_time, m_deltaTime);
 
 		if (m_basicProjectiles[i]->getReadyToDelete()) {
 			//Delete the projectile from the game vector
@@ -164,16 +223,44 @@ void Player::updatePotionEffects()
 	}
 }
 
-void Player::update(float p_deltaTime) {
+void Player::update(double p_time, double p_deltaTime) {
+	m_time		= p_time;
 	m_deltaTime = p_deltaTime;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 		pickObject();
 
 	updatePotionEffects();
 	updateBasicAtack();
 	move();
-	rangeAtack();	
+	rangeAtack();
+
+	if (m_hability1Launched) {
+		m_hability1->update(m_time, m_deltaTime);
+		if (m_hability1->getReadyToDelete()) {
+			delete m_hability1;
+			m_hability1 = nullptr;
+			m_hability1Launched = false;
+		}
+	}
+
+	if (m_hability2Launched) {
+		m_hability2->update(m_time, m_deltaTime);
+		if (m_hability2->getReadyToDelete()) {
+			delete m_hability2;
+			m_hability2 = nullptr;
+			m_hability2Launched = false;
+		}
+	}
+
+	if (m_hability3Launched) {
+		m_hability3->update(m_time, m_deltaTime);
+		if (m_hability3->getReadyToDelete()) {
+			delete m_hability3;
+			m_hability3 = nullptr;
+			m_hability3Launched = false;
+		}
+	}
 }
 
 void Player::draw()
@@ -181,6 +268,15 @@ void Player::draw()
 	m_engineManager->draw(m_engineManager->getSprite(m_spriteID));
 
 	for (int i = 0; i < m_basicProjectiles.size(); i++) {
-		m_engineManager->draw(m_engineManager->getSprite(m_basicProjectiles[i]->getSpriteID()));
+		m_basicProjectiles[i]->draw();
 	}
+
+	if (m_hability1Launched)
+		m_hability1->draw();
+
+	if (m_hability2Launched)
+		m_hability2->draw();
+
+	if (m_hability3Launched)
+		m_hability3->draw();
 }

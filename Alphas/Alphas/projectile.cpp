@@ -9,17 +9,21 @@
 
 Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage) : Entity(p_texturePath, p_ent)
 {
+	m_velocity = 400;
 	m_lifeTime = 2.5f;
 	m_dieTime = m_engineManager->getMasterClockSeconds() + m_lifeTime;
 	m_readyToDelete = false;
 
 	m_posX = p_playerPosX;
 	m_posY = p_playerPosY;
+	m_lastPosX = m_posX;
+	m_lastPosY = m_posY;
 	
 	m_damage = p_damage;
 
 	m_moveX = 0;
 	m_moveY = 0;
+	float t_angle = 0.33;
 	switch (p_dir)
 	{
 	case Direction::RIGHT:
@@ -38,6 +42,49 @@ Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_di
 		m_moveY = 1;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 		break;
+	case Direction::RIGHT_UP:
+		m_moveX = 1;
+		m_moveY = -t_angle;
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		break;
+	case Direction::RIGHT_DOWN:
+		m_moveX = 1;
+		m_moveY = t_angle;
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		break;
+	case Direction::LEFT_UP:
+		m_moveX = -1;
+		m_moveY = -t_angle;
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		break;
+	case Direction::LEFT_DOWN:
+		m_moveX = -1;
+		m_moveY = t_angle;
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		break;
+	case Direction::UP_RIGHT:
+		m_moveX = t_angle;
+		m_moveY = -1;
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		break;
+	case Direction::UP_LEFT:
+		m_moveX = -t_angle;
+		m_moveY = -1;
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		break;
+	case Direction::DOWN_RIGHT:
+		m_moveX = t_angle;
+		m_moveY = 1;
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		break;
+	case Direction::DOWN_LEFT:
+		m_moveX = -t_angle;
+		m_moveY = 1;
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		break;
+	case Direction::NONE:
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		break;
 	}
 }
 
@@ -46,15 +93,10 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::update(float p_deltaTime)
+void Projectile::update(double p_time, double p_deltaTime){}
+
+void Projectile::update(bool p_deleteOnCollide)
 {
-	m_lastPosX = m_posX;
-	m_lastPosY = m_posY;
-	m_posX = m_lastPosX + p_deltaTime * m_velocity * m_moveX;
-	m_posY = m_lastPosY + p_deltaTime * m_velocity * m_moveY;
-
-	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
-
 	//Check if life time end
 	if (m_engineManager->getMasterClockSeconds() > m_dieTime)
 		m_readyToDelete = true;
@@ -63,8 +105,17 @@ void Projectile::update(float p_deltaTime)
 	for (int i = 0; i < Game::m_enemyVector.size(); i++) {
 		if (m_engineManager->checkCollision(this->getSpriteID(), Game::m_enemyVector[i]->getSpriteID())) {
 			Game::m_enemyVector[i]->receiveDamage(m_damage);
-			m_readyToDelete = true;
+			
+			if (p_deleteOnCollide) {
+				m_readyToDelete = true;
+			}
+			
 			break;
 		}
 	}
+}
+
+void Projectile::draw()
+{
+	m_engineManager->draw(m_engineManager->getSprite(getSpriteID()));
 }

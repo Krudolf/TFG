@@ -169,6 +169,10 @@
     <ClInclude Include="potionMana.h" />
     <ClInclude Include="potionSpeed.h" />
     <ClInclude Include="projectile.h" />
+    <ClInclude Include="projectileConus.h" />
+    <ClInclude Include="projectileSpin.h" />
+    <ClInclude Include="projectileStraight.h" />
+    <ClInclude Include="projectileStraightSpin.h" />
     <ClInclude Include="quadTree.h" />
     <ClInclude Include="sceneMap.h" />
     <ClInclude Include="tile.h" />
@@ -193,6 +197,10 @@
     <ClCompile Include="potionMana.cpp" />
     <ClCompile Include="potionSpeed.cpp" />
     <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="projectileConus.cpp" />
+    <ClCompile Include="projectileSpin.cpp" />
+    <ClCompile Include="projectileStraight.cpp" />
+    <ClCompile Include="projectileStraightSpin.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="sceneMap.cpp" />
     <ClCompile Include="Tile.cpp" />

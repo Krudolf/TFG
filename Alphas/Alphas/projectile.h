@@ -5,21 +5,27 @@ class Projectile :
 {
 public:
 	Projectile(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage);
-	~Projectile();
+	virtual ~Projectile();
 
 	bool getReadyToDelete() { return m_readyToDelete; };
 
-	void update(float p_deltaTime);
+	void update(double p_time, double p_deltaTime);
+	void update(bool p_deleteOnCollide);
 
-private:
-	int		m_velocity = 300;
-	int		m_moveX;
-	int		m_moveY;
+	void draw();
 
-	float	m_damage;
+protected:
+	int		m_velocity;
+	float	m_moveX;
+	float	m_moveY;
 
 	float	m_lifeTime;
 	float	m_dieTime;
+	float	m_damage;
+	
 	bool	m_readyToDelete;
+
+private:
+
 };
 

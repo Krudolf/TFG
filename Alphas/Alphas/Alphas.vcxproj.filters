@@ -37,6 +37,12 @@
     <Filter Include="Archivos de origen\entities\tiles">
       <UniqueIdentifier>{862a5f8a-55ef-4078-b7eb-68c320de61b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\entities\projectiles">
+      <UniqueIdentifier>{fdeb2444-d3af-4813-8069-426940cdaea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\entities\projectiles">
+      <UniqueIdentifier>{07636397-dba2-430c-8c3d-781b40a85a64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -60,12 +66,6 @@
     <ClInclude Include="player.h">
       <Filter>Archivos de encabezado\entities</Filter>
     </ClInclude>
-    <ClInclude Include="projectile.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="potion.h">
-      <Filter>Archivos de encabezado\entities</Filter>
-    </ClInclude>
     <ClInclude Include="potionHealth.h">
       <Filter>Archivos de encabezado\entities\potions</Filter>
     </ClInclude>
@@ -86,6 +86,24 @@
     </ClInclude>
     <ClInclude Include="tile.h">
       <Filter>Archivos de encabezado\entities\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="projectile.h">
+      <Filter>Archivos de encabezado\entities\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="potion.h">
+      <Filter>Archivos de encabezado\entities\potions</Filter>
+    </ClInclude>
+    <ClInclude Include="projectileStraight.h">
+      <Filter>Archivos de encabezado\entities\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="projectileSpin.h">
+      <Filter>Archivos de encabezado\entities\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="projectileStraightSpin.h">
+      <Filter>Archivos de encabezado\entities\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="projectileConus.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,12 +131,6 @@
     <ClCompile Include="enemy.cpp">
       <Filter>Archivos de origen\entities</Filter>
     </ClCompile>
-    <ClCompile Include="projectile.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="potion.cpp">
-      <Filter>Archivos de origen\entities</Filter>
-    </ClCompile>
     <ClCompile Include="potionHealth.cpp">
       <Filter>Archivos de origen\entities\potions</Filter>
     </ClCompile>
@@ -139,6 +151,24 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Archivos de origen\entities\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="potion.cpp">
+      <Filter>Archivos de origen\entities\potions</Filter>
+    </ClCompile>
+    <ClCompile Include="projectile.cpp">
+      <Filter>Archivos de origen\entities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="projectileStraight.cpp">
+      <Filter>Archivos de origen\entities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="projectileSpin.cpp">
+      <Filter>Archivos de origen\entities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="projectileStraightSpin.cpp">
+      <Filter>Archivos de origen\entities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="projectileConus.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -35,7 +35,7 @@ Entity::~Entity()
 
 
 void Entity::update(){}
-void Entity::update(float p_deltaTime){}
+void Entity::update(double p_time, double p_deltaTime){}
 
 
 void Entity::draw()

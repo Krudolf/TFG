@@ -23,9 +23,13 @@ public:
 	~Game();
 
 	void run();
-	void update(double p_time, float p_deltaTime);
+	void update(double p_time, double p_deltaTime);
 	void draw();
 	void deleteAndFree();
+
+	static bool getCooperativeMode();
+
+	void checkCollisionBetweenEnemys();
 
 	void createPlayer();
 
@@ -38,9 +42,10 @@ private:
 	SceneMap*		m_sceneMap;
 	QuadTree*		m_quadTree;
 
-	float m_time;
-	float m_dt;
-	float m_currentTime;
+	double m_time;
+	double m_dt;
+	double m_currentTime;
+	double m_accumulator;
 	float m_newTime;
 	float m_frameTime;
 	int FPS;

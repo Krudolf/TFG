@@ -112,6 +112,26 @@ void EngineManager::setSpriteFrame(int p_spriteID, int p_entity, int p_frame)
 	this->getSprite(p_spriteID)->setTextureRect(sf::IntRect(128 * p_frame, 128 * p_entity, 128, 128));
 }
 
+void EngineManager::getDirection(float p_posEntity1X, float p_posEntity1Y, float p_posEntity2X, float p_posEntity2Y, float & p_directionX, float & p_directionY)
+{
+	sf::Vector2f t_entity1(p_posEntity1X, p_posEntity1Y);
+	sf::Vector2f t_entity2(p_posEntity2X, p_posEntity2Y);
+	
+	sf::Vector2f t_direction(t_entity1 - t_entity2);
+
+	float t_length = sqrt((t_direction.x * t_direction.x) + (t_direction.y * t_direction.y));
+	if (t_length != 0) {
+		p_directionX = t_direction.x / t_length;
+		p_directionY = t_direction.y / t_length;
+	}
+	else {
+		p_directionX = t_direction.x;
+		p_directionY = t_direction.y;
+	}
+		
+
+}
+
 bool EngineManager::checkCollision(int p_spriteID1, int p_spriteID2)
 {
 	sf::Sprite* t_sprite1 = m_spriteVector[p_spriteID1];

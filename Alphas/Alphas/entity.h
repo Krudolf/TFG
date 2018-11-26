@@ -12,10 +12,26 @@ enum class Entities {
 };
 
 enum class Direction {
-	RIGHT,
+	RIGHT = 0,
 	LEFT,
 	UP,
-	DOWN
+	DOWN,
+	RIGHT_UP,
+	RIGHT_DOWN,
+	LEFT_UP,
+	LEFT_DOWN,
+	UP_RIGHT,
+	UP_LEFT,
+	DOWN_RIGHT,
+	DOWN_LEFT,
+	NONE
+};
+
+enum class ProjectileType {
+	STRAIGHT = 0,
+	SPIN,
+	STRAIGHT_SPIN,
+	CONUS
 };
 
 class Entity
@@ -26,7 +42,7 @@ public:
 	virtual ~Entity();
 
 	virtual void update();
-	virtual void update(float p_deltaTime);
+	virtual void update(double p_time, double p_deltaTime);
 	virtual void draw();
 
 	float	getPositionX() { return m_posX; };

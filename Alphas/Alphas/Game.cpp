@@ -24,8 +24,9 @@ Game::Game()
 	m_camera = new Camera();
 
 	m_time			= 0.f;
-	m_dt			= 1/60.f;
+	m_dt			= 0.01;
 	m_currentTime	= m_engineManager->getMasterClockSeconds();
+	m_accumulator	= 0.0;
 	m_newTime		= 0.f;
 	m_frameTime		= 0.f;
 	FPS				= 0;
@@ -50,14 +51,14 @@ void Game::run()
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
 	//m_sceneMap = new SceneMap("assets/map/map2.tmx", "assets/map2.png");
-	m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
+	//m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
 	std::vector<Entity*> t_returnObjects;
 
 	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
-	//createEnemy(1000.f, 400.f);
-	//createEnemy(600.f, 400.f);
-	//createEnemy(800.f, 600.f);
-	//createEnemy(800.f, 200.f);
+	createEnemy(1000.f, 400.f);
+	createEnemy(600.f, 400.f);
+	createEnemy(800.f, 600.f);
+	createEnemy(800.f, 200.f);
 
 	//Run the program while the window is open
 	while (m_engineManager->getWindow()->isOpen()){
@@ -71,9 +72,11 @@ void Game::run()
 		m_newTime = m_engineManager->getMasterClockSeconds();
 		m_frameTime = m_newTime - m_currentTime;
 		m_currentTime = m_newTime;
+
+		m_accumulator += m_frameTime;
 		
 		/* QUADTREE */
-		m_quadTree->clear();
+		/*m_quadTree->clear();
 
 		for (int i = 0; i < m_entityVector.size(); i++) {
 			m_quadTree->insert(m_entityVector[i]);
@@ -84,24 +87,14 @@ void Game::run()
 			m_quadTree->retrieve(t_returnObjects, t_player);
 			std::cout << t_returnObjects.size() << std::endl;
 			
-
-			/*int x = 0;
-			for (auto t_objects : t_returnObjects) {
-				if (static_cast<Tile*>(t_objects)->getGID() == 15) {
-					//std::cout << "Hay un borde cerca" << std::endl;
-					x++;
-				}
-				//std::cout << static_cast<Tile*>(t_objects)->getGID() << std::endl;
-			}*/
-		}
-
+		}*/
 		
-		while (m_frameTime > 0.0) {
-			float t_deltaTime = std::min(m_frameTime, m_dt);
-			update(m_time, t_deltaTime);
+		while (m_accumulator >= m_dt) {
+			//float t_deltaTime = std::min(m_frameTime, m_dt);
+			update(m_time, m_dt);
 
-			m_frameTime -= t_deltaTime;
-			m_time += t_deltaTime;
+			m_accumulator -= m_dt;
+			m_time += m_dt;
 		}
 
 		m_engineManager->getWindow()->clear(sf::Color::Red);
@@ -113,18 +106,18 @@ void Game::run()
 }
 
 
-void Game::update(double p_time, float p_deltaTime)
+void Game::update(double p_time, double p_deltaTime)
 {
 	m_camera->update();
 	
 	//Update player/s
 	for (int i = 0; i < m_playerVector.size(); i++) {
-		m_playerVector[i]->update(p_deltaTime);
+		m_playerVector[i]->update(p_time, p_deltaTime);
 	}
 
 	//Update enemys
 	for (int i = 0; i < m_enemyVector.size(); i++) {
-		m_enemyVector[i]->update(p_deltaTime);
+		m_enemyVector[i]->update(p_time, p_deltaTime);
 		
 		if (m_enemyVector[i]->isDead()) {
 			int random = rand() % 101;	//Random between 0 and 100;
@@ -146,6 +139,7 @@ void Game::update(double p_time, float p_deltaTime)
 			m_enemyVector.erase(m_enemyVector.begin() + i);
 		}
 	}
+	checkCollisionBetweenEnemys();
 
 	//Update potions
 	for (int i = 0; i < m_potionVector.size(); i++) {
@@ -163,7 +157,7 @@ void Game::draw()
 {
 	//Draw the map
 	m_sceneMap->draw();
-	m_quadTree->debug();
+	//m_quadTree->debug();
 
 	//Draw player/s
 	for (auto t_player : m_playerVector) {
@@ -202,6 +196,29 @@ void Game::deleteAndFree()
 	m_enemyVector.clear();
 	m_potionVector.clear();
 	m_entityVector.clear();
+}
+
+bool Game::getCooperativeMode()
+{
+	if (m_playerVector.size() > 1)
+		return true;
+	else
+		return false;
+}
+
+void Game::checkCollisionBetweenEnemys()
+{
+	for (auto t_enemy1 : m_enemyVector) {
+		for (auto t_enemy2 : m_enemyVector) {
+			if (t_enemy1 != t_enemy2) {
+				bool t_collision = m_engineManager->checkCollision(t_enemy1->getSpriteID(), t_enemy2->getSpriteID());
+				if (t_collision && t_enemy1->getDistanceToObjective() < t_enemy2->getDistanceToObjective())
+					t_enemy2->moveBackwards();
+				else if(t_collision && t_enemy2->getDistanceToObjective() < t_enemy1->getDistanceToObjective())
+					t_enemy1->moveBackwards();
+			}
+		}
+	}
 }
 
 
