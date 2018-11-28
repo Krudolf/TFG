@@ -159,6 +159,9 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemyCharger.h" />
+    <ClInclude Include="enemyRanger.h" />
+    <ClInclude Include="enemyWarrior.h" />
     <ClInclude Include="engineManager.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
@@ -182,6 +185,9 @@
     <ClCompile Include="Alphas.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enemyCharger.cpp" />
+    <ClCompile Include="enemyRanger.cpp" />
+    <ClCompile Include="enemyWarrior.cpp" />
     <ClCompile Include="EngineManager.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="Game.cpp" />

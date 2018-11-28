@@ -45,8 +45,8 @@ public:
 	virtual void update(double p_time, double p_deltaTime);
 	virtual void draw();
 
-	float	getPositionX() { return m_posX; };
-	float	getPositionY() { return m_posY; };
+	double	getPositionX() { return m_posX; };
+	double	getPositionY() { return m_posY; };
 	int		getSpriteID()  { return m_spriteID; };
 
 
@@ -55,10 +55,12 @@ protected:
 
 	const char*	m_texturePath;
 
-	int m_spriteID;
-	int m_spriteSheetRow;
+	int		m_spriteID;
+	int		m_spriteSheetRow;
 
-	float m_posX, m_posY;
-	float m_lastPosX, m_lastPosY;
+	double	m_posX;
+	double	m_posY;
+	double	m_lastPosX;
+	double	m_lastPosY;
 };
 

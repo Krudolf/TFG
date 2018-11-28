@@ -23,13 +23,17 @@ Enemy::Enemy(float p_posX, float p_posY, const char* p_path) : Entity(p_path, En
 	m_health		= m_maxHealth;
 	m_maxMana		= 100.f;
 	m_mana			= m_maxMana;
-	m_damage		= 25.f;
+	m_damage		= 2.f;
 	m_atackSpeed	= 0.75f;
 	m_dead			= false;
 
-	m_cooperativeMode = Game::getCooperativeMode();
-	m_distanceToObjective		= 1000;
-	m_objectivePlayer = Game::m_playerVector[0];
+	m_cooperativeMode		= Game::getCooperativeMode();
+	m_distanceToObjective	= 1000;
+	m_objectivePlayer		= Game::m_playerVector[0];
+
+	m_atackInCooldown	= false;
+	m_cooldownAtack		= 1.f;
+	m_endCooldown		= -1;
 }
 
 
@@ -46,16 +50,27 @@ void Enemy::receiveDamage(float p_damage)
 
 }
 
+double Enemy::calculateDistance(Player * p_posibleObjective)
+{
+	double t_posX = p_posibleObjective->getPositionX();
+	double t_posY = p_posibleObjective->getPositionY();
+
+	return sqrt(pow(m_posX - t_posX, 2) + pow(m_posY - t_posY, 2));
+}
+
+/*
+	Search for the closest enemy if there are more than 1 and calculate the distance to the enemy.
+	If not only calculate the distance to the enemy
+*/
 void Enemy::checkObjective()
 {
-	
 	if (m_cooperativeMode) {
 		float t_bestDistance = 1000;
 		Player* t_bestObjective = nullptr;
 
 		//Checks the closest enemy
 		for (auto t_objective : Game::m_playerVector) {
-			float t_distance = calculateDistance(t_objective);
+			double t_distance = calculateDistance(t_objective);
 
 			if (t_distance < t_bestDistance) {
 				t_bestObjective = t_objective;
@@ -72,25 +87,12 @@ void Enemy::checkObjective()
 	}
 
 	m_engineManager->getDirection(m_objectivePlayer->getPositionX(), m_objectivePlayer->getPositionY(), m_posX, m_posY, m_directionMoveX, m_directionMoveY);
-
-}
-
-float Enemy::calculateDistance(Player * p_posibleObjective)
-{
-	float t_posX = p_posibleObjective->getPositionX();
-	float t_posY = p_posibleObjective->getPositionY();
-
-	return sqrt(pow(m_posX - t_posX, 2) + pow(m_posY - t_posY, 2));
 }
 
 void Enemy::move()
 {
-	checkObjective();
-
-	if (m_distanceToObjective >= 10) {
-		m_posX = m_lastPosX + (m_deltaTime * m_velocity * m_directionMoveX);
-		m_posY = m_lastPosY + (m_deltaTime * m_velocity * m_directionMoveY);
-	}
+	m_posX = m_lastPosX + (m_deltaTime * m_velocity * m_directionMoveX);
+	m_posY = m_lastPosY + (m_deltaTime * m_velocity * m_directionMoveY);
 }
 
 void Enemy::moveBackwards()
@@ -99,20 +101,18 @@ void Enemy::moveBackwards()
 	m_posY = m_lastPosY + (m_deltaTime * m_velocity * -m_directionMoveY);
 }
 
-void Enemy::goLastPosition()
-{
-	m_posX = m_lastPosX;
-	m_posY = m_lastPosY;
-}
-
 void Enemy::update(double p_time, double p_deltaTime)
 {
+	m_time = p_time;
 	m_deltaTime = p_deltaTime;
 
 	m_lastPosX = m_posX;
 	m_lastPosY = m_posY;
 
+	checkObjective();
 	move();
+	atack();
+	updateAtack();
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 }

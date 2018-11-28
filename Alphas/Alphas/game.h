@@ -33,7 +33,9 @@ public:
 
 	void createPlayer();
 
-	void createEnemy(float p_posX, float p_posY);
+	void createEnemyWarrior(float p_posX, float p_posY);
+	void createEnemyCharger(float p_posX, float p_posY);
+	void createEnemyRanger(float p_posX, float p_posY);
 
 private:
 

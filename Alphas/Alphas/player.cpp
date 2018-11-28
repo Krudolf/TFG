@@ -17,6 +17,8 @@ Player::Player(float p_posX, float p_posY, const char* p_path) : Entity(p_path, 
 	m_posY		= p_posY;
 	m_lastPosX	= p_posX;
 	m_lastPosY	= p_posY;
+
+	m_playerAlive	= true;
 	
 	m_baseVelocity	= 100.f;
 	m_velocity		= m_baseVelocity;
@@ -50,15 +52,34 @@ Player::~Player()
 	m_basicProjectiles.clear();
 }
 
+void Player::receiveDamage(float p_damage)
+{
+	m_health -= p_damage;
+
+	if (m_health <= 0.f) {
+		m_playerAlive = false;
+	}
+
+	std::cout << "Player HP: " << m_health << std::endl;
+}
+
 void Player::increaseHealth(float p_health)
 {
 	m_health += p_health;
+
+	if (m_health > m_maxHealth)
+		m_health = m_maxHealth;
+
 	std::cout << "Health: " <<  m_health << std::endl;
 }
 
 void Player::increaseMana(float p_mana)
 {
 	m_mana += p_mana;
+
+	if (m_mana > m_maxMana)
+		m_mana = m_maxMana;
+
 	std::cout << "Mana: " << m_mana << std::endl;
 }
 
@@ -167,8 +188,34 @@ void Player::hability3()
 	m_hability3 = new ProjectileConus(m_texturePath, Entities::BULLET1, m_faceDirection, m_posX, m_posY, m_damage);
 }
 
-void Player::hability4()
+void Player::updateHabilities()
 {
+	if (m_hability1Launched) {
+		m_hability1->update(m_time, m_deltaTime);
+		if (m_hability1->getReadyToDelete()) {
+			delete m_hability1;
+			m_hability1 = nullptr;
+			m_hability1Launched = false;
+		}
+	}
+
+	if (m_hability2Launched) {
+		m_hability2->update(m_time, m_deltaTime);
+		if (m_hability2->getReadyToDelete()) {
+			delete m_hability2;
+			m_hability2 = nullptr;
+			m_hability2Launched = false;
+		}
+	}
+
+	if (m_hability3Launched) {
+		m_hability3->update(m_time, m_deltaTime);
+		if (m_hability3->getReadyToDelete()) {
+			delete m_hability3;
+			m_hability3 = nullptr;
+			m_hability3Launched = false;
+		}
+	}
 }
 
 void Player::launchProjectile(Direction p_dir, ProjectileType p_projectileType)
@@ -234,33 +281,7 @@ void Player::update(double p_time, double p_deltaTime) {
 	updateBasicAtack();
 	move();
 	rangeAtack();
-
-	if (m_hability1Launched) {
-		m_hability1->update(m_time, m_deltaTime);
-		if (m_hability1->getReadyToDelete()) {
-			delete m_hability1;
-			m_hability1 = nullptr;
-			m_hability1Launched = false;
-		}
-	}
-
-	if (m_hability2Launched) {
-		m_hability2->update(m_time, m_deltaTime);
-		if (m_hability2->getReadyToDelete()) {
-			delete m_hability2;
-			m_hability2 = nullptr;
-			m_hability2Launched = false;
-		}
-	}
-
-	if (m_hability3Launched) {
-		m_hability3->update(m_time, m_deltaTime);
-		if (m_hability3->getReadyToDelete()) {
-			delete m_hability3;
-			m_hability3 = nullptr;
-			m_hability3Launched = false;
-		}
-	}
+	updateHabilities();
 }
 
 void Player::draw()

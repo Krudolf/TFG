@@ -25,6 +25,8 @@ protected:
 	
 	bool	m_readyToDelete;
 
+	Entities m_entityOwner;
+
 private:
 
 };

@@ -1,12 +1,3 @@
-﻿  Game.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(73): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(114): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(119): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\game.cpp(145): warning C4018: '<': no coinciden signed/unsigned
-  enemy.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\enemy.cpp(91): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\enemy.cpp(92): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\enemy.cpp(98): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\enemy.cpp(99): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  Generando código...
+﻿  enemyCharger.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\enemycharger.cpp(105): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
   Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe

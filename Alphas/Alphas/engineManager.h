@@ -29,7 +29,7 @@ public:
 	int createSprite(const char* p_texturePath, float p_scale, bool p_centerOrigin, int p_textureLeft, int p_textureTop, int p_textureWidth, int p_textureHeight, float p_posX, float p_posY);
 	sf::Sprite* getSprite(int p_spriteID) { return m_spriteVector[p_spriteID]; };
 	void setSpriteFrame(int p_spriteID, int p_entity, int p_frame);
-	void getDirection(float p_posEntity1X, float p_posentity1Y, float p_posEntity2X, float p_posEntity2Y, float& p_directionX, float& p_directionY);
+	void getDirection(double p_posEntity1X, double p_posentity1Y, double p_posEntity2X, double p_posEntity2Y, float& p_directionX, float& p_directionY);
 
 	/* MAP */
 

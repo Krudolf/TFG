@@ -5,6 +5,9 @@
 #include "entity.h"
 #include "player.h"
 #include "enemy.h"
+#include "enemyWarrior.h"
+#include "enemyCharger.h"
+#include "enemyRanger.h"
 #include "potion.h"
 #include "potionHealth.h"
 #include "potionMana.h"
@@ -55,10 +58,13 @@ void Game::run()
 	std::vector<Entity*> t_returnObjects;
 
 	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
-	createEnemy(1000.f, 400.f);
-	createEnemy(600.f, 400.f);
-	createEnemy(800.f, 600.f);
-	createEnemy(800.f, 200.f);
+	createEnemyWarrior(1000.f, 400.f);
+	createEnemyWarrior(600.f, 400.f);
+	createEnemyCharger(800.f, 600.f);
+	createEnemyCharger(800.f, 200.f);
+	createEnemyRanger(675.f, 400.f);
+	createEnemyRanger(725.f, 400.f);
+
 
 	//Run the program while the window is open
 	while (m_engineManager->getWindow()->isOpen()){
@@ -230,9 +236,23 @@ void Game::createPlayer()
 	m_playerVector.push_back(player);
 }
 
-void Game::createEnemy(float p_posX, float p_posY)
+void Game::createEnemyWarrior(float p_posX, float p_posY)
 {
-	Enemy* enemy = new Enemy(p_posX, p_posY, "assets/spritesheet.png");
+	EnemyWarrior* enemy = new EnemyWarrior(p_posX, p_posY, "assets/spritesheet.png");
+	//m_entityVector.push_back(enemy);
+	m_enemyVector.push_back(enemy);
+}
+
+void Game::createEnemyCharger(float p_posX, float p_posY)
+{
+	EnemyCharger* enemy = new EnemyCharger(p_posX, p_posY, "assets/spritesheet.png");
+	//m_entityVector.push_back(enemy);
+	m_enemyVector.push_back(enemy);
+}
+
+void Game::createEnemyRanger(float p_posX, float p_posY)
+{
+	EnemyRanger* enemy = new EnemyRanger(p_posX, p_posY, "assets/spritesheet.png");
 	//m_entityVector.push_back(enemy);
 	m_enemyVector.push_back(enemy);
 }

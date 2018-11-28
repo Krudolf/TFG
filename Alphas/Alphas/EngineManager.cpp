@@ -73,7 +73,7 @@ int EngineManager::createSprite(const char* p_texturePath, float p_scale, bool p
 	sf::Sprite* t_sprite = new sf::Sprite();
 	t_sprite->setTexture(*m_textureMap[p_texturePath]);
 	t_sprite->setTextureRect(sf::IntRect(0, 0, 128, 128));
-	t_sprite->setOrigin(t_sprite->getTextureRect().width / 2, t_sprite->getTextureRect().height / 2);
+	t_sprite->setOrigin(t_sprite->getTextureRect().width / 2.f, t_sprite->getTextureRect().height / 2.f);
 	t_sprite->setScale(p_scale, p_scale);
 
 	/* DEBUG */
@@ -112,7 +112,7 @@ void EngineManager::setSpriteFrame(int p_spriteID, int p_entity, int p_frame)
 	this->getSprite(p_spriteID)->setTextureRect(sf::IntRect(128 * p_frame, 128 * p_entity, 128, 128));
 }
 
-void EngineManager::getDirection(float p_posEntity1X, float p_posEntity1Y, float p_posEntity2X, float p_posEntity2Y, float & p_directionX, float & p_directionY)
+void EngineManager::getDirection(double p_posEntity1X, double p_posEntity1Y, double p_posEntity2X, double p_posEntity2Y, float & p_directionX, float & p_directionY)
 {
 	sf::Vector2f t_entity1(p_posEntity1X, p_posEntity1Y);
 	sf::Vector2f t_entity2(p_posEntity2X, p_posEntity2Y);

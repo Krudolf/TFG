@@ -3,6 +3,7 @@
 #include "engineManager.h"
 #include "game.h"
 #include "enemy.h"
+#include "player.h"
 
 #include <iostream>
 
@@ -20,6 +21,8 @@ Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_di
 	m_lastPosY = m_posY;
 	
 	m_damage = p_damage;
+
+	m_entityOwner = p_ent;
 
 	m_moveX = 0;
 	m_moveY = 0;
@@ -101,18 +104,35 @@ void Projectile::update(bool p_deleteOnCollide)
 	if (m_engineManager->getMasterClockSeconds() > m_dieTime)
 		m_readyToDelete = true;
 
-	//Check if the projectile collide with one enemy, if it collide it will be destroyed
-	for (int i = 0; i < Game::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(this->getSpriteID(), Game::m_enemyVector[i]->getSpriteID())) {
-			Game::m_enemyVector[i]->receiveDamage(m_damage);
-			
-			if (p_deleteOnCollide) {
-				m_readyToDelete = true;
+	if (m_entityOwner == Entities::BULLET1) {
+		//Check if the projectile collides with one enemy, if it collide it will be destroyed
+		for (int i = 0; i < Game::m_enemyVector.size(); i++) {
+			if (m_engineManager->checkCollision(this->getSpriteID(), Game::m_enemyVector[i]->getSpriteID())) {
+				Game::m_enemyVector[i]->receiveDamage(m_damage);
+
+				if (p_deleteOnCollide) {
+					m_readyToDelete = true;
+				}
+
+				break;
 			}
-			
-			break;
 		}
 	}
+	else if (m_entityOwner == Entities::BULLET2) {
+		//Check if the projectile collides with one player, if it collide it will be destroyed
+		for (int i = 0; i < Game::m_playerVector.size(); i++) {
+			if (m_engineManager->checkCollision(this->getSpriteID(), Game::m_playerVector[i]->getSpriteID())) {
+				Game::m_playerVector[i]->receiveDamage(m_damage);
+
+				if (p_deleteOnCollide) {
+					m_readyToDelete = true;
+				}
+
+				break;
+			}
+		}
+	}
+
 }
 
 void Projectile::draw()

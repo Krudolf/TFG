@@ -15,6 +15,8 @@ public:
 	Player(float p_posX, float p_posY, const char* p_path);
 	~Player();
 
+	void receiveDamage(float p_damage);
+
 	void increaseHealth(float p_health);
 	void increaseMana(float p_mana);
 	void increaseSpeed(float p_duration);
@@ -24,7 +26,7 @@ public:
 	void hability1();
 	void hability2();
 	void hability3();
-	void hability4();
+	void updateHabilities();
 	void launchProjectile(Direction p_dir, ProjectileType p_ptojectileType);
 
 	void pickObject();
@@ -37,6 +39,8 @@ public:
 private:
 	double	m_deltaTime;
 	double	m_time;
+
+	bool	m_playerAlive;
 
 	float	m_velocity;
 	float	m_baseVelocity;
