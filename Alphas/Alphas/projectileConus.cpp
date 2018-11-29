@@ -2,7 +2,7 @@
 #include "projectileConus.h"
 #include "projectileStraight.h"
 #include "engineManager.h"
-#include "game.h"
+#include "stateGame.h"
 #include "enemy.h"
 
 #include <iostream>
@@ -84,9 +84,9 @@ void ProjectileConus::update(double p_time, double p_deltaTime)
 
 	if (!m_makeInvisible) {
 		//Check if the projectile collide with one enemy, if it collide it will be destroyed
-		for (int i = 0; i < Game::m_enemyVector.size(); i++) {
-			if (m_engineManager->checkCollision(this->getSpriteID(), Game::m_enemyVector[i]->getSpriteID())) {
-				Game::m_enemyVector[i]->receiveDamage(m_damage);
+		for (int i = 0; i < StateGame::m_enemyVector.size(); i++) {
+			if (m_engineManager->checkCollision(this->getSpriteID(), StateGame::m_enemyVector[i]->getSpriteID())) {
+				StateGame::m_enemyVector[i]->receiveDamage(m_damage);
 				m_makeInvisible = true;
 
 				break;

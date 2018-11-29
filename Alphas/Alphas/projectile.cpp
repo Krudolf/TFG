@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "projectile.h"
 #include "engineManager.h"
-#include "game.h"
+#include "stateGame.h"
 #include "enemy.h"
 #include "player.h"
 
@@ -106,9 +106,9 @@ void Projectile::update(bool p_deleteOnCollide)
 
 	if (m_entityOwner == Entities::BULLET1) {
 		//Check if the projectile collides with one enemy, if it collide it will be destroyed
-		for (int i = 0; i < Game::m_enemyVector.size(); i++) {
-			if (m_engineManager->checkCollision(this->getSpriteID(), Game::m_enemyVector[i]->getSpriteID())) {
-				Game::m_enemyVector[i]->receiveDamage(m_damage);
+		for (int i = 0; i < StateGame::m_enemyVector.size(); i++) {
+			if (m_engineManager->checkCollision(this->getSpriteID(), StateGame::m_enemyVector[i]->getSpriteID())) {
+				StateGame::m_enemyVector[i]->receiveDamage(m_damage);
 
 				if (p_deleteOnCollide) {
 					m_readyToDelete = true;
@@ -120,9 +120,9 @@ void Projectile::update(bool p_deleteOnCollide)
 	}
 	else if (m_entityOwner == Entities::BULLET2) {
 		//Check if the projectile collides with one player, if it collide it will be destroyed
-		for (int i = 0; i < Game::m_playerVector.size(); i++) {
-			if (m_engineManager->checkCollision(this->getSpriteID(), Game::m_playerVector[i]->getSpriteID())) {
-				Game::m_playerVector[i]->receiveDamage(m_damage);
+		for (int i = 0; i < StateGame::m_playerVector.size(); i++) {
+			if (m_engineManager->checkCollision(this->getSpriteID(), StateGame::m_playerVector[i]->getSpriteID())) {
+				StateGame::m_playerVector[i]->receiveDamage(m_damage);
 
 				if (p_deleteOnCollide) {
 					m_readyToDelete = true;

@@ -49,6 +49,12 @@
     <Filter Include="Archivos de encabezado\entities\enemies">
       <UniqueIdentifier>{c01b9226-db02-4227-8a6e-fabf9f356a4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\states">
+      <UniqueIdentifier>{54cd2882-aad9-4dc0-8d69-a2c745da0545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\states">
+      <UniqueIdentifier>{61fa8ddb-bf8c-4b9b-aed4-40991f4233f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -119,6 +125,27 @@
     </ClInclude>
     <ClInclude Include="enemyRanger.h">
       <Filter>Archivos de encabezado\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="potionArmor.h">
+      <Filter>Archivos de encabezado\entities\potions</Filter>
+    </ClInclude>
+    <ClInclude Include="potionDamage.h">
+      <Filter>Archivos de encabezado\entities\potions</Filter>
+    </ClInclude>
+    <ClInclude Include="potionAtackSpeed.h">
+      <Filter>Archivos de encabezado\entities\potions</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>Archivos de encabezado\states</Filter>
+    </ClInclude>
+    <ClInclude Include="stateGame.h">
+      <Filter>Archivos de encabezado\states</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMenu.h">
+      <Filter>Archivos de encabezado\states</Filter>
+    </ClInclude>
+    <ClInclude Include="stateMachine.h">
+      <Filter>Archivos de encabezado\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +220,27 @@
     </ClCompile>
     <ClCompile Include="enemyRanger.cpp">
       <Filter>Archivos de origen\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="potionAtackSpeed.cpp">
+      <Filter>Archivos de origen\entities\potions</Filter>
+    </ClCompile>
+    <ClCompile Include="potionDamage.cpp">
+      <Filter>Archivos de origen\entities\potions</Filter>
+    </ClCompile>
+    <ClCompile Include="potionArmor.cpp">
+      <Filter>Archivos de origen\entities\potions</Filter>
+    </ClCompile>
+    <ClCompile Include="state.cpp">
+      <Filter>Archivos de origen\states</Filter>
+    </ClCompile>
+    <ClCompile Include="stateGame.cpp">
+      <Filter>Archivos de origen\states</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMenu.cpp">
+      <Filter>Archivos de origen\states</Filter>
+    </ClCompile>
+    <ClCompile Include="stateMachine.cpp">
+      <Filter>Archivos de origen\states</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

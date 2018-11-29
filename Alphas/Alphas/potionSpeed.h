@@ -13,4 +13,3 @@ public:
 	void setEffect(Player* p_player);
 
 };
-

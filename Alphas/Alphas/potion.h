@@ -7,7 +7,7 @@ enum class PotionType {
 	SPEED,
 	DAMAGE,
 	ARMOR,
-	POISON
+	ATACK_SPEED
 };
 
 class Player;
@@ -17,12 +17,15 @@ class Potion :
 {
 public:
 	Potion(const char* p_path, float p_posX, float p_posY, PotionType p_potionType);
-	~Potion();
+	virtual ~Potion();
 
 	virtual void setEffect(Player* p_player) = 0;
 	bool getEffectUsed() { return m_efectUsed; };
 
 protected:
 	bool m_efectUsed;
+
+	float	m_effectIncrease;
+	float	m_effectDuration;
 
 };

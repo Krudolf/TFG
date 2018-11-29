@@ -168,8 +168,11 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="potion.h" />
+    <ClInclude Include="potionArmor.h" />
+    <ClInclude Include="potionDamage.h" />
     <ClInclude Include="potionHealth.h" />
     <ClInclude Include="potionMana.h" />
+    <ClInclude Include="potionAtackSpeed.h" />
     <ClInclude Include="potionSpeed.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="projectileConus.h" />
@@ -178,6 +181,10 @@
     <ClInclude Include="projectileStraightSpin.h" />
     <ClInclude Include="quadTree.h" />
     <ClInclude Include="sceneMap.h" />
+    <ClInclude Include="state.h" />
+    <ClInclude Include="stateGame.h" />
+    <ClInclude Include="stateMachine.h" />
+    <ClInclude Include="stateMenu.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
@@ -199,8 +206,11 @@
     </ClCompile>
     <ClCompile Include="player.cpp" />
     <ClCompile Include="potion.cpp" />
+    <ClCompile Include="potionArmor.cpp" />
+    <ClCompile Include="potionDamage.cpp" />
     <ClCompile Include="potionHealth.cpp" />
     <ClCompile Include="potionMana.cpp" />
+    <ClCompile Include="potionAtackSpeed.cpp" />
     <ClCompile Include="potionSpeed.cpp" />
     <ClCompile Include="projectile.cpp" />
     <ClCompile Include="projectileConus.cpp" />
@@ -209,6 +219,10 @@
     <ClCompile Include="projectileStraightSpin.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="sceneMap.cpp" />
+    <ClCompile Include="state.cpp" />
+    <ClCompile Include="stateGame.cpp" />
+    <ClCompile Include="stateMachine.cpp" />
+    <ClCompile Include="stateMenu.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>

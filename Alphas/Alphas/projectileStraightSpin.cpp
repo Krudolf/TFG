@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "projectileStraightSpin.h"
 #include "engineManager.h"
-#include "game.h"
+#include "stateGame.h"
 #include "enemy.h"
 
 #include <iostream>
@@ -47,9 +47,9 @@ void ProjectileStraightSpin::updateStraight(double p_deltaTime)
 	}
 
 	//Check if the projectile collide with one enemy, if it collide change to spin mode
-	for (int i = 0; i < Game::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(this->getSpriteID(), Game::m_enemyVector[i]->getSpriteID())) {
-			Game::m_enemyVector[i]->receiveDamage(m_damage);
+	for (int i = 0; i < StateGame::m_enemyVector.size(); i++) {
+		if (m_engineManager->checkCollision(this->getSpriteID(), StateGame::m_enemyVector[i]->getSpriteID())) {
+			StateGame::m_enemyVector[i]->receiveDamage(m_damage);
 			
 			m_straightPhase = false;
 			m_spinPhase = true;

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "sceneMap.h"
 #include "engineManager.h"
-#include "game.h"
+#include "stateGame.h"
 #include "tile.h"
 
 
@@ -53,7 +53,7 @@ SceneMap::SceneMap(const char* p_urlXML, const char* p_urlTexture)
 				Tile* t_tile = new Tile(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
 
 				m_mapMatrix4D[l][h][w] = t_tile;
-				Game::m_entityVector.push_back(t_tile);
+				StateGame::m_entityVector.push_back(t_tile);
 			}
 		}
 	}

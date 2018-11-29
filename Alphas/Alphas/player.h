@@ -19,7 +19,10 @@ public:
 
 	void increaseHealth(float p_health);
 	void increaseMana(float p_mana);
-	void increaseSpeed(float p_duration);
+	void increaseSpeed(float p_duration, float p_speedIncrease);
+	void increaseDamage(float p_duration, float p_damageIncrease);
+	void increaseArmor(float p_duration, float p_armorIncrease);
+	void increaseAtackSpeed(float p_duration, float p_atackSpeedIncrease);
 	
 	void move();
 	void rangeAtack();
@@ -42,17 +45,28 @@ private:
 
 	bool	m_playerAlive;
 
-	float	m_velocity;
 	float	m_baseVelocity;
-	float	m_health;
+	float	m_velocity;
 	float	m_maxHealth;
-	float	m_mana;
+	float	m_health;
 	float	m_maxMana;
+	float	m_mana;
+	float	m_baseDamage;
 	float	m_damage;
+	float	m_baseAtackSpeed;
 	float	m_atackSpeed;
+	float	m_baseArmor;
+	float	m_armor;
 	
 	bool	m_speedPotionEfect;
+	bool	m_damagePotionEfect;
+	bool	m_armorPotionEfect;
+	bool	m_atackSpeedPotionEfect;
+	
 	float	m_endOfSpeedPotionEffect;
+	float	m_endOfDamagePotionEffect;
+	float	m_endOfArmorPotionEffect;
+	float	m_endOfAtackSpeedPotionEffect;
 
 	bool	m_basicInCooldown;
 	float	m_nextBasic;
