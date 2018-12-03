@@ -16,6 +16,10 @@ EnemyRanger::EnemyRanger(float p_posX, float p_posY, const char* p_path) : Enemy
 
 EnemyRanger::~EnemyRanger()
 {
+	if (m_projectileLaunched && m_projectile != nullptr) {
+		delete m_projectile;
+		m_projectile = nullptr;
+	}
 }
 
 void EnemyRanger::atack()

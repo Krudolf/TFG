@@ -1,6 +1,8 @@
 #pragma once
 #include "state.h"
 
+class StateMachine;
+
 class StateMenu :
 	public State
 {
@@ -14,5 +16,7 @@ public:
 
 private:
 	StateMenu();
+
+	StateMachine* m_stateMachine;
 };
 

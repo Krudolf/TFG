@@ -185,6 +185,7 @@
     <ClInclude Include="stateGame.h" />
     <ClInclude Include="stateMachine.h" />
     <ClInclude Include="stateMenu.h" />
+    <ClInclude Include="stateMenuHome.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
@@ -223,6 +224,7 @@
     <ClCompile Include="stateGame.cpp" />
     <ClCompile Include="stateMachine.cpp" />
     <ClCompile Include="stateMenu.cpp" />
+    <ClCompile Include="stateMenuHome.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
