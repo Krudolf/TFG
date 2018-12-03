@@ -1,10 +1,16 @@
 #include "pch.h"
 #include "engineManager.h"
+
 #include <iostream>
 
 
 EngineManager::EngineManager()
 {
+	m_font = new sf::Font();
+	if (!m_font->loadFromFile("assets/fonts/good_times_rg.ttf"))
+		std::cout << "No se ha podido cargar la fuente Good Times" << std::endl;
+	
+	m_keyReleased = true;
 }
 
 
@@ -22,8 +28,8 @@ EngineManager::~EngineManager()
 	}
 	m_textureMap.clear();
 
+	delete m_font;
 	delete m_cameraView;
-
 	delete m_window;
 }
 
@@ -36,6 +42,13 @@ EngineManager& EngineManager::p()
 void EngineManager::createWindow(int p_resolutionX, int p_resolutionY, const char* p_name)
 {
 	m_window = new sf::RenderWindow(sf::VideoMode(p_resolutionX, p_resolutionY), p_name);
+	m_width	= p_resolutionX;
+	m_height = p_resolutionY;
+}
+
+void EngineManager::closeWindow()
+{
+	m_window->close();
 }
 
 void EngineManager::draw(sf::Sprite* p_sprite)
@@ -43,10 +56,40 @@ void EngineManager::draw(sf::Sprite* p_sprite)
 	m_window->draw(*p_sprite);
 }
 
+void EngineManager::draw(sf::RectangleShape p_rectangle)
+{
+	m_window->draw(p_rectangle);
+}
+
+void EngineManager::draw(sf::Text p_text)
+{
+	m_window->draw(p_text);
+}
+
+void EngineManager::checkEvents()
+{
+	sf::Event event;
+	while (m_window->pollEvent(event))
+	{
+		if (event.type == sf::Event::Closed)
+			m_window->close();
+
+		if (event.type == sf::Event::KeyReleased) {
+			m_keyReleased = true;
+		}
+	}
+}
+
 void EngineManager::createCameraView(int centerX, int centerY, int width, int height)
 {
 	m_cameraView = new sf::View(sf::Vector2f(centerX, centerY), sf::Vector2f(width, height));
 	m_cameraView->zoom(2);
+}
+
+void EngineManager::resetView()
+{
+	m_cameraView->reset(sf::FloatRect(0, 0, 1000, 1000));
+	m_cameraView->zoom(0.5);
 }
 
 void EngineManager::loadTexture(const char * p_path)

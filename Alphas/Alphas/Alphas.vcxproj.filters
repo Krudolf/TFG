@@ -19,48 +19,57 @@
     <Filter Include="Archivos de encabezado\managers">
       <UniqueIdentifier>{64d2b5d9-531f-4ba0-b963-37fb1fe39d2a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\entities">
-      <UniqueIdentifier>{af48504c-f9cf-4d2c-895a-b64d3e4ef90f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\entities">
-      <UniqueIdentifier>{22c2b4ee-89fe-4e50-aab5-7f560a7f3675}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\entities\potions">
-      <UniqueIdentifier>{33210650-293f-4f69-8c36-b39c48db3fcb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\entities\potions">
-      <UniqueIdentifier>{6ca50b8c-d8c7-4c7c-ab0b-0e0d08f4d6c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\entities\tiles">
-      <UniqueIdentifier>{39daff27-b0be-49cc-a948-ab1345042e08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\entities\tiles">
-      <UniqueIdentifier>{862a5f8a-55ef-4078-b7eb-68c320de61b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\entities\projectiles">
-      <UniqueIdentifier>{fdeb2444-d3af-4813-8069-426940cdaea3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\entities\projectiles">
-      <UniqueIdentifier>{07636397-dba2-430c-8c3d-781b40a85a64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\entities\enemies">
-      <UniqueIdentifier>{601f58e3-c7bb-4ac1-be4d-8b8470bb8a11}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\entities\enemies">
-      <UniqueIdentifier>{c01b9226-db02-4227-8a6e-fabf9f356a4a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de encabezado\states">
       <UniqueIdentifier>{54cd2882-aad9-4dc0-8d69-a2c745da0545}</UniqueIdentifier>
     </Filter>
     <Filter Include="Archivos de origen\states">
       <UniqueIdentifier>{61fa8ddb-bf8c-4b9b-aed4-40991f4233f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\screens">
+      <UniqueIdentifier>{c8094764-853a-4385-beed-90f8e7c20363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\screens">
+      <UniqueIdentifier>{846d5e59-62c9-4991-bf9d-92a34eaadccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\gameEntities">
+      <UniqueIdentifier>{22c2b4ee-89fe-4e50-aab5-7f560a7f3675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\gameEntities\potions">
+      <UniqueIdentifier>{6ca50b8c-d8c7-4c7c-ab0b-0e0d08f4d6c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\gameEntities\tiles">
+      <UniqueIdentifier>{39daff27-b0be-49cc-a948-ab1345042e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\gameEntities\projectiles">
+      <UniqueIdentifier>{fdeb2444-d3af-4813-8069-426940cdaea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\gameEntities\enemies">
+      <UniqueIdentifier>{c01b9226-db02-4227-8a6e-fabf9f356a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\gameEntities">
+      <UniqueIdentifier>{af48504c-f9cf-4d2c-895a-b64d3e4ef90f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\gameEntities\potions">
+      <UniqueIdentifier>{33210650-293f-4f69-8c36-b39c48db3fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\gameEntities\tiles">
+      <UniqueIdentifier>{862a5f8a-55ef-4078-b7eb-68c320de61b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\gameEntities\projectiles">
+      <UniqueIdentifier>{07636397-dba2-430c-8c3d-781b40a85a64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\gameEntities\enemies">
+      <UniqueIdentifier>{601f58e3-c7bb-4ac1-be4d-8b8470bb8a11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\menuEntities">
+      <UniqueIdentifier>{ff5af4eb-9155-4ef6-8435-9f6ed71f4b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\menuEntities">
+      <UniqueIdentifier>{56b61cf0-7ed1-4de3-8b42-57e82f7b3ef6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="entity.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
@@ -73,16 +82,16 @@
       <Filter>Archivos de encabezado\managers</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>Archivos de encabezado\entities</Filter>
+      <Filter>Archivos de encabezado\gameEntities</Filter>
     </ClInclude>
     <ClInclude Include="potionHealth.h">
-      <Filter>Archivos de encabezado\entities\potions</Filter>
+      <Filter>Archivos de encabezado\gameEntities\potions</Filter>
     </ClInclude>
     <ClInclude Include="potionMana.h">
-      <Filter>Archivos de encabezado\entities\potions</Filter>
+      <Filter>Archivos de encabezado\gameEntities\potions</Filter>
     </ClInclude>
     <ClInclude Include="potionSpeed.h">
-      <Filter>Archivos de encabezado\entities\potions</Filter>
+      <Filter>Archivos de encabezado\gameEntities\potions</Filter>
     </ClInclude>
     <ClInclude Include="sceneMap.h">
       <Filter>Archivos de encabezado</Filter>
@@ -94,61 +103,79 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="tile.h">
-      <Filter>Archivos de encabezado\entities\tiles</Filter>
+      <Filter>Archivos de encabezado\gameEntities\tiles</Filter>
     </ClInclude>
     <ClInclude Include="projectile.h">
-      <Filter>Archivos de encabezado\entities\projectiles</Filter>
+      <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
     </ClInclude>
     <ClInclude Include="potion.h">
-      <Filter>Archivos de encabezado\entities\potions</Filter>
+      <Filter>Archivos de encabezado\gameEntities\potions</Filter>
     </ClInclude>
     <ClInclude Include="projectileStraight.h">
-      <Filter>Archivos de encabezado\entities\projectiles</Filter>
+      <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
     </ClInclude>
     <ClInclude Include="projectileSpin.h">
-      <Filter>Archivos de encabezado\entities\projectiles</Filter>
+      <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
     </ClInclude>
     <ClInclude Include="projectileStraightSpin.h">
-      <Filter>Archivos de encabezado\entities\projectiles</Filter>
+      <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
     </ClInclude>
     <ClInclude Include="projectileConus.h">
-      <Filter>Archivos de encabezado\entities\projectiles</Filter>
+      <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
     </ClInclude>
     <ClInclude Include="enemy.h">
-      <Filter>Archivos de encabezado\entities\enemies</Filter>
+      <Filter>Archivos de encabezado\gameEntities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="enemyWarrior.h">
-      <Filter>Archivos de encabezado\entities\enemies</Filter>
+      <Filter>Archivos de encabezado\gameEntities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="enemyCharger.h">
-      <Filter>Archivos de encabezado\entities\enemies</Filter>
+      <Filter>Archivos de encabezado\gameEntities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="enemyRanger.h">
-      <Filter>Archivos de encabezado\entities\enemies</Filter>
+      <Filter>Archivos de encabezado\gameEntities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="potionArmor.h">
-      <Filter>Archivos de encabezado\entities\potions</Filter>
+      <Filter>Archivos de encabezado\gameEntities\potions</Filter>
     </ClInclude>
     <ClInclude Include="potionDamage.h">
-      <Filter>Archivos de encabezado\entities\potions</Filter>
+      <Filter>Archivos de encabezado\gameEntities\potions</Filter>
     </ClInclude>
     <ClInclude Include="potionAtackSpeed.h">
-      <Filter>Archivos de encabezado\entities\potions</Filter>
+      <Filter>Archivos de encabezado\gameEntities\potions</Filter>
     </ClInclude>
     <ClInclude Include="state.h">
-      <Filter>Archivos de encabezado\states</Filter>
-    </ClInclude>
-    <ClInclude Include="stateGame.h">
-      <Filter>Archivos de encabezado\states</Filter>
-    </ClInclude>
-    <ClInclude Include="stateMenu.h">
       <Filter>Archivos de encabezado\states</Filter>
     </ClInclude>
     <ClInclude Include="stateMachine.h">
       <Filter>Archivos de encabezado\states</Filter>
     </ClInclude>
-    <ClInclude Include="stateMenuHome.h">
+    <ClInclude Include="screenMenuHome.h">
+      <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="screenGame.h">
+      <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="screen.h">
+      <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="screenManager.h">
+      <Filter>Archivos de encabezado\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Archivos de encabezado\gameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="screenGameMode.h">
+      <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="screenOption.h">
+      <Filter>Archivos de encabezado\screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,9 +183,6 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Alphas.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="entity.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
@@ -171,16 +195,16 @@
       <Filter>Archivos de origen\managers</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
-      <Filter>Archivos de origen\entities</Filter>
+      <Filter>Archivos de origen\gameEntities</Filter>
     </ClCompile>
     <ClCompile Include="potionHealth.cpp">
-      <Filter>Archivos de origen\entities\potions</Filter>
+      <Filter>Archivos de origen\gameEntities\potions</Filter>
     </ClCompile>
     <ClCompile Include="potionSpeed.cpp">
-      <Filter>Archivos de origen\entities\potions</Filter>
+      <Filter>Archivos de origen\gameEntities\potions</Filter>
     </ClCompile>
     <ClCompile Include="potionMana.cpp">
-      <Filter>Archivos de origen\entities\potions</Filter>
+      <Filter>Archivos de origen\gameEntities\potions</Filter>
     </ClCompile>
     <ClCompile Include="sceneMap.cpp">
       <Filter>Archivos de origen</Filter>
@@ -192,61 +216,76 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Archivos de origen\entities\tiles</Filter>
+      <Filter>Archivos de origen\gameEntities\tiles</Filter>
     </ClCompile>
     <ClCompile Include="potion.cpp">
-      <Filter>Archivos de origen\entities\potions</Filter>
+      <Filter>Archivos de origen\gameEntities\potions</Filter>
     </ClCompile>
     <ClCompile Include="projectile.cpp">
-      <Filter>Archivos de origen\entities\projectiles</Filter>
+      <Filter>Archivos de origen\gameEntities\projectiles</Filter>
     </ClCompile>
     <ClCompile Include="projectileStraight.cpp">
-      <Filter>Archivos de origen\entities\projectiles</Filter>
+      <Filter>Archivos de origen\gameEntities\projectiles</Filter>
     </ClCompile>
     <ClCompile Include="projectileSpin.cpp">
-      <Filter>Archivos de origen\entities\projectiles</Filter>
+      <Filter>Archivos de origen\gameEntities\projectiles</Filter>
     </ClCompile>
     <ClCompile Include="projectileStraightSpin.cpp">
-      <Filter>Archivos de origen\entities\projectiles</Filter>
+      <Filter>Archivos de origen\gameEntities\projectiles</Filter>
     </ClCompile>
     <ClCompile Include="projectileConus.cpp">
-      <Filter>Archivos de origen\entities\projectiles</Filter>
+      <Filter>Archivos de origen\gameEntities\projectiles</Filter>
     </ClCompile>
     <ClCompile Include="enemy.cpp">
-      <Filter>Archivos de origen\entities\enemies</Filter>
+      <Filter>Archivos de origen\gameEntities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="enemyWarrior.cpp">
-      <Filter>Archivos de origen\entities\enemies</Filter>
+      <Filter>Archivos de origen\gameEntities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="enemyCharger.cpp">
-      <Filter>Archivos de origen\entities\enemies</Filter>
+      <Filter>Archivos de origen\gameEntities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="enemyRanger.cpp">
-      <Filter>Archivos de origen\entities\enemies</Filter>
+      <Filter>Archivos de origen\gameEntities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="potionAtackSpeed.cpp">
-      <Filter>Archivos de origen\entities\potions</Filter>
+      <Filter>Archivos de origen\gameEntities\potions</Filter>
     </ClCompile>
     <ClCompile Include="potionDamage.cpp">
-      <Filter>Archivos de origen\entities\potions</Filter>
+      <Filter>Archivos de origen\gameEntities\potions</Filter>
     </ClCompile>
     <ClCompile Include="potionArmor.cpp">
-      <Filter>Archivos de origen\entities\potions</Filter>
+      <Filter>Archivos de origen\gameEntities\potions</Filter>
     </ClCompile>
     <ClCompile Include="state.cpp">
-      <Filter>Archivos de origen\states</Filter>
-    </ClCompile>
-    <ClCompile Include="stateGame.cpp">
-      <Filter>Archivos de origen\states</Filter>
-    </ClCompile>
-    <ClCompile Include="stateMenu.cpp">
       <Filter>Archivos de origen\states</Filter>
     </ClCompile>
     <ClCompile Include="stateMachine.cpp">
       <Filter>Archivos de origen\states</Filter>
     </ClCompile>
-    <ClCompile Include="stateMenuHome.cpp">
+    <ClCompile Include="screenMenuHome.cpp">
+      <Filter>Archivos de origen\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="screenGame.cpp">
+      <Filter>Archivos de origen\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="screen.cpp">
+      <Filter>Archivos de origen\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="screenManager.cpp">
+      <Filter>Archivos de origen\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Archivos de origen\gameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="screenGameMode.cpp">
+      <Filter>Archivos de origen\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="screenOption.cpp">
+      <Filter>Archivos de origen\screens</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="button.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemyCharger.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="potion.h" />
     <ClInclude Include="potionArmor.h" />
     <ClInclude Include="potionDamage.h" />
@@ -181,16 +183,20 @@
     <ClInclude Include="projectileStraightSpin.h" />
     <ClInclude Include="quadTree.h" />
     <ClInclude Include="sceneMap.h" />
+    <ClInclude Include="screen.h" />
+    <ClInclude Include="screenGameMode.h" />
+    <ClInclude Include="screenManager.h" />
+    <ClInclude Include="screenOption.h" />
     <ClInclude Include="state.h" />
-    <ClInclude Include="stateGame.h" />
+    <ClInclude Include="screenGame.h" />
     <ClInclude Include="stateMachine.h" />
-    <ClInclude Include="stateMenu.h" />
-    <ClInclude Include="stateMenuHome.h" />
+    <ClInclude Include="screenMenuHome.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Alphas.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="enemyCharger.cpp" />
@@ -220,11 +226,14 @@
     <ClCompile Include="projectileStraightSpin.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="sceneMap.cpp" />
+    <ClCompile Include="screen.cpp" />
+    <ClCompile Include="screenGameMode.cpp" />
+    <ClCompile Include="screenManager.cpp" />
+    <ClCompile Include="screenOption.cpp" />
     <ClCompile Include="state.cpp" />
-    <ClCompile Include="stateGame.cpp" />
+    <ClCompile Include="screenGame.cpp" />
     <ClCompile Include="stateMachine.cpp" />
-    <ClCompile Include="stateMenu.cpp" />
-    <ClCompile Include="stateMenuHome.cpp" />
+    <ClCompile Include="screenMenuHome.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>

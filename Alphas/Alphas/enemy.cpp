@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "enemy.h"
 #include "engineManager.h"
-#include "stateGame.h"
+#include "screenGame.h"
 #include "player.h"
 
 #include <iostream>
@@ -27,9 +27,9 @@ Enemy::Enemy(float p_posX, float p_posY, const char* p_path) : Entity(p_path, En
 	m_atackSpeed	= 0.75f;
 	m_dead			= false;
 
-	m_cooperativeMode		= StateGame::getCooperativeMode();
+	m_cooperativeMode		= ScreenGame::getCooperativeMode();
 	m_distanceToObjective	= 1000;
-	m_objectivePlayer		= StateGame::m_playerVector[0];
+	m_objectivePlayer		= ScreenGame::m_playerVector[0];
 
 	m_atackInCooldown	= false;
 	m_cooldownAtack		= 1.f;
@@ -69,7 +69,7 @@ void Enemy::checkObjective()
 		Player* t_bestObjective = nullptr;
 
 		//Checks the closest enemy
-		for (auto t_objective : StateGame::m_playerVector) {
+		for (auto t_objective : ScreenGame::m_playerVector) {
 			double t_distance = calculateDistance(t_objective);
 
 			if (t_distance < t_bestDistance) {

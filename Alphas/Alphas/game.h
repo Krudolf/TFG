@@ -3,8 +3,8 @@
 #include <vector>
 
 class EngineManager;
-class StateMachine;
-class State;
+class ScreenManager;
+class Screen;
 
 class Game
 {
@@ -12,15 +12,14 @@ public:
 	Game();
 	~Game();
 
-	void initGameMap();
+	void init();
 	void run();
 	void update(double p_time, double p_deltaTime);
 	void draw();
 	
 private:
 	EngineManager*	m_engineManager;
-	
-	StateMachine*	m_stateMachine;
+	ScreenManager*	m_screenManager;
 
 	double m_time;
 	double m_dt;

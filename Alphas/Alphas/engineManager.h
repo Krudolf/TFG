@@ -12,11 +12,21 @@ public:
 	/* WINDOW */
 	void createWindow(int p_resolutionX, int p_resolutionY, const char* p_name);
 	sf::RenderWindow* getWindow() { return m_window; };
+	void closeWindow();
+	int getWidth() { return m_width; };
+	int getHeight() { return m_height; };
 	void draw(sf::Sprite* p_sprite);
+	void draw(sf::RectangleShape p_rectangle);
+	void draw(sf::Text p_text);
+
+	void checkEvents();
+	bool getKeyReleased() { return m_keyReleased; };
+	void setKeyReleased(bool p_keyReleased) { m_keyReleased = p_keyReleased; };
 
 	/* VIEW */
 	void createCameraView(int centerX, int centerY, int width, int height);
 	sf::View*	getCameraView() { return m_cameraView; };
+	void resetView();
 
 	/* CLOCK */
 	sf::Clock	getMasterClock() { return m_masterClock; };
@@ -31,14 +41,19 @@ public:
 	void setSpriteFrame(int p_spriteID, int p_entity, int p_frame);
 	void getDirection(double p_posEntity1X, double p_posentity1Y, double p_posEntity2X, double p_posEntity2Y, float& p_directionX, float& p_directionY);
 
-	/* MAP */
-
 	/* COLLISION */
 	bool checkCollision(int p_spriteID1, int p_spriteID2);
 
+	/* MENU */
+	sf::Font* getFont() { return m_font; };
 
 private:
 	EngineManager();
+
+	int		m_width;
+	int		m_height;
+
+	bool	m_keyReleased;
 
 	std::map<const char*, sf::Texture*> m_textureMap;
 	std::map<const char*, sf::Texture*>::iterator m_textureMapIterator;
@@ -51,6 +66,6 @@ private:
 	sf::Texture* mapTexture;
 	sf::Sprite* mapSprite;
 
-	/* MAP */
+	sf::Font*	m_font;
 
 };

@@ -6,7 +6,7 @@
 #include "projectileSpin.h"
 #include "projectileStraightSpin.h"
 #include "projectileConus.h"
-#include "stateGame.h"
+#include "screenGame.h"
 #include "potion.h"
 
 #include <iostream>
@@ -255,15 +255,15 @@ void Player::launchProjectile(Direction p_dir, ProjectileType p_projectileType)
 		Projectile* t_projectile = new ProjectileStraight(m_texturePath, Entities::BULLET1, p_dir, m_posX, m_posY, m_damage);
 
 		m_basicProjectiles.push_back(t_projectile);
-		StateGame::m_entityVector.push_back(t_projectile);
+		ScreenGame::m_entityVector.push_back(t_projectile);
 	}
 }
 
 void Player::pickObject()
 {
-	for (int i = 0; i < StateGame::m_potionVector.size(); i++) {
-		if (m_engineManager->checkCollision(this->m_spriteID, StateGame::m_potionVector[i]->getSpriteID())) {
-			StateGame::m_potionVector[i]->setEffect(this);
+	for (int i = 0; i < ScreenGame::m_potionVector.size(); i++) {
+		if (m_engineManager->checkCollision(this->m_spriteID, ScreenGame::m_potionVector[i]->getSpriteID())) {
+			ScreenGame::m_potionVector[i]->setEffect(this);
 		}
 	}
 }
@@ -279,8 +279,8 @@ void Player::updateBasicAtack()
 
 		if (m_basicProjectiles[i]->getReadyToDelete()) {
 			//Delete the projectile from the game vector
-			auto it = std::find(StateGame::m_entityVector.begin(), StateGame::m_entityVector.end(), m_basicProjectiles[i]);
-			StateGame::m_entityVector.erase(it);
+			auto it = std::find(ScreenGame::m_entityVector.begin(), ScreenGame::m_entityVector.end(), m_basicProjectiles[i]);
+			ScreenGame::m_entityVector.erase(it);
 
 			//Delete the projectile from the player vector os projectiles
 			delete m_basicProjectiles[i];

@@ -2,21 +2,21 @@
 #include "game.h"
 #include "engineManager.h"
 
-#include "stateMachine.h"
-#include "state.h"
-#include "stateMenu.h"
-#include "stateGame.h"
+#include "screenManager.h"
+#include "screen.h"
+#include "screenMenuHome.h"
+#include "screenGame.h"
 
 #include <iostream>
 
 Game::Game()
 {
 	m_engineManager = &EngineManager::p();
-	//Create the window
 	m_engineManager->createWindow(1280, 720, "ALPHAS");
 
-	m_stateMachine = new StateMachine();
-	m_stateMachine->setCurrentState(&StateMenu::p());
+	m_screenManager = &ScreenManager::p();
+	m_screenManager->setCurrentScreen(new ScreenMenuHome());
+	m_screenManager->init();
 
 	m_time			= 0.f;
 	m_dt			= 0.01;
@@ -35,18 +35,10 @@ Game::~Game()
 
 void Game::run()
 {	
-	//initGameMap();
-	m_stateMachine->init();
-
 	//Run the program while the window is open
 	while (m_engineManager->getWindow()->isOpen()){
-		sf::Event event;
-		while (m_engineManager->getWindow()->pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				m_engineManager->getWindow()->close();
-		}
-		
+		m_engineManager->checkEvents();
+
 		m_newTime = m_engineManager->getMasterClockSeconds();
 		m_frameTime = m_newTime - m_currentTime;
 		m_currentTime = m_newTime;
@@ -55,32 +47,27 @@ void Game::run()
 		
 		while (m_accumulator >= m_dt) {
 			//float t_deltaTime = std::min(m_frameTime, m_dt);
-			//update(m_time, m_dt);
-			m_stateMachine->update(m_time, m_dt);
+			update(m_time, m_dt);
 
 			m_accumulator -= m_dt;
 			m_time += m_dt;
 		}
 
-		//draw();
-		m_stateMachine->draw();
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
-			m_stateMachine->changeState(&StateGame::p());
+		draw();
 	}
 }
 
 void Game::update(double p_time, double p_deltaTime)
 {
-	m_stateMachine->update(p_time, p_deltaTime);
+	m_screenManager->update(p_time, p_deltaTime);
 }
 
 void Game::draw()
 {
-	m_stateMachine->draw();
+	m_screenManager->draw();
 }
 
-void Game::initGameMap()
+void Game::init()
 {
-	m_stateMachine->init();
+	m_screenManager->init();
 }
