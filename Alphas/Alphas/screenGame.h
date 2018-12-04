@@ -11,6 +11,7 @@ class Enemy;
 class Potion;
 class SceneMap;
 class QuadTree;
+class Interface;
 
 class ScreenGame :
 	public Screen
@@ -40,6 +41,7 @@ private:
 	Camera*			m_camera;
 	SceneMap*		m_sceneMap;
 	QuadTree*		m_quadTree;
+	Interface*		m_interface;
 
 };
 

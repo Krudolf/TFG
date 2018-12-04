@@ -70,6 +70,18 @@
     <Filter Include="Archivos de encabezado\others">
       <UniqueIdentifier>{e16d2031-b543-4768-a97e-956866c8c07e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\gameEntities\players">
+      <UniqueIdentifier>{356cec69-5f50-40fb-8547-5ee69aa8e178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\gameEntities\players">
+      <UniqueIdentifier>{7dea4fe8-0960-47a0-9e9f-660f81d0f444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\interface">
+      <UniqueIdentifier>{18581c19-db5d-46fc-93fd-498da786914e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\interface">
+      <UniqueIdentifier>{6d46661f-39a2-4990-8750-dd4957f0ef08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -83,9 +95,6 @@
     </ClInclude>
     <ClInclude Include="engineManager.h">
       <Filter>Archivos de encabezado\managers</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Archivos de encabezado\gameEntities</Filter>
     </ClInclude>
     <ClInclude Include="potionHealth.h">
       <Filter>Archivos de encabezado\gameEntities\potions</Filter>
@@ -195,6 +204,27 @@
     <ClInclude Include="entities_enum.h">
       <Filter>Archivos de encabezado\others</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Archivos de encabezado\gameEntities\players</Filter>
+    </ClInclude>
+    <ClInclude Include="playerBlue.h">
+      <Filter>Archivos de encabezado\gameEntities\players</Filter>
+    </ClInclude>
+    <ClInclude Include="playerGreen.h">
+      <Filter>Archivos de encabezado\gameEntities\players</Filter>
+    </ClInclude>
+    <ClInclude Include="interface.h">
+      <Filter>Archivos de encabezado\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="fillBar.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Archivos de encabezado\others</Filter>
+    </ClInclude>
+    <ClInclude Include="playerInfo.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -211,9 +241,6 @@
     </ClCompile>
     <ClCompile Include="EngineManager.cpp">
       <Filter>Archivos de origen\managers</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Archivos de origen\gameEntities</Filter>
     </ClCompile>
     <ClCompile Include="potionHealth.cpp">
       <Filter>Archivos de origen\gameEntities\potions</Filter>
@@ -316,6 +343,24 @@
     </ClCompile>
     <ClCompile Include="image.cpp">
       <Filter>Archivos de origen\menuEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Archivos de origen\gameEntities\players</Filter>
+    </ClCompile>
+    <ClCompile Include="playerBlue.cpp">
+      <Filter>Archivos de origen\gameEntities\players</Filter>
+    </ClCompile>
+    <ClCompile Include="playerGreen.cpp">
+      <Filter>Archivos de origen\gameEntities\players</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface.cpp">
+      <Filter>Archivos de origen\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="fillBar.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInfo.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

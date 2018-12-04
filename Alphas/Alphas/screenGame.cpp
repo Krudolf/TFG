@@ -6,6 +6,8 @@
 #include "camera.h"
 #include "entity.h"
 #include "player.h"
+#include "playerBlue.h"
+#include "playerGreen.h"
 #include "enemy.h"
 #include "enemyWarrior.h"
 #include "enemyCharger.h"
@@ -20,6 +22,7 @@
 #include "quadTree.h"
 #include "tile.h"
 #include "sceneMap.h"
+#include "interface.h"
 
 #include "screenMenuHome.h"
 
@@ -31,13 +34,15 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 	switch (p_playerEntity)
 	{
 	case Entities::PLAYER1:
-		t_player = new Player(0, 0, "assets/spritesheet.png");
+		t_player = new PlayerBlue(0, 0, "assets/spritesheet.png");
 		break;
 	case Entities::PLAYER2:
-		t_player = new Player(1000, 0, "assets/spritesheet.png");
+		t_player = new PlayerGreen(0, 0, "assets/spritesheet.png");
 		break;
 	}
 	m_playerVector.push_back(t_player);
+
+	m_interface = new Interface(m_playerVector[0], nullptr);
 }
 
 
@@ -48,6 +53,7 @@ ScreenGame::~ScreenGame()
 	delete m_camera;
 	delete m_sceneMap;
 	delete m_quadTree;
+	delete m_interface;
 }
 
 void ScreenGame::deleteAndFree()
@@ -163,6 +169,9 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 		}
 	}
 
+	/*	INTERFACE */
+	m_interface->update();
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
 		m_engineManager->setKeyReleased(false);
 		m_screenManager->changeScreen(new ScreenMenuHome());
@@ -172,6 +181,7 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 void ScreenGame::draw()
 {
 	m_engineManager->getWindow()->clear(sf::Color::Red);
+	m_engineManager->useGameView();
 
 	//Draw the map
 	m_sceneMap->draw();
@@ -191,6 +201,9 @@ void ScreenGame::draw()
 	for (auto t_potion : m_potionVector) {
 		t_potion->draw();
 	}
+
+	m_engineManager->useInterfaceView();
+	m_interface->draw();
 
 	m_engineManager->getWindow()->display();
 }

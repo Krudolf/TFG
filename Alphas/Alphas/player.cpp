@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-Player::Player(float p_posX, float p_posY, const char* p_path) : Entity(p_path, Entities::PLAYER1)
+Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_playerEntity) : Entity(p_path, p_playerEntity)
 {
 	m_posX		= p_posX;
 	m_posY		= p_posY;
@@ -19,19 +19,6 @@ Player::Player(float p_posX, float p_posY, const char* p_path) : Entity(p_path, 
 	m_lastPosY	= p_posY;
 
 	m_playerAlive	= true;
-	
-	m_baseVelocity	= 100.f;
-	m_velocity		= m_baseVelocity;
-	m_maxHealth		= 100.f;
-	m_health		= m_maxHealth;
-	m_maxMana		= 100.f;
-	m_mana			= m_maxMana;
-	m_baseDamage	= 1.f;
-	m_damage		= m_baseDamage;
-	m_baseAtackSpeed= 0.25f;
-	m_atackSpeed	= m_baseAtackSpeed;
-	m_baseArmor		= 1.f;
-	m_armor			= m_baseArmor;
 
 	m_speedPotionEfect		= false;
 	m_damagePotionEfect		= false;
@@ -195,27 +182,6 @@ void Player::rangeAtack()
 	}
 }
 
-void Player::hability1()
-{
-	m_hability1Launched = true;
-	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-	m_hability1 = new ProjectileSpin(m_texturePath, Entities::BULLET1, Direction::NONE, m_posX, m_posY, m_damage / 10, this);
-}
-
-void Player::hability2()
-{
-	m_hability2Launched = true;
-	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-	m_hability2 = new ProjectileStraightSpin(m_texturePath, Entities::BULLET1, m_faceDirection, m_posX, m_posY, m_damage);
-}
-
-void Player::hability3()
-{
-	m_hability3Launched = true;
-	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-	m_hability3 = new ProjectileConus(m_texturePath, Entities::BULLET1, m_faceDirection, m_posX, m_posY, m_damage);
-}
-
 void Player::updateHabilities()
 {
 	if (m_hability1Launched) {
@@ -252,7 +218,7 @@ void Player::launchProjectile(Direction p_dir, ProjectileType p_projectileType)
 		m_basicInCooldown = true;
 		m_nextBasic = m_engineManager->getMasterClockSeconds() + m_atackSpeed;
 
-		Projectile* t_projectile = new ProjectileStraight(m_texturePath, Entities::BULLET1, p_dir, m_posX, m_posY, m_damage);
+		Projectile* t_projectile = new ProjectileStraight(m_texturePath, m_bulletColor, p_dir, m_posX, m_posY, m_damage);
 
 		m_basicProjectiles.push_back(t_projectile);
 		ScreenGame::m_entityVector.push_back(t_projectile);

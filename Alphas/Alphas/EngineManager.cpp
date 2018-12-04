@@ -6,7 +6,7 @@
 
 EngineManager::EngineManager()
 {
-	m_cameraView = new sf::View();
+	m_gameView = new sf::View();
 
 	m_font = new sf::Font();
 	if (!m_font->loadFromFile("assets/fonts/good_times_rg.ttf"))
@@ -31,7 +31,7 @@ EngineManager::~EngineManager()
 	m_textureMap.clear();
 
 	delete m_font;
-	delete m_cameraView;
+	delete m_gameView;
 	delete m_window;
 }
 
@@ -47,7 +47,7 @@ void EngineManager::createWindow(int p_resolutionX, int p_resolutionY, const cha
 	m_height = p_resolutionY;
 
 	m_window = new sf::RenderWindow(sf::VideoMode(p_resolutionX, p_resolutionY), p_name);
-	m_menuView = m_window->getDefaultView();
+	m_interfaceView = m_window->getDefaultView();
 }
 
 void EngineManager::closeWindow()
@@ -91,14 +91,23 @@ void EngineManager::checkEvents()
 
 void EngineManager::createCameraView(int centerX, int centerY, int width, int height)
 {
-	m_cameraView->setCenter(sf::Vector2f(centerX, centerY));
-	m_cameraView->setSize(sf::Vector2f(width, height));
-	m_cameraView->zoom(2);
+	m_gameView->setCenter(sf::Vector2f(centerX, centerY));
+	m_gameView->setSize(sf::Vector2f(width, height));
 }
 
-void EngineManager::resetView()
+void EngineManager::setTargetGameView(float p_posX, float p_posY)
 {
-	m_window->setView(m_menuView);
+	m_gameView->setCenter(p_posX, p_posY);
+}
+
+void EngineManager::useGameView()
+{
+	m_window->setView(*m_gameView);
+}
+
+void EngineManager::useInterfaceView()
+{
+	m_window->setView(m_interfaceView);
 }
 
 void EngineManager::loadTexture(const char * p_path)

@@ -6,5 +6,6 @@ enum class Entities {
 	PLAYER2,
 	BULLET2,
 	ENEMY,
+	ENEMY_BULLET,
 	POTION
 };

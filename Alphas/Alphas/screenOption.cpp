@@ -57,7 +57,6 @@ void ScreenOption::update(double p_time, double p_deltaTime)
 		m_engineManager->setKeyReleased(false);
 		m_screenManager->changeScreen(new ScreenMenuHome());
 	}
-		
 }
 
 void ScreenOption::draw()

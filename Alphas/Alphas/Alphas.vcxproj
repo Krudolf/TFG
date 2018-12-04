@@ -161,6 +161,7 @@
     <ClInclude Include="buttonImage.h" />
     <ClInclude Include="buttonText.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="color.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemyCharger.h" />
     <ClInclude Include="enemyRanger.h" />
@@ -168,10 +169,15 @@
     <ClInclude Include="engineManager.h" />
     <ClInclude Include="entities_enum.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="fillBar.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="image.h" />
+    <ClInclude Include="interface.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="playerBlue.h" />
+    <ClInclude Include="playerGreen.h" />
+    <ClInclude Include="playerInfo.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="potion.h" />
     <ClInclude Include="potionArmor.h" />
@@ -211,8 +217,10 @@
     <ClCompile Include="enemyWarrior.cpp" />
     <ClCompile Include="EngineManager.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="fillBar.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="image.cpp" />
+    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -220,6 +228,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="playerBlue.cpp" />
+    <ClCompile Include="playerGreen.cpp" />
+    <ClCompile Include="PlayerInfo.cpp" />
     <ClCompile Include="potion.cpp" />
     <ClCompile Include="potionArmor.cpp" />
     <ClCompile Include="potionDamage.cpp" />

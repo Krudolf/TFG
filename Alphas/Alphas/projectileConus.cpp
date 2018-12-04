@@ -16,20 +16,20 @@ ProjectileConus::ProjectileConus(const char* p_texturePath, Entities p_ent, Dire
 	switch (p_dir)
 	{
 	case Direction::RIGHT:
-		m_projectile1 = new ProjectileStraight(m_texturePath, Entities::BULLET1, Direction::RIGHT_UP, p_playerPosX, p_playerPosY, m_damage);
-		m_projectile2 = new ProjectileStraight(m_texturePath, Entities::BULLET1, Direction::RIGHT_DOWN, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::RIGHT_UP, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::RIGHT_DOWN, p_playerPosX, p_playerPosY, m_damage);
 		break;
 	case Direction::LEFT:
-		m_projectile1 = new ProjectileStraight(m_texturePath, Entities::BULLET1, Direction::LEFT_UP, p_playerPosX, p_playerPosY, m_damage);
-		m_projectile2 = new ProjectileStraight(m_texturePath, Entities::BULLET1, Direction::LEFT_DOWN, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::LEFT_UP, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::LEFT_DOWN, p_playerPosX, p_playerPosY, m_damage);
 		break;
 	case Direction::UP:
-		m_projectile1 = new ProjectileStraight(m_texturePath, Entities::BULLET1, Direction::UP_RIGHT, p_playerPosX, p_playerPosY, m_damage);
-		m_projectile2 = new ProjectileStraight(m_texturePath, Entities::BULLET1, Direction::UP_LEFT, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::UP_RIGHT, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::UP_LEFT, p_playerPosX, p_playerPosY, m_damage);
 		break;
 	case Direction::DOWN:
-		m_projectile1 = new ProjectileStraight(m_texturePath, Entities::BULLET1, Direction::DOWN_RIGHT, p_playerPosX, p_playerPosY, m_damage);
-		m_projectile2 = new ProjectileStraight(m_texturePath, Entities::BULLET1, Direction::DOWN_LEFT, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::DOWN_RIGHT, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::DOWN_LEFT, p_playerPosX, p_playerPosY, m_damage);
 		break;
 	}
 }

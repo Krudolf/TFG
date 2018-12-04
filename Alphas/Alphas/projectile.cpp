@@ -104,7 +104,7 @@ void Projectile::update(bool p_deleteOnCollide)
 	if (m_engineManager->getMasterClockSeconds() > m_dieTime)
 		m_readyToDelete = true;
 
-	if (m_entityOwner == Entities::BULLET1) {
+	if (m_entityOwner == Entities::BULLET1 || m_entityOwner == Entities::BULLET2) {
 		//Check if the projectile collides with one enemy, if it collide it will be destroyed
 		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
 			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
@@ -118,7 +118,7 @@ void Projectile::update(bool p_deleteOnCollide)
 			}
 		}
 	}
-	else if (m_entityOwner == Entities::BULLET2) {
+	else if (m_entityOwner == Entities::ENEMY_BULLET) {
 		//Check if the projectile collides with one player, if it collide it will be destroyed
 		for (int i = 0; i < ScreenGame::m_playerVector.size(); i++) {
 			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_playerVector[i]->getSpriteID())) {
@@ -132,7 +132,6 @@ void Projectile::update(bool p_deleteOnCollide)
 			}
 		}
 	}
-
 }
 
 void Projectile::draw()

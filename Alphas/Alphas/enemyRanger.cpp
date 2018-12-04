@@ -26,7 +26,7 @@ void EnemyRanger::atack()
 {
 	if (!m_atackInCooldown && m_projectile == nullptr && m_distanceToObjective <= 600) {
 		m_endCooldown = m_engineManager->getMasterClockSeconds() + m_cooldownAtack;
-		m_projectile = new ProjectileStraight(m_texturePath, Entities::BULLET2, m_posX, m_posY, m_damage, m_directionMoveX, m_directionMoveY);
+		m_projectile = new ProjectileStraight(m_texturePath, Entities::ENEMY_BULLET, m_posX, m_posY, m_damage, m_directionMoveX, m_directionMoveY);
 		m_projectileLaunched = true;
 		m_atackInCooldown = true;
 	}

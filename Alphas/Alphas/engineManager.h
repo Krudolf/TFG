@@ -26,8 +26,10 @@ public:
 
 	/* VIEW */
 	void createCameraView(int centerX, int centerY, int width, int height);
-	sf::View*	getCameraView() { return m_cameraView; };
-	void resetView();
+	sf::View*	getCameraView() { return m_gameView; };
+	void setTargetGameView(float p_posX, float p_posY);
+	void useGameView();
+	void useInterfaceView();
 
 	/* CLOCK */
 	sf::Clock	getMasterClock() { return m_masterClock; };
@@ -61,8 +63,8 @@ private:
 	std::vector<sf::Sprite*>	m_spriteVector;
 
 	sf::RenderWindow*	m_window;
-	sf::View*			m_cameraView;
-	sf::View			m_menuView;
+	sf::View*			m_gameView;
+	sf::View			m_interfaceView;
 	sf::Clock			m_masterClock;
 	
 	sf::Texture* mapTexture;
