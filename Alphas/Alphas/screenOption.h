@@ -1,9 +1,7 @@
 #pragma once
 #include "screen.h"
 
-#include <vector>
-
-class Button;
+class ButtonText;
 
 class ScreenOption :
 	public Screen
@@ -19,7 +17,7 @@ public:
 private:
 	std::vector<Button*> m_buttonVector;
 
-	Button* m_buttonBack;
+	ButtonText* m_buttonBack;
 
 	int	m_buttonFocused;
 };

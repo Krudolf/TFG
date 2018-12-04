@@ -5,6 +5,7 @@
 #include "screenManager.h"
 #include "screen.h"
 #include "screenMenuHome.h"
+#include "screenSelectPlayerSolo.h"
 #include "screenGame.h"
 
 #include <iostream>
@@ -15,7 +16,8 @@ Game::Game()
 	m_engineManager->createWindow(1280, 720, "ALPHAS");
 
 	m_screenManager = &ScreenManager::p();
-	m_screenManager->setCurrentScreen(new ScreenMenuHome());
+	//m_screenManager->setCurrentScreen(new ScreenMenuHome());
+	m_screenManager->setCurrentScreen(new ScreenSelectPlayerSolo());
 	m_screenManager->init();
 
 	m_time			= 0.f;

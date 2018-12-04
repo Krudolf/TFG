@@ -4,13 +4,14 @@
 #include "screenManager.h"
 #include "screenMenuHome.h"
 #include "button.h"
+#include "buttonText.h"
 
 
 ScreenOption::ScreenOption()
 {
 	m_buttonFocused = 0;
 
-	m_buttonBack = new Button("BACK", Down_right);
+	m_buttonBack = new ButtonText("BACK", Down_right);
 	m_buttonVector.push_back(m_buttonBack);
 
 	m_buttonBack->setIsFocused(true);
@@ -51,6 +52,10 @@ void ScreenOption::update(double p_time, double p_deltaTime)
 
 		if (m_buttonFocused == 0)
 			m_screenManager->changeScreen(new ScreenMenuHome());
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
+		m_engineManager->setKeyReleased(false);
+		m_screenManager->changeScreen(new ScreenMenuHome());
 	}
 		
 }

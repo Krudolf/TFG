@@ -1,15 +1,7 @@
 #pragma once
+#include "entities_enum.h"
 
 class EngineManager;
-
-enum class Entities {
-	PLAYER1 = 0,
-	BULLET1,
-	PLAYER2,
-	BULLET2,
-	ENEMY,
-	POTION
-};
 
 enum class Direction {
 	RIGHT = 0,

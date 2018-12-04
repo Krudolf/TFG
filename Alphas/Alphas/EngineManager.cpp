@@ -70,6 +70,11 @@ void EngineManager::draw(sf::Text p_text)
 	m_window->draw(p_text);
 }
 
+void EngineManager::draw(sf::Sprite p_sprite)
+{
+	m_window->draw(p_sprite);
+}
+
 void EngineManager::checkEvents()
 {
 	sf::Event event;
@@ -101,7 +106,7 @@ void EngineManager::loadTexture(const char * p_path)
 	//Search the texture in the map, if not found we create the texture and add it to the map
 	m_textureMapIterator = m_textureMap.find(p_path);
 	
-	//The texture was not found
+	//The texture was not found --> Create the texture
 	if (m_textureMapIterator == m_textureMap.end()) {
 		sf::Texture* t_texture = new sf::Texture();
 		if (!t_texture->loadFromFile(p_path))

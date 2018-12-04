@@ -67,6 +67,9 @@
     <Filter Include="Archivos de origen\menuEntities">
       <UniqueIdentifier>{56b61cf0-7ed1-4de3-8b42-57e82f7b3ef6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\others">
+      <UniqueIdentifier>{e16d2031-b543-4768-a97e-956866c8c07e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -165,17 +168,32 @@
     <ClInclude Include="entity.h">
       <Filter>Archivos de encabezado\gameEntities</Filter>
     </ClInclude>
-    <ClInclude Include="button.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="screenGameMode.h">
       <Filter>Archivos de encabezado\screens</Filter>
     </ClInclude>
     <ClInclude Include="screenOption.h">
       <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>Archivos de encabezado\menuEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonText.h">
+      <Filter>Archivos de encabezado\menuEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonImage.h">
+      <Filter>Archivos de encabezado\menuEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="screenSelectPlayerSolo.h">
+      <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>Archivos de encabezado\menuEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Archivos de encabezado\others</Filter>
+    </ClInclude>
+    <ClInclude Include="entities_enum.h">
+      <Filter>Archivos de encabezado\others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -278,14 +296,26 @@
     <ClCompile Include="entity.cpp">
       <Filter>Archivos de origen\gameEntities</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="screenGameMode.cpp">
       <Filter>Archivos de origen\screens</Filter>
     </ClCompile>
     <ClCompile Include="screenOption.cpp">
       <Filter>Archivos de origen\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Archivos de origen\menuEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonText.cpp">
+      <Filter>Archivos de origen\menuEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonImage.cpp">
+      <Filter>Archivos de origen\menuEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="screenSelectPlayerSolo.cpp">
+      <Filter>Archivos de origen\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>Archivos de origen\menuEntities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

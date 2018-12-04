@@ -5,18 +5,19 @@
 #include "screenGameMode.h"
 #include "screenOption.h"
 #include "button.h"
+#include "buttonText.h"
 
 #include <iostream>
 
 ScreenMenuHome::ScreenMenuHome() : Screen()
 {
-	m_buttonPlay	= new Button("PLAY", CenterList1_3);
+	m_buttonPlay	= new ButtonText("PLAY", CenterList1_3);
 	m_buttonVector.push_back(m_buttonPlay);
 
-	m_buttonOptions	= new Button("OPTIONS", CenterList2_3);
+	m_buttonOptions	= new ButtonText("OPTIONS", CenterList2_3);
 	m_buttonVector.push_back(m_buttonOptions);
 
-	m_buttonQuit	= new Button("EXIT", CenterList3_3);
+	m_buttonQuit	= new ButtonText("EXIT", CenterList3_3);
 	m_buttonVector.push_back(m_buttonQuit);
 	
 	m_buttonPlay->setIsFocused(true);
@@ -62,6 +63,10 @@ void ScreenMenuHome::update(double p_time, double p_deltaTime)
 			m_screenManager->changeScreen(new ScreenOption());
 		else if (m_buttonFocused == 2)
 			m_engineManager->closeWindow();
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
+		m_engineManager->setKeyReleased(false);
+		m_engineManager->closeWindow();
 	}
 }
 

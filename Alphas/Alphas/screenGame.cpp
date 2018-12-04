@@ -25,8 +25,19 @@
 
 #include <iostream>
 
-ScreenGame::ScreenGame() : Screen()
+ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 {
+	Player* t_player;
+	switch (p_playerEntity)
+	{
+	case Entities::PLAYER1:
+		t_player = new Player(0, 0, "assets/spritesheet.png");
+		break;
+	case Entities::PLAYER2:
+		t_player = new Player(1000, 0, "assets/spritesheet.png");
+		break;
+	}
+	m_playerVector.push_back(t_player);
 }
 
 
@@ -65,7 +76,6 @@ void ScreenGame::init()
 {
 	m_camera = new Camera();
 
-	createPlayer();
 	m_camera->setTarget(m_playerVector[0]);
 
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
@@ -206,14 +216,6 @@ void ScreenGame::checkCollisionBetweenEnemys()
 			}
 		}
 	}
-}
-
-void ScreenGame::createPlayer()
-{
-	//Player* player = new Player(800, 400, "assets/spritesheet.png");
-	Player* player = new Player(0, 0, "assets/spritesheet.png");
-	//m_entityVector.push_back(player);
-	m_playerVector.push_back(player);
 }
 
 void ScreenGame::createEnemyWarrior(float p_posX, float p_posY)

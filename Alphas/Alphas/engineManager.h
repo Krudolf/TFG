@@ -18,6 +18,7 @@ public:
 	void draw(sf::Sprite* p_sprite);
 	void draw(sf::RectangleShape p_rectangle);
 	void draw(sf::Text p_text);
+	void draw(sf::Sprite p_sprite);
 
 	void checkEvents();
 	bool getKeyReleased() { return m_keyReleased; };

@@ -9,28 +9,29 @@ class EngineManager;
 class Button
 {
 public:
-	Button(std::string p_text, Point p_point);
-	~Button();
+	Button(Point p_point);
+	virtual ~Button();
 
-	void setTextSize(int p_textSize) { m_textSize = p_textSize; };
 	void setIsFocused(bool p_isFocused);
 	bool getIsFocused() { return m_isFocused; };
 
-	void draw();
+	void setIsBlocked(bool p_isBlocked);
+	bool getIsBlocked() { return m_isBlocked; };
 
-private:
+	virtual void draw() = 0;
+
+protected:
 	EngineManager* m_engineManager;
 
 	sf::RectangleShape	m_button;
-	sf::Text			m_buttonText;
 
 	bool		m_isFocused;
+	bool		m_isBlocked;
 
-	std::string	m_text;
-
-	int			m_textSize;
-	
+	float		m_posX;
+	float		m_posY;
 	float		m_buttonWidth;
 	float		m_buttonHeight;
+	
 };
 

@@ -2,27 +2,30 @@
 #include "screenGameMode.h"
 #include "engineManager.h"
 #include "screenManager.h"
-#include "screenGame.h"
-#include "screenMenuHome.h"
 #include "button.h"
+#include "buttonText.h"
+#include "screenMenuHome.h"
+#include "screenSelectPlayerSolo.h"
 
 #include <iostream>
 
 ScreenGameMode::ScreenGameMode()
 {
-	m_buttonSolo = new Button("SOLO", CenterList1_4);
+	m_buttonSolo = new ButtonText("SOLO", CenterList1_4);
 	m_buttonVector.push_back(m_buttonSolo);
 
-	m_buttonCooperativeAI = new Button("COOP: AI", CenterList2_4);
+	m_buttonCooperativeAI = new ButtonText("COOP: AI", CenterList2_4);
 	m_buttonVector.push_back(m_buttonCooperativeAI);
 
-	m_buttonCooperativeLocal = new Button("COOP: LOCAL", CenterList3_4);
+	m_buttonCooperativeLocal = new ButtonText("COOP: LOCAL", CenterList3_4);
 	m_buttonVector.push_back(m_buttonCooperativeLocal);
 
-	m_buttonBack = new Button("BACK", CenterList4_4);
+	m_buttonBack = new ButtonText("BACK", CenterList4_4);
 	m_buttonVector.push_back(m_buttonBack);
 
 	m_buttonSolo->setIsFocused(true);
+	m_buttonCooperativeAI->setIsBlocked(true);
+	m_buttonCooperativeLocal->setIsBlocked(true);
 }
 
 
@@ -59,13 +62,17 @@ void ScreenGameMode::update(double p_time, double p_deltaTime)
 		m_engineManager->setKeyReleased(false);
 
 		if (m_buttonFocused == 0)
-			m_screenManager->changeScreen(new ScreenGame());
-		else if (m_buttonFocused == 1)
+			m_screenManager->changeScreen(new ScreenSelectPlayerSolo());
+		else if (m_buttonFocused == 1 && !m_buttonCooperativeAI->getIsBlocked())
 			std::cout << "COOPERATIVE: AI" << std::endl;
-		else if (m_buttonFocused == 2)
+		else if (m_buttonFocused == 2 && !m_buttonCooperativeLocal->getIsBlocked())
 			std::cout << "COOPERATIVE: LOCAL" << std::endl;
 		else if (m_buttonFocused == 3)
 			m_screenManager->changeScreen(new ScreenMenuHome());
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
+		m_engineManager->setKeyReleased(false);
+		m_screenManager->changeScreen(new ScreenMenuHome());
 	}
 }
 

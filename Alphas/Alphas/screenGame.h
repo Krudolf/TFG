@@ -1,5 +1,6 @@
 #pragma once
 #include "screen.h"
+#include "entities_enum.h"
 
 #include <vector>
 
@@ -20,7 +21,7 @@ public:
 	static std::vector<Enemy*>	m_enemyVector;
 	static std::vector<Potion*> m_potionVector;
 
-	ScreenGame();
+	ScreenGame(Entities p_playerEntity);
 	~ScreenGame();
 	void deleteAndFree();
 
@@ -31,7 +32,6 @@ public:
 	static bool getCooperativeMode();
 
 	void checkCollisionBetweenEnemys();
-	void createPlayer();
 	void createEnemyWarrior(float p_posX, float p_posY);
 	void createEnemyCharger(float p_posX, float p_posY);
 	void createEnemyRanger(float p_posX, float p_posY);
