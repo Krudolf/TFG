@@ -1,16 +1,21 @@
 ﻿  EngineManager.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(19): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(85): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(21): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(89): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(160): warning C4244: 'argumento': conversión de 'double' a 'T'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(90): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(161): warning C4244: 'argumento': conversión de 'double' a 'T'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(164): warning C4244: 'argumento': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+c:\users\krudo\desktop\tfg\alphas\alphas\enginemanager.cpp(165): warning C4244: 'argumento': conversión de 'double' a 'T'; posible pérdida de datos
           with
           [
               T=float

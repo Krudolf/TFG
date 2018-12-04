@@ -6,6 +6,8 @@
 
 EngineManager::EngineManager()
 {
+	m_cameraView = new sf::View();
+
 	m_font = new sf::Font();
 	if (!m_font->loadFromFile("assets/fonts/good_times_rg.ttf"))
 		std::cout << "No se ha podido cargar la fuente Good Times" << std::endl;
@@ -41,9 +43,11 @@ EngineManager& EngineManager::p()
 
 void EngineManager::createWindow(int p_resolutionX, int p_resolutionY, const char* p_name)
 {
-	m_window = new sf::RenderWindow(sf::VideoMode(p_resolutionX, p_resolutionY), p_name);
 	m_width	= p_resolutionX;
 	m_height = p_resolutionY;
+
+	m_window = new sf::RenderWindow(sf::VideoMode(p_resolutionX, p_resolutionY), p_name);
+	m_menuView = m_window->getDefaultView();
 }
 
 void EngineManager::closeWindow()
@@ -82,14 +86,14 @@ void EngineManager::checkEvents()
 
 void EngineManager::createCameraView(int centerX, int centerY, int width, int height)
 {
-	m_cameraView = new sf::View(sf::Vector2f(centerX, centerY), sf::Vector2f(width, height));
+	m_cameraView->setCenter(sf::Vector2f(centerX, centerY));
+	m_cameraView->setSize(sf::Vector2f(width, height));
 	m_cameraView->zoom(2);
 }
 
 void EngineManager::resetView()
 {
-	m_cameraView->reset(sf::FloatRect(0, 0, 1000, 1000));
-	m_cameraView->zoom(0.5);
+	m_window->setView(m_menuView);
 }
 
 void EngineManager::loadTexture(const char * p_path)

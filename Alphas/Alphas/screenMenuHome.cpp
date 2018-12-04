@@ -35,6 +35,7 @@ ScreenMenuHome::~ScreenMenuHome()
 
 void ScreenMenuHome::init()
 {
+	m_engineManager->resetView();
 }
 
 void ScreenMenuHome::update(double p_time, double p_deltaTime)
