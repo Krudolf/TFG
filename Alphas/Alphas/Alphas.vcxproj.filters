@@ -216,14 +216,26 @@
     <ClInclude Include="interface.h">
       <Filter>Archivos de encabezado\interface</Filter>
     </ClInclude>
-    <ClInclude Include="fillBar.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="color.h">
       <Filter>Archivos de encabezado\others</Filter>
     </ClInclude>
     <ClInclude Include="playerInfo.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="fillBar.h">
+      <Filter>Archivos de encabezado\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="habilities_enum.h">
+      <Filter>Archivos de encabezado\others</Filter>
+    </ClInclude>
+    <ClInclude Include="habilityInfo.h">
+      <Filter>Archivos de encabezado\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="statsInfo.h">
+      <Filter>Archivos de encabezado\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="stats_enum.h">
+      <Filter>Archivos de encabezado\others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -357,10 +369,16 @@
       <Filter>Archivos de origen\interface</Filter>
     </ClCompile>
     <ClCompile Include="fillBar.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\interface</Filter>
     </ClCompile>
     <ClCompile Include="PlayerInfo.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="habilityInfo.cpp">
+      <Filter>Archivos de origen\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="StatsInfo.cpp">
+      <Filter>Archivos de origen\interface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

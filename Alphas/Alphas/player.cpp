@@ -38,7 +38,18 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 	m_hability1Launched = false;
 	m_hability2Launched = false;
 	m_hability3Launched = false;
-	m_hability4Launched = false;
+
+	m_hability1EnoughMana = true;
+	m_hability2EnoughMana = true;
+	m_hability3EnoughMana = true;
+
+	m_hability1CooldownDuration = 0.f;
+	m_hability2CooldownDuration = 0.f;
+	m_hability3CooldownDuration = 0.f;
+
+	m_hability1ActivationTime = 0.f;
+	m_hability2ActivationTime = 0.f;
+	m_hability3ActivationTime = 0.f;
 }
 
 
@@ -63,14 +74,22 @@ void Player::receiveDamage(float p_damage)
 	std::cout << "Player HP: " << m_health << std::endl;
 }
 
+bool Player::enoughMana(float p_mana)
+{
+	if (m_mana >= p_mana) {
+		m_mana -= p_mana;
+		return true;
+	}
+	else
+		return false;
+}
+
 void Player::increaseHealth(float p_health)
 {
 	m_health += p_health;
 
 	if (m_health > m_maxHealth)
 		m_health = m_maxHealth;
-
-	std::cout << "Health: " <<  m_health << std::endl;
 }
 
 void Player::increaseMana(float p_mana)
@@ -79,8 +98,6 @@ void Player::increaseMana(float p_mana)
 
 	if (m_mana > m_maxMana)
 		m_mana = m_maxMana;
-
-	std::cout << "Mana: " << m_mana << std::endl;
 }
 
 void Player::increaseSpeed(float p_duration, float p_speedIncrease)
@@ -169,47 +186,93 @@ void Player::rangeAtack()
 		launchProjectile(m_faceDirection, ProjectileType::STRAIGHT);
 	}
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !m_hability1Launched) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !m_hability1inCooldown) {
 		hability1();
+		if (m_hability1Launched) {
+			m_hability1inCooldown = true;
+			m_hability1CooldownDuration = m_hability1->getCooldownDuration();
+			m_hability1ActivationTime = m_engineManager->getMasterClockSeconds();
+		}
 	}
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !m_hability2Launched) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !m_hability2inCooldown) {
 		hability2();
+		if (m_hability2Launched) {
+			m_hability2inCooldown = true;
+			m_hability2CooldownDuration = m_hability2->getCooldownDuration();
+			m_hability2ActivationTime = m_engineManager->getMasterClockSeconds();
+		}
 	}
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F) && !m_hability3Launched) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F) && !m_hability3inCooldown) {
 		hability3();
+		if (m_hability3Launched) {
+			m_hability3inCooldown = true;
+			m_hability3CooldownDuration = m_hability3->getCooldownDuration();
+			m_hability3ActivationTime = m_engineManager->getMasterClockSeconds();
+		}
 	}
 }
 
 void Player::updateHabilities()
 {
-	if (m_hability1Launched) {
-		m_hability1->update(m_time, m_deltaTime);
-		if (m_hability1->getReadyToDelete()) {
-			delete m_hability1;
-			m_hability1 = nullptr;
-			m_hability1Launched = false;
+	float t_time = m_engineManager->getMasterClockSeconds();
+
+	/* UPDATE MANA COOLDOWN */
+	if (m_hability1inCooldown) {
+		if (m_hability1Launched) {
+			m_hability1->update(m_time, m_deltaTime);
+			if (m_hability1->getReadyToDelete()) {
+				delete m_hability1;
+				m_hability1 = nullptr;
+				m_hability1Launched = false;
+			}
 		}
+		if (t_time > (m_hability1ActivationTime + m_hability1CooldownDuration))
+			m_hability1inCooldown = false;
 	}
 
-	if (m_hability2Launched) {
-		m_hability2->update(m_time, m_deltaTime);
-		if (m_hability2->getReadyToDelete()) {
-			delete m_hability2;
-			m_hability2 = nullptr;
-			m_hability2Launched = false;
+	if (m_hability2inCooldown) {
+		if (m_hability2Launched) {
+			m_hability2->update(m_time, m_deltaTime);
+			if (m_hability2->getReadyToDelete()) {
+				delete m_hability2;
+				m_hability2 = nullptr;
+				m_hability2Launched = false;
+			}
 		}
+		if (t_time > (m_hability2ActivationTime + m_hability2CooldownDuration))
+			m_hability2inCooldown = false;
 	}
 
-	if (m_hability3Launched) {
-		m_hability3->update(m_time, m_deltaTime);
-		if (m_hability3->getReadyToDelete()) {
-			delete m_hability3;
-			m_hability3 = nullptr;
-			m_hability3Launched = false;
+	if (m_hability3inCooldown) {
+		if (m_hability3Launched) {
+			m_hability3->update(m_time, m_deltaTime);
+			if (m_hability3->getReadyToDelete()) {
+				delete m_hability3;
+				m_hability3 = nullptr;
+				m_hability3Launched = false;
+			}
 		}
+		if (t_time > (m_hability3ActivationTime + m_hability3CooldownDuration))
+			m_hability3inCooldown = false;
 	}
+
+	/* UPDATE MANA CONSUMPTION */
+	if (m_mana >= m_hability1ManaConsumption)
+		m_hability1EnoughMana = true;
+	else
+		m_hability1EnoughMana = false;
+
+	if (m_mana >= m_hability2ManaConsumption)
+		m_hability2EnoughMana = true;
+	else
+		m_hability2EnoughMana = false;
+
+	if (m_mana >= m_hability3ManaConsumption)
+		m_hability3EnoughMana = true;
+	else
+		m_hability3EnoughMana = false;
 }
 
 void Player::launchProjectile(Direction p_dir, ProjectileType p_projectileType)
@@ -232,6 +295,15 @@ void Player::pickObject()
 			ScreenGame::m_potionVector[i]->setEffect(this);
 		}
 	}
+}
+
+void Player::updateHealthAndMana(double p_deltaTime)
+{
+	float t_health = m_maxHealth * (p_deltaTime / 100);
+	increaseHealth(t_health);
+
+	float t_mana = m_maxMana * (p_deltaTime / 100);
+	increaseMana(t_mana);
 }
 
 void Player::updateBasicAtack()
@@ -288,6 +360,8 @@ void Player::update(double p_time, double p_deltaTime) {
 		pickObject();
 
 	move();
+
+	updateHealthAndMana(p_deltaTime);
 
 	rangeAtack();
 	

@@ -14,7 +14,7 @@ PlayerGreen::PlayerGreen(float p_posX, float p_posY, const char * p_path) : Play
 	m_velocity = m_baseVelocity;
 	m_maxHealth = 100.f;
 	m_health = m_maxHealth;
-	m_maxMana = 100.f;
+	m_maxMana = 200.f;
 	m_mana = m_maxMana;
 	m_baseDamage = 1.f;
 	m_damage = m_baseDamage;
@@ -22,6 +22,10 @@ PlayerGreen::PlayerGreen(float p_posX, float p_posY, const char * p_path) : Play
 	m_atackSpeed = m_baseAtackSpeed;
 	m_baseArmor = 1.f;
 	m_armor = m_baseArmor;
+
+	m_hability1ManaConsumption = 50.f;
+	m_hability2ManaConsumption = 20.f;
+	m_hability3ManaConsumption = 25.f;
 }
 
 
@@ -45,21 +49,27 @@ PlayerGreen::~PlayerGreen()
 
 void PlayerGreen::hability1()
 {
-	m_hability1Launched = true;
-	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-	m_hability1 = new ProjectileStraightSpin(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage);
+	if (enoughMana(m_hability1ManaConsumption)) {
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		m_hability1 = new ProjectileStraightSpin(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage);
+		m_hability1Launched = true;
+	}
 }
 
 void PlayerGreen::hability2()
 {
-	m_hability2Launched = true;
-	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-	m_hability2 = new ProjectileConus(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage);
+	if (enoughMana(m_hability2ManaConsumption)) {
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		m_hability2 = new ProjectileConus(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage);
+		m_hability2Launched = true;
+	}
 }
 
 void PlayerGreen::hability3()
 {
-	m_hability3Launched = true;
-	m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-	m_hability3 = new ProjectileSpin(m_texturePath, m_bulletColor, Direction::NONE, m_posX, m_posY, m_damage / 10, this);
+	if (enoughMana(m_hability3ManaConsumption)) {
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		m_hability3 = new ProjectileSpin(m_texturePath, m_bulletColor, Direction::NONE, m_posX, m_posY, m_damage / 10, this);
+		m_hability3Launched = true;
+	}
 }

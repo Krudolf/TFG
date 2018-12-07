@@ -25,6 +25,7 @@ public:
 	float getAtackSpeed() { return m_atackSpeed; };
 
 	void receiveDamage(float p_damage);
+	bool enoughMana(float p_mana);
 
 	void increaseHealth(float p_health);
 	void increaseMana(float p_mana);
@@ -38,11 +39,23 @@ public:
 	virtual void hability1() = 0;
 	virtual void hability2() = 0;
 	virtual void hability3() = 0;
+	bool	getHability1EnoughMana() { return m_hability1EnoughMana; };
+	bool	getHability2EnoughMana() { return m_hability2EnoughMana; };
+	bool	getHability3EnoughMana() { return m_hability3EnoughMana; };
+
+	float	getHability1CooldownDuration() { return m_hability1CooldownDuration; };
+	float	getHability2CooldownDuration() { return m_hability2CooldownDuration; };
+	float	getHability3CooldownDuration() { return m_hability3CooldownDuration; };
+
+	float	getHability1ActivationTime() { return m_hability1ActivationTime; };
+	float	getHability2ActivationTime() { return m_hability2ActivationTime; };
+	float	getHability3ActivationTime() { return m_hability3ActivationTime; };
 	void updateHabilities();
 	void launchProjectile(Direction p_dir, ProjectileType p_ptojectileType);
 
 	void pickObject();
 	
+	void updateHealthAndMana(double p_deltaTime);
 	void updateBasicAtack();
 	void updatePotionEffects();
 	void update(double p_time, double p_deltaTime);
@@ -73,7 +86,22 @@ protected:
 	bool m_hability1Launched;
 	bool m_hability2Launched;
 	bool m_hability3Launched;
-	bool m_hability4Launched;
+	bool m_hability1inCooldown;
+	bool m_hability2inCooldown;
+	bool m_hability3inCooldown;
+	bool m_hability1EnoughMana;
+	bool m_hability2EnoughMana;
+	bool m_hability3EnoughMana;
+
+	float	m_hability1ManaConsumption;
+	float	m_hability2ManaConsumption;
+	float	m_hability3ManaConsumption;
+	float	m_hability1CooldownDuration;
+	float	m_hability2CooldownDuration;
+	float	m_hability3CooldownDuration;
+	float	m_hability1ActivationTime;
+	float	m_hability2ActivationTime;
+	float	m_hability3ActivationTime;
 
 private:
 	double	m_deltaTime;

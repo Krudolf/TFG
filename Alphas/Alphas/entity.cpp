@@ -8,6 +8,7 @@
 Entity::Entity(const char* p_path, Entities p_entity)
 {
 	m_engineManager = &EngineManager::p();
+	m_entity = p_entity;
 	m_spriteSheetRow = static_cast<int>(p_entity);
 
 	/*

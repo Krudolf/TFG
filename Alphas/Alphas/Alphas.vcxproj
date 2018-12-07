@@ -171,6 +171,8 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="fillBar.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="habilities_enum.h" />
+    <ClInclude Include="habilityInfo.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="interface.h" />
     <ClInclude Include="pch.h" />
@@ -202,6 +204,8 @@
     <ClInclude Include="screenGame.h" />
     <ClInclude Include="stateMachine.h" />
     <ClInclude Include="screenMenuHome.h" />
+    <ClInclude Include="statsInfo.h" />
+    <ClInclude Include="stats_enum.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
@@ -219,6 +223,7 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="fillBar.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="habilityInfo.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="pch.cpp">
@@ -254,6 +259,7 @@
     <ClCompile Include="screenGame.cpp" />
     <ClCompile Include="stateMachine.cpp" />
     <ClCompile Include="screenMenuHome.cpp" />
+    <ClCompile Include="StatsInfo.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>

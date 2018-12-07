@@ -40,10 +40,12 @@ public:
 	double	getPositionX() { return m_posX; };
 	double	getPositionY() { return m_posY; };
 	int		getSpriteID()  { return m_spriteID; };
-
+	const char* getTexturePath() { return m_texturePath; };
+	Entities	getEntity() { return m_entity; };
 
 protected:
 	EngineManager*	m_engineManager;
+	Entities	m_entity;
 
 	const char*	m_texturePath;
 

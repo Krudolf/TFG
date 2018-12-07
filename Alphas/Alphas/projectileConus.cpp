@@ -10,6 +10,8 @@
 
 ProjectileConus::ProjectileConus(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage) : Projectile(p_texturePath, p_ent, p_dir, p_playerPosX, p_playerPosY, p_damage)
 {
+	m_cooldownDuration = 5.f;
+
 	m_deleteOnCollide = false;
 	m_makeInvisible = false;
 

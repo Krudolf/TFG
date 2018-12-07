@@ -117,6 +117,7 @@ void EngineManager::loadTexture(const char * p_path)
 	
 	//The texture was not found --> Create the texture
 	if (m_textureMapIterator == m_textureMap.end()) {
+		std::cout << "CREAMOS LA TEXTURA " << p_path << std::endl;
 		sf::Texture* t_texture = new sf::Texture();
 		if (!t_texture->loadFromFile(p_path))
 		{

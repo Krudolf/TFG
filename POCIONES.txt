@@ -1,6 +1,0 @@
-Roja -> Vida
-Azul -> Mana
-Lila -> Velocidad
-Amarilla -> Daño
-Violeta -> Armadura
-Verde -> Veneno
