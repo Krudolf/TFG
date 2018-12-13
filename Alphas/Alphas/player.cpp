@@ -43,9 +43,9 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 	m_hability2EnoughMana = true;
 	m_hability3EnoughMana = true;
 
-	m_hability1CooldownDuration = 0.f;
-	m_hability2CooldownDuration = 0.f;
-	m_hability3CooldownDuration = 0.f;
+	m_hability1CooldownDuration = 5.f;
+	m_hability2CooldownDuration = 5.f;
+	m_hability3CooldownDuration = 5.f;
 
 	m_hability1ActivationTime = 0.f;
 	m_hability2ActivationTime = 0.f;
@@ -105,6 +105,9 @@ void Player::increaseSpeed(float p_duration, float p_speedIncrease)
 	m_endOfSpeedPotionEffect = m_engineManager->getMasterClockSeconds() + p_duration;
 }
 
+/*
+	Incresa the damage by the p_damageIncrease (if 2, damage will be the double)
+*/
 void Player::increaseDamage(float p_duration, float p_damageIncrease)
 {
 	m_damagePotionEfect = true;
@@ -112,6 +115,9 @@ void Player::increaseDamage(float p_duration, float p_damageIncrease)
 	m_endOfDamagePotionEffect = m_engineManager->getMasterClockSeconds() + p_duration;
 }
 
+/*
+	Incresa the armor by the p_armorIncrease (if 2, armor will be the double)
+*/
 void Player::increaseArmor(float p_duration, float p_armorIncrease)
 {
 	m_armorPotionEfect = true;
@@ -188,7 +194,6 @@ void Player::rangeAtack()
 		hability1();
 		if (m_hability1Launched) {
 			m_hability1inCooldown = true;
-			m_hability1CooldownDuration = m_hability1->getCooldownDuration();
 			m_hability1ActivationTime = m_engineManager->getMasterClockSeconds();
 		}
 	}
@@ -197,7 +202,6 @@ void Player::rangeAtack()
 		hability2();
 		if (m_hability2Launched) {
 			m_hability2inCooldown = true;
-			m_hability2CooldownDuration = m_hability2->getCooldownDuration();
 			m_hability2ActivationTime = m_engineManager->getMasterClockSeconds();
 		}
 	}
@@ -206,7 +210,6 @@ void Player::rangeAtack()
 		hability3();
 		if (m_hability3Launched) {
 			m_hability3inCooldown = true;
-			m_hability3CooldownDuration = m_hability3->getCooldownDuration();
 			m_hability3ActivationTime = m_engineManager->getMasterClockSeconds();
 		}
 	}
@@ -279,7 +282,7 @@ void Player::launchProjectile(Direction p_dir, ProjectileType p_projectileType)
 		m_basicInCooldown = true;
 		m_nextBasic = m_engineManager->getMasterClockSeconds() + m_atackSpeed;
 
-		Projectile* t_projectile = new ProjectileStraight(m_texturePath, m_bulletColor, p_dir, m_posX, m_posY, m_damage);
+		Projectile* t_projectile = new ProjectileStraight(m_texturePath, m_bulletColor, p_dir, m_posX, m_posY, m_damage, false, true);
 
 		m_basicProjectiles.push_back(t_projectile);
 		ScreenGame::m_entityVector.push_back(t_projectile);

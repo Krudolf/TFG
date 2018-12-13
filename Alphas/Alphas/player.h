@@ -4,9 +4,6 @@
 
 class Entity;
 class Projectile;
-class ProjectileSpin;
-class ProjectileStraightSpin;
-class ProjectileConus;
 
 class Player :
 	public Entity
@@ -107,6 +104,7 @@ protected:
 	float	m_hability3ActivationTime;
 
 private:
+	const int m_maxProjectiles = 20;
 	double	m_deltaTime;
 	double	m_time;
 	
@@ -124,5 +122,4 @@ private:
 	float	m_nextBasic;
 
 	std::vector<Projectile*> m_basicProjectiles;
-	const int m_maxProjectiles = 10;
 };

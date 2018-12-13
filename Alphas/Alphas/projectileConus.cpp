@@ -8,9 +8,10 @@
 #include <iostream>
 
 
-ProjectileConus::ProjectileConus(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage) : Projectile(p_texturePath, p_ent, p_dir, p_playerPosX, p_playerPosY, p_damage)
+ProjectileConus::ProjectileConus(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage, bool p_crossEnemy, bool p_makeDamage) : Projectile(p_texturePath, p_ent, p_dir, p_playerPosX, p_playerPosY, p_damage)
 {
-	m_cooldownDuration = 5.f;
+	m_crossEnemy = p_crossEnemy;
+	m_makeDamage = p_makeDamage;
 
 	m_deleteOnCollide = false;
 	m_makeInvisible = false;
@@ -18,20 +19,20 @@ ProjectileConus::ProjectileConus(const char* p_texturePath, Entities p_ent, Dire
 	switch (p_dir)
 	{
 	case Direction::RIGHT:
-		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::RIGHT_UP, p_playerPosX, p_playerPosY, m_damage);
-		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::RIGHT_DOWN, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::RIGHT_UP, p_playerPosX, p_playerPosY, m_damage, p_crossEnemy, p_makeDamage);
+		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::RIGHT_DOWN, p_playerPosX, p_playerPosY, m_damage, p_crossEnemy, p_makeDamage);
 		break;
 	case Direction::LEFT:
-		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::LEFT_UP, p_playerPosX, p_playerPosY, m_damage);
-		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::LEFT_DOWN, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::LEFT_UP, p_playerPosX, p_playerPosY, m_damage, p_crossEnemy, p_makeDamage);
+		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::LEFT_DOWN, p_playerPosX, p_playerPosY, m_damage, p_crossEnemy, p_makeDamage);
 		break;
 	case Direction::UP:
-		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::UP_RIGHT, p_playerPosX, p_playerPosY, m_damage);
-		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::UP_LEFT, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::UP_RIGHT, p_playerPosX, p_playerPosY, m_damage, p_crossEnemy, p_makeDamage);
+		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::UP_LEFT, p_playerPosX, p_playerPosY, m_damage, p_crossEnemy, p_makeDamage);
 		break;
 	case Direction::DOWN:
-		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::DOWN_RIGHT, p_playerPosX, p_playerPosY, m_damage);
-		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::DOWN_LEFT, p_playerPosX, p_playerPosY, m_damage);
+		m_projectile1 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::DOWN_RIGHT, p_playerPosX, p_playerPosY, m_damage, p_crossEnemy, p_makeDamage);
+		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::DOWN_LEFT, p_playerPosX, p_playerPosY, m_damage, p_crossEnemy, p_makeDamage);
 		break;
 	}
 }
@@ -85,13 +86,14 @@ void ProjectileConus::update(double p_time, double p_deltaTime)
 		m_readyToDelete = true;
 
 	if (!m_makeInvisible) {
-		//Check if the projectile collide with one enemy, if it collide it will be destroyed
 		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
 			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
 				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
-				m_makeInvisible = true;
-
-				break;
+				
+				if (!m_crossEnemy) {
+					m_makeInvisible = true;
+					break;
+				}
 			}
 		}
 	}
@@ -110,6 +112,5 @@ void ProjectileConus::draw()
 
 	if (m_projectile2 != nullptr)
 		m_projectile2->draw();
-
 }
 

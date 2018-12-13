@@ -17,8 +17,6 @@ public:
 	void update(double p_time, double p_deltaTime) override;
 
 private:
-	bool	m_chargingAtack;
-	bool	m_doingCharge;
 	bool	m_chargePhase;
 	bool	m_releasePhase;
 	bool	m_lockDirection;

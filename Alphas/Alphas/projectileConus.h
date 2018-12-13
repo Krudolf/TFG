@@ -7,7 +7,7 @@ class ProjectileConus :
 	public Projectile
 {
 public:
-	ProjectileConus(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage);
+	ProjectileConus(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage, bool p_crossEnemy, bool p_makeDamage);
 	~ProjectileConus();
 
 	void update(double p_time, double p_deltaTime);

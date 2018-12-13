@@ -40,13 +40,9 @@ void WaveSystem::createEnemy(EnemyType p_type)
 	Enemy* t_enemy;
 	int t_random = rand() % m_spawnPointsVector.size();
 
-	//Random between -50 and 50 
-	float	t_randX = (rand() % 101) - 50;
-	float	t_randY = (rand() % 101) - 50;
-
 	Point t_point = m_spawnPointsVector[t_random];
-	t_point.x += t_randX;
-	t_point.y += t_randY;
+	t_point.x += ((rand() % 101) - 50);
+	t_point.y += ((rand() % 101) - 50);
 
 	switch (p_type)
 	{
@@ -72,8 +68,7 @@ void WaveSystem::createEnemy(EnemyType p_type)
 
 void WaveSystem::spawnNextWave()
 {
-	if (m_wave == 1) {
-		std::cout << "BOSS SPAWNS!" << std::endl;
+	if (m_wave % 5 == 0) {
 		createEnemy(EnemyType::BOSS);
 		m_enemyAlive = 1;
 		m_remainingEnemy = 0;
@@ -114,7 +109,7 @@ void WaveSystem::spawnRemainingEnemy()
 
 void WaveSystem::checkEndOfWave()
 {
-	m_enemyAlive--;
+	m_enemyAlive = ScreenGame::m_enemyVector.size();
 
 	if (m_enemyAlive == 0) {
 		m_wave++;

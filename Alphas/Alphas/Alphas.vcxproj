@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="attackEffect_enum.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="buttonImage.h" />
     <ClInclude Include="buttonText.h" />

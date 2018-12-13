@@ -252,6 +252,9 @@
     <ClInclude Include="enemyBoss.h">
       <Filter>Archivos de encabezado\gameEntities\enemies</Filter>
     </ClInclude>
+    <ClInclude Include="attackEffect_enum.h">
+      <Filter>Archivos de encabezado\others</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

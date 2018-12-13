@@ -24,6 +24,8 @@ Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_di
 
 	m_entityOwner = p_ent;
 
+	m_attackEffect = AttackEffect::NONE;
+
 	m_moveX = 0;
 	m_moveY = 0;
 	float t_angle = 0.33;
@@ -98,7 +100,7 @@ Projectile::~Projectile()
 
 void Projectile::update(double p_time, double p_deltaTime){}
 
-void Projectile::update(bool p_deleteOnCollide)
+void Projectile::update()
 {
 	//Check if life time end
 	if (m_engineManager->getMasterClockSeconds() > m_dieTime)
@@ -108,13 +110,14 @@ void Projectile::update(bool p_deleteOnCollide)
 		//Check if the projectile collides with one enemy, if it collide it will be destroyed
 		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
 			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
-				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
+				if(m_makeDamage)
+					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
 
-				if (p_deleteOnCollide) {
+				if (!m_crossEnemy) {
 					m_readyToDelete = true;
+					break;
 				}
 
-				break;
 			}
 		}
 	}
@@ -124,7 +127,7 @@ void Projectile::update(bool p_deleteOnCollide)
 			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_playerVector[i]->getSpriteID())) {
 				ScreenGame::m_playerVector[i]->receiveDamage(m_damage);
 
-				if (p_deleteOnCollide) {
+				if (!m_crossEnemy) {
 					m_readyToDelete = true;
 				}
 

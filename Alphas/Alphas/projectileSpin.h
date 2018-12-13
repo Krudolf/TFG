@@ -13,8 +13,6 @@ public:
 	void update(double p_time, double p_deltaTime);
 
 private:
-	bool	m_deleteOnCollide;
-
 	float	m_angle;
 	float	m_angleStep;
 

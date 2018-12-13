@@ -1,5 +1,7 @@
 #pragma once
 #include "entity.h"
+#include "attackEffect_enum.h"
+
 class Projectile :
 	public Entity
 {
@@ -8,10 +10,9 @@ public:
 	virtual ~Projectile();
 
 	bool	getReadyToDelete() { return m_readyToDelete; };
-	float	getCooldownDuration() { return m_cooldownDuration; };
 
 	void	update(double p_time, double p_deltaTime);
-	void	update(bool p_deleteOnCollide);
+	void	update();
 
 	void	draw();
 
@@ -20,14 +21,17 @@ protected:
 	float	m_moveX;
 	float	m_moveY;
 
-	float	m_cooldownDuration;
 	float	m_lifeTime;
 	float	m_dieTime;
 	float	m_damage;
 	
 	bool	m_readyToDelete;
 
-	Entities m_entityOwner;
+	bool	m_crossEnemy;
+	bool	m_makeDamage;
+
+	Entities		m_entityOwner;
+	AttackEffect	m_attackEffect;
 
 private:
 

@@ -10,7 +10,6 @@ EnemyCharger::EnemyCharger(float p_posX, float p_posY, const char* p_path) : Ene
 {
 	m_damage = 20;
 
-	m_chargingAtack	= false;
 	m_chargePhase	= false;
 	m_releasePhase	= false;
 	m_lockDirection = false;

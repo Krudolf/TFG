@@ -9,9 +9,11 @@
 
 ProjectileSpin::ProjectileSpin(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage, Player* p_owner) : Projectile(p_texturePath, p_ent, p_dir, p_playerPosX, p_playerPosY, p_damage)
 {
-	m_cooldownDuration = 5.f;
+	m_lifeTime = 5.f;
+	m_dieTime = m_engineManager->getMasterClockSeconds() + m_lifeTime;
 
-	m_deleteOnCollide = false;
+	m_crossEnemy = true;
+	m_makeDamage = true;
 
 	//Increase m_angleStep ==> increase spinSpeed;
 	m_angle = 0;
@@ -19,6 +21,12 @@ ProjectileSpin::ProjectileSpin(const char* p_texturePath, Entities p_ent, Direct
 	m_radius = 50;
 
 	m_owner = p_owner;
+
+	p_owner->increaseArmor(5.f, 10.f);
+	/*
+		TODO:
+			INCREASE TIME AND DECREASE DAMAGE??
+	*/
 }
 
 
@@ -35,5 +43,5 @@ void ProjectileSpin::update(double p_time, double p_deltaTime)
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 
-	Projectile::update(m_deleteOnCollide);
+	Projectile::update();
 }

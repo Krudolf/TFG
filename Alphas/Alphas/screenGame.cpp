@@ -181,11 +181,11 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 				delete m_enemyVector[i];
 				m_enemyVector[i] = nullptr;
 				m_enemyVector.erase(m_enemyVector.begin() + i);
-				m_waveSystem->checkEndOfWave();
 			}
 		}
 		checkCollisionBetweenEnemys();
 		m_waveSystem->spawnRemainingEnemy();
+		m_waveSystem->checkEndOfWave();
 
 		/* ++++++++++++++++++++++++++ UPDATE POTION ++++++++++++++++++++++++++ */
 		for (int i = 0; i < m_potionVector.size(); i++) {

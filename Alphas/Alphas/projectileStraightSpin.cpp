@@ -3,17 +3,19 @@
 #include "engineManager.h"
 #include "screenGame.h"
 #include "enemy.h"
+#include "player.h"
 
 #include <iostream>
 
 
-ProjectileStraightSpin::ProjectileStraightSpin(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage) : Projectile(p_texturePath, p_ent, p_dir, p_playerPosX, p_playerPosY, p_damage)
+ProjectileStraightSpin::ProjectileStraightSpin(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage, Player* p_owner) : Projectile(p_texturePath, p_ent, p_dir, p_playerPosX, p_playerPosY, p_damage)
 {
-	m_cooldownDuration = 7.5f;
+	m_owner = p_owner;
 
-	m_deleteOnCollide = false;
+	m_crossEnemy = true;
+	m_makeDamage = true;
+
 	m_straightPhase = true;
-	m_spinPhase = false;
 
 	m_angle = 0;
 	m_angleStep = 0.1;
@@ -54,7 +56,6 @@ void ProjectileStraightSpin::updateStraight(double p_deltaTime)
 			ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
 			
 			m_straightPhase = false;
-			m_spinPhase = true;
 			
 			m_spinPositionX = m_engineManager->getSprite(m_spriteID)->getPosition().x;
 			m_spinPositionY = m_engineManager->getSprite(m_spriteID)->getPosition().y;
@@ -74,5 +75,24 @@ void ProjectileStraightSpin::updateSpin()
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 
-	Projectile::update(m_deleteOnCollide);
+	//Check if life time end
+	if (m_engineManager->getMasterClockSeconds() > m_dieTime)
+		m_readyToDelete = true;
+
+	if (m_entityOwner == Entities::BULLET1 || m_entityOwner == Entities::BULLET2) {
+		//Check if the projectile collides with one enemy, if it collide it will be destroyed
+		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
+			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
+				if (m_makeDamage)
+					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
+					m_owner->increaseMana(m_damage / 10);
+
+				if (!m_crossEnemy) {
+					m_readyToDelete = true;
+					break;
+				}
+
+			}
+		}
+	}
 }
