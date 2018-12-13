@@ -12,7 +12,10 @@ EngineManager::EngineManager()
 	if (!m_font->loadFromFile("assets/fonts/good_times_rg.ttf"))
 		std::cout << "No se ha podido cargar la fuente Good Times" << std::endl;
 	
-	m_keyReleased = true;
+	m_keyReleased	= true;
+
+	m_masterTime	= sf::Time::Zero;
+	m_pauseTime		= sf::Time::Zero;
 }
 
 
@@ -110,6 +113,34 @@ void EngineManager::useInterfaceView()
 	m_window->setView(m_interfaceView);
 }
 
+float EngineManager::updateMasterClock()
+{
+	m_masterTime += m_masterClock.getElapsedTime();
+	m_masterClock.restart();
+
+	return m_masterTime.asSeconds();
+}
+
+float EngineManager::getMasterClockSeconds()
+{
+	return m_masterTime.asSeconds();
+}
+
+void EngineManager::pauseClock()
+{
+	m_pauseTime = m_masterTime;
+}
+
+void EngineManager::resumeClock()
+{
+	m_masterTime = m_pauseTime;
+}
+
+void EngineManager::restartClock()
+{
+	m_masterClock.restart();
+}
+
 void EngineManager::loadTexture(const char * p_path)
 {
 	//Search the texture in the map, if not found we create the texture and add it to the map
@@ -155,7 +186,8 @@ int EngineManager::createSprite(const char * p_texturePath, float p_scale, bool 
 	sf::Sprite* t_sprite = new sf::Sprite();
 	t_sprite->setTexture(*m_textureMap[p_texturePath]);
 	t_sprite->setTextureRect(sf::IntRect(p_textureLeft, p_textureTop, p_textureWidth, p_textureHeight));
-	//t_sprite->setOrigin(t_sprite->getTextureRect().width / 2, t_sprite->getTextureRect().height / 2);
+	if(p_centerOrigin)
+		t_sprite->setOrigin(t_sprite->getTextureRect().width / 2, t_sprite->getTextureRect().height / 2);
 	t_sprite->setScale(p_scale, p_scale);
 	t_sprite->setPosition(p_posX, p_posY);
 

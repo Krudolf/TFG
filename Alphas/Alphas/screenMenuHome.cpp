@@ -72,11 +72,7 @@ void ScreenMenuHome::update(double p_time, double p_deltaTime)
 
 void ScreenMenuHome::draw()
 {
-	m_engineManager->getWindow()->clear(sf::Color::Green);
-
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();
 	}
-
-	m_engineManager->getWindow()->display();
 }

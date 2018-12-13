@@ -12,36 +12,23 @@ Screen::Screen()
 	m_width		= m_engineManager->getWidth();
 	m_height	= m_engineManager->getHeight();
 
-	CenterList1_3.x = m_width * 0.5;
-	CenterList1_3.y = m_height * 0.25;
-	CenterList2_3.x = m_width * 0.5;
-	CenterList2_3.y = m_height * 0.5;
-	CenterList3_3.x = m_width * 0.5;
-	CenterList3_3.y = m_height * 0.75;
+	CenterList1_3 = { m_width * 0.5f, m_height * 0.25f };
+	CenterList2_3 = { m_width * 0.5f, m_height * 0.5f };
+	CenterList3_3 = { m_width * 0.5f, m_height * 0.75f };
 
-	CenterList1_4.x = m_width * 0.5;
-	CenterList1_4.y = m_height * 0.2;
-	CenterList2_4.x = m_width * 0.5;
-	CenterList2_4.y = m_height * 0.4;
-	CenterList3_4.x = m_width * 0.5;
-	CenterList3_4.y = m_height * 0.6;
-	CenterList4_4.x = m_width * 0.5;
-	CenterList4_4.y = m_height * 0.8;
+	CenterList1_4 = { m_width * 0.5f, m_height * 0.2f };
+	CenterList2_4 = { m_width * 0.5f, m_height * 0.4f };
+	CenterList3_4 = { m_width * 0.5f, m_height * 0.6f };
+	CenterList4_4 = { m_width * 0.5f, m_height * 0.8f };
 
-	Center_left.x = m_width * 0.25;
-	Center_left.y = m_height * 0.3;
+	Center_left = { m_width * 0.25f, m_height * 0.3f };
 
-	Down_Left1_3.x = m_width * 0.1;
-	Down_Left1_3.y = m_height * 0.8;
-	Down_Left2_3.x = m_width * 0.25;
-	Down_Left2_3.y = m_height * 0.8;
-	Down_Left3_3.x = m_width * 0.4;
-	Down_Left3_3.y = m_height * 0.8;
+	Down_Left1_3 = { m_width * 0.1f, m_height * 0.8f };
+	Down_Left2_3 = { m_width * 0.25f, m_height * 0.8f };
+	Down_Left3_3 = { m_width * 0.4f, m_height * 0.8f };
 	
-	Down_right_up.x = m_width * 0.8;
-	Down_right_up.y = m_height * 0.75;
-	Down_right.x = m_width * 0.8;
-	Down_right.y = m_height * 0.9;
+	Down_right_up = { m_width * 0.8f, m_height * 0.75f };
+	Down_right = { m_width * 0.8f, m_height * 0.9f };
 
 	m_buttonFocused = 0;
 }

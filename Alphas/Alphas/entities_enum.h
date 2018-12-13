@@ -7,5 +7,7 @@ enum class Entities {
 	BULLET2,
 	ENEMY,
 	ENEMY_BULLET,
-	POTION
+	POTION,
+	ENEMY_BOSS,
+	ENEMY_BOSS_BULLET
 };

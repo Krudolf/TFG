@@ -237,6 +237,21 @@
     <ClInclude Include="stats_enum.h">
       <Filter>Archivos de encabezado\others</Filter>
     </ClInclude>
+    <ClInclude Include="enemyType_enum.h">
+      <Filter>Archivos de encabezado\others</Filter>
+    </ClInclude>
+    <ClInclude Include="waveSystem.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="screenGameOver.h">
+      <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="screenPause.h">
+      <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyBoss.h">
+      <Filter>Archivos de encabezado\gameEntities\enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -379,6 +394,18 @@
     </ClCompile>
     <ClCompile Include="StatsInfo.cpp">
       <Filter>Archivos de origen\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="waveSystem.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="screenPause.cpp">
+      <Filter>Archivos de origen\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="screenGameOver.cpp">
+      <Filter>Archivos de origen\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyBoss.cpp">
+      <Filter>Archivos de origen\gameEntities\enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

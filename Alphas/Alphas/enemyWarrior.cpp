@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-EnemyWarrior::EnemyWarrior(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path)
+EnemyWarrior::EnemyWarrior(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {
 	m_damage = 5;
 	m_velocity *= 1.5;

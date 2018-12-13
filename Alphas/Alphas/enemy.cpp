@@ -7,7 +7,7 @@
 #include <iostream>
 
 
-Enemy::Enemy(float p_posX, float p_posY, const char* p_path) : Entity(p_path, Entities::ENEMY)
+Enemy::Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity) : Entity(p_path, p_entity)
 {
 	m_posX		= p_posX;
 	m_posY		= p_posY;
@@ -44,10 +44,9 @@ Enemy::~Enemy()
 void Enemy::receiveDamage(float p_damage)
 {
 	m_health -= p_damage;
-	std::cout << "Vida del enemigo: " << m_health << std::endl;
+
 	if (m_health <= 0)
 		m_dead = true;
-
 }
 
 double Enemy::calculateDistance(Player * p_posibleObjective)

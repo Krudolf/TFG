@@ -1,6 +1,8 @@
 #pragma once
 #include "screen.h"
 #include "entities_enum.h"
+#include "enemyType_enum.h"
+#include "Point.h"
 
 #include <vector>
 
@@ -12,6 +14,7 @@ class Potion;
 class SceneMap;
 class QuadTree;
 class Interface;
+class WaveSystem;
 
 class ScreenGame :
 	public Screen
@@ -32,16 +35,21 @@ public:
 
 	static bool getCooperativeMode();
 
+	void checkGameOver();
 	void checkCollisionBetweenEnemys();
-	void createEnemyWarrior(float p_posX, float p_posY);
-	void createEnemyCharger(float p_posX, float p_posY);
-	void createEnemyRanger(float p_posX, float p_posY);
 
 private:
 	Camera*			m_camera;
 	SceneMap*		m_sceneMap;
 	QuadTree*		m_quadTree;
 	Interface*		m_interface;
+	WaveSystem*		m_waveSystem;
 
+	Entities		m_playerEntity;
+
+	std::vector<Point>		m_spawnPointsVector;
+
+	bool	m_gameOver;
+	bool	m_gamePause;
 };
 

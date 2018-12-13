@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-EnemyCharger::EnemyCharger(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path)
+EnemyCharger::EnemyCharger(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {
 	m_damage = 20;
 

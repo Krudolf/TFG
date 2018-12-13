@@ -22,8 +22,8 @@ protected:
 	EngineManager* m_engineManager;
 	ScreenManager* m_screenManager;
 
-	int	m_width;
-	int	m_height;
+	float	m_width;
+	float	m_height;
 
 	int		m_buttonFocused;
 

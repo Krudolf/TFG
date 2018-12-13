@@ -32,8 +32,11 @@ public:
 	void useInterfaceView();
 
 	/* CLOCK */
-	sf::Clock	getMasterClock() { return m_masterClock; };
-	float		getMasterClockSeconds() { return m_masterClock.getElapsedTime().asSeconds(); };
+	float		updateMasterClock();
+	float		getMasterClockSeconds();
+	void		pauseClock();
+	void		resumeClock();
+	void		restartClock();
 
 	/* ENTITY */
 	void loadTexture(const char* p_path);
@@ -71,5 +74,8 @@ private:
 	sf::Sprite* mapSprite;
 
 	sf::Font*	m_font;
+
+	sf::Time	m_masterTime;
+	sf::Time	m_pauseTime;
 
 };

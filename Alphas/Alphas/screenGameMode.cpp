@@ -78,11 +78,7 @@ void ScreenGameMode::update(double p_time, double p_deltaTime)
 
 void ScreenGameMode::draw()
 {
-	m_engineManager->getWindow()->clear(sf::Color::Green);
-
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();
 	}
-
-	m_engineManager->getWindow()->display();
 }

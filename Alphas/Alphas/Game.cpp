@@ -42,7 +42,7 @@ void Game::run()
 	while (m_engineManager->getWindow()->isOpen()){
 		m_engineManager->checkEvents();
 
-		m_newTime = m_engineManager->getMasterClockSeconds();
+		m_newTime = m_engineManager->updateMasterClock();
 		m_frameTime = m_newTime - m_currentTime;
 		m_currentTime = m_newTime;
 

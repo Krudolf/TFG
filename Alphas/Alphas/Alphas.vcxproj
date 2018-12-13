@@ -163,8 +163,10 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemyBoss.h" />
     <ClInclude Include="enemyCharger.h" />
     <ClInclude Include="enemyRanger.h" />
+    <ClInclude Include="enemyType_enum.h" />
     <ClInclude Include="enemyWarrior.h" />
     <ClInclude Include="engineManager.h" />
     <ClInclude Include="entities_enum.h" />
@@ -197,8 +199,10 @@
     <ClInclude Include="sceneMap.h" />
     <ClInclude Include="screen.h" />
     <ClInclude Include="screenGameMode.h" />
+    <ClInclude Include="screenGameOver.h" />
     <ClInclude Include="screenManager.h" />
     <ClInclude Include="screenOption.h" />
+    <ClInclude Include="screenPause.h" />
     <ClInclude Include="screenSelectPlayerSolo.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="screenGame.h" />
@@ -208,6 +212,7 @@
     <ClInclude Include="stats_enum.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="waveSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Alphas.cpp" />
@@ -216,6 +221,7 @@
     <ClCompile Include="buttonText.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enemyBoss.cpp" />
     <ClCompile Include="enemyCharger.cpp" />
     <ClCompile Include="enemyRanger.cpp" />
     <ClCompile Include="enemyWarrior.cpp" />
@@ -252,8 +258,10 @@
     <ClCompile Include="sceneMap.cpp" />
     <ClCompile Include="screen.cpp" />
     <ClCompile Include="screenGameMode.cpp" />
+    <ClCompile Include="screenGameOver.cpp" />
     <ClCompile Include="screenManager.cpp" />
     <ClCompile Include="screenOption.cpp" />
+    <ClCompile Include="screenPause.cpp" />
     <ClCompile Include="screenSelectPlayerSolo.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="screenGame.cpp" />
@@ -262,6 +270,7 @@
     <ClCompile Include="StatsInfo.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="waveSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,7 +18,7 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 	m_lastPosX	= p_posX;
 	m_lastPosY	= p_posY;
 
-	m_playerAlive	= true;
+	m_alive = true;
 
 	m_speedPotionEfect		= false;
 	m_damagePotionEfect		= false;
@@ -68,10 +68,8 @@ void Player::receiveDamage(float p_damage)
 	m_health -= (p_damage - t_blockDamage);
 
 	if (m_health <= 0.f) {
-		m_playerAlive = false;
+		m_alive = false;
 	}
-
-	std::cout << "Player HP: " << m_health << std::endl;
 }
 
 bool Player::enoughMana(float p_mana)
@@ -299,11 +297,13 @@ void Player::pickObject()
 
 void Player::updateHealthAndMana(double p_deltaTime)
 {
-	float t_health = m_maxHealth * (p_deltaTime / 100);
-	increaseHealth(t_health);
+	if (m_alive) {
+		float t_health = m_maxHealth * (p_deltaTime / 100);
+		increaseHealth(t_health);
 
-	float t_mana = m_maxMana * (p_deltaTime / 100);
-	increaseMana(t_mana);
+		float t_mana = m_maxMana * (p_deltaTime / 100);
+		increaseMana(t_mana);
+	}
 }
 
 void Player::updateBasicAtack()

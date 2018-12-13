@@ -114,12 +114,8 @@ void ScreenSelectPlayerSolo::update(double p_time, double p_deltaTime)
 
 void ScreenSelectPlayerSolo::draw()
 {
-	m_engineManager->getWindow()->clear(sf::Color::Green);
-
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();
 	}
 	m_imageCharacters->draw();
-
-	m_engineManager->getWindow()->display();
 }

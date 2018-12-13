@@ -15,14 +15,15 @@ public:
 	Player(float p_posX, float p_posY, const char* p_path, Entities p_playerEntity);
 	virtual ~Player();
 
-	float getHealth() { return m_health; };
-	float getMaxHealth() { return m_maxHealth; };
-	float getMana() { return m_mana; };
-	float getMaxMana() { return m_maxMana; };
-	float getVelocity() { return m_velocity; };
-	float getDamage() { return m_damage; };
-	float getArmor() { return m_armor; };
-	float getAtackSpeed() { return m_atackSpeed; };
+	bool	getAlive() { return m_alive; };
+	float	getHealth() { return m_health; };
+	float	getMaxHealth() { return m_maxHealth; };
+	float	getMana() { return m_mana; };
+	float	getMaxMana() { return m_maxMana; };
+	float	getVelocity() { return m_velocity; };
+	float	getDamage() { return m_damage; };
+	float	getArmor() { return m_armor; };
+	float	getAtackSpeed() { return m_atackSpeed; };
 
 	void receiveDamage(float p_damage);
 	bool enoughMana(float p_mana);
@@ -62,6 +63,8 @@ public:
 	void draw() override;
 
 protected:
+	bool	m_alive;
+
 	float	m_maxHealth;
 	float	m_health;
 	float	m_maxMana;
@@ -106,8 +109,6 @@ protected:
 private:
 	double	m_deltaTime;
 	double	m_time;
-
-	bool	m_playerAlive;
 	
 	bool	m_speedPotionEfect;
 	bool	m_damagePotionEfect;

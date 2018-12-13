@@ -3,10 +3,12 @@
 #include "fillBar.h"
 #include "color.h"
 #include "playerInfo.h"
-
+#include "waveSystem.h"
 #include "engineManager.h"
 
-Interface::Interface(Player* p_player1, Player* p_player2)
+#include <string>
+
+Interface::Interface(Player* p_player1, Player* p_player2, WaveSystem* p_waveSystem)
 {
 	m_engineManager = &EngineManager::p();
 
@@ -25,6 +27,16 @@ Interface::Interface(Player* p_player1, Player* p_player2)
 		t_posX = m_width - t_sizeX;
 		m_player2Info = new PlayerInfo(p_player2, t_posX, t_posY, t_sizeX, t_sizeY);
 	}
+
+	m_waveSystem = p_waveSystem;
+
+	m_waveInfo.setFont(*m_engineManager->getFont());
+	m_waveInfo.setCharacterSize(20);
+	m_waveText = "Wave: "    + std::to_string(p_waveSystem->getWaveNumber()) +
+				 "\nEnemy: " + std::to_string(p_waveSystem->getAliveEnemy());
+	m_waveInfo.setString(m_waveText);
+	m_waveInfo.setPosition(10, 10);
+	m_waveInfo.setFillColor(sf::Color::Black);
 }
 
 
@@ -45,6 +57,10 @@ void Interface::update()
 
 	if(m_player2Info != nullptr)
 		m_player2Info->update();
+
+	m_waveText = "Wave: " + std::to_string(m_waveSystem->getWaveNumber()) +
+				 "\nEnemy: " + std::to_string(m_waveSystem->getAliveEnemy());
+	m_waveInfo.setString(m_waveText);
 }
 
 void Interface::draw()
@@ -53,4 +69,6 @@ void Interface::draw()
 
 	if(m_player2Info != nullptr)
 		m_player2Info->draw();
+
+	m_engineManager->draw(m_waveInfo);
 }

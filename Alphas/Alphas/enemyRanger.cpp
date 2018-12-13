@@ -4,7 +4,7 @@
 #include "projectile.h"
 #include "projectileStraight.h"
 
-EnemyRanger::EnemyRanger(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path)
+EnemyRanger::EnemyRanger(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {
 	m_damage = 10;
 

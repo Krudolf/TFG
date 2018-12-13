@@ -16,7 +16,7 @@ PlayerBlue::PlayerBlue(float p_posX, float p_posY, const char * p_path) : Player
 	m_health = m_maxHealth;
 	m_maxMana = 250.f;
 	m_mana = m_maxMana;
-	m_baseDamage = 1.f;
+	m_baseDamage = 50.f;
 	m_damage = m_baseDamage;
 	m_baseAtackSpeed = 0.25f;
 	m_atackSpeed = m_baseAtackSpeed;

@@ -7,7 +7,7 @@ class Enemy :
 	public Entity
 {
 public:
-	Enemy(float p_posX, float p_posY, const char* p_path);
+	Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity);
 	virtual ~Enemy();
 
 	void receiveDamage(float p_damage);
@@ -31,6 +31,11 @@ protected:
 	float	m_velocity;
 	float	m_baseVelocity;
 	float	m_damage;
+	float	m_health;
+	float	m_maxHealth;
+	float	m_mana;
+	float	m_maxMana;
+	float	m_atackSpeed;
 
 	Player* m_objectivePlayer;
 	double	m_distanceToObjective;
@@ -43,12 +48,6 @@ protected:
 	float	m_endCooldown;
 
 private:
-	float	m_health;
-	float	m_maxHealth;
-	float	m_mana;
-	float	m_maxMana;
-	float	m_atackSpeed;
-
 	bool	m_dead;
 	bool	m_cooperativeMode;
 

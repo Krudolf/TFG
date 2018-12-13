@@ -86,7 +86,7 @@ Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_di
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 		break;
 	case Direction::NONE:
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		//m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
 		break;
 	}
 }
@@ -118,7 +118,7 @@ void Projectile::update(bool p_deleteOnCollide)
 			}
 		}
 	}
-	else if (m_entityOwner == Entities::ENEMY_BULLET) {
+	else if (m_entityOwner == Entities::ENEMY_BULLET || m_entityOwner == Entities::ENEMY_BOSS_BULLET) {
 		//Check if the projectile collides with one player, if it collide it will be destroyed
 		for (int i = 0; i < ScreenGame::m_playerVector.size(); i++) {
 			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_playerVector[i]->getSpriteID())) {

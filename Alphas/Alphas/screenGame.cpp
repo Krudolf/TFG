@@ -23,26 +23,56 @@
 #include "tile.h"
 #include "sceneMap.h"
 #include "interface.h"
+#include "waveSystem.h"
 
 #include "screenMenuHome.h"
+#include "screenGameOver.h"
+#include "screenPause.h"
 
 #include <iostream>
 
 ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 {
+	m_playerEntity = p_playerEntity;
+
+	m_gamePause			= false;
+	m_gameOver			= false;
+
+	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
+	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
+	//m_sceneMap = new SceneMap("assets/map/map2.tmx", "assets/map2.png");
+	//m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
+	std::vector<Entity*> t_returnObjects;
+
+	float t_width = m_sceneMap->getWidth();
+	float t_height = m_sceneMap->getHeight();
+	m_spawnPointsVector.push_back({ 0.f, 0.f });
+	m_spawnPointsVector.push_back({ 0.f, t_height });
+	m_spawnPointsVector.push_back({ t_width, 0.f });
+	m_spawnPointsVector.push_back({ t_width, t_height });
+	/* ++++++++++++++++++++++++++ PLAYER ++++++++++++++++++++++++++ */
 	Player* t_player;
 	switch (p_playerEntity)
 	{
 	case Entities::PLAYER1:
-		t_player = new PlayerBlue(0, 0, "assets/spritesheet.png");
+		t_player = new PlayerBlue(t_width / 2, t_height / 2, "assets/spritesheet.png");
 		break;
 	case Entities::PLAYER2:
-		t_player = new PlayerGreen(0, 0, "assets/spritesheet.png");
+		t_player = new PlayerGreen(t_width / 2, t_height / 2, "assets/spritesheet.png");
 		break;
 	}
 	m_playerVector.push_back(t_player);
 
-	m_interface = new Interface(m_playerVector[0], nullptr);
+	/* ++++++++++++++++++++++++++ CAMERA ++++++++++++++++++++++++++ */
+	m_camera = new Camera();
+	m_camera->setTarget(m_playerVector[0]);
+
+	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
+	m_waveSystem = new WaveSystem(m_spawnPointsVector);
+	//m_waveSystem->setWavenumber(10);
+	m_waveSystem->spawnNextWave();
+	
+	m_interface = new Interface(m_playerVector[0], nullptr, m_waveSystem);
 }
 
 
@@ -51,9 +81,19 @@ ScreenGame::~ScreenGame()
 	deleteAndFree();
 
 	delete m_camera;
+	m_camera = nullptr;
+
 	delete m_sceneMap;
+	m_sceneMap = nullptr;
+	
 	delete m_quadTree;
+	m_quadTree = nullptr;
+	
+	delete m_waveSystem;
+	m_waveSystem = nullptr;
+	
 	delete m_interface;
+	m_interface = nullptr;
 }
 
 void ScreenGame::deleteAndFree()
@@ -80,107 +120,104 @@ void ScreenGame::deleteAndFree()
 
 void ScreenGame::init()
 {
-	m_camera = new Camera();
 
-	m_camera->setTarget(m_playerVector[0]);
-
-	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
-	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
-	//m_sceneMap = new SceneMap("assets/map/map2.tmx", "assets/map2.png");
-	//m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
-	std::vector<Entity*> t_returnObjects;
-
-	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
-	createEnemyWarrior(1000.f, 400.f);
-	createEnemyWarrior(600.f, 400.f);
-	createEnemyCharger(800.f, 600.f);
-	createEnemyCharger(800.f, 200.f);
-	createEnemyRanger(675.f, 400.f);
-	createEnemyRanger(725.f, 400.f);
 }
 
 void ScreenGame::update(double p_time, double p_deltaTime)
 {
-	m_camera->update();
+	if (!m_gamePause && !m_gameOver) {
+		m_camera->update();
 
-	/* QUADTREE */
-		/*m_quadTree->clear();
+		/* QUADTREE */
+			/*m_quadTree->clear();
 
-		for (int i = 0; i < m_entityVector.size(); i++) {
-			m_quadTree->insert(m_entityVector[i]);
-		}
-
-		for (auto t_player : m_playerVector) {
-			t_returnObjects.clear();
-			m_quadTree->retrieve(t_returnObjects, t_player);
-			std::cout << t_returnObjects.size() << std::endl;
-
-		}*/
-
-		//Update player/s
-	for (int i = 0; i < m_playerVector.size(); i++) {
-		m_playerVector[i]->update(p_time, p_deltaTime);
-	}
-
-	//Update enemys
-	for (int i = 0; i < m_enemyVector.size(); i++) {
-		m_enemyVector[i]->update(p_time, p_deltaTime);
-
-		if (m_enemyVector[i]->isDead()) {
-			int t_random = rand() % 101;	//random between 0 and 100;
-
-			if (t_random < 60) {
-				Potion* t_potion;
-				if (t_random < 10) {
-					t_potion = new PotionHealth("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::HEALTH);
-				}
-				else if (t_random >= 10 && t_random < 20) {
-					t_potion = new PotionSpeed("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::SPEED);
-				}
-				else if (t_random >= 20 && t_random < 30) {
-					t_potion = new PotionMana("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::MANA);
-				}
-				else if (t_random >= 30 && t_random < 40) {
-					t_potion = new PotionDamage("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::DAMAGE);
-				}
-				else if (t_random >= 40 && t_random < 50) {
-					t_potion = new PotionArmor("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ARMOR);
-				}
-				else if (t_random >= 50 && t_random < 60) {
-					t_potion = new PotionAtackSpeed("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ATACK_SPEED);
-				}
-				m_potionVector.push_back(t_potion);
+			for (int i = 0; i < m_entityVector.size(); i++) {
+				m_quadTree->insert(m_entityVector[i]);
 			}
 
-			delete m_enemyVector[i];
-			m_enemyVector[i] = nullptr;
-			m_enemyVector.erase(m_enemyVector.begin() + i);
+			for (auto t_player : m_playerVector) {
+				t_returnObjects.clear();
+				m_quadTree->retrieve(t_returnObjects, t_player);
+				std::cout << t_returnObjects.size() << std::endl;
+
+			}*/
+
+		/* ++++++++++++++++++++++++++ UPDATE PLAYER ++++++++++++++++++++++++++ */
+		for (int i = 0; i < m_playerVector.size(); i++) {
+			m_playerVector[i]->update(p_time, p_deltaTime);
+		}
+		checkGameOver();
+
+		/* ++++++++++++++++++++++++++ UPDATE ENEMY ++++++++++++++++++++++++++ */
+		for (int i = 0; i < m_enemyVector.size(); i++) {
+			m_enemyVector[i]->update(p_time, p_deltaTime);
+
+			if (m_enemyVector[i]->isDead()) {
+				float t_random = rand() % 101;	//random between 0 and 100;
+
+				if (t_random < 10) {
+					Potion* t_potion;
+					if (t_random < 3) {
+						t_potion = new PotionHealth("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::HEALTH);
+					}
+					else if (t_random >= 3 && t_random < 6) {
+						t_potion = new PotionMana("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::MANA);
+					}
+					else if (t_random >= 6 && t_random < 7) {
+						t_potion = new PotionSpeed("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::SPEED);
+					}
+					else if (t_random >= 7 && t_random < 8) {
+						t_potion = new PotionDamage("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::DAMAGE);
+					}
+					else if (t_random >= 8 && t_random < 9) {
+						t_potion = new PotionArmor("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ARMOR);
+					}
+					else if (t_random >= 9 && t_random < 10) {
+						t_potion = new PotionAtackSpeed("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ATACK_SPEED);
+					}
+					m_potionVector.push_back(t_potion);
+				}
+
+				delete m_enemyVector[i];
+				m_enemyVector[i] = nullptr;
+				m_enemyVector.erase(m_enemyVector.begin() + i);
+				m_waveSystem->checkEndOfWave();
+			}
+		}
+		checkCollisionBetweenEnemys();
+		m_waveSystem->spawnRemainingEnemy();
+
+		/* ++++++++++++++++++++++++++ UPDATE POTION ++++++++++++++++++++++++++ */
+		for (int i = 0; i < m_potionVector.size(); i++) {
+			m_potionVector[i]->update();
+			if (m_potionVector[i]->getEffectUsed()) {
+				delete m_potionVector[i];
+				m_potionVector[i] = nullptr;
+				m_potionVector.erase(m_potionVector.begin() + i);
+			}
+		}
+
+		/*	INTERFACE */
+		m_interface->update();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
+			m_engineManager->setKeyReleased(false);
+			m_screenManager->setOverlayScreen(new ScreenPause());
+			//m_engineManager->pauseClock();
 		}
 	}
-	checkCollisionBetweenEnemys();
-
-	//Update potions
-	for (int i = 0; i < m_potionVector.size(); i++) {
-		m_potionVector[i]->update();
-		if (m_potionVector[i]->getEffectUsed()) {
-			delete m_potionVector[i];
-			m_potionVector[i] = nullptr;
-			m_potionVector.erase(m_potionVector.begin() + i);
-		}
+	else if(m_gameOver){
+		//GAME OVEEEEER!!
+		m_screenManager->setOverlayScreen(new ScreenGameOver(m_playerEntity));
 	}
-
-	/*	INTERFACE */
-	m_interface->update();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
-		m_engineManager->setKeyReleased(false);
-		m_screenManager->changeScreen(new ScreenMenuHome());
+	else if (m_gamePause) {
+		//PAUSEEE!!
+		m_gamePause = m_screenManager->overlayOpened();
 	}
 }
 
 void ScreenGame::draw()
 {
-	m_engineManager->getWindow()->clear(sf::Color::Red);
 	m_engineManager->useGameView();
 
 	//Draw the map
@@ -204,16 +241,30 @@ void ScreenGame::draw()
 
 	m_engineManager->useInterfaceView();
 	m_interface->draw();
-
-	m_engineManager->getWindow()->display();
 }
 
+/*
+	Return true if game is cooperative (more than one player).
+	Return false if only one player is playing.
+*/
 bool ScreenGame::getCooperativeMode()
 {
-	if (m_playerVector.size() > 1)
-		return true;
-	else
+	if (m_playerVector.size() == 1)
 		return false;
+	else if (m_playerVector.size() == 2)
+		return true;
+}
+
+void ScreenGame::checkGameOver()
+{
+	if (getCooperativeMode) {
+		if (!m_playerVector[0]->getAlive())
+			m_gameOver = true;
+	}
+	else {
+		if (!m_playerVector[0]->getAlive() && !m_playerVector[1]->getAlive())
+			m_gameOver = true;
+	}
 }
 
 void ScreenGame::checkCollisionBetweenEnemys()
@@ -231,23 +282,4 @@ void ScreenGame::checkCollisionBetweenEnemys()
 	}
 }
 
-void ScreenGame::createEnemyWarrior(float p_posX, float p_posY)
-{
-	EnemyWarrior* enemy = new EnemyWarrior(p_posX, p_posY, "assets/spritesheet.png");
-	//m_entityVector.push_back(enemy);
-	m_enemyVector.push_back(enemy);
-}
 
-void ScreenGame::createEnemyCharger(float p_posX, float p_posY)
-{
-	EnemyCharger* enemy = new EnemyCharger(p_posX, p_posY, "assets/spritesheet.png");
-	//m_entityVector.push_back(enemy);
-	m_enemyVector.push_back(enemy);
-}
-
-void ScreenGame::createEnemyRanger(float p_posX, float p_posY)
-{
-	EnemyRanger* enemy = new EnemyRanger(p_posX, p_posY, "assets/spritesheet.png");
-	//m_entityVector.push_back(enemy);
-	m_enemyVector.push_back(enemy);
-}
