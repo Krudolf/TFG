@@ -50,37 +50,48 @@ void EnemyCharger::atack()
 
 void EnemyCharger::updateAtack()
 {
-	float t_time = m_engineManager->getMasterClockSeconds();
+	if (!m_stunned) {
+		float t_time = m_engineManager->getMasterClockSeconds();
 
-	//charge time ends --> charge phase ends --> starts release phase
-	if (m_chargePhase && t_time >= m_endChargeTime) {
-		m_chargePhase = false;
-		m_releasePhase = true;
-		m_endReleaseTime = m_endChargeTime = t_time + m_releaseTime;
-	}
-
-	//Release phase
-	if (m_releasePhase) {
-		//Lock the direction that the enemy will follow during charge and increase the speed
-		if (!m_lockDirection) {
-			m_lockDirection = true;
-			m_velocity *= 6;
-			m_engineManager->getDirection(m_objectivePlayer->getPositionX(), m_objectivePlayer->getPositionY(), m_posX, m_posY, m_directionMoveX, m_directionMoveY);
+		//charge time ends --> charge phase ends --> starts release phase
+		if (m_chargePhase && t_time >= m_endChargeTime) {
+			m_chargePhase	= false;
+			m_releasePhase	= true;
+			m_endReleaseTime = m_endChargeTime = t_time + m_releaseTime;
 		}
 
-		move();
+		//Release phase
+		if (m_releasePhase) {
+			//Lock the direction that the enemy will follow during charge and increase the speed
+			if (!m_lockDirection) {
+				m_lockDirection = true;
+				m_velocity *= 6;
+				m_engineManager->getDirection(m_objectivePlayer->getPositionX(), m_objectivePlayer->getPositionY(), m_posX, m_posY, m_directionMoveX, m_directionMoveY);
+			}
 
-		bool t_collision = m_engineManager->checkCollision(m_spriteID, m_objectivePlayer->getSpriteID());
-		if (t_collision)
-			m_objectivePlayer->receiveDamage(m_damage);
+			move();
 
-		if (t_collision || t_time >= m_endReleaseTime) {
-			m_velocity = m_baseVelocity;
-			m_lockDirection = false;
-			m_releasePhase = false;
-			m_atackInCooldown = true;
+			bool t_collision = m_engineManager->checkCollision(m_spriteID, m_objectivePlayer->getSpriteID());
+			if (t_collision)
+				m_objectivePlayer->receiveDamage(m_damage);
+
+			if (t_collision || t_time >= m_endReleaseTime) {
+				m_velocity			= m_baseVelocity;
+				m_lockDirection		= false;
+				m_releasePhase		= false;
+				m_atackInCooldown	= true;
+			}
 		}
 	}
+	else {
+		m_velocity			= m_baseVelocity;
+		m_lockDirection		= false;
+		m_chargePhase		= false;
+		m_releasePhase		= false;
+		m_atackInCooldown	= true;
+	}
+
+
 }
 
 void EnemyCharger::update(double p_time, double p_deltaTime)

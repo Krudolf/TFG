@@ -255,11 +255,14 @@
     <ClInclude Include="attackEffect_enum.h">
       <Filter>Archivos de encabezado\others</Filter>
     </ClInclude>
-    <ClInclude Include="projectileStraightStun.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="projectileSpinFixed.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="projectileStraightSticky.h">
+      <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="projectileStraightStun.h">
+      <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -416,11 +419,14 @@
     <ClCompile Include="enemyBoss.cpp">
       <Filter>Archivos de origen\gameEntities\enemies</Filter>
     </ClCompile>
-    <ClCompile Include="projectileStraightStun.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="projectileSpinFixed.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\gameEntities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="projectileStraightSticky.cpp">
+      <Filter>Archivos de origen\gameEntities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="projectileStraightStun.cpp">
+      <Filter>Archivos de origen\gameEntities\projectiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

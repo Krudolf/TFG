@@ -379,12 +379,6 @@ void Player::update(double p_time, double p_deltaTime) {
 
 void Player::draw()
 {
-	m_engineManager->draw(m_engineManager->getSprite(m_spriteID));
-
-	for (int i = 0; i < m_basicProjectiles.size(); i++) {
-		m_basicProjectiles[i]->draw();
-	}
-
 	if (m_hability1Launched)
 		m_hability1->draw();
 
@@ -393,4 +387,10 @@ void Player::draw()
 
 	if (m_hability3Launched)
 		m_hability3->draw();
+
+	for (int i = 0; i < m_basicProjectiles.size(); i++) {
+		m_basicProjectiles[i]->draw();
+	}
+
+	m_engineManager->draw(m_engineManager->getSprite(m_spriteID));
 }

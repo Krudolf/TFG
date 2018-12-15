@@ -11,7 +11,7 @@ public:
 	virtual ~Enemy();
 
 	void receiveDamage(float p_damage);
-	bool isDead() { return m_dead; };
+	bool isDead() { return (m_dead && !m_sticky); };
 
 	double calculateDistance(Player* p_posibleObjective);
 	double getDistanceToObjective() { return m_distanceToObjective; };
@@ -26,8 +26,12 @@ public:
 	void update(double p_time, double p_deltaTime);
 
 	void setStunned(float p_timeStunned);
+	void setSticky(float p_sticky) { m_sticky = p_sticky; };
 
 protected:
+	bool	m_stunned;
+	bool	m_sticky;
+
 	float	m_directionMoveX;
 	float	m_directionMoveY;
 	float	m_velocity;
@@ -52,8 +56,6 @@ protected:
 private:
 	bool	m_dead;
 	bool	m_cooperativeMode;
-
-	bool	m_stunned;
 
 	float	m_endOfStun;
 

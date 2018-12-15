@@ -92,6 +92,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\dev\SFML-2.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,6 +128,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\SFML-2.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -197,6 +199,7 @@
     <ClInclude Include="projectileSpinFixed.h" />
     <ClInclude Include="projectileStraight.h" />
     <ClInclude Include="projectileStraightSpin.h" />
+    <ClInclude Include="projectileStraightSticky.h" />
     <ClInclude Include="projectileStraightStun.h" />
     <ClInclude Include="quadTree.h" />
     <ClInclude Include="sceneMap.h" />
@@ -258,6 +261,7 @@
     <ClCompile Include="projectileSpinFixed.cpp" />
     <ClCompile Include="projectileStraight.cpp" />
     <ClCompile Include="projectileStraightSpin.cpp" />
+    <ClCompile Include="projectileStraightSticky.cpp" />
     <ClCompile Include="projectileStraightStun.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="sceneMap.cpp" />

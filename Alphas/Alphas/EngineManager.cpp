@@ -78,6 +78,11 @@ void EngineManager::draw(sf::Sprite p_sprite)
 	m_window->draw(p_sprite);
 }
 
+void EngineManager::drawCircle()
+{
+	m_window->draw(m_circle);
+}
+
 void EngineManager::checkEvents()
 {
 	sf::Event event;
@@ -226,12 +231,29 @@ void EngineManager::getDirection(double p_posEntity1X, double p_posEntity1Y, dou
 
 }
 
+void EngineManager::createCircle(float p_posX, float p_posY, float p_radius)
+{
+	m_circle.setPosition(p_posX, p_posY);
+	m_circle.setRadius(p_radius);
+	m_circle.setFillColor(sf::Color(90, 250, 60, 50));
+	m_circle.setOrigin(m_circle.getGlobalBounds().width / 2, m_circle.getGlobalBounds().height / 2);
+}
+
 bool EngineManager::checkCollision(int p_spriteID1, int p_spriteID2)
 {
 	sf::Sprite* t_sprite1 = m_spriteVector[p_spriteID1];
 	sf::Sprite* t_sprite2 = m_spriteVector[p_spriteID2];
 
-	bool t_collide = t_sprite1->getGlobalBounds().intersects(t_sprite2->getGlobalBounds());
+	bool t_collide = t_sprite1->getGlobalBounds().contains(t_sprite2->getPosition());
+
+	return t_collide;
+}
+
+bool EngineManager::checkCollisionCircle(int p_spriteID)
+{
+	sf::Sprite* t_sprite = m_spriteVector[p_spriteID];
+
+	bool t_collide = m_circle.getGlobalBounds().contains(t_sprite->getPosition());
 
 	return t_collide;
 }

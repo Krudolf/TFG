@@ -1,10 +1,8 @@
-﻿  playerGreen.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\playergreen.cpp(61): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playergreen.cpp(71): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playergreen.cpp(81): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  projectileSpinFixed.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilespinfixed.cpp(18): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilespinfixed.cpp(36): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilespinfixed.cpp(43): warning C4018: '<': no coinciden signed/unsigned
-  Generando código...
+﻿  projectileStraightSticky.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightsticky.cpp(17): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightsticky.cpp(52): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightsticky.cpp(55): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightsticky.cpp(68): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightsticky.cpp(97): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightsticky.cpp(100): warning C4018: '<': no coinciden signed/unsigned
   Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe

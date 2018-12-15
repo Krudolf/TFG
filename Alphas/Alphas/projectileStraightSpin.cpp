@@ -29,10 +29,15 @@ ProjectileStraightSpin::~ProjectileStraightSpin()
 
 void ProjectileStraightSpin::update(double p_time, double p_deltaTime)
 {
-	if (m_straightPhase)
-		updateStraight(p_deltaTime);
-	else
-		updateSpin();
+	//Check if life time end
+	if (m_engineManager->getMasterClockSeconds() >= m_dieTime)
+		m_readyToDelete = true;
+	else {
+		if (m_straightPhase)
+			updateStraight(p_deltaTime);
+		else
+			updateSpin();
+	}
 }
 
 void ProjectileStraightSpin::updateStraight(double p_deltaTime)
@@ -44,11 +49,6 @@ void ProjectileStraightSpin::updateStraight(double p_deltaTime)
 	m_posY = m_lastPosY + (p_deltaTime * m_velocity * m_moveY);
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
-
-	//Check if life time end
-	if (m_engineManager->getMasterClockSeconds() > m_dieTime) {
-		m_readyToDelete = true;
-	}
 
 	//Check if the projectile collide with one enemy, if it collide change to spin mode
 	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
@@ -75,24 +75,12 @@ void ProjectileStraightSpin::updateSpin()
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 
-	//Check if life time end
-	if (m_engineManager->getMasterClockSeconds() > m_dieTime)
-		m_readyToDelete = true;
-
-	if (m_entityOwner == Entities::BULLET1 || m_entityOwner == Entities::BULLET2) {
-		//Check if the projectile collides with one enemy, if it collide it will be destroyed
-		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
-				if (m_makeDamage)
-					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
-					m_owner->increaseMana(m_damage / 10);
-
-				if (!m_crossEnemy) {
-					m_readyToDelete = true;
-					break;
-				}
-
-			}
+	//Check if the projectile collides with one enemy, if it collide it will be destroyed
+	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
+		if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
+			if (m_makeDamage)
+				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
+				m_owner->increaseMana(m_damage / 10);
 		}
 	}
 }

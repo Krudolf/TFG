@@ -19,6 +19,7 @@ public:
 	void draw(sf::RectangleShape p_rectangle);
 	void draw(sf::Text p_text);
 	void draw(sf::Sprite p_sprite);
+	void drawCircle();
 
 	void checkEvents();
 	bool getKeyReleased() { return m_keyReleased; };
@@ -46,9 +47,11 @@ public:
 	sf::Sprite* getSprite(int p_spriteID) { return m_spriteVector[p_spriteID]; };
 	void setSpriteFrame(int p_spriteID, int p_entity, int p_frame);
 	void getDirection(double p_posEntity1X, double p_posentity1Y, double p_posEntity2X, double p_posEntity2Y, float& p_directionX, float& p_directionY);
+	void createCircle(float p_posX, float p_posY, float p_radius);
 
 	/* COLLISION */
 	bool checkCollision(int p_spriteID1, int p_spriteID2);
+	bool checkCollisionCircle(int p_spriteID);
 
 	/* MENU */
 	sf::Font* getFont() { return m_font; };
@@ -77,5 +80,7 @@ private:
 
 	sf::Time	m_masterTime;
 	sf::Time	m_pauseTime;
+
+	sf::CircleShape	m_circle;
 
 };

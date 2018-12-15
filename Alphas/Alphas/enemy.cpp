@@ -35,6 +35,8 @@ Enemy::Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity) 
 	m_atackInCooldown	= false;
 	m_cooldownAtack		= 1.f;
 	m_endCooldown		= -1;
+
+	m_sticky = false;
 }
 
 
@@ -108,15 +110,16 @@ void Enemy::update(double p_time, double p_deltaTime)
 
 	m_lastPosX = m_posX;
 	m_lastPosY = m_posY;
-
-	checkObjective();
-	if(!m_stunned)
+	
+	if (!m_stunned) {
+		checkObjective();
 		move();
+		atack();
+	}
 	else {
 		if (m_engineManager->getMasterClockSeconds() >= m_endOfStun)
 			m_stunned = false;
 	}
-	atack();
 	updateAtack();
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
