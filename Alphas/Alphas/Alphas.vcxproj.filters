@@ -255,6 +255,12 @@
     <ClInclude Include="attackEffect_enum.h">
       <Filter>Archivos de encabezado\others</Filter>
     </ClInclude>
+    <ClInclude Include="projectileStraightStun.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="projectileSpinFixed.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -409,6 +415,12 @@
     </ClCompile>
     <ClCompile Include="enemyBoss.cpp">
       <Filter>Archivos de origen\gameEntities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="projectileStraightStun.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="projectileSpinFixed.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

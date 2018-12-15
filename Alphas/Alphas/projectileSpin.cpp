@@ -7,7 +7,7 @@
 #include <math.h>
 
 
-ProjectileSpin::ProjectileSpin(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage, Player* p_owner) : Projectile(p_texturePath, p_ent, p_dir, p_playerPosX, p_playerPosY, p_damage)
+ProjectileSpin::ProjectileSpin(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_damage, Player* p_owner) : Projectile(p_texturePath, p_ent, p_dir, p_owner->getPositionX(), p_owner->getPositionY(), p_damage)
 {
 	m_lifeTime = 5.f;
 	m_dieTime = m_engineManager->getMasterClockSeconds() + m_lifeTime;
@@ -23,10 +23,6 @@ ProjectileSpin::ProjectileSpin(const char* p_texturePath, Entities p_ent, Direct
 	m_owner = p_owner;
 
 	p_owner->increaseArmor(5.f, 10.f);
-	/*
-		TODO:
-			INCREASE TIME AND DECREASE DAMAGE??
-	*/
 }
 
 

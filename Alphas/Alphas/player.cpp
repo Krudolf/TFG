@@ -67,7 +67,8 @@ void Player::receiveDamage(float p_damage)
 	float t_blockDamage = p_damage * (m_armor / 100);
 	m_health -= (p_damage - t_blockDamage);
 
-	if (m_health <= 0.f) {
+	if (m_health < 0.f) {
+		m_health = 0.f;
 		m_alive = false;
 	}
 }
@@ -106,7 +107,7 @@ void Player::increaseSpeed(float p_duration, float p_speedIncrease)
 }
 
 /*
-	Incresa the damage by the p_damageIncrease (if 2, damage will be the double)
+	Increase the damage by the p_damageIncrease (if 2, damage will be the double)
 */
 void Player::increaseDamage(float p_duration, float p_damageIncrease)
 {
@@ -116,7 +117,7 @@ void Player::increaseDamage(float p_duration, float p_damageIncrease)
 }
 
 /*
-	Incresa the armor by the p_armorIncrease (if 2, armor will be the double)
+	Increase the armor by the p_armorIncrease (if 2, armor will be the double)
 */
 void Player::increaseArmor(float p_duration, float p_armorIncrease)
 {
@@ -125,6 +126,9 @@ void Player::increaseArmor(float p_duration, float p_armorIncrease)
 	m_endOfArmorPotionEffect = m_engineManager->getMasterClockSeconds() + p_duration;
 }
 
+/*
+	Increase the attack speed by the p_attackSpeedIncrease (if 2, attackSpeed will be the double)
+*/
 void Player::increaseAtackSpeed(float p_duration, float p_atackSpeedIncrease)
 {
 	m_atackSpeedPotionEfect = true;
@@ -172,22 +176,22 @@ void Player::rangeAtack()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		m_faceDirection = Direction::RIGHT;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 2);
-		launchProjectile(m_faceDirection, ProjectileType::STRAIGHT);
+		launchProjectile();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		m_faceDirection = Direction::LEFT;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 3);
-		launchProjectile(m_faceDirection, ProjectileType::STRAIGHT);
+		launchProjectile();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 		m_faceDirection = Direction::DOWN;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
-		launchProjectile(m_faceDirection, ProjectileType::STRAIGHT);
+		launchProjectile();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		m_faceDirection = Direction::UP;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		launchProjectile(m_faceDirection, ProjectileType::STRAIGHT);
+		launchProjectile();
 	}
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !m_hability1inCooldown) {
@@ -276,13 +280,13 @@ void Player::updateHabilities()
 		m_hability3EnoughMana = false;
 }
 
-void Player::launchProjectile(Direction p_dir, ProjectileType p_projectileType)
+void Player::launchProjectile()
 {
 	if (!m_basicInCooldown && m_basicProjectiles.size() < m_maxProjectiles) {
 		m_basicInCooldown = true;
 		m_nextBasic = m_engineManager->getMasterClockSeconds() + m_atackSpeed;
 
-		Projectile* t_projectile = new ProjectileStraight(m_texturePath, m_bulletColor, p_dir, m_posX, m_posY, m_damage, false, true);
+		Projectile* t_projectile = new ProjectileStraight(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage, false, true);
 
 		m_basicProjectiles.push_back(t_projectile);
 		ScreenGame::m_entityVector.push_back(t_projectile);

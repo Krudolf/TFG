@@ -194,8 +194,10 @@
     <ClInclude Include="projectile.h" />
     <ClInclude Include="projectileConus.h" />
     <ClInclude Include="projectileSpin.h" />
+    <ClInclude Include="projectileSpinFixed.h" />
     <ClInclude Include="projectileStraight.h" />
     <ClInclude Include="projectileStraightSpin.h" />
+    <ClInclude Include="projectileStraightStun.h" />
     <ClInclude Include="quadTree.h" />
     <ClInclude Include="sceneMap.h" />
     <ClInclude Include="screen.h" />
@@ -253,8 +255,10 @@
     <ClCompile Include="projectile.cpp" />
     <ClCompile Include="projectileConus.cpp" />
     <ClCompile Include="projectileSpin.cpp" />
+    <ClCompile Include="projectileSpinFixed.cpp" />
     <ClCompile Include="projectileStraight.cpp" />
     <ClCompile Include="projectileStraightSpin.cpp" />
+    <ClCompile Include="projectileStraightStun.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="sceneMap.cpp" />
     <ClCompile Include="screen.cpp" />

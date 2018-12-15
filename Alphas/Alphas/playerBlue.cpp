@@ -61,7 +61,7 @@ void PlayerBlue::hability2()
 	if (enoughMana(m_hability2ManaConsumption)) {
 		m_hability2CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		m_hability2 = new ProjectileSpin(m_texturePath, m_bulletColor, Direction::NONE, m_posX, m_posY, m_damage/10, this);
+		m_hability2 = new ProjectileSpin(m_texturePath, m_bulletColor, Direction::NONE, m_damage/10, this);
 		m_hability2Launched = true;
 	}
 }

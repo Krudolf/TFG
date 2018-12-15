@@ -49,7 +49,7 @@ public:
 	float	getHability2ActivationTime() { return m_hability2ActivationTime; };
 	float	getHability3ActivationTime() { return m_hability3ActivationTime; };
 	void updateHabilities();
-	void launchProjectile(Direction p_dir, ProjectileType p_ptojectileType);
+	void launchProjectile();
 
 	void pickObject();
 	

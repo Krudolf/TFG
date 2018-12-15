@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "playerGreen.h"
 #include "engineManager.h"
-#include "projectileSpin.h"
+#include "projectileSpinFixed.h"
 #include "projectileStraightSpin.h"
-#include "projectileConus.h"
+#include "projectileStraightStun.h"
 
 
 PlayerGreen::PlayerGreen(float p_posX, float p_posY, const char * p_path) : Player(p_posX, p_posY, p_path, Entities::PLAYER2)
@@ -26,6 +26,12 @@ PlayerGreen::PlayerGreen(float p_posX, float p_posY, const char * p_path) : Play
 	m_hability1ManaConsumption = 20.f;
 	m_hability2ManaConsumption = 60.f;
 	m_hability3ManaConsumption = 50.f;
+
+	/*
+		TODOOOO!!:
+		CUANDO LANZAMOS EL ATAQUE QUE CAUSA STUN, LOS ENEMIGOS NO TIENEN QUE HACER NA DE NAAAAH!!
+		MAS QUE NADA PORQUE AHORA MISMO EL RANGER ATACA Y EL CHARGER SI ESTA CARGANDO CONTINUA CON LA CARGA
+	*/
 }
 
 
@@ -52,7 +58,7 @@ void PlayerGreen::hability1()
 	if (enoughMana(m_hability1ManaConsumption)) {
 		m_hability1CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		m_hability1 = new ProjectileConus(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage / 5, true, true);
+		m_hability1 = new ProjectileStraightStun(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage/5, true, true);
 		m_hability1Launched = true;
 	}
 }
@@ -62,7 +68,7 @@ void PlayerGreen::hability2()
 	if (enoughMana(m_hability2ManaConsumption)) {
 		m_hability2CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		m_hability2 = new ProjectileSpin(m_texturePath, m_bulletColor, Direction::NONE, m_posX, m_posY, m_damage / 10, this);
+		m_hability2 = new ProjectileSpinFixed(m_texturePath, m_bulletColor, Direction::NONE, m_posX, m_posY, m_damage/10);
 		m_hability2Launched = true;
 	}
 }

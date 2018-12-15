@@ -25,6 +25,8 @@ public:
 
 	void update(double p_time, double p_deltaTime);
 
+	void setStunned(float p_timeStunned);
+
 protected:
 	float	m_directionMoveX;
 	float	m_directionMoveY;
@@ -50,5 +52,9 @@ protected:
 private:
 	bool	m_dead;
 	bool	m_cooperativeMode;
+
+	bool	m_stunned;
+
+	float	m_endOfStun;
 
 };

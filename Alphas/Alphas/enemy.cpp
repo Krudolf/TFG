@@ -26,6 +26,7 @@ Enemy::Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity) 
 	m_damage		= 2.f;
 	m_atackSpeed	= 0.75f;
 	m_dead			= false;
+	m_stunned		= false;
 
 	m_cooperativeMode		= ScreenGame::getCooperativeMode();
 	m_distanceToObjective	= 1000;
@@ -109,9 +110,20 @@ void Enemy::update(double p_time, double p_deltaTime)
 	m_lastPosY = m_posY;
 
 	checkObjective();
-	move();
+	if(!m_stunned)
+		move();
+	else {
+		if (m_engineManager->getMasterClockSeconds() >= m_endOfStun)
+			m_stunned = false;
+	}
 	atack();
 	updateAtack();
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
+}
+
+void Enemy::setStunned(float p_timeStunned)
+{
+	m_stunned = true;
+	m_endOfStun = m_engineManager->getMasterClockSeconds() + p_timeStunned;
 }

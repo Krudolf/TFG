@@ -28,7 +28,7 @@ EnemyBoss::EnemyBoss(float p_posX, float p_posY, const char* p_path) : Enemy(p_p
 
 	m_rangeAttackCooldown = 6.f;
 	m_chargeAttackCooldown = m_chargeTime + m_releaseTime + 5.f;;
-	m_spawnMinionCooldown = 5.f;
+	m_spawnMinionCooldown = 10.f;
 	m_rangeAttackEndCooldown = 0.f;
 	m_chargeAttackEndCooldown = 0.f;
 	m_spawnMinionEndCooldown = m_engineManager->getMasterClockSeconds() + m_spawnMinionCooldown;

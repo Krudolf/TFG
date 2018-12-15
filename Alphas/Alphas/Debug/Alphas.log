@@ -1,84 +1,10 @@
-﻿  PlayerInfo.cpp
-  StatsInfo.cpp
-  enemy.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\enemy.cpp(76): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\enemy.cpp(116): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  enemyBoss.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(109): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(134): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(140): warning C4838: la conversión de 'double' en 'float' requiere una conversión de restricción
-c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(140): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(172): warning C4018: '<': no coinciden signed/unsigned
-  enemyCharger.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\enemycharger.cpp(104): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  enemyWarrior.cpp
-  player.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(58): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(167): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(281): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(285): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(294): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(304): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(307): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(318): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(380): warning C4018: '<': no coinciden signed/unsigned
-  playerBlue.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\playerblue.cpp(54): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerblue.cpp(64): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerblue.cpp(74): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  playerGreen.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\playergreen.cpp(54): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playergreen.cpp(63): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playergreen.cpp(72): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  potion.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\potion.cpp(15): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  potionArmor.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\potionarmor.cpp(11): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potionarmor.cpp(14): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potionarmor.cpp(17): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potionarmor.cpp(20): warning C4305: '=': truncamiento de 'double' a 'float'
-  potionAtackSpeed.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\potionatackspeed.cpp(12): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potionatackspeed.cpp(15): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potionatackspeed.cpp(18): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potionatackspeed.cpp(21): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potionatackspeed.cpp(24): warning C4305: '=': truncamiento de 'double' a 'float'
-  potionDamage.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\potiondamage.cpp(12): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potiondamage.cpp(15): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potiondamage.cpp(18): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potiondamage.cpp(21): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\potiondamage.cpp(24): warning C4305: '=': truncamiento de 'double' a 'float'
-  potionHealth.cpp
-  potionMana.cpp
-  potionSpeed.cpp
-  projectile.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\projectile.cpp(31): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\projectile.cpp(111): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\projectile.cpp(126): warning C4018: '<': no coinciden signed/unsigned
-  projectileSpin.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilespin.cpp(20): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilespin.cpp(44): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  projectileStraightSpin.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightspin.cpp(21): warning C4305: '=': truncamiento de 'double' a 'float'
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightspin.cpp(46): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightspin.cpp(54): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightspin.cpp(76): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\projectilestraightspin.cpp(84): warning C4018: '<': no coinciden signed/unsigned
-  screenGame.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(47): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(48): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(146): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(152): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(156): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(161): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(164): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(167): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(170): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(173): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(176): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(191): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(260): warning C4551: la llamada a la función no tiene lista de argumentos
+﻿  playerGreen.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\playergreen.cpp(61): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\playergreen.cpp(71): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\playergreen.cpp(81): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+  projectileSpinFixed.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\projectilespinfixed.cpp(18): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\krudo\desktop\tfg\alphas\alphas\projectilespinfixed.cpp(36): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\projectilespinfixed.cpp(43): warning C4018: '<': no coinciden signed/unsigned
   Generando código...
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(256): warning C4715: 'ScreenGame::getCooperativeMode': no todas las rutas de acceso de control devuelven un valor
   Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe
