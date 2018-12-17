@@ -49,7 +49,7 @@ void ProjectileSpinFixed::update(double p_time, double p_deltaTime)
 		//Check if the projectile collides with one enemy, if it collide it will be destroyed
 		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
 			if (m_engineManager->checkCollisionCircle(ScreenGame::m_enemyVector[i]->getSpriteID()))
-					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
+					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
 		}
 
 		for (int i = 0; i < ScreenGame::m_playerVector.size(); i++) {

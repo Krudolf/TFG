@@ -6,9 +6,9 @@
 #include "projectileStraightStun.h"
 
 
-PlayerGreen::PlayerGreen(float p_posX, float p_posY, const char * p_path) : Player(p_posX, p_posY, p_path, Entities::PLAYER2)
+PlayerGreen::PlayerGreen(float p_posX, float p_posY, const char * p_path) : Player(p_posX, p_posY, p_path, Entities::PLAYER_GREEN)
 {
-	m_bulletColor = Entities::BULLET2;
+	m_bulletColor = Entities::BULLET_GREEN;
 
 	m_baseDamage = 10.f;
 	m_damage = m_baseDamage;
@@ -52,7 +52,7 @@ void PlayerGreen::hability1()
 	if (enoughMana(m_hability1ManaConsumption)) {
 		m_hability1CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		m_hability1 = new ProjectileStraightStun(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage/5, true, true);
+		m_hability1 = new ProjectileStraightStun(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage*1.5, true, true);
 		m_hability1Launched = true;
 	}
 }
@@ -62,7 +62,7 @@ void PlayerGreen::hability2()
 	if (enoughMana(m_hability2ManaConsumption)) {
 		m_hability2CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		m_hability2 = new ProjectileSpinFixed(m_texturePath, m_bulletColor, Direction::NONE, m_posX, m_posY, m_damage/2);
+		m_hability2 = new ProjectileSpinFixed(m_texturePath, m_bulletColor, Direction::NONE, m_posX, m_posY, m_damage*1.25);
 		m_hability2Launched = true;
 	}
 }
@@ -72,7 +72,7 @@ void PlayerGreen::hability3()
 	if (enoughMana(m_hability3ManaConsumption)) {
 		m_hability3CooldownDuration = 10.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		m_hability3 = new ProjectileStraightSticky(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage);
+		m_hability3 = new ProjectileStraightSticky(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage*2);
 		m_hability3Launched = true;
 	}
 }

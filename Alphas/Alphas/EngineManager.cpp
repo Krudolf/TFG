@@ -239,21 +239,25 @@ void EngineManager::createCircle(float p_posX, float p_posY, float p_radius)
 	m_circle.setOrigin(m_circle.getGlobalBounds().width / 2, m_circle.getGlobalBounds().height / 2);
 }
 
-bool EngineManager::checkCollision(int p_spriteID1, int p_spriteID2)
+/*
+	p_spriteID1			-> Entity (player or enemy) where we check if one bullet collides with
+	p_bulletSpriteID2	-> Bullet which we are going to check if collides
+*/
+bool EngineManager::checkCollision(int p_spriteID1, int p_bulletSpriteID2)
 {
-	sf::Sprite* t_sprite1 = m_spriteVector[p_spriteID1];
-	sf::Sprite* t_sprite2 = m_spriteVector[p_spriteID2];
+	sf::Sprite* t_entity = m_spriteVector[p_spriteID1];
+	sf::Sprite* t_bullet = m_spriteVector[p_bulletSpriteID2];
 
-	bool t_collide = t_sprite1->getGlobalBounds().contains(t_sprite2->getPosition());
+	bool t_collide = t_entity->getGlobalBounds().contains(t_bullet->getPosition());
 
 	return t_collide;
 }
 
 bool EngineManager::checkCollisionCircle(int p_spriteID)
 {
-	sf::Sprite* t_sprite = m_spriteVector[p_spriteID];
+	sf::Sprite* t_entity = m_spriteVector[p_spriteID];
 
-	bool t_collide = m_circle.getGlobalBounds().contains(t_sprite->getPosition());
+	bool t_collide = m_circle.getGlobalBounds().contains(t_entity->getPosition());
 
 	return t_collide;
 }

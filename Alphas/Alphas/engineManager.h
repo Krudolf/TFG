@@ -50,7 +50,7 @@ public:
 	void createCircle(float p_posX, float p_posY, float p_radius);
 
 	/* COLLISION */
-	bool checkCollision(int p_spriteID1, int p_spriteID2);
+	bool checkCollision(int p_spriteID1, int p_bulletSpriteID2);
 	bool checkCollisionCircle(int p_spriteID);
 
 	/* MENU */
@@ -72,9 +72,6 @@ private:
 	sf::View*			m_gameView;
 	sf::View			m_interfaceView;
 	sf::Clock			m_masterClock;
-	
-	sf::Texture* mapTexture;
-	sf::Sprite* mapSprite;
 
 	sf::Font*	m_font;
 

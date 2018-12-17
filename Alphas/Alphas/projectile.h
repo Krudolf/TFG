@@ -16,6 +16,8 @@ public:
 
 	void	draw();
 
+	void	setLifeTime(float p_lifeTime);
+
 protected:
 	int		m_velocity;
 	float	m_moveX;

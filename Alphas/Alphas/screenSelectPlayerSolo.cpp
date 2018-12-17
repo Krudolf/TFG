@@ -14,13 +14,13 @@ ScreenSelectPlayerSolo::ScreenSelectPlayerSolo()
 {
 	m_playerSelected = -1;
 
-	m_buttonBlue = new ButtonImage("assets/spritesheet.png", Entities::PLAYER1, Down_Left1_3);
+	m_buttonBlue = new ButtonImage("assets/spritesheet.png", Entities::PLAYER_BLUE, Down_Left1_3);
 	m_buttonVector.push_back(m_buttonBlue);
 
-	m_buttonGreen = new ButtonImage("assets/spritesheet.png", Entities::PLAYER2, Down_Left2_3);
+	m_buttonGreen = new ButtonImage("assets/spritesheet.png", Entities::PLAYER_GREEN, Down_Left2_3);
 	m_buttonVector.push_back(m_buttonGreen);
 
-	m_buttonYellow = new ButtonImage("assets/spritesheet.png", Entities::PLAYER2, Down_Left3_3);
+	m_buttonYellow = new ButtonImage("assets/spritesheet.png", Entities::PLAYER_YELLOW, Down_Left3_3);
 	m_buttonVector.push_back(m_buttonYellow);
 
 	m_buttonPlay = new ButtonText("PLAY", Down_right_up);
@@ -32,11 +32,11 @@ ScreenSelectPlayerSolo::ScreenSelectPlayerSolo()
 	m_buttonBlue->setIsFocused(true);
 	m_buttonPlay->setIsBlocked(true);
 
-	m_imageCharacters = new Image("assets/spritesheet.png", Entities::PLAYER1, Center_left);
+	m_imageCharacters = new Image("assets/spritesheet.png", Entities::PLAYER_BLUE, Center_left);
 
-	m_arrayEntities[0] = static_cast<int>(Entities::PLAYER1);
-	m_arrayEntities[1] = static_cast<int>(Entities::PLAYER2);
-	m_arrayEntities[2] = static_cast<int>(Entities::PLAYER2);
+	m_arrayEntities[0] = static_cast<int>(Entities::PLAYER_BLUE);
+	m_arrayEntities[1] = static_cast<int>(Entities::PLAYER_GREEN);
+	m_arrayEntities[2] = static_cast<int>(Entities::PLAYER_YELLOW);
 }
 
 
@@ -96,8 +96,8 @@ void ScreenSelectPlayerSolo::update(double p_time, double p_deltaTime)
 			m_buttonPlay->setIsBlocked(false);
 		}
 		else if (m_buttonFocused == 2) {
-			m_playerSelected = -1;
-			m_buttonPlay->setIsBlocked(true);
+			m_playerSelected = 2;
+			m_buttonPlay->setIsBlocked(false);
 		}
 		else if (m_buttonFocused == 3 && !m_buttonPlay->getIsBlocked()) {
 			Entities t_entitySelected = static_cast<Entities>(m_arrayEntities[m_playerSelected]);

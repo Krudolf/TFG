@@ -52,8 +52,8 @@ void ProjectileStraightSpin::updateStraight(double p_deltaTime)
 
 	//Check if the projectile collide with one enemy, if it collide change to spin mode
 	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
-			ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
+		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
+			ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
 			
 			m_straightPhase = false;
 			
@@ -77,9 +77,9 @@ void ProjectileStraightSpin::updateSpin()
 
 	//Check if the projectile collides with one enemy, if it collide it will be destroyed
 	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
+		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
 			if (m_makeDamage)
-				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
+				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
 				m_owner->increaseMana(m_damage / 10);
 		}
 	}

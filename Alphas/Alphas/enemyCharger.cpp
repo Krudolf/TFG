@@ -2,6 +2,7 @@
 #include "enemyCharger.h"
 #include "engineManager.h"
 #include "player.h"
+#include "fillBar.h"
 
 #include <iostream>
 
@@ -113,4 +114,5 @@ void EnemyCharger::update(double p_time, double p_deltaTime)
 		m_atackInCooldown = false;
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
+	m_healthBar->update(m_health / m_maxHealth, m_posX, m_posY);
 }

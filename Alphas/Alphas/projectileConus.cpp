@@ -87,8 +87,11 @@ void ProjectileConus::update(double p_time, double p_deltaTime)
 
 	if (!m_makeInvisible) {
 		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
-				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
+			if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
+				if (m_makeDamage)
+					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
+				else
+					ScreenGame::m_enemyVector[i]->setStunned(5.f);
 				
 				if (!m_crossEnemy) {
 					m_makeInvisible = true;

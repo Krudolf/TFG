@@ -264,6 +264,9 @@
     <ClInclude Include="projectileStraightStun.h">
       <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
     </ClInclude>
+    <ClInclude Include="playerYellow.h">
+      <Filter>Archivos de encabezado\gameEntities\players</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -427,6 +430,9 @@
     </ClCompile>
     <ClCompile Include="projectileStraightStun.cpp">
       <Filter>Archivos de origen\gameEntities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="playerYellow.cpp">
+      <Filter>Archivos de origen\gameEntities\players</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

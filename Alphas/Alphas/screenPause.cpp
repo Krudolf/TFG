@@ -57,6 +57,10 @@ void ScreenPause::update(double p_time, double p_deltaTime)
 		else if (m_buttonFocused == 1)
 			m_screenManager->changeScreen(new ScreenMenuHome());
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
+		m_engineManager->setKeyReleased(false);
+		m_screenManager->deleteOverlayScreen();
+	}
 }
 
 void ScreenPause::draw()

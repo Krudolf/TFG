@@ -3,6 +3,8 @@
 #include "engineManager.h"
 #include "screenGame.h"
 #include "player.h"
+#include "projectile.h"
+#include "fillBar.h"
 
 #include <iostream>
 
@@ -37,16 +39,33 @@ Enemy::Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity) 
 	m_endCooldown		= -1;
 
 	m_sticky = false;
+
+	m_lastProjectile = nullptr;
+	m_TimeNextHit = 0.f;
+
+	m_healthBar = new FillBar(50, 10, this->getPositionX(), this->getPositionY(), { 0, 0, 0, 255 }, { 255, 0, 0, 255 });
 }
 
 
 Enemy::~Enemy()
 {
+	delete m_healthBar;
+	m_healthBar = nullptr;
 }
 
-void Enemy::receiveDamage(float p_damage)
+void Enemy::receiveDamage(float p_damage, Projectile* p_projectile)
 {
-	m_health -= p_damage;
+	if (m_lastProjectile != p_projectile) {
+		m_health -= p_damage;
+		m_lastProjectile = p_projectile;
+		m_TimeNextHit = m_engineManager->getMasterClockSeconds() + 0.15;
+	}
+	else {
+		if (m_engineManager->getMasterClockSeconds() >= m_TimeNextHit) {
+			m_health -= p_damage;
+			m_TimeNextHit = m_engineManager->getMasterClockSeconds() + 0.15;
+		}
+	}
 
 	if (m_health <= 0)
 		m_dead = true;
@@ -123,6 +142,15 @@ void Enemy::update(double p_time, double p_deltaTime)
 	updateAtack();
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
+	m_healthBar->update(m_health / m_maxHealth, m_posX, m_posY);
+}
+
+void Enemy::draw()
+{
+	m_engineManager->draw(m_engineManager->getSprite(m_spriteID));
+	
+	if(m_health != m_maxHealth)
+		m_healthBar->draw();
 }
 
 void Enemy::setStunned(float p_timeStunned)

@@ -9,6 +9,7 @@
 #include "player.h"
 #include "Point.h"
 #include "screenGame.h"
+#include "fillBar.h"
 
 #include <iostream>
 
@@ -234,4 +235,7 @@ void EnemyBoss::draw()
 			t_projectile->draw();
 		}
 	}
+
+	if (m_health != m_maxHealth)
+		m_healthBar->draw();
 }

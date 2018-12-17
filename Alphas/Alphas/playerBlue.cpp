@@ -6,9 +6,9 @@
 #include "projectileConus.h"
 
 
-PlayerBlue::PlayerBlue(float p_posX, float p_posY, const char * p_path) : Player(p_posX, p_posY, p_path, Entities::PLAYER1)
+PlayerBlue::PlayerBlue(float p_posX, float p_posY, const char * p_path) : Player(p_posX, p_posY, p_path, Entities::PLAYER_BLUE)
 {
-	m_bulletColor = Entities::BULLET1;
+	m_bulletColor = Entities::BULLET_BLUE;
 
 	m_baseDamage = 10.f;
 	m_damage = m_baseDamage;
@@ -51,7 +51,7 @@ void PlayerBlue::hability1()
 	if (enoughMana(m_hability1ManaConsumption)) {
 		m_hability1CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		m_hability1 = new ProjectileConus(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage/5, true, true);
+		m_hability1 = new ProjectileConus(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage*2, true, true);
 		m_hability1Launched = true;
 	}
 }
@@ -61,7 +61,7 @@ void PlayerBlue::hability2()
 	if (enoughMana(m_hability2ManaConsumption)) {
 		m_hability2CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		m_hability2 = new ProjectileSpin(m_texturePath, m_bulletColor, Direction::NONE, m_damage/10, this);
+		m_hability2 = new ProjectileSpin(m_texturePath, m_bulletColor, Direction::NONE, m_damage*1.2, this, true, true);
 		m_hability2Launched = true;
 	}
 }
@@ -71,7 +71,7 @@ void PlayerBlue::hability3()
 	if (enoughMana(m_hability3ManaConsumption)) {
 		m_hability3CooldownDuration = 10.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
-		m_hability3 = new ProjectileStraightSpin(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage, this);
+		m_hability3 = new ProjectileStraightSpin(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage*1.5, this);
 		m_hability3Launched = true;
 	}
 }

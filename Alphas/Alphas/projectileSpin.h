@@ -7,7 +7,7 @@ class ProjectileSpin :
 	public Projectile
 {
 public:
-	ProjectileSpin(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_damage, Player* p_owner);
+	ProjectileSpin(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_damage, Player* p_owner, bool p_crossEnemy, bool p_makeDamage);
 	~ProjectileSpin();
 
 	void update(double p_time, double p_deltaTime);

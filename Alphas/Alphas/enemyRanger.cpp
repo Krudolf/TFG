@@ -3,6 +3,8 @@
 #include "engineManager.h"
 #include "projectile.h"
 #include "projectileStraight.h"
+#include "fillBar.h"
+
 
 EnemyRanger::EnemyRanger(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {
@@ -52,5 +54,8 @@ void EnemyRanger::draw()
 
 	if (m_projectileLaunched)
 		m_projectile->draw();
+
+	if (m_health != m_maxHealth)
+		m_healthBar->draw();
 }
 

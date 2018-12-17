@@ -20,13 +20,14 @@ PlayerInfo::PlayerInfo(Player* p_owner, float p_posX, float p_posY, float p_size
 
 	switch (p_owner->getEntity())
 	{
-		case Entities::PLAYER1:
+		case Entities::PLAYER_BLUE:
 			m_mainBox.setFillColor(sf::Color(0, 195, 255, 200));
 			break;
-		case Entities::PLAYER2:
+		case Entities::PLAYER_GREEN:
 			m_mainBox.setFillColor(sf::Color(0, 255, 100, 200));
 			break;
-		default:
+		case Entities::PLAYER_YELLOW:
+			m_mainBox.setFillColor(sf::Color(255, 255, 80, 200));
 			break;
 	}
 

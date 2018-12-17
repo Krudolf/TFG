@@ -185,6 +185,7 @@
     <ClInclude Include="playerBlue.h" />
     <ClInclude Include="playerGreen.h" />
     <ClInclude Include="playerInfo.h" />
+    <ClInclude Include="playerYellow.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="potion.h" />
     <ClInclude Include="potionArmor.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="playerBlue.cpp" />
     <ClCompile Include="playerGreen.cpp" />
     <ClCompile Include="PlayerInfo.cpp" />
+    <ClCompile Include="playerYellow.cpp" />
     <ClCompile Include="potion.cpp" />
     <ClCompile Include="potionArmor.cpp" />
     <ClCompile Include="potionDamage.cpp" />

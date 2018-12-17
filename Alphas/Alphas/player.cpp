@@ -19,6 +19,7 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 	m_lastPosY	= p_posY;
 
 	m_alive = true;
+	m_pasiveActive = false;
 
 	m_speedPotionEfect		= false;
 	m_damagePotionEfect		= false;
@@ -219,7 +220,7 @@ void Player::rangeAtack()
 	}
 }
 
-void Player::updateHabilities()
+void Player::updateHability1()
 {
 	float t_time = m_engineManager->getMasterClockSeconds();
 
@@ -236,6 +237,11 @@ void Player::updateHabilities()
 		if (t_time > (m_hability1ActivationTime + m_hability1CooldownDuration))
 			m_hability1inCooldown = false;
 	}
+}
+
+void Player::updateHability2()
+{
+	float t_time = m_engineManager->getMasterClockSeconds();
 
 	if (m_hability2inCooldown) {
 		if (m_hability2Launched) {
@@ -249,6 +255,11 @@ void Player::updateHabilities()
 		if (t_time > (m_hability2ActivationTime + m_hability2CooldownDuration))
 			m_hability2inCooldown = false;
 	}
+}
+
+void Player::updateHability3()
+{
+	float t_time = m_engineManager->getMasterClockSeconds();
 
 	if (m_hability3inCooldown) {
 		if (m_hability3Launched) {
@@ -262,7 +273,10 @@ void Player::updateHabilities()
 		if (t_time > (m_hability3ActivationTime + m_hability3CooldownDuration))
 			m_hability3inCooldown = false;
 	}
+}
 
+void Player::updateManaConsumption()
+{
 	/* UPDATE MANA CONSUMPTION */
 	if (m_mana >= m_hability1ManaConsumption)
 		m_hability1EnoughMana = true;
@@ -286,7 +300,13 @@ void Player::launchProjectile()
 		m_basicInCooldown = true;
 		m_nextBasic = m_engineManager->getMasterClockSeconds() + m_atackSpeed;
 
-		Projectile* t_projectile = new ProjectileStraight(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage, false, true);
+		Projectile* t_projectile;
+		if(!m_pasiveActive)
+			t_projectile = new ProjectileStraight(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage, false, true);
+		else {
+			t_projectile = new ProjectileStraight(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage, true, true);
+			t_projectile->setLifeTime(0.75f);
+		}
 
 		m_basicProjectiles.push_back(t_projectile);
 		ScreenGame::m_entityVector.push_back(t_projectile);
@@ -374,7 +394,12 @@ void Player::update(double p_time, double p_deltaTime) {
 	
 	updatePotionEffects();
 	updateBasicAtack();
-	updateHabilities();
+	
+	updateHability1();
+	updateHability2();
+	updateHability3();
+	
+	updateManaConsumption();
 }
 
 void Player::draw()

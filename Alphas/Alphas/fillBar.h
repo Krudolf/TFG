@@ -11,6 +11,7 @@ public:
 	~FillBar();
 
 	void update(float p_size);
+	void update(float p_size, float p_posX, float p_posY);
 	void draw();
 
 private:
@@ -18,5 +19,8 @@ private:
 
 	sf::RectangleShape	m_background;
 	sf::RectangleShape	m_upperground;
+
+	float m_offset;
+	float m_sizeX;
 };
 

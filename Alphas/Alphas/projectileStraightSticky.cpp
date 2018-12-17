@@ -53,12 +53,12 @@ void ProjectileStraightSticky::updateStraight(double p_deltaTime)
 
 	//Check if the projectile collide with one enemy, if it collide change to spin mode
 	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
+		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
 			m_straightPhase = false;
 
 			m_enemySticky = ScreenGame::m_enemyVector[i];
 			m_enemySticky->setSticky(true);
-			m_enemySticky->receiveDamage(m_damage*2);
+			m_enemySticky->receiveDamage(m_damage, this);
 
 			m_dieTime = m_engineManager->getMasterClockSeconds() + 5;
 			break;
@@ -66,8 +66,8 @@ void ProjectileStraightSticky::updateStraight(double p_deltaTime)
 	}
 
 	for (int i = 0; i < ScreenGame::m_playerVector.size(); i++) {
-		if (ScreenGame::m_playerVector[i]->getEntity() != Entities::PLAYER2) {
-			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_playerVector[i]->getSpriteID())) {
+		if (ScreenGame::m_playerVector[i]->getEntity() != Entities::PLAYER_GREEN) {
+			if (m_engineManager->checkCollision(ScreenGame::m_playerVector[i]->getSpriteID(), getSpriteID())) {
 				m_straightPhase = false;
 
 				m_playerSticky = ScreenGame::m_playerVector[i];
@@ -86,7 +86,7 @@ void ProjectileStraightSticky::updateSpin()
 	if (m_enemySticky != nullptr) {
 		m_posX = m_enemySticky->getPositionX() + (m_radius * cos(m_angle));
 		m_posY = m_enemySticky->getPositionY() + (m_radius * sin(m_angle));
-		m_enemySticky->receiveDamage(m_damage/10);
+		m_enemySticky->receiveDamage(m_damage*0.75, this);
 	}
 	else if (m_playerSticky != nullptr) {
 		m_posX = m_playerSticky->getPositionX() + (m_radius * cos(m_angle));
@@ -98,9 +98,9 @@ void ProjectileStraightSticky::updateSpin()
 
 	//Check if the projectile collides with one enemy, if it collide it will be destroyed
 	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
+		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
 			if (m_makeDamage)
-				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage/10);
+				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage/10, this);
 		}
 	}
 }

@@ -48,7 +48,10 @@ public:
 	float	getHability1ActivationTime() { return m_hability1ActivationTime; };
 	float	getHability2ActivationTime() { return m_hability2ActivationTime; };
 	float	getHability3ActivationTime() { return m_hability3ActivationTime; };
-	void updateHabilities();
+	virtual void updateHability1();
+	virtual void updateHability2();
+	virtual void updateHability3();
+	void updateManaConsumption();
 	void launchProjectile();
 
 	void pickObject();
@@ -60,6 +63,9 @@ public:
 	void draw() override;
 
 protected:
+	double	m_deltaTime;
+	double	m_time;
+
 	bool	m_alive;
 
 	float	m_maxHealth;
@@ -74,6 +80,8 @@ protected:
 	float	m_armor;
 	float	m_baseAtackSpeed;
 	float	m_atackSpeed;
+
+	bool	m_pasiveActive;
 
 	Entities	m_bulletColor;
 
@@ -105,8 +113,6 @@ protected:
 
 private:
 	const int m_maxProjectiles = 20;
-	double	m_deltaTime;
-	double	m_time;
 	
 	bool	m_speedPotionEfect;
 	bool	m_damagePotionEfect;

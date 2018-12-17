@@ -34,9 +34,9 @@ void ProjectileStraightStun::update(double p_time, double p_deltaTime)
 
 	//Check if the projectile collides with one enemy, if it collide it will be destroyed
 	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
+		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
 			if (m_makeDamage)
-				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
+				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
 
 			ScreenGame::m_enemyVector[i]->setStunned(5.f);
 

@@ -10,8 +10,8 @@
 
 Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage) : Entity(p_texturePath, p_ent)
 {
-	m_velocity = 400;
-	m_lifeTime = 2.5f;
+	m_velocity = 600;
+	m_lifeTime = 2.f;
 	m_dieTime = m_engineManager->getMasterClockSeconds() + m_lifeTime;
 	m_readyToDelete = false;
 
@@ -33,62 +33,63 @@ Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_di
 	{
 	case Direction::RIGHT:
 		m_moveX = 1;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 4);
 		break;
 	case Direction::LEFT:
 		m_moveX = -1;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 4);
 		break;
 	case Direction::UP:
 		m_moveY = -1;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 5);
 		break;
 	case Direction::DOWN:
 		m_moveY = 1;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 5);
 		break;
 	case Direction::RIGHT_UP:
 		m_moveX = 1;
 		m_moveY = -t_angle;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 4);
 		break;
 	case Direction::RIGHT_DOWN:
 		m_moveX = 1;
 		m_moveY = t_angle;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 4);
 		break;
 	case Direction::LEFT_UP:
 		m_moveX = -1;
 		m_moveY = -t_angle;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 4);
 		break;
 	case Direction::LEFT_DOWN:
 		m_moveX = -1;
 		m_moveY = t_angle;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 4);
 		break;
 	case Direction::UP_RIGHT:
 		m_moveX = t_angle;
 		m_moveY = -1;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 5);
 		break;
 	case Direction::UP_LEFT:
 		m_moveX = -t_angle;
 		m_moveY = -1;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 5);
 		break;
 	case Direction::DOWN_RIGHT:
 		m_moveX = t_angle;
 		m_moveY = 1;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 5);
 		break;
 	case Direction::DOWN_LEFT:
 		m_moveX = -t_angle;
 		m_moveY = 1;
-		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
+		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 5);
 		break;
 	case Direction::NONE:
-		//m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
+		if(p_ent != Entities::ENEMY_BOSS_BULLET)
+			m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 4);
 		break;
 	}
 }
@@ -106,12 +107,14 @@ void Projectile::update()
 	if (m_engineManager->getMasterClockSeconds() > m_dieTime)
 		m_readyToDelete = true;
 
-	if (m_entityOwner == Entities::BULLET1 || m_entityOwner == Entities::BULLET2) {
+	if (m_entityOwner == Entities::BULLET_BLUE || m_entityOwner == Entities::BULLET_GREEN || m_entityOwner == Entities::BULLET_YELLOW) {
 		//Check if the projectile collides with one enemy, if it collide it will be destroyed
 		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_enemyVector[i]->getSpriteID())) {
-				if(m_makeDamage)
-					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage);
+			if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
+				if (m_makeDamage)
+					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
+				else
+					ScreenGame::m_enemyVector[i]->setStunned(5.f);
 
 				if (!m_crossEnemy) {
 					m_readyToDelete = true;
@@ -124,7 +127,7 @@ void Projectile::update()
 	else if (m_entityOwner == Entities::ENEMY_BULLET || m_entityOwner == Entities::ENEMY_BOSS_BULLET) {
 		//Check if the projectile collides with one player, if it collide it will be destroyed
 		for (int i = 0; i < ScreenGame::m_playerVector.size(); i++) {
-			if (m_engineManager->checkCollision(this->getSpriteID(), ScreenGame::m_playerVector[i]->getSpriteID())) {
+			if (m_engineManager->checkCollision(ScreenGame::m_playerVector[i]->getSpriteID(), getSpriteID())) {
 				ScreenGame::m_playerVector[i]->receiveDamage(m_damage);
 
 				if (!m_crossEnemy) {
@@ -140,4 +143,10 @@ void Projectile::update()
 void Projectile::draw()
 {
 	m_engineManager->draw(m_engineManager->getSprite(getSpriteID()));
+}
+
+void Projectile::setLifeTime(float p_lifeTime)
+{
+	m_lifeTime = p_lifeTime;
+	m_dieTime = m_engineManager->getMasterClockSeconds() + m_lifeTime;
 }

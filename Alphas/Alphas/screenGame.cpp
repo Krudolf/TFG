@@ -8,6 +8,7 @@
 #include "player.h"
 #include "playerBlue.h"
 #include "playerGreen.h"
+#include "playerYellow.h"
 #include "enemy.h"
 #include "enemyWarrior.h"
 #include "enemyCharger.h"
@@ -54,13 +55,16 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 	Player* t_player;
 	switch (p_playerEntity)
 	{
-	case Entities::PLAYER1:
-		t_player = new PlayerBlue(t_width / 2, t_height / 2, "assets/spritesheet.png");
-		break;
-	case Entities::PLAYER2:
-		t_player = new PlayerGreen(t_width / 2, t_height / 2, "assets/spritesheet.png");
-		break;
-	}
+		case Entities::PLAYER_BLUE:
+			t_player = new PlayerBlue(t_width / 2, t_height / 2, "assets/spritesheet.png");
+			break;
+		case Entities::PLAYER_GREEN:
+			t_player = new PlayerGreen(t_width / 2, t_height / 2, "assets/spritesheet.png");
+			break;
+		case Entities::PLAYER_YELLOW:
+			t_player = new PlayerYellow(t_width / 2, t_height / 2, "assets/spritesheet.png");
+			break;
+		}
 	m_playerVector.push_back(t_player);
 
 	/* ++++++++++++++++++++++++++ CAMERA ++++++++++++++++++++++++++ */

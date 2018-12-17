@@ -18,7 +18,7 @@ Game::Game()
 	m_screenManager = &ScreenManager::p();
 	//m_screenManager->setCurrentScreen(new ScreenMenuHome());
 	//m_screenManager->setCurrentScreen(new ScreenSelectPlayerSolo());
-	m_screenManager->setCurrentScreen(new ScreenGame(Entities::PLAYER2));
+	m_screenManager->setCurrentScreen(new ScreenGame(Entities::PLAYER_YELLOW));
 	m_screenManager->init();
 
 	m_time			= 0.f;

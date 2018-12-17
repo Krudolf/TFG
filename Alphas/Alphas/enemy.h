@@ -2,6 +2,8 @@
 #include "entity.h"
 
 class Player;
+class Projectile;
+class FillBar;
 
 class Enemy : 
 	public Entity
@@ -10,7 +12,7 @@ public:
 	Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity);
 	virtual ~Enemy();
 
-	void receiveDamage(float p_damage);
+	void receiveDamage(float p_damage, Projectile* p_projectile);
 	bool isDead() { return (m_dead && !m_sticky); };
 
 	double calculateDistance(Player* p_posibleObjective);
@@ -24,6 +26,7 @@ public:
 	virtual void updateAtack() = 0;
 
 	void update(double p_time, double p_deltaTime);
+	void draw() override;
 
 	void setStunned(float p_timeStunned);
 	void setSticky(float p_sticky) { m_sticky = p_sticky; };
@@ -53,7 +56,12 @@ protected:
 	float	m_cooldownAtack;
 	float	m_endCooldown;
 
+	FillBar*	m_healthBar;
+
 private:
+	Projectile*	m_lastProjectile;
+	float		m_TimeNextHit;
+
 	bool	m_dead;
 	bool	m_cooperativeMode;
 
