@@ -172,6 +172,14 @@ void Player::move() {
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 }
 
+void Player::moveBackguards()
+{
+	m_posX = m_lastPosX;
+	m_posY = m_lastPosY;
+
+	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
+}
+
 void Player::rangeAtack()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
@@ -413,4 +421,16 @@ void Player::draw()
 	}
 
 	m_engineManager->draw(m_engineManager->getSprite(m_spriteID));
+
+	/*
+	sf::RectangleShape t_bounding;
+	t_bounding.setSize({ getWidth(), getHeight() });
+	t_bounding.setPosition(m_posX, m_posY);
+	t_bounding.setOrigin(t_bounding.getGlobalBounds().width / 2, t_bounding.getGlobalBounds().height / 2);
+	t_bounding.setFillColor(sf::Color(0, 0, 0, 0));
+	t_bounding.setOutlineColor(sf::Color::Magenta);
+	t_bounding.setOutlineThickness(2);
+
+	m_engineManager->draw(t_bounding);
+	*/
 }

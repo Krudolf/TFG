@@ -178,6 +178,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="habilities_enum.h" />
     <ClInclude Include="habilityInfo.h" />
+    <ClInclude Include="hashGrid.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="interface.h" />
     <ClInclude Include="pch.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="fillBar.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="habilityInfo.cpp" />
+    <ClCompile Include="HashGrid.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="pch.cpp">

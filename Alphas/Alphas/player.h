@@ -33,6 +33,7 @@ public:
 	void increaseAtackSpeed(float p_duration, float p_atackSpeedIncrease);
 	
 	void move();
+	void moveBackguards();
 	void rangeAtack();
 	virtual void hability1() = 0;
 	virtual void hability2() = 0;

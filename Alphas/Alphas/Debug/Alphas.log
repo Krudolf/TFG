@@ -1,21 +1,22 @@
-﻿  screenGame.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(45): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
-          with
-          [
-              T=float
-          ]
+﻿  HashGrid.cpp
+  screenGame.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\hashgrid.cpp(39): warning C4838: la conversión de 'double' en 'float' requiere una conversión de restricción
+c:\users\krudo\desktop\tfg\alphas\alphas\hashgrid.cpp(39): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\hashgrid.cpp(40): warning C4838: la conversión de 'double' en 'float' requiere una conversión de restricción
+c:\users\krudo\desktop\tfg\alphas\alphas\hashgrid.cpp(40): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\hashgrid.cpp(42): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\hashgrid.cpp(63): warning C4018: '<': no coinciden signed/unsigned
 c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(47): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
 c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(48): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(149): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(155): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(159): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(164): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(167): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(170): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(173): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(176): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(179): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(194): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(263): warning C4551: la llamada a la función no tiene lista de argumentos
-c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(259): warning C4715: 'ScreenGame::getCooperativeMode': no todas las rutas de acceso de control devuelven un valor
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(157): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(161): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(166): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(169): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(172): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(175): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(178): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(181): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(196): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(265): warning C4551: la llamada a la función no tiene lista de argumentos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(261): warning C4715: 'ScreenGame::getCooperativeMode': no todas las rutas de acceso de control devuelven un valor
   Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe

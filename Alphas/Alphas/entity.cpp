@@ -11,9 +11,14 @@ Entity::Entity(const char* p_path, Entities p_entity)
 	m_entity = p_entity;
 	m_spriteSheetRow = static_cast<int>(p_entity);
 
+	m_width	 = 128/2;
+	m_height = 128/2;
+
 	m_texturePath = p_path;
 	m_engineManager->loadTexture(m_texturePath);
 	if (p_entity == Entities::ENEMY_BOSS) {
+		m_width	 = 128*2;
+		m_height = 128*2;
 		m_spriteID = m_engineManager->createSprite(m_texturePath, 1, true, 128 * 0, 128 * 5, 128 * 2, 128 * 2, 0, 0);
 	}
 	else if (p_entity == Entities::ENEMY_BOSS_BULLET) {
@@ -33,6 +38,13 @@ Entity::Entity(const char* p_path, Entities p_entity)
 Entity::Entity(const char * p_path, int p_textureLeft, int p_textureTop, int p_textureWidth, int p_textureHeight, float p_posX, float p_posY)
 {
 	m_engineManager = &EngineManager::p();
+
+	m_entity = Entities::TILE;
+
+	m_width = p_textureWidth;
+	m_height = p_textureHeight;
+	m_posX = p_posX;
+	m_posY = p_posY;
 
 	m_texturePath = p_path;
 	m_engineManager->loadTexture(m_texturePath);

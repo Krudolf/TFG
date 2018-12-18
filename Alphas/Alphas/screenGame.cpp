@@ -20,11 +20,11 @@
 #include "potionDamage.h"
 #include "potionArmor.h"
 #include "potionAtackSpeed.h"
-#include "quadTree.h"
 #include "tile.h"
 #include "sceneMap.h"
 #include "interface.h"
 #include "waveSystem.h"
+#include "hashgrid.h"
 
 #include "screenMenuHome.h"
 #include "screenGameOver.h"
@@ -41,8 +41,8 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
-	//m_sceneMap = new SceneMap("assets/map/map2.tmx", "assets/map2.png");
-	m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
+	m_hashGrid = new HashGrid(m_sceneMap->getWidth(), m_sceneMap->getHeight(), 200);
+	//m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
 
 	float t_width = m_sceneMap->getWidth();
 	float t_height = m_sceneMap->getHeight();
@@ -89,8 +89,8 @@ ScreenGame::~ScreenGame()
 	delete m_sceneMap;
 	m_sceneMap = nullptr;
 	
-	delete m_quadTree;
-	m_quadTree = nullptr;
+	delete m_hashGrid;
+	m_hashGrid = nullptr;
 	
 	delete m_waveSystem;
 	m_waveSystem = nullptr;
@@ -132,28 +132,30 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 		m_camera->update();
 
 		/* QUADTREE */
-		m_quadTree->clear();
+		m_hashGrid->clear();
 
 		for (Entity* t_tile : m_tileCollisionVector) {
-			m_quadTree->insert(t_tile);
+			m_hashGrid->registerObject(t_tile);
 		}
 
 		std::vector<Entity*> t_returnObjects;
-		for (auto t_player : m_playerVector) {
-			t_returnObjects.clear();
-			m_quadTree->retrieve(t_returnObjects, t_player);
-			std::cout << t_returnObjects.size() << std::endl;
-		}
-
 		/* ++++++++++++++++++++++++++ UPDATE PLAYER ++++++++++++++++++++++++++ */
-		for (int i = 0; i < m_playerVector.size(); i++) {
-			m_playerVector[i]->update(p_time, p_deltaTime);
+		for (auto t_player : m_playerVector) {
+			t_returnObjects = m_hashGrid->getNearby(t_player);
+			t_player->update(p_time, p_deltaTime);
+			
+			for (auto t_objects : t_returnObjects) {
+				if (t_objects->getEntity() == Entities::TILE) {
+					if (m_engineManager->checkCollision(t_player->getSpriteID(), t_objects->getSpriteID()))
+						t_player->moveBackguards();
+				}
+			}
 		}
 		checkGameOver();
 
 		/* ++++++++++++++++++++++++++ UPDATE ENEMY ++++++++++++++++++++++++++ */
 		for (int i = 0; i < m_enemyVector.size(); i++) {
-			m_enemyVector[i]->update(p_time, p_deltaTime);
+			//m_enemyVector[i]->update(p_time, p_deltaTime);
 
 			if (m_enemyVector[i]->isDead()) {
 				float t_random = rand() % 101;	//random between 0 and 100;
@@ -225,7 +227,7 @@ void ScreenGame::draw()
 
 	//Draw the map
 	m_sceneMap->draw();
-	m_quadTree->debug();
+	//m_hashGrid->debug();
 
 	//Draw player/s
 	for (auto t_player : m_playerVector) {

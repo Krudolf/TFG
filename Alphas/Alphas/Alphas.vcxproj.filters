@@ -267,6 +267,9 @@
     <ClInclude Include="playerYellow.h">
       <Filter>Archivos de encabezado\gameEntities\players</Filter>
     </ClInclude>
+    <ClInclude Include="hashGrid.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -433,6 +436,9 @@
     </ClCompile>
     <ClCompile Include="playerYellow.cpp">
       <Filter>Archivos de origen\gameEntities\players</Filter>
+    </ClCompile>
+    <ClCompile Include="HashGrid.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

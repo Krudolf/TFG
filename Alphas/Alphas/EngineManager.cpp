@@ -174,10 +174,6 @@ int EngineManager::createSprite(const char* p_texturePath, float p_scale, bool p
 	t_sprite->setOrigin(t_sprite->getTextureRect().width / 2.f, t_sprite->getTextureRect().height / 2.f);
 	t_sprite->setScale(p_scale, p_scale);
 
-	/* DEBUG */
-	//t_sprite->setOutlineColor(sf::Color::Red);
-	//t_sprite->setOutlineThickness(2);
-
 	m_spriteVector.push_back(t_sprite);
 	spriteID = m_spriteVector.size() - 1;
 
@@ -195,10 +191,6 @@ int EngineManager::createSprite(const char * p_texturePath, float p_scale, bool 
 		t_sprite->setOrigin(t_sprite->getTextureRect().width / 2, t_sprite->getTextureRect().height / 2);
 	t_sprite->setScale(p_scale, p_scale);
 	t_sprite->setPosition(p_posX, p_posY);
-
-	/* DEBUG */
-	//t_sprite->setOutlineColor(sf::Color::Red);
-	//t_sprite->setOutlineThickness(2);
 
 	m_spriteVector.push_back(t_sprite);
 	spriteID = m_spriteVector.size() - 1;

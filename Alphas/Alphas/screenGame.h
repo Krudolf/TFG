@@ -12,7 +12,7 @@ class Player;
 class Enemy;
 class Potion;
 class SceneMap;
-class QuadTree;
+class HashGrid;
 class Interface;
 class WaveSystem;
 class Tile;
@@ -42,7 +42,7 @@ public:
 private:
 	Camera*			m_camera;
 	SceneMap*		m_sceneMap;
-	QuadTree*		m_quadTree;
+	HashGrid*		m_hashGrid;
 	Interface*		m_interface;
 	WaveSystem*		m_waveSystem;
 

@@ -39,6 +39,8 @@ public:
 
 	double	getPositionX() { return m_posX; };
 	double	getPositionY() { return m_posY; };
+	float	getWidth() { return m_width; };
+	float	getHeight() { return m_height; };
 	int		getSpriteID()  { return m_spriteID; };
 	const char* getTexturePath() { return m_texturePath; };
 	Entities	getEntity() { return m_entity; };
@@ -56,5 +58,8 @@ protected:
 	double	m_posY;
 	double	m_lastPosX;
 	double	m_lastPosY;
+
+	float	m_width;
+	float	m_height;
 };
 
