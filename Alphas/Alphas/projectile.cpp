@@ -109,32 +109,30 @@ void Projectile::update()
 
 	if (m_entityOwner == Entities::BULLET_BLUE || m_entityOwner == Entities::BULLET_GREEN || m_entityOwner == Entities::BULLET_YELLOW) {
 		//Check if the projectile collides with one enemy, if it collide it will be destroyed
-		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-			if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
+		for (auto t_enemy : ScreenGame::m_enemyVector) {
+			if (m_engineManager->checkCollision(t_enemy->getSpriteID(), getSpriteID())) {
 				if (m_makeDamage)
-					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
+					t_enemy->receiveDamage(m_damage, this);
 				else
-					ScreenGame::m_enemyVector[i]->setStunned(5.f);
+					t_enemy->setStunned(5.f);
 
 				if (!m_crossEnemy) {
 					m_readyToDelete = true;
 					break;
 				}
-
 			}
 		}
 	}
 	else if (m_entityOwner == Entities::ENEMY_BULLET || m_entityOwner == Entities::ENEMY_BOSS_BULLET) {
 		//Check if the projectile collides with one player, if it collide it will be destroyed
-		for (int i = 0; i < ScreenGame::m_playerVector.size(); i++) {
-			if (m_engineManager->checkCollision(ScreenGame::m_playerVector[i]->getSpriteID(), getSpriteID())) {
-				ScreenGame::m_playerVector[i]->receiveDamage(m_damage);
+		for (auto t_player : ScreenGame::m_playerVector) {
+			if (m_engineManager->checkCollision(t_player->getSpriteID(), getSpriteID())) {
+				t_player->receiveDamage(m_damage);
 
 				if (!m_crossEnemy) {
 					m_readyToDelete = true;
+					break;
 				}
-
-				break;
 			}
 		}
 	}

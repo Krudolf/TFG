@@ -15,15 +15,16 @@ class SceneMap;
 class QuadTree;
 class Interface;
 class WaveSystem;
+class Tile;
 
 class ScreenGame :
 	public Screen
 {
 public:
-	static std::vector<Entity*> m_entityVector;
 	static std::vector<Player*>	m_playerVector;
 	static std::vector<Enemy*>	m_enemyVector;
 	static std::vector<Potion*> m_potionVector;
+	static std::vector<Tile*>	m_tileCollisionVector;
 
 	ScreenGame(Entities p_playerEntity);
 	~ScreenGame();

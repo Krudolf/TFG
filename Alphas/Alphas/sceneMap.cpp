@@ -53,7 +53,10 @@ SceneMap::SceneMap(const char* p_urlXML, const char* p_urlTexture)
 				Tile* t_tile = new Tile(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
 
 				m_mapMatrix4D[l][h][w] = t_tile;
-				ScreenGame::m_entityVector.push_back(t_tile);
+
+				if (gid == 16) {
+					ScreenGame::m_tileCollisionVector.push_back(t_tile);
+				}
 			}
 		}
 	}
@@ -74,9 +77,6 @@ SceneMap::~SceneMap()
 	delete m_mapMatrix4D;
 
 	delete m_mapDocument;
-	//delete m_rootElement;
-	//delete m_layerElement;
-	//delete m_tileElement;
 }
 
 void SceneMap::draw()

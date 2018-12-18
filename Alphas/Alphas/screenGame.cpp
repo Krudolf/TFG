@@ -42,8 +42,7 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
 	//m_sceneMap = new SceneMap("assets/map/map2.tmx", "assets/map2.png");
-	//m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
-	std::vector<Entity*> t_returnObjects;
+	m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
 
 	float t_width = m_sceneMap->getWidth();
 	float t_height = m_sceneMap->getHeight();
@@ -119,7 +118,7 @@ void ScreenGame::deleteAndFree()
 	m_playerVector.clear();
 	m_enemyVector.clear();
 	m_potionVector.clear();
-	m_entityVector.clear();
+	m_tileCollisionVector.clear();
 }
 
 void ScreenGame::init()
@@ -133,18 +132,18 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 		m_camera->update();
 
 		/* QUADTREE */
-			/*m_quadTree->clear();
+		m_quadTree->clear();
 
-			for (int i = 0; i < m_entityVector.size(); i++) {
-				m_quadTree->insert(m_entityVector[i]);
-			}
+		for (Entity* t_tile : m_tileCollisionVector) {
+			m_quadTree->insert(t_tile);
+		}
 
-			for (auto t_player : m_playerVector) {
-				t_returnObjects.clear();
-				m_quadTree->retrieve(t_returnObjects, t_player);
-				std::cout << t_returnObjects.size() << std::endl;
-
-			}*/
+		std::vector<Entity*> t_returnObjects;
+		for (auto t_player : m_playerVector) {
+			t_returnObjects.clear();
+			m_quadTree->retrieve(t_returnObjects, t_player);
+			std::cout << t_returnObjects.size() << std::endl;
+		}
 
 		/* ++++++++++++++++++++++++++ UPDATE PLAYER ++++++++++++++++++++++++++ */
 		for (int i = 0; i < m_playerVector.size(); i++) {
@@ -226,7 +225,7 @@ void ScreenGame::draw()
 
 	//Draw the map
 	m_sceneMap->draw();
-	//m_quadTree->debug();
+	m_quadTree->debug();
 
 	//Draw player/s
 	for (auto t_player : m_playerVector) {

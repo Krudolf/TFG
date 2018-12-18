@@ -309,7 +309,6 @@ void Player::launchProjectile()
 		}
 
 		m_basicProjectiles.push_back(t_projectile);
-		ScreenGame::m_entityVector.push_back(t_projectile);
 	}
 }
 
@@ -343,10 +342,6 @@ void Player::updateBasicAtack()
 		m_basicProjectiles[i]->update(m_time, m_deltaTime);
 
 		if (m_basicProjectiles[i]->getReadyToDelete()) {
-			//Delete the projectile from the game vector
-			auto it = std::find(ScreenGame::m_entityVector.begin(), ScreenGame::m_entityVector.end(), m_basicProjectiles[i]);
-			ScreenGame::m_entityVector.erase(it);
-
 			//Delete the projectile from the player vector os projectiles
 			delete m_basicProjectiles[i];
 			m_basicProjectiles.erase(m_basicProjectiles.begin() + i);
