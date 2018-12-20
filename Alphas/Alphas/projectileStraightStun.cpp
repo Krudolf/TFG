@@ -33,18 +33,23 @@ void ProjectileStraightStun::update(double p_time, double p_deltaTime)
 		m_readyToDelete = true;
 
 	//Check if the projectile collides with one enemy, if it collide it will be destroyed
-	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
-			if (m_makeDamage)
-				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
-
-			ScreenGame::m_enemyVector[i]->setStunned(5.f);
-
-			if (!m_crossEnemy) {
+	for (auto t_object : m_nearEntityVector) {
+		if (t_object->getEntity() == Entities::TILE) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID))
 				m_readyToDelete = true;
-				break;
-			}
+		}
+		else if (t_object->getEntity() == Entities::ENEMY || t_object->getEntity() == Entities::ENEMY_BOSS) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
+				Enemy* t_enemy = dynamic_cast<Enemy*>(t_object);
+				if (m_makeDamage)
+					t_enemy->receiveDamage(m_damage, this);
+			
+				t_enemy->setStunned(5.f);
 
+				if (!m_crossEnemy) {
+					m_readyToDelete = true;
+				}
+			}
 		}
 	}
 }

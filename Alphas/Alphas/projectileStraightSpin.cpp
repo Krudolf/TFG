@@ -4,6 +4,7 @@
 #include "screenGame.h"
 #include "enemy.h"
 #include "player.h"
+#include "hashGrid.h"
 
 #include <iostream>
 
@@ -33,6 +34,7 @@ void ProjectileStraightSpin::update(double p_time, double p_deltaTime)
 	if (m_engineManager->getMasterClockSeconds() >= m_dieTime)
 		m_readyToDelete = true;
 	else {
+		m_nearEntityVector = m_hashGrid->getNearby(this);
 		if (m_straightPhase)
 			updateStraight(p_deltaTime);
 		else
@@ -51,18 +53,23 @@ void ProjectileStraightSpin::updateStraight(double p_deltaTime)
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 
 	//Check if the projectile collide with one enemy, if it collide change to spin mode
-	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
-			ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
+	for (auto t_object : m_nearEntityVector) {
+		if (t_object->getEntity() == Entities::TILE) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID))
+				m_readyToDelete = true;
+		}
+		else if (t_object->getEntity() == Entities::ENEMY || t_object->getEntity() == Entities::ENEMY_BOSS) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
+				Enemy* t_enemy = dynamic_cast<Enemy*>(t_object);
+				t_enemy->receiveDamage(m_damage, this);
+					
+				m_straightPhase = false;
 			
-			m_straightPhase = false;
+				m_spinPositionX = m_engineManager->getSprite(m_spriteID)->getPosition().x;
+				m_spinPositionY = m_engineManager->getSprite(m_spriteID)->getPosition().y;
 			
-			m_spinPositionX = m_engineManager->getSprite(m_spriteID)->getPosition().x;
-			m_spinPositionY = m_engineManager->getSprite(m_spriteID)->getPosition().y;
-			
-			m_dieTime = m_engineManager->getMasterClockSeconds() + 4;
-
-			break;
+				m_dieTime = m_engineManager->getMasterClockSeconds() + 4;
+			}
 		}
 	}
 }
@@ -76,11 +83,15 @@ void ProjectileStraightSpin::updateSpin()
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 
 	//Check if the projectile collides with one enemy, if it collide it will be destroyed
-	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
-			if (m_makeDamage)
-				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
-				m_owner->increaseMana(m_damage / 10);
+	for (auto t_object : m_nearEntityVector) {
+		if (t_object->getEntity() == Entities::ENEMY || t_object->getEntity() == Entities::ENEMY_BOSS) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
+				Enemy* t_enemy = dynamic_cast<Enemy*>(t_object);
+				
+				//if (m_makeDamage)
+				t_enemy->receiveDamage(m_damage, this);
+				m_owner->increaseMana(m_damage / 100);
+			}
 		}
 	}
 }

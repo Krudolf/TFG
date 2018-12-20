@@ -4,6 +4,7 @@
 #include "projectileSpinFixed.h"
 #include "projectileStraightSticky.h"
 #include "projectileStraightStun.h"
+#include "screenGame.h"
 
 
 PlayerGreen::PlayerGreen(float p_posX, float p_posY, const char * p_path) : Player(p_posX, p_posY, p_path, Entities::PLAYER_GREEN)
@@ -53,6 +54,7 @@ void PlayerGreen::hability1()
 		m_hability1CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 		m_hability1 = new ProjectileStraightStun(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage*1.5, true, true);
+		ScreenGame::m_projectileVector.push_back(m_hability1);
 		m_hability1Launched = true;
 	}
 }
@@ -63,6 +65,7 @@ void PlayerGreen::hability2()
 		m_hability2CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 		m_hability2 = new ProjectileSpinFixed(m_texturePath, m_bulletColor, Direction::NONE, m_posX, m_posY, m_damage*1.25);
+		ScreenGame::m_projectileVector.push_back(m_hability2);
 		m_hability2Launched = true;
 	}
 }
@@ -73,6 +76,7 @@ void PlayerGreen::hability3()
 		m_hability3CooldownDuration = 10.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 		m_hability3 = new ProjectileStraightSticky(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage*2);
+		ScreenGame::m_projectileVector.push_back(m_hability3);
 		m_hability3Launched = true;
 	}
 }

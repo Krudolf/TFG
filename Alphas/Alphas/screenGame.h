@@ -11,6 +11,7 @@ class Entity;
 class Player;
 class Enemy;
 class Potion;
+class Projectile;
 class SceneMap;
 class HashGrid;
 class Interface;
@@ -21,10 +22,11 @@ class ScreenGame :
 	public Screen
 {
 public:
-	static std::vector<Player*>	m_playerVector;
-	static std::vector<Enemy*>	m_enemyVector;
-	static std::vector<Potion*> m_potionVector;
-	static std::vector<Tile*>	m_tileCollisionVector;
+	static std::vector<Player*>		m_playerVector;
+	static std::vector<Enemy*>		m_enemyVector;
+	static std::vector<Potion*>		m_potionVector;
+	static std::vector<Projectile*>	m_projectileVector;
+	static std::vector<Tile*>		m_tileCollisionVector;
 
 	ScreenGame(Entities p_playerEntity);
 	~ScreenGame();
@@ -35,6 +37,8 @@ public:
 	virtual void draw();
 
 	static bool getCooperativeMode();
+
+	void fillHashGrid();
 
 	void checkGameOver();
 	void checkCollisionBetweenEnemys();

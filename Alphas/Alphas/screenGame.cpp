@@ -9,6 +9,7 @@
 #include "playerBlue.h"
 #include "playerGreen.h"
 #include "playerYellow.h"
+#include "projectile.h"
 #include "enemy.h"
 #include "enemyWarrior.h"
 #include "enemyCharger.h"
@@ -41,15 +42,15 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
 	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
-	m_hashGrid = new HashGrid(m_sceneMap->getWidth(), m_sceneMap->getHeight(), 200);
-	//m_quadTree = new QuadTree(0, sf::FloatRect(0, 0, m_sceneMap->getWidth(), m_sceneMap->getHeight()));
+	m_hashGrid = &HashGrid::p();
+	m_hashGrid->init(m_sceneMap->getWidth(), m_sceneMap->getHeight(), 200);
 
 	float t_width = m_sceneMap->getWidth();
 	float t_height = m_sceneMap->getHeight();
-	m_spawnPointsVector.push_back({ 0.f, 0.f });
-	m_spawnPointsVector.push_back({ 0.f, t_height });
-	m_spawnPointsVector.push_back({ t_width, 0.f });
-	m_spawnPointsVector.push_back({ t_width, t_height });
+	m_spawnPointsVector.push_back({ 100.f, 100.f });
+	m_spawnPointsVector.push_back({ 100.f, t_height - 100.f });
+	m_spawnPointsVector.push_back({ t_width - 100.f, 100.f });
+	m_spawnPointsVector.push_back({ t_width - 100.f, t_height - 100.f });
 	/* ++++++++++++++++++++++++++ PLAYER ++++++++++++++++++++++++++ */
 	Player* t_player;
 	switch (p_playerEntity)
@@ -76,6 +77,10 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 	m_waveSystem->spawnNextWave();
 	
 	m_interface = new Interface(m_playerVector[0], nullptr, m_waveSystem);
+
+	m_potionVector.push_back(new PotionHealth("assets/spritesheet.png", 500.f, 500.f, PotionType::HEALTH));
+	m_potionVector.push_back(new PotionHealth("assets/spritesheet.png", 750.f, 500.f, PotionType::MANA));
+	m_potionVector.push_back(new PotionHealth("assets/spritesheet.png", 320.f, 320.f, PotionType::DAMAGE));
 }
 
 
@@ -88,9 +93,6 @@ ScreenGame::~ScreenGame()
 
 	delete m_sceneMap;
 	m_sceneMap = nullptr;
-	
-	delete m_hashGrid;
-	m_hashGrid = nullptr;
 	
 	delete m_waveSystem;
 	m_waveSystem = nullptr;
@@ -118,12 +120,12 @@ void ScreenGame::deleteAndFree()
 	m_playerVector.clear();
 	m_enemyVector.clear();
 	m_potionVector.clear();
+	m_projectileVector.clear();
 	m_tileCollisionVector.clear();
 }
 
 void ScreenGame::init()
 {
-
 }
 
 void ScreenGame::update(double p_time, double p_deltaTime)
@@ -131,53 +133,43 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 	if (!m_gamePause && !m_gameOver) {
 		m_camera->update();
 
-		/* QUADTREE */
+		/* HASH GRID */
 		m_hashGrid->clear();
 
-		for (Entity* t_tile : m_tileCollisionVector) {
-			m_hashGrid->registerObject(t_tile);
-		}
+		fillHashGrid();
 
-		std::vector<Entity*> t_returnObjects;
+
 		/* ++++++++++++++++++++++++++ UPDATE PLAYER ++++++++++++++++++++++++++ */
 		for (auto t_player : m_playerVector) {
-			t_returnObjects = m_hashGrid->getNearby(t_player);
 			t_player->update(p_time, p_deltaTime);
-			
-			for (auto t_objects : t_returnObjects) {
-				if (t_objects->getEntity() == Entities::TILE) {
-					if (m_engineManager->checkCollision(t_player->getSpriteID(), t_objects->getSpriteID()))
-						t_player->moveBackguards();
-				}
-			}
 		}
 		checkGameOver();
 
 		/* ++++++++++++++++++++++++++ UPDATE ENEMY ++++++++++++++++++++++++++ */
 		for (int i = 0; i < m_enemyVector.size(); i++) {
-			//m_enemyVector[i]->update(p_time, p_deltaTime);
+			m_enemyVector[i]->update(p_time, p_deltaTime);
 
 			if (m_enemyVector[i]->isDead()) {
-				float t_random = rand() % 101;	//random between 0 and 100;
+				float t_random = rand() % 100;	//random between 0 and 99;
 
 				if (t_random < 10) {
 					Potion* t_potion;
-					if (t_random < 3) {
+					if (t_random <= 3) {
 						t_potion = new PotionHealth("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::HEALTH);
 					}
-					else if (t_random >= 3 && t_random < 6) {
+					else if (t_random > 3 && t_random <= 6) {
 						t_potion = new PotionMana("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::MANA);
 					}
-					else if (t_random >= 6 && t_random < 7) {
+					else if (t_random > 6 && t_random <= 7) {
 						t_potion = new PotionSpeed("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::SPEED);
 					}
-					else if (t_random >= 7 && t_random < 8) {
+					else if (t_random > 7 && t_random <= 8) {
 						t_potion = new PotionDamage("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::DAMAGE);
 					}
-					else if (t_random >= 8 && t_random < 9) {
+					else if (t_random > 8 && t_random <= 9) {
 						t_potion = new PotionArmor("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ARMOR);
 					}
-					else if (t_random >= 9 && t_random < 10) {
+					else if (t_random > 9 && t_random <= 10) {
 						t_potion = new PotionAtackSpeed("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ATACK_SPEED);
 					}
 					m_potionVector.push_back(t_potion);
@@ -229,19 +221,19 @@ void ScreenGame::draw()
 	m_sceneMap->draw();
 	//m_hashGrid->debug();
 
-	//Draw player/s
-	for (auto t_player : m_playerVector) {
-		t_player->draw();
+	//Draw potions
+	for (auto t_potion : m_potionVector) {
+		t_potion->draw();
 	}
 
 	//Draw enemys
 	for (auto t_enemy : m_enemyVector) {
 		t_enemy->draw();
 	}
-
-	//Draw potions
-	for (auto t_potion : m_potionVector) {
-		t_potion->draw();
+	
+	//Draw player/s
+	for (auto t_player : m_playerVector) {
+		t_player->draw();
 	}
 
 	m_engineManager->useInterfaceView();
@@ -258,6 +250,29 @@ bool ScreenGame::getCooperativeMode()
 		return false;
 	else if (m_playerVector.size() == 2)
 		return true;
+}
+
+void ScreenGame::fillHashGrid()
+{
+	for (auto t_tile : m_tileCollisionVector) {
+		m_hashGrid->registerObject(t_tile);
+	}
+
+	for (auto t_player : m_playerVector) {
+		m_hashGrid->registerObject(t_player);
+	}
+
+	for (auto t_enemy : m_enemyVector) {
+		m_hashGrid->registerObject(t_enemy);
+	}
+
+	for (auto t_projectile : m_projectileVector) {
+		m_hashGrid->registerObject(t_projectile);
+	}
+
+	for (auto t_potion : m_potionVector) {
+		m_hashGrid->registerObject(t_potion);
+	}
 }
 
 void ScreenGame::checkGameOver()

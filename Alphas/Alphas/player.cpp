@@ -8,6 +8,7 @@
 #include "projectileConus.h"
 #include "screenGame.h"
 #include "potion.h"
+#include "hashGrid.h"
 
 #include <iostream>
 
@@ -20,6 +21,7 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 
 	m_alive = true;
 	m_pasiveActive = false;
+	m_nearPotion = false;
 
 	m_speedPotionEfect		= false;
 	m_damagePotionEfect		= false;
@@ -317,10 +319,11 @@ void Player::launchProjectile()
 		}
 
 		m_basicProjectiles.push_back(t_projectile);
+		ScreenGame::m_projectileVector.push_back(t_projectile);
 	}
 }
 
-void Player::pickObject()
+void Player::pickPotion()
 {
 	for (int i = 0; i < ScreenGame::m_potionVector.size(); i++) {
 		if (m_engineManager->checkCollision(this->m_spriteID, ScreenGame::m_potionVector[i]->getSpriteID())) {
@@ -386,8 +389,25 @@ void Player::update(double p_time, double p_deltaTime) {
 	m_time		= p_time;
 	m_deltaTime = p_deltaTime;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-		pickObject();
+	m_nearEntityVector = m_hashGrid->getNearby(this);
+	m_nearPotion = false;
+	for (auto t_object : m_nearEntityVector) {
+		switch (t_object->getEntity())
+		{
+		case Entities::TILE:
+			if (m_engineManager->checkCollision(getSpriteID(), t_object->getSpriteID()))
+				moveBackguards();
+			break;
+		case Entities::POTION:
+			m_nearPotion = true;
+			break;
+		default:
+			break;
+		}
+	}
+
+	if (m_nearPotion && sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		pickPotion();
 
 	move();
 

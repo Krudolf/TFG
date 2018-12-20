@@ -1,7 +1,9 @@
 #pragma once
 #include "entities_enum.h"
+#include <vector>
 
 class EngineManager;
+class HashGrid;
 
 enum class Direction {
 	RIGHT = 0,
@@ -44,10 +46,14 @@ public:
 	int		getSpriteID()  { return m_spriteID; };
 	const char* getTexturePath() { return m_texturePath; };
 	Entities	getEntity() { return m_entity; };
+	void	setNearEntityVector(std::vector<Entity*> p_nearEntity) { m_nearEntityVector = p_nearEntity; };
 
 protected:
 	EngineManager*	m_engineManager;
 	Entities	m_entity;
+
+	HashGrid*	m_hashGrid;
+	std::vector<Entity*>	m_nearEntityVector;
 
 	const char*	m_texturePath;
 

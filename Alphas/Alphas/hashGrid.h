@@ -9,9 +9,10 @@ class Entity;
 class HashGrid
 {
 public:
-	HashGrid(int p_mapWidth, int p_mapHeight, int p_cellSize);
 	~HashGrid();
+	static HashGrid& p();
 
+	void init(int p_mapWidth, int p_mapHeight, int p_cellSize);
 	void clear();
 
 	void					registerObject(Entity* p_entity);
@@ -20,6 +21,8 @@ public:
 	void debug();
 
 private:
+	HashGrid();
+
 	std::vector<int>		getIdForObject(Entity* p_entity);
 	void					addToBucket(Point p_point, float p_width, std::vector<int>& p_cellIdVector);
 	

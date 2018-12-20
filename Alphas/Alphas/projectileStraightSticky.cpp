@@ -4,6 +4,7 @@
 #include "screenGame.h"
 #include "enemy.h"
 #include "player.h"
+#include "hashGrid.h"
 
 
 ProjectileStraightSticky::ProjectileStraightSticky(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_entityPosX, float p_entityPosY, float p_damage) : Projectile(p_texturePath, p_ent, p_dir, p_entityPosX, p_entityPosY, p_damage)
@@ -35,6 +36,7 @@ void ProjectileStraightSticky::update(double p_time, double p_deltaTime)
 			m_enemySticky->setSticky(false);
 	}
 	else {
+		m_nearEntityVector = m_hashGrid->getNearby(this);
 		if (m_straightPhase)
 			updateStraight(p_deltaTime);
 		else
@@ -51,31 +53,36 @@ void ProjectileStraightSticky::updateStraight(double p_deltaTime)
 
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 
+
 	//Check if the projectile collide with one enemy, if it collide change to spin mode
-	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
-			m_straightPhase = false;
-
-			m_enemySticky = ScreenGame::m_enemyVector[i];
-			m_enemySticky->setSticky(true);
-			m_enemySticky->receiveDamage(m_damage, this);
-
-			m_dieTime = m_engineManager->getMasterClockSeconds() + 5;
-			break;
+	for (auto t_object : m_nearEntityVector) {
+		if (t_object->getEntity() == Entities::TILE) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID))
+				m_readyToDelete = true;
 		}
-	}
+		else if (t_object->getEntity() == Entities::ENEMY ||t_object->getEntity() == Entities::ENEMY_BOSS) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
+				Enemy* t_enemy = dynamic_cast<Enemy*>(t_object);
 
-	for (int i = 0; i < ScreenGame::m_playerVector.size(); i++) {
-		if (ScreenGame::m_playerVector[i]->getEntity() != Entities::PLAYER_GREEN) {
-			if (m_engineManager->checkCollision(ScreenGame::m_playerVector[i]->getSpriteID(), getSpriteID())) {
 				m_straightPhase = false;
 
-				m_playerSticky = ScreenGame::m_playerVector[i];
+				m_enemySticky = t_enemy;
+				m_enemySticky->setSticky(true);
+				m_enemySticky->receiveDamage(m_damage, this);
+
+				m_dieTime = m_engineManager->getMasterClockSeconds() + 5;
+			}
+		}
+		else if (t_object->getEntity() == Entities::PLAYER_BLUE || t_object->getEntity() == Entities::PLAYER_YELLOW) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
+				Player* t_player = dynamic_cast<Player*>(t_object);
+				m_straightPhase = false;
+
+				m_playerSticky = t_player;
 				m_playerSticky->increaseArmor(5, 10);
 				m_playerSticky->increaseHealth(m_damage);
 
 				m_dieTime = m_engineManager->getMasterClockSeconds() + 5;
-				break;
 			}
 		}
 	}
@@ -97,10 +104,13 @@ void ProjectileStraightSticky::updateSpin()
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 
 	//Check if the projectile collides with one enemy, if it collide it will be destroyed
-	for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-		if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
-			if (m_makeDamage)
-				ScreenGame::m_enemyVector[i]->receiveDamage(m_damage/10, this);
+	for (auto t_object : m_nearEntityVector) {
+		if (t_object->getEntity() == Entities::ENEMY || t_object->getEntity() == Entities::ENEMY_BOSS) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
+				Enemy* t_enemy = dynamic_cast<Enemy*>(t_object);
+
+				t_enemy->receiveDamage(m_damage, this);
+			}
 		}
 	}
 }

@@ -4,6 +4,7 @@
 #include "screenGame.h"
 #include "enemy.h"
 #include "player.h"
+#include "hashGrid.h"
 
 
 ProjectileSpinFixed::ProjectileSpinFixed(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage) : Projectile(p_texturePath, p_ent, p_dir, p_playerPosX, p_playerPosY, p_damage)
@@ -43,18 +44,28 @@ void ProjectileSpinFixed::update(double p_time, double p_deltaTime)
 	if (m_engineManager->getMasterClockSeconds() > m_dieTime)
 		m_readyToDelete = true;
 
+
+	/* 
+		TODOO!:
+		 - ESTE SE HA IDO AL TRASTE CON LAS COLISIONEEEEEES!! TENGO QUE VER SI PUEDO APAÑARLO O EN SU DEFECTO ME TOCARÁ VOLVER ATRAS A COMO ESTABA ANTES. 
+	*/
+	m_nearEntityVector = m_hashGrid->getNearby(this);
 	if (m_engineManager->getMasterClockSeconds() >= m_nextCheckTime) {
 		m_nextCheckTime += 0.5f;
 
-		//Check if the projectile collides with one enemy, if it collide it will be destroyed
-		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-			if (m_engineManager->checkCollisionCircle(ScreenGame::m_enemyVector[i]->getSpriteID()))
-					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
-		}
-
-		for (int i = 0; i < ScreenGame::m_playerVector.size(); i++) {
-			if (m_engineManager->checkCollisionCircle(ScreenGame::m_playerVector[i]->getSpriteID()))
-				ScreenGame::m_playerVector[i]->increaseHealth(m_damage);
+		for (auto t_object : m_nearEntityVector) {
+			if (t_object->getEntity() == Entities::ENEMY || t_object->getEntity() == Entities::ENEMY_BOSS) {
+				if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
+					Enemy* t_enemy = dynamic_cast<Enemy*>(t_object);
+					t_enemy->receiveDamage(m_damage, this);
+				}
+			}
+			else if (t_object->getEntity() == Entities::PLAYER_BLUE || t_object->getEntity() == Entities::PLAYER_GREEN || t_object->getEntity() == Entities::PLAYER_YELLOW) {
+				if (m_engineManager->checkCollisionCircle(t_object->getSpriteID())) {
+					Player* t_player = dynamic_cast<Player*>(t_object);
+					t_player->increaseHealth(m_damage);
+				}
+			}
 		}
 	}
 }

@@ -134,6 +134,7 @@ void EnemyBoss::launchProjectile()
 {
 	Projectile* t_projectile = new ProjectileStraight(m_texturePath, Entities::ENEMY_BOSS_BULLET, m_posX, m_posY, m_damage, m_directionMoveX*2, m_directionMoveY*2);
 	m_projectilesVector.push_back(t_projectile);
+	ScreenGame::m_projectileVector.push_back(t_projectile);
 }
 
 void EnemyBoss::createEnemy(EnemyType p_type)

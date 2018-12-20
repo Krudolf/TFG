@@ -4,6 +4,8 @@
 #include "engineManager.h"
 #include "screenGame.h"
 #include "enemy.h"
+#include "hashGrid.h"
+#include "screenGame.h"
 
 #include <iostream>
 
@@ -35,6 +37,8 @@ ProjectileConus::ProjectileConus(const char* p_texturePath, Entities p_ent, Dire
 		m_projectile2 = new ProjectileStraight(m_texturePath, m_entityOwner, Direction::DOWN_LEFT, p_playerPosX, p_playerPosY, m_damage, p_crossEnemy, p_makeDamage);
 		break;
 	}
+	ScreenGame::m_projectileVector.push_back(m_projectile1);
+	ScreenGame::m_projectileVector.push_back(m_projectile2);
 }
 
 
@@ -85,17 +89,24 @@ void ProjectileConus::update(double p_time, double p_deltaTime)
 	if (m_engineManager->getMasterClockSeconds() > m_dieTime)
 		m_readyToDelete = true;
 
+	m_nearEntityVector = m_hashGrid->getNearby(this);
 	if (!m_makeInvisible) {
-		for (int i = 0; i < ScreenGame::m_enemyVector.size(); i++) {
-			if (m_engineManager->checkCollision(ScreenGame::m_enemyVector[i]->getSpriteID(), getSpriteID())) {
-				if (m_makeDamage)
-					ScreenGame::m_enemyVector[i]->receiveDamage(m_damage, this);
-				else
-					ScreenGame::m_enemyVector[i]->setStunned(5.f);
-				
-				if (!m_crossEnemy) {
-					m_makeInvisible = true;
-					break;
+		for (auto t_object : m_nearEntityVector) {
+			if (t_object->getEntity() == Entities::TILE) {
+				if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID))
+					m_readyToDelete = true;
+			}
+			else if (t_object->getEntity() == Entities::ENEMY || t_object->getEntity() == Entities::ENEMY_BOSS) {
+				if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
+					Enemy* t_enemy = dynamic_cast<Enemy*>(t_object);
+					if (m_makeDamage)
+						t_enemy->receiveDamage(m_damage, this);
+					else
+						t_enemy->setStunned(5.f);
+
+					if (!m_crossEnemy) {
+						m_readyToDelete = true;
+					}
 				}
 			}
 		}

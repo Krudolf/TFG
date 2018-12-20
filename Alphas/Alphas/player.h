@@ -55,7 +55,7 @@ public:
 	void updateManaConsumption();
 	void launchProjectile();
 
-	void pickObject();
+	void pickPotion();
 	
 	void updateHealthAndMana(double p_deltaTime);
 	void updateBasicAtack();
@@ -115,6 +115,7 @@ protected:
 private:
 	const int m_maxProjectiles = 20;
 	
+	bool	m_nearPotion;
 	bool	m_speedPotionEfect;
 	bool	m_damagePotionEfect;
 	bool	m_armorPotionEfect;
@@ -128,5 +129,5 @@ private:
 	bool	m_basicInCooldown;
 	float	m_nextBasic;
 
-	std::vector<Projectile*> m_basicProjectiles;
+	std::vector<Projectile*>	m_basicProjectiles;
 };

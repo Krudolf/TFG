@@ -3,19 +3,31 @@
 #include "entity.h"
 #include <math.h>
 
-HashGrid::HashGrid(int p_mapWidth, int p_mapHeight, int p_cellSize)
+
+HashGrid::HashGrid()
 {
-	m_mapWidth	= p_mapWidth;
-	m_mapHeight = p_mapHeight;
-	m_cellSize	= p_cellSize;
-	m_columns	= m_mapWidth / m_cellSize;
-	m_rows		= m_mapHeight / m_cellSize;
 }
 
 
 HashGrid::~HashGrid()
 {
 	clear();
+}
+
+
+HashGrid& HashGrid::p()
+{
+	static HashGrid instance;
+	return instance;
+}
+
+void HashGrid::init(int p_mapWidth, int p_mapHeight, int p_cellSize)
+{
+	m_mapWidth	= p_mapWidth;
+	m_mapHeight = p_mapHeight;
+	m_cellSize	= p_cellSize;
+	m_columns	= m_mapWidth / m_cellSize;
+	m_rows		= m_mapHeight / m_cellSize;
 }
 
 void HashGrid::clear()

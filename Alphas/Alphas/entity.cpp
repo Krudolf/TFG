@@ -2,12 +2,14 @@
 #include "pch.h"
 #include "entity.h"
 #include "engineManager.h"
+#include "hashGrid.h"
 #include <iostream>
 
 //Constructor for other type of entities
 Entity::Entity(const char* p_path, Entities p_entity)
 {
 	m_engineManager = &EngineManager::p();
+	m_hashGrid = &HashGrid::p();
 	m_entity = p_entity;
 	m_spriteSheetRow = static_cast<int>(p_entity);
 
@@ -38,6 +40,7 @@ Entity::Entity(const char* p_path, Entities p_entity)
 Entity::Entity(const char * p_path, int p_textureLeft, int p_textureTop, int p_textureWidth, int p_textureHeight, float p_posX, float p_posY)
 {
 	m_engineManager = &EngineManager::p();
+	m_hashGrid = &HashGrid::p();
 
 	m_entity = Entities::TILE;
 
@@ -55,10 +58,8 @@ Entity::~Entity()
 {
 }
 
-
 void Entity::update(){}
 void Entity::update(double p_time, double p_deltaTime){}
-
 
 void Entity::draw()
 {

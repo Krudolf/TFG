@@ -4,6 +4,7 @@
 #include "projectileSpin.h"
 #include "projectileStraightSpin.h"
 #include "projectileConus.h"
+#include "screenGame.h"
 
 
 PlayerBlue::PlayerBlue(float p_posX, float p_posY, const char * p_path) : Player(p_posX, p_posY, p_path, Entities::PLAYER_BLUE)
@@ -52,6 +53,7 @@ void PlayerBlue::hability1()
 		m_hability1CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 		m_hability1 = new ProjectileConus(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage*2, true, true);
+		ScreenGame::m_projectileVector.push_back(m_hability1);
 		m_hability1Launched = true;
 	}
 }
@@ -62,6 +64,7 @@ void PlayerBlue::hability2()
 		m_hability2CooldownDuration = 5.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 		m_hability2 = new ProjectileSpin(m_texturePath, m_bulletColor, Direction::NONE, m_damage*1.2, this, true, true);
+		ScreenGame::m_projectileVector.push_back(m_hability2);
 		m_hability2Launched = true;
 	}
 }
@@ -72,6 +75,7 @@ void PlayerBlue::hability3()
 		m_hability3CooldownDuration = 10.f;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 		m_hability3 = new ProjectileStraightSpin(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage*1.5, this);
+		ScreenGame::m_projectileVector.push_back(m_hability3);
 		m_hability3Launched = true;
 	}
 }

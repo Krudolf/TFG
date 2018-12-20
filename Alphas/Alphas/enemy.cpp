@@ -5,6 +5,7 @@
 #include "player.h"
 #include "projectile.h"
 #include "fillBar.h"
+#include "hashGrid.h"
 
 #include <iostream>
 
@@ -44,6 +45,8 @@ Enemy::Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity) 
 	m_TimeNextHit = 0.f;
 
 	m_healthBar = new FillBar(50, 10, this->getPositionX(), this->getPositionY(), { 0, 0, 0, 255 }, { 255, 0, 0, 255 });
+	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
+
 }
 
 
@@ -67,8 +70,10 @@ void Enemy::receiveDamage(float p_damage, Projectile* p_projectile)
 		}
 	}
 
-	if (m_health <= 0)
+	if (m_health <= 0.f) {
 		m_dead = true;
+		m_health = 0.f;
+	}
 }
 
 double Enemy::calculateDistance(Player * p_posibleObjective)
@@ -129,7 +134,15 @@ void Enemy::update(double p_time, double p_deltaTime)
 
 	m_lastPosX = m_posX;
 	m_lastPosY = m_posY;
-	
+
+	m_nearEntityVector = m_hashGrid->getNearby(this);
+	for (auto t_object : m_nearEntityVector) {
+		if (t_object->getEntity() == Entities::TILE) {
+			if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID()))
+				moveBackwards();
+		}
+	}
+
 	if (!m_stunned) {
 		checkObjective();
 		move();
