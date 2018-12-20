@@ -13,6 +13,7 @@ public:
 	virtual ~Enemy();
 
 	void receiveDamage(float p_damage, Projectile* p_projectile);
+	void receiveTrapDamage(float p_damage);
 	bool isDead() { return (m_dead && !m_sticky); };
 
 	double calculateDistance(Player* p_posibleObjective);
@@ -60,7 +61,8 @@ protected:
 
 private:
 	Projectile*	m_lastProjectile;
-	float		m_TimeNextHit;
+	float		m_timeNextHitProjectile;
+	float		m_timeNextHitTrap;
 
 	bool	m_dead;
 	bool	m_cooperativeMode;

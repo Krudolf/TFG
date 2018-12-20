@@ -5,8 +5,7 @@
 #include "screenGame.h"
 #include "enemy.h"
 #include "player.h"
-
-#include <iostream>
+#include "tile.h"
 
 
 Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage) : Entity(p_texturePath, p_ent)
@@ -116,8 +115,10 @@ void Projectile::update()
 		//If collides with enemy, enemy receive damage and projectile maybe or not be destroyed.
 		for (auto t_object : m_nearEntityVector) {
 			if (t_object->getEntity() == Entities::TILE) {
-				if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID))
-					m_readyToDelete = true;
+				if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID())) {
+					Tile* t_tile = dynamic_cast<Tile*>(t_object);
+					t_tile->applyEffect(this);
+				}
 			}
 			else if (t_object->getEntity() == Entities::ENEMY || t_object->getEntity() == Entities::ENEMY_BOSS) {
 				if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
@@ -146,7 +147,7 @@ void Projectile::update()
 				if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
 					Player* t_player = dynamic_cast<Player*>(t_object);
 					if (m_makeDamage)
-						t_player->receiveDamage(m_damage);
+						t_player->receiveDamage(m_damage, this);
 
 					if (!m_crossEnemy) {
 						m_readyToDelete = true;

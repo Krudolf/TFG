@@ -9,6 +9,7 @@
 #include "screenGame.h"
 #include "potion.h"
 #include "hashGrid.h"
+#include "tile.h"
 
 #include <iostream>
 
@@ -53,6 +54,10 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 	m_hability1ActivationTime = 0.f;
 	m_hability2ActivationTime = 0.f;
 	m_hability3ActivationTime = 0.f;
+
+	m_lastProjectile = nullptr;
+	m_timeNextHitProjectile = 0.f;
+	m_timeNextHitTrap = 0.f;
 }
 
 
@@ -69,6 +74,41 @@ void Player::receiveDamage(float p_damage)
 {
 	float t_blockDamage = p_damage * (m_armor / 100);
 	m_health -= (p_damage - t_blockDamage);
+
+	if (m_health < 0.f) {
+		m_health = 0.f;
+		m_alive = false;
+	}
+}
+
+void Player::receiveDamage(float p_damage, Projectile* p_projectile)
+{
+	if (m_lastProjectile != p_projectile) {
+		float t_blockDamage = p_damage * (m_armor / 100);
+		m_health -= (p_damage - t_blockDamage);
+		m_lastProjectile = p_projectile;
+		m_timeNextHitProjectile = m_engineManager->getMasterClockSeconds() + 0.15;
+	}
+	else {
+		if (m_engineManager->getMasterClockSeconds() >= m_timeNextHitProjectile) {
+			float t_blockDamage = p_damage * (m_armor / 100);
+			m_health -= (p_damage - t_blockDamage);
+			m_timeNextHitProjectile = m_engineManager->getMasterClockSeconds() + 0.15;
+		}
+	}
+
+	if (m_health < 0.f) {
+		m_health = 0.f;
+		m_alive = false;
+	}
+}
+
+void Player::receiveTrapDamage(float p_damage)
+{
+	if (m_engineManager->getMasterClockSeconds() >= m_timeNextHitTrap) {
+		m_health -= p_damage;
+		m_timeNextHitTrap = m_engineManager->getMasterClockSeconds() + 0.15;
+	}
 
 	if (m_health < 0.f) {
 		m_health = 0.f;
@@ -174,7 +214,7 @@ void Player::move() {
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
 }
 
-void Player::moveBackguards()
+void Player::moveBackwards()
 {
 	m_posX = m_lastPosX;
 	m_posY = m_lastPosY;
@@ -395,8 +435,11 @@ void Player::update(double p_time, double p_deltaTime) {
 		switch (t_object->getEntity())
 		{
 		case Entities::TILE:
-			if (m_engineManager->checkCollision(getSpriteID(), t_object->getSpriteID()))
-				moveBackguards();
+			if (m_engineManager->checkCollision(getSpriteID(), t_object->getSpriteID())) {
+				Tile* t_tile = dynamic_cast<Tile*>(t_object);
+				t_tile->applyEffect(this);
+			}
+				
 			break;
 		case Entities::POTION:
 			m_nearPotion = true;
@@ -408,6 +451,10 @@ void Player::update(double p_time, double p_deltaTime) {
 
 	if (m_nearPotion && sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 		pickPotion();
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
+		increaseHealth(200.f);
+		increaseMana(200.f);
+	}
 
 	move();
 

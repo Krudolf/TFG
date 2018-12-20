@@ -10,6 +10,7 @@
 #include "Point.h"
 #include "screenGame.h"
 #include "fillBar.h"
+#include "tile.h"
 
 #include <iostream>
 
@@ -132,7 +133,7 @@ void EnemyBoss::spawnMinion()
 
 void EnemyBoss::launchProjectile()
 {
-	Projectile* t_projectile = new ProjectileStraight(m_texturePath, Entities::ENEMY_BOSS_BULLET, m_posX, m_posY, m_damage, m_directionMoveX*2, m_directionMoveY*2);
+	Projectile* t_projectile = new ProjectileStraight(m_texturePath, Entities::ENEMY_BOSS_BULLET, m_posX, m_posY, m_damage/2, m_directionMoveX*2, m_directionMoveY*2);
 	m_projectilesVector.push_back(t_projectile);
 	ScreenGame::m_projectileVector.push_back(t_projectile);
 }
@@ -210,9 +211,30 @@ void EnemyBoss::updateChargeAttack()
 
 		move();
 
-		bool t_collision = m_engineManager->checkCollision(m_spriteID, m_objectivePlayer->getSpriteID());
-		if (t_collision)
-			m_objectivePlayer->receiveDamage(m_damage);
+		bool t_collision = false;
+		for (auto t_object : m_nearEntityVector) {
+			if (t_object->getEntity() == Entities::TILE) {
+				if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID())) {
+					Tile* t_tile = dynamic_cast<Tile*>(t_object);
+					t_tile->applyEffect(this);
+
+					if (m_releasePhase) {
+						m_velocity = m_baseVelocity;
+						m_lockDirection = false;
+						m_releasePhase = false;
+						m_atackInCooldown = true;
+					}
+				}
+			}
+			else if (t_object->getEntity() == Entities::PLAYER_BLUE || t_object->getEntity() == Entities::PLAYER_GREEN || t_object->getEntity() == Entities::PLAYER_YELLOW) {
+				if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID)) {
+					Player* t_player = dynamic_cast<Player*>(t_object);
+					t_player->receiveDamage(m_damage);
+
+					t_collision = true;
+				}
+			}
+		}
 
 		if (t_collision || t_time >= m_endReleaseTime) {
 			m_velocity = m_baseVelocity;

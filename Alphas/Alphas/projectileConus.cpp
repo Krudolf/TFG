@@ -6,8 +6,7 @@
 #include "enemy.h"
 #include "hashGrid.h"
 #include "screenGame.h"
-
-#include <iostream>
+#include "tile.h"
 
 
 ProjectileConus::ProjectileConus(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage, bool p_crossEnemy, bool p_makeDamage) : Projectile(p_texturePath, p_ent, p_dir, p_playerPosX, p_playerPosY, p_damage)
@@ -93,8 +92,10 @@ void ProjectileConus::update(double p_time, double p_deltaTime)
 	if (!m_makeInvisible) {
 		for (auto t_object : m_nearEntityVector) {
 			if (t_object->getEntity() == Entities::TILE) {
-				if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID))
-					m_readyToDelete = true;
+				if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID())) {
+					Tile* t_tile = dynamic_cast<Tile*>(t_object);
+					t_tile->applyEffect(this);
+				}
 			}
 			else if (t_object->getEntity() == Entities::ENEMY || t_object->getEntity() == Entities::ENEMY_BOSS) {
 				if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {

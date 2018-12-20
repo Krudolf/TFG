@@ -17,6 +17,7 @@ public:
 	void	draw();
 
 	void	setLifeTime(float p_lifeTime);
+	void	setReadyToDelete(bool p_readyToDelete) { m_readyToDelete = p_readyToDelete; };
 
 protected:
 	int		m_velocity;

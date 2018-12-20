@@ -23,6 +23,8 @@ public:
 	float	getAtackSpeed() { return m_atackSpeed; };
 
 	void receiveDamage(float p_damage);
+	void receiveDamage(float p_damage, Projectile* p_projectile);
+	void receiveTrapDamage(float p_damage);
 	bool enoughMana(float p_mana);
 
 	void increaseHealth(float p_health);
@@ -33,7 +35,7 @@ public:
 	void increaseAtackSpeed(float p_duration, float p_atackSpeedIncrease);
 	
 	void move();
-	void moveBackguards();
+	void moveBackwards();
 	void rangeAtack();
 	virtual void hability1() = 0;
 	virtual void hability2() = 0;
@@ -128,6 +130,10 @@ private:
 
 	bool	m_basicInCooldown;
 	float	m_nextBasic;
+
+	Projectile*	m_lastProjectile;
+	float		m_timeNextHitProjectile;
+	float		m_timeNextHitTrap;
 
 	std::vector<Projectile*>	m_basicProjectiles;
 };

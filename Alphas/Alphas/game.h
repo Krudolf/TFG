@@ -26,7 +26,7 @@ private:
 	double m_currentTime;
 	double m_accumulator;
 	float m_newTime;
-	float m_frameTime;
+	float m_elapsedTime;
 	int FPS;
 };
 

@@ -4,6 +4,7 @@
 #include "player.h"
 #include "fillBar.h"
 #include "hashGrid.h"
+#include "tile.h"
 
 #include <iostream>
 
@@ -77,8 +78,10 @@ void EnemyCharger::updateAtack()
 			for (auto t_object : m_nearEntityVector) {
 				if (t_object->getEntity() == Entities::TILE) {
 					if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID())) {
-						moveBackwards();
-						if (m_releasePhase) {
+						Tile* t_tile = dynamic_cast<Tile*>(t_object);
+						t_tile->applyEffect(this);
+
+						if (m_releasePhase && t_tile->getTileType() == TileTypes::BLOCK) {
 							m_velocity = m_baseVelocity;
 							m_lockDirection = false;
 							m_releasePhase = false;
@@ -90,12 +93,11 @@ void EnemyCharger::updateAtack()
 					if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID)) {
 						Player* t_player = dynamic_cast<Player*>(t_object);
 						t_player->receiveDamage(m_damage);
-						
+
 						t_collision = true;
 					}
 				}
 			}
-			
 			if (t_collision || t_time >= m_endReleaseTime) {
 				m_velocity			= m_baseVelocity;
 				m_lockDirection		= false;
@@ -120,8 +122,6 @@ void EnemyCharger::update(double p_time, double p_deltaTime)
 	m_lastPosX = m_posX;
 	m_lastPosY = m_posY;
 
-	m_nearEntityVector = m_hashGrid->getNearby(this);
-
 	if (!m_chargePhase && !m_releasePhase) {
 		checkObjective();
 		move();
@@ -129,6 +129,17 @@ void EnemyCharger::update(double p_time, double p_deltaTime)
 	
 	atack();
 	updateAtack();
+
+	m_nearEntityVector = m_hashGrid->getNearby(this);
+	for (auto t_object : m_nearEntityVector) {
+		if (t_object->getEntity() == Entities::TILE) {
+			if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID())) {
+				Tile* t_tile = dynamic_cast<Tile*>(t_object);
+				if(t_tile->getTileType() == TileTypes::SKEWER)
+					t_tile->applyEffect(this);
+			}
+		}
+	}
 
 	if (m_atackInCooldown && m_engineManager->getMasterClockSeconds() >= m_endCooldown)
 		m_atackInCooldown = false;

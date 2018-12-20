@@ -3,6 +3,8 @@
 #include "engineManager.h"
 #include "screenGame.h"
 #include "tile.h"
+#include "tileBlock.h"
+#include "tileSkewer.h"
 
 
 SceneMap::SceneMap(const char* p_urlXML, const char* p_urlTexture)
@@ -50,13 +52,20 @@ SceneMap::SceneMap(const char* p_urlXML, const char* p_urlTexture)
 				int t_textureLeft	= ((gid - 1) % 4 * m_tileWidth);
 				int t_textureTop	= ((gid - 1) / 4 * m_tileWidth);
 
-				Tile* t_tile = new Tile(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
-
-				m_mapMatrix4D[l][h][w] = t_tile;
-
+				Tile* t_tile;
 				if (gid == 16) {
+					t_tile = new TileBlock(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
 					ScreenGame::m_tileCollisionVector.push_back(t_tile);
 				}
+				else if (gid == 15) {
+					t_tile = new TileSkewer(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
+					ScreenGame::m_tileCollisionVector.push_back(t_tile);
+				}
+				else {
+					t_tile = new Tile(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
+				}
+
+				m_mapMatrix4D[l][h][w] = t_tile;
 			}
 		}
 	}

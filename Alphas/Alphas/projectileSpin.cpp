@@ -17,7 +17,7 @@ ProjectileSpin::ProjectileSpin(const char* p_texturePath, Entities p_ent, Direct
 
 	//Increase m_angleStep ==> increase spinSpeed;
 	m_angle = 0;
-	m_angleStep = 0.1;
+	m_angleStep = 0.25;
 	m_radius = 50;
 
 	m_owner = p_owner;

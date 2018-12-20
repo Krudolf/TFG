@@ -22,11 +22,11 @@ Game::Game()
 	m_screenManager->init();
 
 	m_time			= 0.f;
-	m_dt			= 0.01;
+	m_dt			= 1.f/60.f;
 	m_currentTime	= m_engineManager->getMasterClockSeconds();
 	m_accumulator	= 0.0;
 	m_newTime		= 0.f;
-	m_frameTime		= 0.f;
+	m_elapsedTime	= 0.f;
 	FPS				= 0;
 }
 
@@ -43,17 +43,16 @@ void Game::run()
 		m_engineManager->checkEvents();
 
 		m_newTime = m_engineManager->updateMasterClock();
-		m_frameTime = m_newTime - m_currentTime;
+		m_elapsedTime = m_newTime - m_currentTime;
 		m_currentTime = m_newTime;
 
-		m_accumulator += m_frameTime;
+		m_accumulator += m_elapsedTime;
 		
 		while (m_accumulator >= m_dt) {
 			//float t_deltaTime = std::min(m_frameTime, m_dt);
-			update(m_time, m_dt);
+			update(m_newTime, m_dt);
 
 			m_accumulator -= m_dt;
-			m_time += m_dt;
 		}
 
 		draw();

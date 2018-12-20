@@ -5,6 +5,7 @@
 #include <vector>
 
 class Entity;
+class EngineManager;
 
 class HashGrid
 {
@@ -17,6 +18,7 @@ public:
 
 	void					registerObject(Entity* p_entity);
 	std::vector<Entity*>	getNearby(Entity* p_entity);
+	std::vector<Entity*>	getNearbyByPosition(float p_posX, float p_posY, float p_radius);
 
 	void debug();
 
@@ -24,13 +26,17 @@ private:
 	HashGrid();
 
 	std::vector<int>		getIdForObject(Entity* p_entity);
-	void					addToBucket(Point p_point, float p_width, std::vector<int>& p_cellIdVector);
+	std::vector<int>		getIdForObjectPosition(float p_posX, float p_posY, float p_radius);
+	void					addToBucket(Point p_point, std::vector<int>& p_cellIdVector);
 	
+	EngineManager* m_engineManager;
+
 	int		m_mapWidth;
 	int		m_mapHeight;
 	int		m_cellSize;
 	int		m_columns;
 	int		m_rows;
+	float	m_cellWidth;
 	
 	std::map<int, std::vector<Entity*>>	m_bucket;
 };

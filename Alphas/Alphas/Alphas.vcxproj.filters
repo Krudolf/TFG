@@ -270,6 +270,15 @@
     <ClInclude Include="hashGrid.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="tileTypes_enum.h">
+      <Filter>Archivos de encabezado\others</Filter>
+    </ClInclude>
+    <ClInclude Include="tileBlock.h">
+      <Filter>Archivos de encabezado\gameEntities\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="tileSkewer.h">
+      <Filter>Archivos de encabezado\gameEntities\tiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -439,6 +448,12 @@
     </ClCompile>
     <ClCompile Include="HashGrid.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="tileSkewer.cpp">
+      <Filter>Archivos de origen\gameEntities\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="tileBlock.cpp">
+      <Filter>Archivos de origen\gameEntities\tiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

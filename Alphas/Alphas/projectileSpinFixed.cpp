@@ -17,7 +17,7 @@ ProjectileSpinFixed::ProjectileSpinFixed(const char* p_texturePath, Entities p_e
 
 	//Increase m_angleStep ==> increase spinSpeed;
 	m_angle = 0;
-	m_angleStep = 0.1;
+	m_angleStep = 0.25;
 	m_radius = 150;
 	m_nextCheckTime = m_engineManager->getMasterClockSeconds();
 
@@ -45,17 +45,18 @@ void ProjectileSpinFixed::update(double p_time, double p_deltaTime)
 		m_readyToDelete = true;
 
 
-	/* 
-		TODOO!:
-		 - ESTE SE HA IDO AL TRASTE CON LAS COLISIONEEEEEES!! TENGO QUE VER SI PUEDO APAÑARLO O EN SU DEFECTO ME TOCARÁ VOLVER ATRAS A COMO ESTABA ANTES. 
+	/*
+		TODO:
+		 - EL ATAQUE NO VA DEL TODO BIEN, EN OCASIONES SI QUE HACE DAÑO, PERO EN OTRAS NO HACE NADA
 	*/
-	m_nearEntityVector = m_hashGrid->getNearby(this);
+
+	m_nearEntityVector = m_hashGrid->getNearbyByPosition(m_centerPosX, m_centerPosY, m_radius);
 	if (m_engineManager->getMasterClockSeconds() >= m_nextCheckTime) {
 		m_nextCheckTime += 0.5f;
 
 		for (auto t_object : m_nearEntityVector) {
 			if (t_object->getEntity() == Entities::ENEMY || t_object->getEntity() == Entities::ENEMY_BOSS) {
-				if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
+				if (m_engineManager->checkCollisionCircle(t_object->getSpriteID())) {
 					Enemy* t_enemy = dynamic_cast<Enemy*>(t_object);
 					t_enemy->receiveDamage(m_damage, this);
 				}
@@ -74,5 +75,4 @@ void ProjectileSpinFixed::draw()
 {
 	m_engineManager->drawCircle();
 	m_engineManager->draw(m_engineManager->getSprite(getSpriteID()));
-
 }

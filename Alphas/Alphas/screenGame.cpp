@@ -47,10 +47,10 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 
 	float t_width = m_sceneMap->getWidth();
 	float t_height = m_sceneMap->getHeight();
-	m_spawnPointsVector.push_back({ 100.f, 100.f });
-	m_spawnPointsVector.push_back({ 100.f, t_height - 100.f });
-	m_spawnPointsVector.push_back({ t_width - 100.f, 100.f });
-	m_spawnPointsVector.push_back({ t_width - 100.f, t_height - 100.f });
+	m_spawnPointsVector.push_back({ 200.f, 200.f });
+	m_spawnPointsVector.push_back({ 200.f, t_height - 200.f });
+	m_spawnPointsVector.push_back({ t_width - 200.f, 200.f });
+	m_spawnPointsVector.push_back({ t_width - 200.f, t_height - 200.f });
 	/* ++++++++++++++++++++++++++ PLAYER ++++++++++++++++++++++++++ */
 	Player* t_player;
 	switch (p_playerEntity)
@@ -73,14 +73,14 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 
 	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
 	m_waveSystem = new WaveSystem(m_spawnPointsVector);
-	//m_waveSystem->setWavenumber(10);
+	m_waveSystem->setWavenumber(1);
 	m_waveSystem->spawnNextWave();
 	
 	m_interface = new Interface(m_playerVector[0], nullptr, m_waveSystem);
 
 	m_potionVector.push_back(new PotionHealth("assets/spritesheet.png", 500.f, 500.f, PotionType::HEALTH));
-	m_potionVector.push_back(new PotionHealth("assets/spritesheet.png", 750.f, 500.f, PotionType::MANA));
-	m_potionVector.push_back(new PotionHealth("assets/spritesheet.png", 320.f, 320.f, PotionType::DAMAGE));
+	m_potionVector.push_back(new PotionMana("assets/spritesheet.png", 750.f, 500.f, PotionType::MANA));
+	m_potionVector.push_back(new PotionDamage("assets/spritesheet.png", 320.f, 320.f, PotionType::DAMAGE));
 }
 
 
@@ -137,7 +137,6 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 		m_hashGrid->clear();
 
 		fillHashGrid();
-
 
 		/* ++++++++++++++++++++++++++ UPDATE PLAYER ++++++++++++++++++++++++++ */
 		for (auto t_player : m_playerVector) {

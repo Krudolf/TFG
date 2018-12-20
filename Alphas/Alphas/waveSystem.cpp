@@ -61,7 +61,6 @@ void WaveSystem::createEnemy(EnemyType p_type)
 	default:
 		break;
 	}
-	//ScreenGame::m_entityVector.push_back(enemy);
 	ScreenGame::m_enemyVector.push_back(t_enemy);
 }
 

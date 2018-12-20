@@ -219,6 +219,9 @@
     <ClInclude Include="statsInfo.h" />
     <ClInclude Include="stats_enum.h" />
     <ClInclude Include="tile.h" />
+    <ClInclude Include="tileBlock.h" />
+    <ClInclude Include="tileSkewer.h" />
+    <ClInclude Include="tileTypes_enum.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="waveSystem.h" />
   </ItemGroup>
@@ -282,6 +285,8 @@
     <ClCompile Include="screenMenuHome.cpp" />
     <ClCompile Include="StatsInfo.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="tileBlock.cpp" />
+    <ClCompile Include="tileSkewer.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="waveSystem.cpp" />
   </ItemGroup>

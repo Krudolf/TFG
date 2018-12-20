@@ -6,6 +6,7 @@
 #include "projectile.h"
 #include "fillBar.h"
 #include "hashGrid.h"
+#include "tile.h"
 
 #include <iostream>
 
@@ -35,18 +36,18 @@ Enemy::Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity) 
 	m_distanceToObjective	= 1000;
 	m_objectivePlayer		= ScreenGame::m_playerVector[0];
 
-	m_atackInCooldown	= false;
+	m_atackInCooldown	= true;
 	m_cooldownAtack		= 1.f;
-	m_endCooldown		= -1;
+	m_endCooldown		= m_engineManager->getMasterClockSeconds() + 2.f;
 
 	m_sticky = false;
 
 	m_lastProjectile = nullptr;
-	m_TimeNextHit = 0.f;
+	m_timeNextHitProjectile = 0.f;
+	m_timeNextHitTrap = 0.f;
 
 	m_healthBar = new FillBar(50, 10, this->getPositionX(), this->getPositionY(), { 0, 0, 0, 255 }, { 255, 0, 0, 255 });
 	m_engineManager->getSprite(m_spriteID)->setPosition(m_posX, m_posY);
-
 }
 
 
@@ -61,18 +62,31 @@ void Enemy::receiveDamage(float p_damage, Projectile* p_projectile)
 	if (m_lastProjectile != p_projectile) {
 		m_health -= p_damage;
 		m_lastProjectile = p_projectile;
-		m_TimeNextHit = m_engineManager->getMasterClockSeconds() + 0.15;
+		m_timeNextHitProjectile = m_engineManager->getMasterClockSeconds() + 0.15;
 	}
 	else {
-		if (m_engineManager->getMasterClockSeconds() >= m_TimeNextHit) {
+		if (m_engineManager->getMasterClockSeconds() >= m_timeNextHitProjectile) {
 			m_health -= p_damage;
-			m_TimeNextHit = m_engineManager->getMasterClockSeconds() + 0.15;
+			m_timeNextHitProjectile = m_engineManager->getMasterClockSeconds() + 0.15;
 		}
 	}
 
 	if (m_health <= 0.f) {
 		m_dead = true;
 		m_health = 0.f;
+	}
+}
+
+void Enemy::receiveTrapDamage(float p_damage)
+{
+	if (m_engineManager->getMasterClockSeconds() >= m_timeNextHitTrap) {
+		m_health -= p_damage;
+		m_timeNextHitTrap = m_engineManager->getMasterClockSeconds() + 0.15;
+	}
+
+	if (m_health < 0.f) {
+		m_health = 0.f;
+		m_dead = true;
 	}
 }
 
@@ -138,8 +152,10 @@ void Enemy::update(double p_time, double p_deltaTime)
 	m_nearEntityVector = m_hashGrid->getNearby(this);
 	for (auto t_object : m_nearEntityVector) {
 		if (t_object->getEntity() == Entities::TILE) {
-			if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID()))
-				moveBackwards();
+			if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID())) {
+				Tile* t_tile = dynamic_cast<Tile*>(t_object);
+				t_tile->applyEffect(this);
+			}
 		}
 	}
 
