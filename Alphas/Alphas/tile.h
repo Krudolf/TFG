@@ -17,7 +17,6 @@ public:
 
 protected:
 	TileTypes	m_tileType;
-
-private:
 	int m_gid;
+
 };

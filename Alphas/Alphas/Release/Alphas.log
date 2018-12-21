@@ -1,0 +1,18 @@
+﻿  screenGame.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(48): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(49): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(148): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(152): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(157): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(160): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(163): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(166): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(169): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(172): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(187): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(279): warning C4551: la llamada a la función no tiene lista de argumentos
+  Generando código
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(252): warning C4715: 'ScreenGame::getCooperativeMode': no todas las rutas de acceso de control devuelven un valor
+  All 2002 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Generación de código finalizada
+  Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Release\Alphas.exe

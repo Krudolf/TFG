@@ -153,7 +153,6 @@ void EngineManager::loadTexture(const char * p_path)
 	
 	//The texture was not found --> Create the texture
 	if (m_textureMapIterator == m_textureMap.end()) {
-		std::cout << "CREAMOS LA TEXTURA " << p_path << std::endl;
 		sf::Texture* t_texture = new sf::Texture();
 		if (!t_texture->loadFromFile(p_path))
 		{
@@ -201,6 +200,14 @@ int EngineManager::createSprite(const char * p_texturePath, float p_scale, bool 
 void EngineManager::setSpriteFrame(int p_spriteID, int p_entity, int p_frame)
 {
 	this->getSprite(p_spriteID)->setTextureRect(sf::IntRect(128 * p_frame, 128 * p_entity, 128, 128));
+}
+
+void EngineManager::setSpriteFrame(int p_spriteID, int p_frame)
+{
+	sf::Sprite* t_sprite = getSprite(p_spriteID);
+	sf::IntRect t_textureRect = t_sprite->getTextureRect();
+	t_textureRect.left = t_textureRect.width*p_frame;
+	t_sprite->setTextureRect(t_textureRect);
 }
 
 void EngineManager::getDirection(double p_posEntity1X, double p_posEntity1Y, double p_posEntity2X, double p_posEntity2Y, float & p_directionX, float & p_directionY)

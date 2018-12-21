@@ -9,8 +9,13 @@ public:
 	~TileSkewer();
 
 	void applyEffect(Entity* p_entity);
+	void update(double p_time, double p_deltaTime);
 
 private:
+	bool	m_makeDamage;
 	float	m_damage;
+
+	float	m_elapsedTime;
+	float	m_column;
 };
 

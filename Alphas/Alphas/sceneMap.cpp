@@ -24,6 +24,12 @@ SceneMap::SceneMap(const char* p_urlXML, const char* p_urlTexture)
 	m_rootElement->QueryIntAttribute("tileheight", &m_tileHeight);
 	m_totalLayers = 0;
 
+	m_engineManager->loadTexture(p_urlTexture);
+	m_engineManager->getTexture(p_urlTexture)->getSize().x;
+
+	int	t_rows		= m_engineManager->getTexture(p_urlTexture)->getSize().x / m_tileWidth;
+	int	t_columns	= m_engineManager->getTexture(p_urlTexture)->getSize().y / m_tileHeight;
+
 	//Get the first layer
 	m_firstLayerElement = m_rootElement->FirstChildElement("layer");
 	m_layerElement = m_firstLayerElement;
@@ -48,21 +54,24 @@ SceneMap::SceneMap(const char* p_urlXML, const char* p_urlTexture)
 
 				float posX = (w * m_tileWidth);
 				float posY = (h * m_tileHeight);
-
-				int t_textureLeft	= ((gid - 1) % 4 * m_tileWidth);
-				int t_textureTop	= ((gid - 1) / 4 * m_tileWidth);
+				
+				gid--;
+				int t_textureLeft	= (gid % t_rows * m_tileWidth);
+				int t_textureTop	= (gid / t_columns * m_tileWidth);
 
 				Tile* t_tile;
-				if (gid == 16) {
+				if (gid < 40) {
+					if (gid == 20) {
+						t_tile = new TileSkewer(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
+						ScreenGame::m_tileCollisionVector.push_back(t_tile);
+					}
+					else {
+						t_tile = new Tile(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
+					}
+				}
+				else{
 					t_tile = new TileBlock(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
 					ScreenGame::m_tileCollisionVector.push_back(t_tile);
-				}
-				else if (gid == 15) {
-					t_tile = new TileSkewer(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
-					ScreenGame::m_tileCollisionVector.push_back(t_tile);
-				}
-				else {
-					t_tile = new Tile(p_urlTexture, t_textureLeft, t_textureTop, m_tileWidth, m_tileHeight, posX, posY, gid);
 				}
 
 				m_mapMatrix4D[l][h][w] = t_tile;
@@ -90,9 +99,31 @@ SceneMap::~SceneMap()
 
 void SceneMap::draw()
 {
+	int viewCenterX = m_engineManager->getCameraView()->getCenter().x;
+	int viewCenterY = m_engineManager->getCameraView()->getCenter().y;
+	int viewSizeX = m_engineManager->getCameraView()->getSize().x;
+	int viewSizeY = m_engineManager->getCameraView()->getSize().y;
+
+	int startX	= (viewCenterX - viewSizeX / 2) / m_tileWidth;
+	int endX	= (viewCenterX + viewSizeX / 2) / m_tileWidth + 1;
+	int startY	= (viewCenterY - viewSizeY / 2) / m_tileHeight;
+	int endY	= (viewCenterY + viewSizeY / 2) / m_tileHeight + 1;
+
+	if (startX < 0)
+		startX = 0;
+	
+	if (startY < 0)
+		startY = 0;
+
+	if (endX > m_width)
+		endX = m_width;
+
+	if (endY > m_height)
+		endY = m_height;
+	
 	for (int l = 0; l < m_totalLayers; l++) {
-		for (int h = 0; h < m_height; h++) {
-			for (int w = 0; w < m_width; w++) {
+		for (int h = startY; h < endY; h++) {
+			for (int w = startX; w < endX; w++) {
 				m_mapMatrix4D[l][h][w]->draw();
 			}
 		}

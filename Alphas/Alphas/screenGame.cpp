@@ -41,9 +41,9 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 	m_gameOver			= false;
 
 	/* ++++++++++++++++++++++++++ MAP ++++++++++++++++++++++++++ */
-	m_sceneMap = new SceneMap("assets/map/tiledMap.tmx", "assets/tiles.png");
+	m_sceneMap = new SceneMap("assets/map/map.tmx", "assets/floor_SpriteSheet.png");
 	m_hashGrid = &HashGrid::p();
-	m_hashGrid->init(m_sceneMap->getWidth(), m_sceneMap->getHeight(), 200);
+	m_hashGrid->init(m_sceneMap->getWidth(), m_sceneMap->getHeight(), 800);
 
 	float t_width = m_sceneMap->getWidth();
 	float t_height = m_sceneMap->getHeight();
@@ -73,7 +73,7 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 
 	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
 	m_waveSystem = new WaveSystem(m_spawnPointsVector);
-	m_waveSystem->setWavenumber(1);
+	m_waveSystem->setWavenumber(7);
 	m_waveSystem->spawnNextWave();
 	
 	m_interface = new Interface(m_playerVector[0], nullptr, m_waveSystem);
@@ -137,6 +137,11 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 		m_hashGrid->clear();
 
 		fillHashGrid();
+
+		/* TILES WITH EFFECT/COLLISION */
+		for (auto t_tile : m_tileCollisionVector) {
+			t_tile->update(p_time, p_deltaTime);
+		}
 
 		/* ++++++++++++++++++++++++++ UPDATE PLAYER ++++++++++++++++++++++++++ */
 		for (auto t_player : m_playerVector) {
