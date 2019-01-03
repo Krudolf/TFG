@@ -4,6 +4,7 @@
 #include <math.h>
 #include "engineManager.h"
 
+#include <iostream>
 
 HashGrid::HashGrid()
 {
@@ -29,6 +30,7 @@ void HashGrid::init(int p_mapWidth, int p_mapHeight, int p_cellSize)
 	m_mapWidth	= p_mapWidth;
 	m_mapHeight = p_mapHeight;
 	m_cellSize	= p_cellSize;
+
 	m_columns	= m_mapWidth / m_cellSize;
 	m_rows		= m_mapHeight / m_cellSize;
 	m_cellWidth = m_mapWidth / m_cellSize;
@@ -128,6 +130,58 @@ std::vector<Entity*> HashGrid::getNearbyByPosition(float p_posX, float p_posY, f
 	}
 
 	return t_nearbyObjects;
+}
+
+std::vector<Entity*> HashGrid::getScreenEntities()
+{
+	getScreenQuadrants();
+
+	std::vector<Entity*>	t_nearbyObjects;
+	for (int t_cellID : m_screenQuadrants) {
+		t_nearbyObjects.insert(t_nearbyObjects.end(), m_bucket[t_cellID].begin(), m_bucket[t_cellID].end());
+	}
+
+	return t_nearbyObjects;
+}
+
+
+void HashGrid::addNeightbour(int p_row, int p_col)
+{
+	if (p_row >= 0 && p_row < m_rows && p_col >= 0 && p_col < m_columns) {
+
+		int t_neighbour = p_row * m_columns + p_col;
+
+		bool t_justAdded = false;
+		for (auto t_id : m_screenQuadrants) {
+			if (t_id == t_neighbour)
+				t_justAdded = true;
+		}
+
+		if (!t_justAdded)
+			m_screenQuadrants.push_back(t_neighbour);
+	}
+}
+
+void HashGrid::getScreenQuadrants()
+{
+	m_screenQuadrants.clear();
+	float t_posX = m_engineManager->getCameraView()->getCenter().x;
+	float t_posY = m_engineManager->getCameraView()->getCenter().y;
+
+	m_screenQuadrants = getIdForObjectPosition(t_posX, t_posY, 0);
+
+	int t_row = m_screenQuadrants[0] / m_columns;
+	int t_col = m_screenQuadrants[0] % m_columns;
+
+	addNeightbour(t_row - 1, t_col - 1);
+	addNeightbour(t_row - 1, t_col);
+	addNeightbour(t_row - 1, t_col + 1);
+	addNeightbour(t_row,	 t_col - 1);
+	addNeightbour(t_row,	 t_col);
+	addNeightbour(t_row,	 t_col + 1);
+	addNeightbour(t_row + 1, t_col - 1);
+	addNeightbour(t_row + 1, t_col);
+	addNeightbour(t_row + 1, t_col + 1);
 }
 
 void HashGrid::debug()

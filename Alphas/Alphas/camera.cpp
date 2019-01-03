@@ -10,7 +10,7 @@ Camera::Camera()
 	m_engineManager = &EngineManager::p();
 
 	//sf::View((target),(size of the rectangle));
-	m_engineManager->createCameraView(0, 0, 1980, 1080);
+	m_engineManager->createCameraView(0, 0, 1280, 720);
 	m_engineManager->useGameView();
 }
 

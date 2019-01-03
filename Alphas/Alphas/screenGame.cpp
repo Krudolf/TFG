@@ -73,7 +73,7 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 
 	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
 	m_waveSystem = new WaveSystem(m_spawnPointsVector);
-	m_waveSystem->setWavenumber(7);
+	m_waveSystem->setWavenumber(1);
 	m_waveSystem->spawnNextWave();
 	
 	m_interface = new Interface(m_playerVector[0], nullptr, m_waveSystem);
@@ -135,18 +135,36 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 
 		/* HASH GRID */
 		m_hashGrid->clear();
+		m_screenEntities.clear();
+
+		/*
+			TODO:
+			VER UNA FORMA DE NO TENER QUE LIMPIAR EL HASH GRID TODO EL RATO, ACTUALIZAR SOLO PLAYER Y ENEMIGOS QUE SON LOS QUE SE MUEVEN
+		*/
 
 		fillHashGrid();
+		m_screenEntities = m_hashGrid->getScreenEntities();
 
-		/* TILES WITH EFFECT/COLLISION */
-		for (auto t_tile : m_tileCollisionVector) {
+		for (auto t_entity : m_screenEntities) {
+			if (t_entity->getEntity() == Entities::TILE) {
+				Tile* t_tile = dynamic_cast<Tile*>(t_entity);
+				t_tile->update(p_time, p_deltaTime);
+			}
+			else if (t_entity->getEntity() == Entities::PLAYER_BLUE || t_entity->getEntity() == Entities::PLAYER_GREEN || t_entity->getEntity() == Entities::PLAYER_YELLOW) {
+				Player* t_player = dynamic_cast<Player*>(t_entity);
+				t_player->update(p_time, p_deltaTime);
+			}
+		}
+
+		// TILES WITH EFFECT/COLLISION 
+		/*for (auto t_tile : m_tileCollisionVector) {
 			t_tile->update(p_time, p_deltaTime);
 		}
 
-		/* ++++++++++++++++++++++++++ UPDATE PLAYER ++++++++++++++++++++++++++ */
+		// ++++++++++++++++++++++++++ UPDATE PLAYER ++++++++++++++++++++++++++
 		for (auto t_player : m_playerVector) {
 			t_player->update(p_time, p_deltaTime);
-		}
+		}*/
 		checkGameOver();
 
 		/* ++++++++++++++++++++++++++ UPDATE ENEMY ++++++++++++++++++++++++++ */
@@ -223,7 +241,7 @@ void ScreenGame::draw()
 
 	//Draw the map
 	m_sceneMap->draw();
-	//m_hashGrid->debug();
+	m_hashGrid->debug();
 
 	//Draw potions
 	for (auto t_potion : m_potionVector) {

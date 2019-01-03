@@ -53,6 +53,7 @@ private:
 	Entities		m_playerEntity;
 
 	std::vector<Point>		m_spawnPointsVector;
+	std::vector<Entity*>	m_screenEntities;
 
 	bool	m_gameOver;
 	bool	m_gamePause;

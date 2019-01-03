@@ -19,6 +19,7 @@ public:
 	void					registerObject(Entity* p_entity);
 	std::vector<Entity*>	getNearby(Entity* p_entity);
 	std::vector<Entity*>	getNearbyByPosition(float p_posX, float p_posY, float p_radius);
+	std::vector<Entity*>	getScreenEntities();
 
 	void debug();
 
@@ -28,8 +29,13 @@ private:
 	std::vector<int>		getIdForObject(Entity* p_entity);
 	std::vector<int>		getIdForObjectPosition(float p_posX, float p_posY, float p_radius);
 	void					addToBucket(Point p_point, std::vector<int>& p_cellIdVector);
+	void					addNeightbour(int p_row, int p_col);
+	void					getScreenQuadrants();
 	
 	EngineManager* m_engineManager;
+
+	std::map<int, std::vector<Entity*>>	m_bucket;
+	std::vector<int>	m_screenQuadrants;
 
 	int		m_mapWidth;
 	int		m_mapHeight;
@@ -38,7 +44,6 @@ private:
 	int		m_rows;
 	float	m_cellWidth;
 	
-	std::map<int, std::vector<Entity*>>	m_bucket;
 };
 
 /*
