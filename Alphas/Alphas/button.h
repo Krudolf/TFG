@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Point.h"
+#include "color.h"
 
 class EngineManager;
 
@@ -24,6 +25,11 @@ protected:
 	EngineManager* m_engineManager;
 
 	sf::RectangleShape	m_button;
+
+	Color	m_shoftGrey;
+	Color	m_darkGrey;
+	Color	m_shoftBlue;
+	Color	m_darkBlue;
 
 	bool		m_isFocused;
 	bool		m_isBlocked;

@@ -37,42 +37,38 @@ PlayerInfo::PlayerInfo(Player* p_owner, float p_posX, float p_posY, float p_size
 
 	/* HEALTH AND MANA BARS */
 	float	t_offsetY	= 10;
-	float	t_barSizeX	= p_sizeX - 50;
-	float	t_barSizeY	= 40;
-	float	t_barPosX	= p_posX + p_sizeX/2;
-	float	t_barPosY	= p_posY + t_offsetY*3;
-	float	t_barPosY2	= t_barPosY + t_barSizeY + t_offsetY;
+	float	t_barSizeX	= p_sizeX /3;
+	float	t_barSizeY	= 32;
+	float	t_barPosX	= p_posX + p_sizeX * 0.2;
+	float	t_barPosX2	= p_posX + p_sizeX * 0.8;
+	float	t_barPosY	= p_posY + p_sizeY * 0.3;
 
 	m_healthBar = new FillBar(t_barSizeX, t_barSizeY, t_barPosX, t_barPosY, t_black, t_red);
-	m_manaBar = new FillBar(t_barSizeX, t_barSizeY, t_barPosX, t_barPosY2, t_black, t_blue);
+	m_manaBar = new FillBar(t_barSizeX, t_barSizeY, t_barPosX2, t_barPosY, t_black, t_blue);
 
 	/* HABILITY INFORMATION */
 	float	t_skillSize = 32.f;
-	float	t_skillPosX = t_barPosX - (t_barSizeX / 2) + (t_skillSize / 2);
-	float	t_skillPosY = t_barPosY2 + t_barSizeY + t_offsetY;
+	float	t_skillPosX = p_posX + p_sizeX * 0.4 + 5;
+	float	t_skillPosY = t_barPosY;
 	m_hability1 = new HabilityInfo(Hability::SPIN_BLUE, t_skillPosX, t_skillPosY, t_skillSize);
 	
-	float	t_skillPosX2 = t_barPosX;
+	float	t_skillPosX2 = p_posX + p_sizeX * 0.5;
 	m_hability2 = new HabilityInfo(Hability::SPIN_BLUE, t_skillPosX2, t_skillPosY, t_skillSize);
 	
-	float	t_skillPosX3 = t_barPosX + (t_barSizeX / 2) - (t_skillSize / 2);
+	float	t_skillPosX3 = p_posX + p_sizeX * 0.6 - 5;
 	m_hability3 = new HabilityInfo(Hability::SPIN_BLUE, t_skillPosX3, t_skillPosY, t_skillSize);
 
-	/*
-		TODO:
-		HACER QUE LOS ATAQUES FUNCIONEN BIEN CON SU COOLDOWN, NO AL TUNTUN COMO ESTÁ AHORA
-	*/
-
 	/* STATS INFORMATION */
-	float	t_statPosX	= t_skillPosX;
-	float	t_statPosX2	= t_skillPosX3 - t_skillSize - 5;
-	float	t_statPosY	= t_skillPosY + t_skillSize + t_offsetY / 2;
-	float	t_statPosY2	= t_statPosY + t_skillSize + t_offsetY / 2;
+	float	t_statPosX	= p_posX + p_sizeX * 0.15;
+	float	t_statPosX2 = p_posX + p_sizeX * 0.35;
+	float	t_statPosX3 = p_posX + p_sizeX * 0.55;
+	float	t_statPosX4	= p_posX + p_sizeX * 0.75;
+	float	t_statPosY	= p_posY + p_sizeY * 0.7;
 
 	m_damageInfo		= new StatsInfo(Stats::DAMAGE,		p_owner, t_statPosX, t_statPosY);
-	m_armorInfo			= new StatsInfo(Stats::ARMOR,		p_owner, t_statPosX, t_statPosY2);
-	m_attackSpeedInfo	= new StatsInfo(Stats::ATACK_SPEED, p_owner, t_statPosX2, t_statPosY);
-	m_velocityInfo		= new StatsInfo(Stats::VELOCITY,	p_owner, t_statPosX2, t_statPosY2);
+	m_armorInfo			= new StatsInfo(Stats::ARMOR,		p_owner, t_statPosX2, t_statPosY);
+	m_attackSpeedInfo	= new StatsInfo(Stats::ATACK_SPEED, p_owner, t_statPosX3, t_statPosY);
+	m_velocityInfo		= new StatsInfo(Stats::VELOCITY,	p_owner, t_statPosX4, t_statPosY);
 }
 
 

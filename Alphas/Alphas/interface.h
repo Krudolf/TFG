@@ -1,5 +1,4 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
 
 class EngineManager;
@@ -27,6 +26,7 @@ private:
 	int m_width;
 	int m_height;
 
+	sf::RectangleShape m_waveRectangle;
 	sf::Text	m_waveInfo;
 	std::string	m_waveText;
 };

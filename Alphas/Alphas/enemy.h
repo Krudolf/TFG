@@ -16,12 +16,10 @@ public:
 	void receiveTrapDamage(float p_damage);
 	bool isDead() { return (m_dead && !m_sticky); };
 
-	double calculateDistance(Player* p_posibleObjective);
-	double getDistanceToObjective() { return m_distanceToObjective; };
-	
 	void checkObjective();
 	void move();
 	virtual void moveBackwards();
+	double getDistanceToObjective() { return m_distanceToObjective; };
 
 	virtual void atack() = 0;
 	virtual void updateAtack() = 0;
@@ -36,19 +34,17 @@ protected:
 	bool	m_stunned;
 	bool	m_sticky;
 
-	float	m_directionMoveX;
-	float	m_directionMoveY;
+	float	m_maxHealth;
+	float	m_health;
+	float	m_damage;
+	float	m_atackSpeed;
 	float	m_velocity;
 	float	m_baseVelocity;
-	float	m_damage;
-	float	m_health;
-	float	m_maxHealth;
-	float	m_mana;
-	float	m_maxMana;
-	float	m_atackSpeed;
 
 	Player* m_objectivePlayer;
 	double	m_distanceToObjective;
+	float	m_directionMoveX;
+	float	m_directionMoveY;
 
 	double	m_time;
 	double	m_deltaTime;
@@ -60,6 +56,8 @@ protected:
 	FillBar*	m_healthBar;
 
 private:
+	double calculateDistance(Player* p_posibleObjective);
+
 	Projectile*	m_lastProjectile;
 	float		m_timeNextHitProjectile;
 	float		m_timeNextHitTrap;

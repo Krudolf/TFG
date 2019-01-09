@@ -25,8 +25,6 @@ Enemy::Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity) 
 	m_velocity		= m_baseVelocity;
 	m_maxHealth		= 100.f;
 	m_health		= m_maxHealth;
-	m_maxMana		= 100.f;
-	m_mana			= m_maxMana;
 	m_damage		= 2.f;
 	m_atackSpeed	= 0.75f;
 	m_dead			= false;

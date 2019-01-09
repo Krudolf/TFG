@@ -11,21 +11,25 @@
 
 ScreenGameMode::ScreenGameMode()
 {
-	m_buttonSolo = new ButtonText("SOLO", CenterList1_4);
+	m_buttonPlay = new ButtonText("PLAY", LeftList1_3);
+	m_buttonVectorStatic.push_back(m_buttonPlay);
+
+	m_buttonOptions = new ButtonText("OPTIONS", LeftList2_3);
+	m_buttonVectorStatic.push_back(m_buttonOptions);
+
+	m_buttonQuit = new ButtonText("EXIT", LeftList3_3);
+	m_buttonVectorStatic.push_back(m_buttonQuit);
+
+	m_buttonPlay->setIsFocused(true);
+
+	m_buttonSolo = new ButtonText("SOLO", RightList1_3);
 	m_buttonVector.push_back(m_buttonSolo);
 
-	m_buttonCooperativeAI = new ButtonText("COOP: AI", CenterList2_4);
-	m_buttonVector.push_back(m_buttonCooperativeAI);
-
-	m_buttonCooperativeLocal = new ButtonText("COOP: LOCAL", CenterList3_4);
-	m_buttonVector.push_back(m_buttonCooperativeLocal);
-
-	m_buttonBack = new ButtonText("BACK", CenterList4_4);
-	m_buttonVector.push_back(m_buttonBack);
+	m_buttonCooperative = new ButtonText("COOPERATIVO", RightList2_3);
+	m_buttonVector.push_back(m_buttonCooperative);
 
 	m_buttonSolo->setIsFocused(true);
-	m_buttonCooperativeAI->setIsBlocked(true);
-	m_buttonCooperativeLocal->setIsBlocked(true);
+	m_buttonCooperative->setIsBlocked(true);
 }
 
 
@@ -63,12 +67,8 @@ void ScreenGameMode::update(double p_time, double p_deltaTime)
 
 		if (m_buttonFocused == 0)
 			m_screenManager->changeScreen(new ScreenSelectPlayerSolo());
-		else if (m_buttonFocused == 1 && !m_buttonCooperativeAI->getIsBlocked())
-			std::cout << "COOPERATIVE: AI" << std::endl;
-		else if (m_buttonFocused == 2 && !m_buttonCooperativeLocal->getIsBlocked())
-			std::cout << "COOPERATIVE: LOCAL" << std::endl;
-		else if (m_buttonFocused == 3)
-			m_screenManager->changeScreen(new ScreenMenuHome());
+		else if (m_buttonFocused == 1 && !m_buttonCooperative->getIsBlocked())
+			std::cout << "COOPERATIVE" << std::endl;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
 		m_engineManager->setKeyReleased(false);
@@ -78,6 +78,12 @@ void ScreenGameMode::update(double p_time, double p_deltaTime)
 
 void ScreenGameMode::draw()
 {
+	drawBackGround();
+
+	for (auto t_buttons : m_buttonVectorStatic) {
+		t_buttons->draw();
+	}
+
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();
 	}

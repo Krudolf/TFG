@@ -9,6 +9,8 @@ EnemyWarrior::EnemyWarrior(float p_posX, float p_posY, const char* p_path) : Ene
 {
 	m_damage = 5;
 	m_velocity *= 1.5;
+	m_maxHealth *= 1.5;
+	m_health = m_maxHealth;
 }
 
 

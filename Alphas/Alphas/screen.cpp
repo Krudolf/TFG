@@ -12,14 +12,19 @@ Screen::Screen()
 	m_width		= m_engineManager->getWidth();
 	m_height	= m_engineManager->getHeight();
 
-	CenterList1_3 = { m_width * 0.5f, m_height * 0.25f };
-	CenterList2_3 = { m_width * 0.5f, m_height * 0.5f };
-	CenterList3_3 = { m_width * 0.5f, m_height * 0.75f };
+	m_engineManager->loadTexture("assets/background.png");
+	m_backGroundID = m_engineManager->createSprite("assets/background.png", 1.f, false, 0, 0, 1280, 720, 0.f, 0.f);
 
-	CenterList1_4 = { m_width * 0.5f, m_height * 0.2f };
+	LeftList1_3 = { m_width * 0.25f, m_height * 0.45f };
+	LeftList2_3 = { m_width * 0.25f, m_height * 0.65f };
+	LeftList3_3 = { m_width * 0.25f, m_height * 0.85f };
+	
+	RightList1_3 = { m_width * 0.75f, m_height * 0.45f };
+	RightList2_3 = { m_width * 0.75f, m_height * 0.65f };
+	RightList3_3 = { m_width * 0.75f, m_height * 0.85f };
+	
 	CenterList2_4 = { m_width * 0.5f, m_height * 0.4f };
 	CenterList3_4 = { m_width * 0.5f, m_height * 0.6f };
-	CenterList4_4 = { m_width * 0.5f, m_height * 0.8f };
 
 	Center_left = { m_width * 0.25f, m_height * 0.3f };
 
@@ -42,6 +47,11 @@ Screen& Screen::p()
 {
 	static Screen instance;
 	return instance;
+}
+
+void Screen::drawBackGround()
+{
+	m_engineManager->draw(m_engineManager->getSprite(m_backGroundID));
 }
 
 void Screen::init()

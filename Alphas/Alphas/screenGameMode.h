@@ -15,12 +15,15 @@ public:
 	void draw();
 
 private:
+	std::vector<Button*> m_buttonVectorStatic;
 	std::vector<Button*> m_buttonVector;
 
+	ButtonText* m_buttonPlay;
+	ButtonText* m_buttonOptions;
+	ButtonText* m_buttonQuit;
+
 	ButtonText* m_buttonSolo;
-	ButtonText* m_buttonCooperativeAI;
-	ButtonText* m_buttonCooperativeLocal;
-	ButtonText* m_buttonBack;
+	ButtonText* m_buttonCooperative;
 
 	int	m_buttonFocused;
 };

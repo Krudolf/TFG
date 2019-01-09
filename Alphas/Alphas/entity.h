@@ -39,13 +39,15 @@ public:
 	virtual void update(double p_time, double p_deltaTime);
 	virtual void draw();
 
-	double	getPositionX() { return m_posX; };
-	double	getPositionY() { return m_posY; };
-	float	getWidth() { return m_width; };
-	float	getHeight() { return m_height; };
-	int		getSpriteID()  { return m_spriteID; };
-	const char* getTexturePath() { return m_texturePath; };
-	Entities	getEntity() { return m_entity; };
+	double	getPositionX()	{ return m_posX; };
+	double	getPositionY()	{ return m_posY; };
+	float	getWidth()		{ return m_width; };
+	float	getHeight()		{ return m_height; };
+	int		getSpriteID()	{ return m_spriteID; };
+	
+	const char* getTexturePath()	{ return m_texturePath; };
+	Entities	getEntity()			{ return m_entity; };
+	
 	void	setNearEntityVector(std::vector<Entity*> p_nearEntity) { m_nearEntityVector = p_nearEntity; };
 
 protected:

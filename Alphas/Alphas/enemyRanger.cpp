@@ -10,6 +10,8 @@
 EnemyRanger::EnemyRanger(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {
 	m_damage = 10;
+	m_maxHealth *= 0.75;
+	m_health = m_maxHealth;
 
 	m_cooldownAtack = 5.f;
 

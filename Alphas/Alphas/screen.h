@@ -5,12 +5,15 @@
 class EngineManager;
 class ScreenManager;
 class Button;
+class Image;
 
 class Screen
 {
 public:
 	virtual ~Screen();
 	static Screen& p();
+
+	void drawBackGround();
 
 	virtual void init();
 	virtual void update(double p_time, double p_deltaTime);
@@ -25,16 +28,19 @@ protected:
 	float	m_width;
 	float	m_height;
 
+	int		m_backGroundID;
 	int		m_buttonFocused;
 
-	Point CenterList1_3;
-	Point CenterList2_3;
-	Point CenterList3_3;
+	Point LeftList1_3;
+	Point LeftList2_3;
+	Point LeftList3_3;
 
-	Point CenterList1_4;
+	Point RightList1_3;
+	Point RightList2_3;
+	Point RightList3_3;
+
 	Point CenterList2_4;
 	Point CenterList3_4;
-	Point CenterList4_4;
 
 	Point Center_left;
 

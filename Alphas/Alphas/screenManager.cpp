@@ -63,7 +63,7 @@ void ScreenManager::update(double p_time, double p_deltaTime)
 
 void ScreenManager::draw()
 {
-	m_engineManager->getWindow()->clear(sf::Color::Red);
+	m_engineManager->getWindow()->clear(sf::Color(27,55,86,255));
 
 	m_currentScreen->draw();
 

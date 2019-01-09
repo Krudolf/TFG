@@ -11,18 +11,18 @@ PlayerBlue::PlayerBlue(float p_posX, float p_posY, const char * p_path) : Player
 {
 	m_bulletColor = Entities::BULLET_BLUE;
 
-	m_baseDamage = 10.f;
-	m_damage = m_baseDamage;
-	m_maxHealth = 100.f;
-	m_health = m_maxHealth;
-	m_maxMana = 225.f;
-	m_mana = m_maxMana;
-	m_baseArmor = 3.f;
-	m_armor = m_baseArmor;
-	m_baseVelocity = 100.f;
-	m_velocity = m_baseVelocity;
+	m_baseDamage	 = 10.f;
+	m_damage		 = m_baseDamage;
+	m_maxHealth		 = 100.f;
+	m_health		 = m_maxHealth;
+	m_maxMana		 = 225.f;
+	m_mana			 = m_maxMana;
+	m_baseArmor		 = 3.f;
+	m_armor			 = m_baseArmor;
+	m_baseVelocity	 = 100.f;
+	m_velocity		 = m_baseVelocity;
 	m_baseAtackSpeed = 0.25f;
-	m_atackSpeed = m_baseAtackSpeed;
+	m_atackSpeed	 = m_baseAtackSpeed;
 
 	m_hability1ManaConsumption = 20.f;
 	m_hability2ManaConsumption = 45.f;

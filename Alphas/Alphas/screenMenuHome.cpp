@@ -11,13 +11,13 @@
 
 ScreenMenuHome::ScreenMenuHome() : Screen()
 {
-	m_buttonPlay	= new ButtonText("PLAY", CenterList1_3);
+	m_buttonPlay	= new ButtonText("PLAY", LeftList1_3);
 	m_buttonVector.push_back(m_buttonPlay);
 
-	m_buttonOptions	= new ButtonText("OPTIONS", CenterList2_3);
+	m_buttonOptions	= new ButtonText("OPTIONS", LeftList2_3);
 	m_buttonVector.push_back(m_buttonOptions);
 
-	m_buttonQuit	= new ButtonText("EXIT", CenterList3_3);
+	m_buttonQuit	= new ButtonText("EXIT", LeftList3_3);
 	m_buttonVector.push_back(m_buttonQuit);
 	
 	m_buttonPlay->setIsFocused(true);
@@ -72,6 +72,8 @@ void ScreenMenuHome::update(double p_time, double p_deltaTime)
 
 void ScreenMenuHome::draw()
 {
+	drawBackGround();
+
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();
 	}

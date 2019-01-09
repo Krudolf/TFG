@@ -10,9 +10,7 @@ ButtonImage::ButtonImage(const char* p_path, Entities p_player, Point p_point) :
 	m_buttonHeight	= 150.f;
 
 	m_button.setSize({ m_buttonWidth, m_buttonHeight });
-	m_button.setFillColor(sf::Color::Cyan);
-	m_button.setOutlineColor(sf::Color::Black);
-	m_button.setOutlineThickness(5);
+	m_button.setFillColor(sf::Color(m_shoftBlue.r, m_shoftBlue.g, m_shoftBlue.b, m_shoftBlue.a));
 	m_button.setOrigin({ m_buttonWidth / 2, m_buttonHeight / 2 });
 	m_button.setPosition({ m_posX, m_posY });
 

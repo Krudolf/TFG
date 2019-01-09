@@ -12,34 +12,35 @@ public:
 	Player(float p_posX, float p_posY, const char* p_path, Entities p_playerEntity);
 	virtual ~Player();
 
-	bool	getAlive() { return m_alive; };
-	float	getHealth() { return m_health; };
-	float	getMaxHealth() { return m_maxHealth; };
-	float	getMana() { return m_mana; };
-	float	getMaxMana() { return m_maxMana; };
-	float	getVelocity() { return m_velocity; };
-	float	getDamage() { return m_damage; };
-	float	getArmor() { return m_armor; };
+	bool	getAlive()		{ return m_alive; };
+	float	getHealth()		{ return m_health; };
+	float	getMaxHealth()	{ return m_maxHealth; };
+	float	getMana()		{ return m_mana; };
+	float	getMaxMana()	{ return m_maxMana; };
+	float	getVelocity()	{ return m_velocity; };
+	float	getDamage()		{ return m_damage; };
+	float	getArmor()		{ return m_armor; };
 	float	getAtackSpeed() { return m_atackSpeed; };
 
-	void receiveDamage(float p_damage);
-	void receiveDamage(float p_damage, Projectile* p_projectile);
-	void receiveTrapDamage(float p_damage);
-	bool enoughMana(float p_mana);
+	void	receiveDamage(float p_damage);
+	void	receiveDamage(float p_damage, Projectile* p_projectile);
+	void	receiveTrapDamage(float p_damage);
 
-	void increaseHealth(float p_health);
-	void increaseMana(float p_mana);
-	void increaseSpeed(float p_duration, float p_speedIncrease);
-	void increaseDamage(float p_duration, float p_damageIncrease);
-	void increaseArmor(float p_duration, float p_armorIncrease);
-	void increaseAtackSpeed(float p_duration, float p_atackSpeedIncrease);
+	void	increaseHealth(float p_health);
+	void	increaseMana(float p_mana);
+	void	increaseSpeed(float p_duration, float p_speedIncrease);
+	void	increaseDamage(float p_duration, float p_damageIncrease);
+	void	increaseArmor(float p_duration, float p_armorIncrease);
+	void	increaseAtackSpeed(float p_duration, float p_atackSpeedIncrease);
 	
-	void move();
-	void moveBackwards();
-	void rangeAtack();
+	void	move();
+	void	moveBackwards();
+	void	rangeAtack();
+	bool	enoughMana(float p_mana);
 	virtual void hability1() = 0;
 	virtual void hability2() = 0;
 	virtual void hability3() = 0;
+
 	bool	getHability1EnoughMana() { return m_hability1EnoughMana; };
 	bool	getHability2EnoughMana() { return m_hability2EnoughMana; };
 	bool	getHability3EnoughMana() { return m_hability3EnoughMana; };
