@@ -2,6 +2,7 @@
 #include "screen.h"
 
 class ButtonText;
+class Text;
 
 class ScreenMenuHome :
 	public Screen
@@ -16,6 +17,8 @@ public:
 
 private:
 	std::vector<Button*> m_buttonVector;
+
+	Text*		m_textAlphas;
 
 	ButtonText* m_buttonPlay;
 	ButtonText* m_buttonOptions;

@@ -31,6 +31,8 @@ protected:
 	int		m_backGroundID;
 	int		m_buttonFocused;
 
+	Point CenterTop;
+
 	Point LeftList1_3;
 	Point LeftList2_3;
 	Point LeftList3_3;

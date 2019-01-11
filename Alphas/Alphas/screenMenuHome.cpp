@@ -6,11 +6,17 @@
 #include "screenOption.h"
 #include "button.h"
 #include "buttonText.h"
+#include "text.h"
 
 #include <iostream>
 
 ScreenMenuHome::ScreenMenuHome() : Screen()
 {
+	m_textAlphas = new Text("ALPHAS");
+	m_textAlphas->setPosition(CenterTop);
+	m_textAlphas->setSize(150);
+	m_textAlphas->centerOrigin();
+
 	m_buttonPlay	= new ButtonText("PLAY", LeftList1_3);
 	m_buttonVector.push_back(m_buttonPlay);
 
@@ -26,6 +32,10 @@ ScreenMenuHome::ScreenMenuHome() : Screen()
 
 ScreenMenuHome::~ScreenMenuHome()
 {
+
+	delete m_textAlphas;
+	m_textAlphas = nullptr;
+
 	for (int i = 0; i < m_buttonVector.size(); i++) {
 		delete m_buttonVector[i];
 		m_buttonVector[i] = nullptr;
@@ -73,6 +83,8 @@ void ScreenMenuHome::update(double p_time, double p_deltaTime)
 void ScreenMenuHome::draw()
 {
 	drawBackGround();
+
+	m_textAlphas->draw();
 
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();

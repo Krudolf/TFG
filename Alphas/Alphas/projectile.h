@@ -1,6 +1,5 @@
 #pragma once
 #include "entity.h"
-#include "attackEffect_enum.h"
 
 class Projectile :
 	public Entity
@@ -34,9 +33,5 @@ protected:
 	bool	m_makeDamage;
 
 	Entities		m_entityOwner;
-	AttackEffect	m_attackEffect;
-
-private:
-
 };
 

@@ -6,6 +6,7 @@ class FillBar;
 class Player;
 class PlayerInfo;
 class WaveSystem;
+class Image;
 
 class Interface
 {
@@ -26,7 +27,7 @@ private:
 	int m_width;
 	int m_height;
 
-	sf::RectangleShape m_waveRectangle;
+	Image*		m_waveBox;
 	sf::Text	m_waveInfo;
 	std::string	m_waveText;
 };

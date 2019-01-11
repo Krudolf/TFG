@@ -10,6 +10,7 @@ class EngineManager;
 class Image
 {
 public:
+	Image(const char* p_path, Point p_point);
 	Image(const char* p_path, Entities p_player, Point p_point);
 	//Constructor for create icons
 	Image(Stats p_stats, float p_posX, float p_posY);
@@ -17,11 +18,19 @@ public:
 
 	void changeFrame(int p_frame);
 
+	void setPosition(Point p_pos) { m_image.setPosition(p_pos.x, p_pos.y); };
+
+	int getWidth()	{ return m_width; };
+	int getHeight() { return m_height; };
+
 	void draw();
 
 private:
 	EngineManager*	m_engineManager;
 
 	sf::Sprite	m_image;
+
+	int	m_width;
+	int	m_height;
 };
 

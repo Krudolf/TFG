@@ -159,7 +159,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="attackEffect_enum.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="buttonImage.h" />
     <ClInclude Include="buttonText.h" />
@@ -218,6 +217,7 @@
     <ClInclude Include="screenMenuHome.h" />
     <ClInclude Include="statsInfo.h" />
     <ClInclude Include="stats_enum.h" />
+    <ClInclude Include="text.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tileBlock.h" />
     <ClInclude Include="tileSkewer.h" />
@@ -284,6 +284,7 @@
     <ClCompile Include="stateMachine.cpp" />
     <ClCompile Include="screenMenuHome.cpp" />
     <ClCompile Include="StatsInfo.cpp" />
+    <ClCompile Include="text.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="tileBlock.cpp" />
     <ClCompile Include="tileSkewer.cpp" />

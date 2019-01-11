@@ -2,6 +2,21 @@
 #include "image.h"
 #include "engineManager.h"
 
+
+Image::Image(const char * p_path, Point p_point) {
+	m_engineManager = &EngineManager::p();
+
+	m_engineManager->loadTexture(p_path);
+
+	m_width		= m_engineManager->getTexture(p_path)->getSize().x;
+	m_height	= m_engineManager->getTexture(p_path)->getSize().y;
+
+	m_image.setTexture(*m_engineManager->getTexture(p_path));
+	m_image.setTextureRect(sf::IntRect(0, 0, m_width , m_height));
+	m_image.setPosition(p_point.x, p_point.y);
+	m_image.setOrigin(m_image.getTextureRect().width / 2, m_image.getTextureRect().height / 2);
+}
+
 Image::Image(const char * p_path, Entities p_player, Point p_point)
 {
 	m_engineManager = &EngineManager::p();

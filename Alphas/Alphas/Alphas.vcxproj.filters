@@ -252,9 +252,6 @@
     <ClInclude Include="enemyBoss.h">
       <Filter>Archivos de encabezado\gameEntities\enemies</Filter>
     </ClInclude>
-    <ClInclude Include="attackEffect_enum.h">
-      <Filter>Archivos de encabezado\others</Filter>
-    </ClInclude>
     <ClInclude Include="projectileSpinFixed.h">
       <Filter>Archivos de encabezado\gameEntities\projectiles</Filter>
     </ClInclude>
@@ -278,6 +275,9 @@
     </ClInclude>
     <ClInclude Include="tileSkewer.h">
       <Filter>Archivos de encabezado\gameEntities\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="text.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -454,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="tileBlock.cpp">
       <Filter>Archivos de origen\gameEntities\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="text.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

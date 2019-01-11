@@ -6,11 +6,17 @@
 #include "buttonText.h"
 #include "screenMenuHome.h"
 #include "screenSelectPlayerSolo.h"
+#include "text.h"
 
 #include <iostream>
 
 ScreenGameMode::ScreenGameMode()
 {
+	m_textAlphas = new Text("ALPHAS");
+	m_textAlphas->setPosition(CenterTop);
+	m_textAlphas->setSize(150);
+	m_textAlphas->centerOrigin();
+
 	m_buttonPlay = new ButtonText("PLAY", LeftList1_3);
 	m_buttonVectorStatic.push_back(m_buttonPlay);
 
@@ -35,6 +41,9 @@ ScreenGameMode::ScreenGameMode()
 
 ScreenGameMode::~ScreenGameMode()
 {
+	delete m_textAlphas;
+	m_textAlphas = nullptr;
+
 	for (int i = 0; i < m_buttonVector.size(); i++) {
 		delete m_buttonVector[i];
 		m_buttonVector[i] = nullptr;
@@ -79,6 +88,8 @@ void ScreenGameMode::update(double p_time, double p_deltaTime)
 void ScreenGameMode::draw()
 {
 	drawBackGround();
+
+	m_textAlphas->draw();
 
 	for (auto t_buttons : m_buttonVectorStatic) {
 		t_buttons->draw();

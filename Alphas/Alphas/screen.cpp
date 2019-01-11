@@ -15,6 +15,8 @@ Screen::Screen()
 	m_engineManager->loadTexture("assets/background.png");
 	m_backGroundID = m_engineManager->createSprite("assets/background.png", 1.f, false, 0, 0, 1280, 720, 0.f, 0.f);
 
+	CenterTop = { m_width * 0.5f, m_height * 0.1f };
+
 	LeftList1_3 = { m_width * 0.25f, m_height * 0.45f };
 	LeftList2_3 = { m_width * 0.25f, m_height * 0.65f };
 	LeftList3_3 = { m_width * 0.25f, m_height * 0.85f };

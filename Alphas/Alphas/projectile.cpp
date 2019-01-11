@@ -24,8 +24,6 @@ Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_di
 
 	m_entityOwner = p_ent;
 
-	m_attackEffect = AttackEffect::NONE;
-
 	m_moveX = 0;
 	m_moveY = 0;
 	float t_angle = 0.33;

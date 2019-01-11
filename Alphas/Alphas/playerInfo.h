@@ -6,11 +6,12 @@ class Player;
 class FillBar;
 class HabilityInfo;
 class StatsInfo;
+class Image;
 
 class PlayerInfo
 {
 public:
-	PlayerInfo(Player* p_owner, float p_posX, float p_posY, float p_sizeX, float p_sizeY);
+	PlayerInfo(Player* p_owner, float p_posX, float p_posY);
 	~PlayerInfo();
 
 	void update();
@@ -21,7 +22,7 @@ private:
 
 	Player*	m_owner;
 
-	sf::RectangleShape	m_mainBox;
+	Image*			m_mainBox;
 
 	FillBar*		m_healthBar;
 	FillBar*		m_manaBar;
