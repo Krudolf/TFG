@@ -25,7 +25,7 @@ void TileBlock::applyEffect(Entity* p_entity)
 		Enemy* t_enemy = dynamic_cast<Enemy*>(p_entity);
 		t_enemy->moveBackwards();
 	}
-	else if (p_entity->getEntity() == Entities::BULLET_BLUE || p_entity->getEntity() == Entities::BULLET_GREEN || p_entity->getEntity() == Entities::BULLET_GREEN || p_entity->getEntity() == Entities::ENEMY_BULLET || p_entity->getEntity() == Entities::ENEMY_BOSS_BULLET) {
+	else if (p_entity->getEntity() == Entities::BULLET_BLUE || p_entity->getEntity() == Entities::BULLET_GREEN || p_entity->getEntity() == Entities::BULLET_YELLOW || p_entity->getEntity() == Entities::ENEMY_BULLET || p_entity->getEntity() == Entities::ENEMY_BOSS_BULLET) {
 		Projectile* t_projectile = dynamic_cast<Projectile*>(p_entity);
 		t_projectile->setReadyToDelete(true);
 	}

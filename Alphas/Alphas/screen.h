@@ -45,10 +45,15 @@ protected:
 	Point CenterList3_4;
 
 	Point Center_left;
+	Point Center_right;
 
 	Point Down_Left1_3;
 	Point Down_Left2_3;
 	Point Down_Left3_3;
+	
+	Point Down_Right1_3;
+	Point Down_Right2_3;
+	Point Down_Right3_3;
 
 	Point Down_right;
 	Point Down_right_up;

@@ -111,9 +111,6 @@
     <ClInclude Include="tinyxml2.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="quadTree.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="tile.h">
       <Filter>Archivos de encabezado\gameEntities\tiles</Filter>
     </ClInclude>
@@ -279,6 +276,12 @@
     <ClInclude Include="text.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="joystick_enum.h">
+      <Filter>Archivos de encabezado\others</Filter>
+    </ClInclude>
+    <ClInclude Include="screenSelectPlayerCooperative.h">
+      <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -309,9 +312,6 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="tinyxml2.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="QuadTree.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
@@ -457,6 +457,9 @@
     </ClCompile>
     <ClCompile Include="text.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="screenSelectPlayerCooperative.cpp">
+      <Filter>Archivos de origen\screens</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

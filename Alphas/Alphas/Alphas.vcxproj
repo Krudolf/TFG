@@ -164,6 +164,7 @@
     <ClInclude Include="buttonText.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="joystick_enum.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemyBoss.h" />
     <ClInclude Include="enemyCharger.h" />
@@ -202,7 +203,6 @@
     <ClInclude Include="projectileStraightSpin.h" />
     <ClInclude Include="projectileStraightSticky.h" />
     <ClInclude Include="projectileStraightStun.h" />
-    <ClInclude Include="quadTree.h" />
     <ClInclude Include="sceneMap.h" />
     <ClInclude Include="screen.h" />
     <ClInclude Include="screenGameMode.h" />
@@ -210,6 +210,7 @@
     <ClInclude Include="screenManager.h" />
     <ClInclude Include="screenOption.h" />
     <ClInclude Include="screenPause.h" />
+    <ClInclude Include="screenSelectPlayerCooperative.h" />
     <ClInclude Include="screenSelectPlayerSolo.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="screenGame.h" />
@@ -270,7 +271,6 @@
     <ClCompile Include="projectileStraightSpin.cpp" />
     <ClCompile Include="projectileStraightSticky.cpp" />
     <ClCompile Include="projectileStraightStun.cpp" />
-    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="sceneMap.cpp" />
     <ClCompile Include="screen.cpp" />
     <ClCompile Include="screenGameMode.cpp" />
@@ -278,6 +278,7 @@
     <ClCompile Include="screenManager.cpp" />
     <ClCompile Include="screenOption.cpp" />
     <ClCompile Include="screenPause.cpp" />
+    <ClCompile Include="screenSelectPlayerCooperative.cpp" />
     <ClCompile Include="screenSelectPlayerSolo.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="screenGame.cpp" />

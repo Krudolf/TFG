@@ -10,8 +10,10 @@
 #include "potion.h"
 #include "hashGrid.h"
 #include "tile.h"
+#include "joystick_enum.h"
 
 #include <iostream>
+
 
 Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_playerEntity) : Entity(p_path, p_playerEntity)
 {
@@ -19,6 +21,8 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 	m_posY		= p_posY;
 	m_lastPosX	= p_posX;
 	m_lastPosY	= p_posY;
+
+	m_keyboard = true;
 
 	m_alive = true;
 	m_pasiveActive = false;
@@ -63,11 +67,15 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 
 Player::~Player()
 {
+
 	for (int i = 0; i < m_basicProjectiles.size(); i++) {
 		delete m_basicProjectiles[i];
 		m_basicProjectiles[i] = nullptr;
 	}
 	m_basicProjectiles.clear();
+	
+	//delete m_actions;
+	//m_actions = nullptr;
 }
 
 void Player::receiveDamage(float p_damage)
@@ -185,27 +193,27 @@ void Player::move() {
 	m_lastPosX = m_posX;
 	m_lastPosY = m_posY;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+	if ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) || (!m_keyboard && sf::Joystick::isButtonPressed(0, (int)JoystickButton::LB))) {
 		t_sprint = 2;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+	if ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::D)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::LEFT_X) >= 75)) {
 		m_faceDirection = Direction::RIGHT;
 		m_posX = m_lastPosX + (m_deltaTime * m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 2);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+	else if ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::A)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::LEFT_X) <= -75)) {
 		m_faceDirection = Direction::LEFT;
 		m_posX = m_lastPosX + (m_deltaTime * -m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 3);
 	}
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+	if ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::LEFT_Y) >= 75)) {
 		m_faceDirection = Direction::DOWN;
 		m_posY = m_lastPosY + (m_deltaTime * m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+	else if ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::LEFT_Y) <= -75)) {
 		m_faceDirection = Direction::UP;
 		m_posY = m_lastPosY + (m_deltaTime * -m_velocity * t_sprint);
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
@@ -224,28 +232,28 @@ void Player::moveBackwards()
 
 void Player::rangeAtack()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+	if ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::RIGHT_X) >= 75)) {
 		m_faceDirection = Direction::RIGHT;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 2);
 		launchProjectile();
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+	else if ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::RIGHT_X) <= -75)) {
 		m_faceDirection = Direction::LEFT;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 3);
 		launchProjectile();
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+	else if ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::RIGHT_Y) >= 75)) {
 		m_faceDirection = Direction::DOWN;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 0);
 		launchProjectile();
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+	else if ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::RIGHT_Y) <= -75)) {
 		m_faceDirection = Direction::UP;
 		m_engineManager->setSpriteFrame(m_spriteID, m_spriteSheetRow, 1);
 		launchProjectile();
 	}
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !m_hability1inCooldown) {
+	if (!m_hability1inCooldown && ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) || (!m_keyboard && sf::Joystick::isButtonPressed(0, (int)JoystickButton::RB)))) {
 		hability1();
 		if (m_hability1Launched) {
 			m_hability1inCooldown = true;
@@ -253,7 +261,7 @@ void Player::rangeAtack()
 		}
 	}
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !m_hability2inCooldown) {
+	if (!m_hability2inCooldown && ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::LT) >= 75))) {
 		hability2();
 		if (m_hability2Launched) {
 			m_hability2inCooldown = true;
@@ -261,7 +269,7 @@ void Player::rangeAtack()
 		}
 	}
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F) && !m_hability3inCooldown) {
+	if (!m_hability3inCooldown && ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) || (!m_keyboard && sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)JoystickPad::RT) <= -75))) {
 		hability3();
 		if (m_hability3Launched) {
 			m_hability3inCooldown = true;
@@ -435,11 +443,10 @@ void Player::update(double p_time, double p_deltaTime) {
 		switch (t_object->getEntity())
 		{
 		case Entities::TILE:
-			if (m_engineManager->checkCollision(getSpriteID(), t_object->getSpriteID())) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {
 				Tile* t_tile = dynamic_cast<Tile*>(t_object);
 				t_tile->applyEffect(this);
-			}
-				
+			}	
 			break;
 		case Entities::POTION:
 			m_nearPotion = true;
@@ -449,7 +456,7 @@ void Player::update(double p_time, double p_deltaTime) {
 		}
 	}
 
-	if (m_nearPotion && sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	if (m_nearPotion && ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::P)) || (!m_keyboard && sf::Joystick::isButtonPressed(0, (int)JoystickButton::X))))
 		pickPotion();
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
 		increaseHealth(200.f);

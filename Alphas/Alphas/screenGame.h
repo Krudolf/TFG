@@ -28,7 +28,7 @@ public:
 	static std::vector<Projectile*>	m_projectileVector;
 	static std::vector<Tile*>		m_tileCollisionVector;
 
-	ScreenGame(Entities p_playerEntity);
+	ScreenGame(Entities p_playerEntity1, Entities p_playerEntity2);
 	~ScreenGame();
 	void deleteAndFree();
 
@@ -44,6 +44,8 @@ public:
 	void checkCollisionBetweenEnemys();
 
 private:
+	void createPlayer(Entities p_playerEntity, bool p_keyboardControll);
+
 	Camera*			m_camera;
 	SceneMap*		m_sceneMap;
 	HashGrid*		m_hashGrid;

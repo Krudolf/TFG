@@ -29,13 +29,18 @@ Screen::Screen()
 	CenterList3_4 = { m_width * 0.5f, m_height * 0.6f };
 
 	Center_left = { m_width * 0.25f, m_height * 0.3f };
+	Center_right = { m_width * 0.75f, m_height * 0.3f };
 
-	Down_Left1_3 = { m_width * 0.1f, m_height * 0.8f };
-	Down_Left2_3 = { m_width * 0.25f, m_height * 0.8f };
-	Down_Left3_3 = { m_width * 0.4f, m_height * 0.8f };
+	Down_Left1_3 = { m_width * 0.1f, m_height * 0.7f };
+	Down_Left2_3 = { m_width * 0.25f, m_height * 0.7f };
+	Down_Left3_3 = { m_width * 0.4f, m_height * 0.7f };
+
+	Down_Right1_3 = { m_width * 0.6f, m_height * 0.7f };
+	Down_Right2_3 = { m_width * 0.75f, m_height * 0.7f };
+	Down_Right3_3 = { m_width * 0.9f, m_height * 0.7f };
 	
-	Down_right_up = { m_width * 0.8f, m_height * 0.75f };
-	Down_right = { m_width * 0.8f, m_height * 0.9f };
+	Down_right = { m_width * 0.25f, m_height * 0.9f };
+	Down_right_up = { m_width * 0.75f, m_height * 0.9f };
 
 	m_buttonFocused = 0;
 }

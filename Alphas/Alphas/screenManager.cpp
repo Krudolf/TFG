@@ -65,6 +65,8 @@ void ScreenManager::draw()
 {
 	m_engineManager->getWindow()->clear(sf::Color(27,55,86,255));
 
+	m_currentScreen->drawBackGround();
+
 	m_currentScreen->draw();
 
 	if (m_overlayScreen != nullptr)

@@ -135,8 +135,7 @@ void EnemyCharger::update(double p_time, double p_deltaTime)
 		if (t_object->getEntity() == Entities::TILE) {
 			if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID())) {
 				Tile* t_tile = dynamic_cast<Tile*>(t_object);
-				if(t_tile->getTileType() == TileTypes::SKEWER)
-					t_tile->applyEffect(this);
+				t_tile->applyEffect(this);
 			}
 		}
 	}

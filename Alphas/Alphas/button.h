@@ -19,6 +19,9 @@ public:
 	void setIsBlocked(bool p_isBlocked);
 	bool getIsBlocked() { return m_isBlocked; };
 
+	void select();
+	void unselect();
+
 	virtual void draw() = 0;
 
 protected:

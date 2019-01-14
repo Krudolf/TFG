@@ -19,8 +19,8 @@ public:
 	void draw();
 
 private:
-	std::vector<Button*> m_buttonVector;
-	std::vector<Image*> m_imageVector;
+	std::vector<Button*>	m_buttonVector;
+	std::vector<Image*>		m_imageVector;
 
 	int				m_arrayEntities[3];
 

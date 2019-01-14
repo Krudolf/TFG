@@ -113,7 +113,7 @@ void Projectile::update()
 		//If collides with enemy, enemy receive damage and projectile maybe or not be destroyed.
 		for (auto t_object : m_nearEntityVector) {
 			if (t_object->getEntity() == Entities::TILE) {
-				if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID())) {
+				if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID)) {
 					Tile* t_tile = dynamic_cast<Tile*>(t_object);
 					t_tile->applyEffect(this);
 				}
@@ -138,8 +138,10 @@ void Projectile::update()
 		//If collides with player, player receive damage and projectile maybe or not be destroyed.
 		for (auto t_object : m_nearEntityVector) {
 			if (t_object->getEntity() == Entities::TILE) {
-				if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID))
-					m_readyToDelete = true;
+				if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID)) {
+					Tile* t_tile = dynamic_cast<Tile*>(t_object);
+					t_tile->applyEffect(this);
+				}
 			}
 			else if (t_object->getEntity() == Entities::PLAYER_BLUE || t_object->getEntity() == Entities::PLAYER_GREEN || t_object->getEntity() == Entities::PLAYER_YELLOW) {
 				if (m_engineManager->checkCollision(t_object->getSpriteID(), getSpriteID())) {

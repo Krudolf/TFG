@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "enemy.h"
 #include "engineManager.h"
 #include "screenGame.h"
@@ -8,6 +8,7 @@
 #include "hashGrid.h"
 #include "tile.h"
 
+#include <cmath>
 #include <iostream>
 
 
@@ -88,7 +89,7 @@ void Enemy::receiveTrapDamage(float p_damage)
 	}
 }
 
-double Enemy::calculateDistance(Player * p_posibleObjective)
+double Enemy::calculateDistance(Entity * p_posibleObjective)
 {
 	double t_posX = p_posibleObjective->getPositionX();
 	double t_posY = p_posibleObjective->getPositionY();
@@ -103,7 +104,7 @@ double Enemy::calculateDistance(Player * p_posibleObjective)
 void Enemy::checkObjective()
 {
 	if (m_cooperativeMode) {
-		float t_bestDistance = 1000;
+		float t_bestDistance = 10000;
 		Player* t_bestObjective = nullptr;
 
 		//Checks the closest enemy
@@ -123,7 +124,6 @@ void Enemy::checkObjective()
 	else {
 		m_distanceToObjective = calculateDistance(m_objectivePlayer);
 	}
-
 	m_engineManager->getDirection(m_objectivePlayer->getPositionX(), m_objectivePlayer->getPositionY(), m_posX, m_posY, m_directionMoveX, m_directionMoveY);
 }
 
@@ -148,14 +148,6 @@ void Enemy::update(double p_time, double p_deltaTime)
 	m_lastPosY = m_posY;
 
 	m_nearEntityVector = m_hashGrid->getNearby(this);
-	for (auto t_object : m_nearEntityVector) {
-		if (t_object->getEntity() == Entities::TILE) {
-			if (m_engineManager->checkCollision(m_spriteID, t_object->getSpriteID())) {
-				Tile* t_tile = dynamic_cast<Tile*>(t_object);
-				t_tile->applyEffect(this);
-			}
-		}
-	}
 
 	if (!m_stunned) {
 		checkObjective();
@@ -165,6 +157,15 @@ void Enemy::update(double p_time, double p_deltaTime)
 	else {
 		if (m_engineManager->getMasterClockSeconds() >= m_endOfStun)
 			m_stunned = false;
+	}
+
+	for (auto t_object : m_nearEntityVector) {
+		if (t_object->getEntity() == Entities::TILE) {
+			if (m_engineManager->checkCollision(t_object->getSpriteID(), m_spriteID)) {
+				Tile* t_tile = dynamic_cast<Tile*>(t_object);
+				t_tile->applyEffect(this);
+			}
+		}
 	}
 	updateAtack();
 

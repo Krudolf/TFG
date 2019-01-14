@@ -82,8 +82,6 @@ void ScreenMenuHome::update(double p_time, double p_deltaTime)
 
 void ScreenMenuHome::draw()
 {
-	drawBackGround();
-
 	m_textAlphas->draw();
 
 	for (auto t_buttons : m_buttonVector) {

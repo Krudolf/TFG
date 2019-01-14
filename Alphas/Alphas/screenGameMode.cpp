@@ -6,6 +6,7 @@
 #include "buttonText.h"
 #include "screenMenuHome.h"
 #include "screenSelectPlayerSolo.h"
+#include "screenSelectPlayerCooperative.h"
 #include "text.h"
 
 #include <iostream>
@@ -35,7 +36,6 @@ ScreenGameMode::ScreenGameMode()
 	m_buttonVector.push_back(m_buttonCooperative);
 
 	m_buttonSolo->setIsFocused(true);
-	m_buttonCooperative->setIsBlocked(true);
 }
 
 
@@ -77,7 +77,7 @@ void ScreenGameMode::update(double p_time, double p_deltaTime)
 		if (m_buttonFocused == 0)
 			m_screenManager->changeScreen(new ScreenSelectPlayerSolo());
 		else if (m_buttonFocused == 1 && !m_buttonCooperative->getIsBlocked())
-			std::cout << "COOPERATIVE" << std::endl;
+			m_screenManager->changeScreen(new ScreenSelectPlayerCooperative());
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
 		m_engineManager->setKeyReleased(false);
@@ -87,8 +87,6 @@ void ScreenGameMode::update(double p_time, double p_deltaTime)
 
 void ScreenGameMode::draw()
 {
-	drawBackGround();
-
 	m_textAlphas->draw();
 
 	for (auto t_buttons : m_buttonVectorStatic) {

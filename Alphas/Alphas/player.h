@@ -66,6 +66,9 @@ public:
 	void update(double p_time, double p_deltaTime);
 	void draw() override;
 
+	void setKeyboardControll(bool p_keyboard) { m_keyboard = p_keyboard; };
+	bool getKeyboardControll() { return m_keyboard; };
+
 protected:
 	double	m_deltaTime;
 	double	m_time;
@@ -117,6 +120,8 @@ protected:
 
 private:
 	const int m_maxProjectiles = 20;
+
+	bool	m_keyboard;
 	
 	bool	m_nearPotion;
 	bool	m_speedPotionEfect;

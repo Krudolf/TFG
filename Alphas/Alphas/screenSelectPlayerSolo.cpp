@@ -23,11 +23,11 @@ ScreenSelectPlayerSolo::ScreenSelectPlayerSolo()
 	m_buttonYellow = new ButtonImage("assets/spritesheet.png", Entities::PLAYER_YELLOW, Down_Left3_3);
 	m_buttonVector.push_back(m_buttonYellow);
 
-	m_buttonPlay = new ButtonText("PLAY", Down_right_up);
-	m_buttonVector.push_back(m_buttonPlay);
-
 	m_buttonBack = new ButtonText("BACK", Down_right);
 	m_buttonVector.push_back(m_buttonBack);
+
+	m_buttonPlay = new ButtonText("PLAY", Down_right_up);
+	m_buttonVector.push_back(m_buttonPlay);
 
 	m_buttonBlue->setIsFocused(true);
 	m_buttonPlay->setIsBlocked(true);
@@ -99,12 +99,12 @@ void ScreenSelectPlayerSolo::update(double p_time, double p_deltaTime)
 			m_playerSelected = 2;
 			m_buttonPlay->setIsBlocked(false);
 		}
-		else if (m_buttonFocused == 3 && !m_buttonPlay->getIsBlocked()) {
-			Entities t_entitySelected = static_cast<Entities>(m_arrayEntities[m_playerSelected]);
-			m_screenManager->changeScreen(new ScreenGame(t_entitySelected));
-		}
-		else if (m_buttonFocused == 4)
+		else if (m_buttonFocused == 3)
 			m_screenManager->changeScreen(new ScreenGameMode());
+		else if (m_buttonFocused == 4 && !m_buttonPlay->getIsBlocked()) {
+			Entities t_entitySelected = static_cast<Entities>(m_arrayEntities[m_playerSelected]);
+			m_screenManager->changeScreen(new ScreenGame(t_entitySelected, Entities::NONE));
+		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
 		m_engineManager->setKeyReleased(false);

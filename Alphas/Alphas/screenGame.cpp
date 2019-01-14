@@ -33,9 +33,9 @@
 
 #include <iostream>
 
-ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
+ScreenGame::ScreenGame(Entities p_playerEntity1, Entities p_playerEntity2) : Screen()
 {
-	m_playerEntity = p_playerEntity;
+	m_playerEntity = p_playerEntity1;
 
 	m_gamePause			= false;
 	m_gameOver			= false;
@@ -52,20 +52,8 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 	m_spawnPointsVector.push_back({ t_width - 200.f, 200.f });
 	m_spawnPointsVector.push_back({ t_width - 200.f, t_height - 200.f });
 	/* ++++++++++++++++++++++++++ PLAYER ++++++++++++++++++++++++++ */
-	Player* t_player;
-	switch (p_playerEntity)
-	{
-		case Entities::PLAYER_BLUE:
-			t_player = new PlayerBlue(t_width / 2, t_height / 2, "assets/spritesheet.png");
-			break;
-		case Entities::PLAYER_GREEN:
-			t_player = new PlayerGreen(t_width / 2, t_height / 2, "assets/spritesheet.png");
-			break;
-		case Entities::PLAYER_YELLOW:
-			t_player = new PlayerYellow(t_width / 2, t_height / 2, "assets/spritesheet.png");
-			break;
-		}
-	m_playerVector.push_back(t_player);
+	createPlayer(p_playerEntity1, true);
+	createPlayer(p_playerEntity2, false);
 
 	/* ++++++++++++++++++++++++++ CAMERA ++++++++++++++++++++++++++ */
 	m_camera = new Camera();
@@ -76,11 +64,12 @@ ScreenGame::ScreenGame(Entities p_playerEntity) : Screen()
 	m_waveSystem->setWavenumber(1);
 	m_waveSystem->spawnNextWave();
 	
-	m_interface = new Interface(m_playerVector[0], nullptr, m_waveSystem);
-
-	m_potionVector.push_back(new PotionHealth("assets/spritesheet.png", 500.f, 500.f, PotionType::HEALTH));
-	m_potionVector.push_back(new PotionMana("assets/spritesheet.png", 750.f, 500.f, PotionType::MANA));
-	m_potionVector.push_back(new PotionDamage("assets/spritesheet.png", 320.f, 320.f, PotionType::DAMAGE));
+	if(p_playerEntity2 == Entities::NONE)
+		m_interface = new Interface(m_playerVector[0], nullptr, m_waveSystem);
+	else {
+		m_interface = new Interface(m_playerVector[0], m_playerVector[1], m_waveSystem);
+		m_engineManager->getCameraView()->zoom(1.25);
+	}
 }
 
 
@@ -137,13 +126,9 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 		m_hashGrid->clear();
 		m_screenEntities.clear();
 
-		/*
-			TODO:
-			VER UNA FORMA DE NO TENER QUE LIMPIAR EL HASH GRID TODO EL RATO, ACTUALIZAR SOLO PLAYER Y ENEMIGOS QUE SON LOS QUE SE MUEVEN
-		*/
-
 		fillHashGrid();
-		m_screenEntities = m_hashGrid->getScreenEntities();
+
+		/*m_screenEntities = m_hashGrid->getScreenEntities();
 
 		for (auto t_entity : m_screenEntities) {
 			if (t_entity->getEntity() == Entities::TILE) {
@@ -154,17 +139,17 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 				Player* t_player = dynamic_cast<Player*>(t_entity);
 				t_player->update(p_time, p_deltaTime);
 			}
-		}
+		}*/
 
 		// TILES WITH EFFECT/COLLISION 
-		/*for (auto t_tile : m_tileCollisionVector) {
+		for (auto t_tile : m_tileCollisionVector) {
 			t_tile->update(p_time, p_deltaTime);
 		}
 
 		// ++++++++++++++++++++++++++ UPDATE PLAYER ++++++++++++++++++++++++++
 		for (auto t_player : m_playerVector) {
 			t_player->update(p_time, p_deltaTime);
-		}*/
+		}
 		checkGameOver();
 
 		/* ++++++++++++++++++++++++++ UPDATE ENEMY ++++++++++++++++++++++++++ */
@@ -227,7 +212,7 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 	}
 	else if(m_gameOver){
 		//GAME OVEEEEER!!
-		m_screenManager->setOverlayScreen(new ScreenGameOver(m_playerEntity));
+		m_screenManager->setOverlayScreen(new ScreenGameOver());
 	}
 	else if (m_gamePause) {
 		//PAUSEEE!!
@@ -241,7 +226,7 @@ void ScreenGame::draw()
 
 	//Draw the map
 	m_sceneMap->draw();
-	m_hashGrid->debug();
+	//m_hashGrid->debug();
 
 	//Draw potions
 	for (auto t_potion : m_potionVector) {
@@ -321,6 +306,36 @@ void ScreenGame::checkCollisionBetweenEnemys()
 					t_enemy1->moveBackwards();
 			}
 		}
+	}
+}
+
+void ScreenGame::createPlayer(Entities p_playerEntity, bool p_keyboardControll)
+{
+
+	float t_width = m_sceneMap->getWidth() / 2;
+	float t_height = m_sceneMap->getHeight() / 2;
+
+	if (p_keyboardControll)
+		t_width -= 100;
+
+	Player* t_player;
+	switch (p_playerEntity)
+	{
+	case Entities::PLAYER_BLUE:
+		t_player = new PlayerBlue(t_width, t_height, "assets/spritesheet.png");
+		t_player->setKeyboardControll(p_keyboardControll);
+		m_playerVector.push_back(t_player);
+		break;
+	case Entities::PLAYER_GREEN:
+		t_player = new PlayerGreen(t_width, t_height, "assets/spritesheet.png");
+		t_player->setKeyboardControll(p_keyboardControll);
+		m_playerVector.push_back(t_player);
+		break;
+	case Entities::PLAYER_YELLOW:
+		t_player = new PlayerYellow(t_width, t_height, "assets/spritesheet.png");
+		t_player->setKeyboardControll(p_keyboardControll);	
+		m_playerVector.push_back(t_player);
+		break;
 	}
 }
 

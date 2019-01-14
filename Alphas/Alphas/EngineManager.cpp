@@ -101,6 +101,7 @@ void EngineManager::createCameraView(int centerX, int centerY, int width, int he
 {
 	m_gameView->setCenter(sf::Vector2f(centerX, centerY));
 	m_gameView->setSize(sf::Vector2f(width, height));
+	//m_gameView->zoom(4);
 }
 
 void EngineManager::setTargetGameView(float p_posX, float p_posY)

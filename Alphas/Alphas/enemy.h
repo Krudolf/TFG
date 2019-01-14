@@ -56,7 +56,7 @@ protected:
 	FillBar*	m_healthBar;
 
 private:
-	double calculateDistance(Player* p_posibleObjective);
+	double	calculateDistance(Entity* p_posibleObjective);
 
 	Projectile*	m_lastProjectile;
 	float		m_timeNextHitProjectile;
@@ -66,5 +66,9 @@ private:
 	bool	m_cooperativeMode;
 
 	float	m_endOfStun;
+
+
+	const float  PI = 3.14159265358979f;
+	int	m_playerDegree;
 
 };

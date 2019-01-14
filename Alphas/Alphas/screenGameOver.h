@@ -8,7 +8,7 @@ class ScreenGameOver :
 	public Screen
 {
 public:
-	ScreenGameOver(Entities p_playerEntity);
+	ScreenGameOver();
 	~ScreenGameOver();
 
 	void init();
@@ -20,8 +20,6 @@ private:
 
 	ButtonText* m_buttonRetry;
 	ButtonText*	m_buttonGoMenu;
-
-	Entities	m_playerEntity;
 
 	int	m_buttonFocused;
 };

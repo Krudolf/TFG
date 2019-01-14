@@ -7,10 +7,8 @@
 #include "screenGameMode.h"
 #include "screenMenuHome.h"
 
-ScreenGameOver::ScreenGameOver(Entities p_playerEntity)
+ScreenGameOver::ScreenGameOver()
 {
-	m_playerEntity = p_playerEntity;
-
 	m_buttonRetry = new ButtonText("RETRY", CenterList2_4);
 	m_buttonVector.push_back(m_buttonRetry);
 

@@ -35,8 +35,9 @@ void Button::setIsFocused(bool p_isFocused)
 	else if (m_isBlocked) {
 		m_button.setFillColor(sf::Color(169, 169, 169));
 	}
-	else
+	else {
 		m_button.setFillColor(sf::Color(m_shoftBlue.r, m_shoftBlue.g, m_shoftBlue.b, m_shoftBlue.a));
+	}
 }
 
 void Button::setIsBlocked(bool p_isBlocked)
@@ -48,4 +49,15 @@ void Button::setIsBlocked(bool p_isBlocked)
 	else {
 		m_button.setFillColor(sf::Color(m_shoftBlue.r, m_shoftBlue.g, m_shoftBlue.b, m_shoftBlue.a));
 	}
+}
+
+void Button::select()
+{
+	m_button.setOutlineThickness(5);
+	m_button.setOutlineColor(sf::Color(m_shoftGrey.r, m_shoftGrey.g, m_shoftGrey.b, m_shoftGrey.a));
+}
+
+void Button::unselect()
+{
+	m_button.setOutlineThickness(0);
 }

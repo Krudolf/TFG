@@ -1,6 +1,7 @@
 #pragma once
 
 enum class Entities {
+	NONE = -1,
 	PLAYER_BLUE = 0,
 	PLAYER_GREEN,
 	PLAYER_YELLOW,
