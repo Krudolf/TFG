@@ -33,6 +33,7 @@ ScreenSelectPlayerSolo::ScreenSelectPlayerSolo()
 	m_buttonPlay->setIsBlocked(true);
 
 	m_imageCharacters = new Image("assets/spritesheet.png", Entities::PLAYER_BLUE, Center_left);
+	m_imageHabilities = new Image("assets/HabilityInfo.png", 0, Center_right2);
 
 	m_arrayEntities[0] = static_cast<int>(Entities::PLAYER_BLUE);
 	m_arrayEntities[1] = static_cast<int>(Entities::PLAYER_GREEN);
@@ -50,15 +51,22 @@ ScreenSelectPlayerSolo::~ScreenSelectPlayerSolo()
 	delete m_imageCharacters;
 	m_imageCharacters = nullptr;
 
+	delete m_imageHabilities;
+	m_imageHabilities = nullptr;
+
 	m_buttonVector.clear();
 }
 
 void ScreenSelectPlayerSolo::updateImage()
 {
-	if (m_buttonFocused < 3)
+	if (m_buttonFocused < 3) {
 		m_imageCharacters->changeFrame(m_arrayEntities[m_buttonFocused]);
-	else if (m_playerSelected != -1)
+		m_imageHabilities->changeFrameHability(m_arrayEntities[m_buttonFocused]);
+	}
+	else if (m_playerSelected != -1) {
 		m_imageCharacters->changeFrame(m_arrayEntities[m_playerSelected]);
+		m_imageHabilities->changeFrameHability(m_arrayEntities[m_playerSelected]);
+	}
 }
 
 void ScreenSelectPlayerSolo::init()
@@ -114,8 +122,10 @@ void ScreenSelectPlayerSolo::update(double p_time, double p_deltaTime)
 
 void ScreenSelectPlayerSolo::draw()
 {
+	m_imageCharacters->draw();
+	m_imageHabilities->draw();
+
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();
 	}
-	m_imageCharacters->draw();
 }

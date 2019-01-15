@@ -45,13 +45,13 @@ PlayerInfo::PlayerInfo(Player* p_owner, float p_posX, float p_posY)
 	float	t_skillSize = 32.f;
 	float	t_skillPosX = t_pos.x + t_sizeX * -0.075;
 	float	t_skillPosY = t_barPosY;
-	m_hability1 = new HabilityInfo(Hability::SPIN_BLUE, t_skillPosX, t_skillPosY, t_skillSize);
+	m_hability1 = new HabilityInfo(t_skillPosX, t_skillPosY, t_skillSize, p_owner->getEntity(), 0);
 	
 	float	t_skillPosX2 = t_pos.x;
-	m_hability2 = new HabilityInfo(Hability::SPIN_BLUE, t_skillPosX2, t_skillPosY, t_skillSize);
+	m_hability2 = new HabilityInfo(t_skillPosX2, t_skillPosY, t_skillSize, p_owner->getEntity(), 1);
 	
 	float	t_skillPosX3 = t_pos.x + t_sizeX * 0.075;
-	m_hability3 = new HabilityInfo(Hability::SPIN_BLUE, t_skillPosX3, t_skillPosY, t_skillSize);
+	m_hability3 = new HabilityInfo(t_skillPosX3, t_skillPosY, t_skillSize, p_owner->getEntity(), 2);
 
 	/* STATS INFORMATION */
 	float	t_statPosX	= t_pos.x + t_sizeX * -0.35;

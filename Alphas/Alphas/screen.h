@@ -46,6 +46,7 @@ protected:
 
 	Point Center_left;
 	Point Center_right;
+	Point Center_right2;
 
 	Point Down_Left1_3;
 	Point Down_Left2_3;

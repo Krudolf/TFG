@@ -30,6 +30,7 @@ private:
 	ButtonText*		m_buttonPlay;
 	ButtonText*		m_buttonBack;
 	Image*			m_imageCharacters;
+	Image*			m_imageHabilities;
 
 	int	m_buttonFocused;
 	int m_playerSelected;

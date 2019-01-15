@@ -176,7 +176,6 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="fillBar.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="habilities_enum.h" />
     <ClInclude Include="habilityInfo.h" />
     <ClInclude Include="hashGrid.h" />
     <ClInclude Include="image.h" />

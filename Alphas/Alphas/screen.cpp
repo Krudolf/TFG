@@ -28,8 +28,9 @@ Screen::Screen()
 	CenterList2_4 = { m_width * 0.5f, m_height * 0.4f };
 	CenterList3_4 = { m_width * 0.5f, m_height * 0.6f };
 
-	Center_left = { m_width * 0.25f, m_height * 0.3f };
-	Center_right = { m_width * 0.75f, m_height * 0.3f };
+	Center_left = { m_width * 0.25f, m_height * 0.35f };
+	Center_right = { m_width * 0.75f, m_height * 0.35f };
+	Center_right2 = { m_width * 0.75f, m_height * 0.35f };
 
 	Down_Left1_3 = { m_width * 0.1f, m_height * 0.7f };
 	Down_Left2_3 = { m_width * 0.25f, m_height * 0.7f };

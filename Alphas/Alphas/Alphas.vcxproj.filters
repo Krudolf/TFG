@@ -222,9 +222,6 @@
     <ClInclude Include="fillBar.h">
       <Filter>Archivos de encabezado\interface</Filter>
     </ClInclude>
-    <ClInclude Include="habilities_enum.h">
-      <Filter>Archivos de encabezado\others</Filter>
-    </ClInclude>
     <ClInclude Include="habilityInfo.h">
       <Filter>Archivos de encabezado\interface</Filter>
     </ClInclude>

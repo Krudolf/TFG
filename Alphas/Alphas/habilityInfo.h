@@ -1,5 +1,5 @@
 #pragma once
-#include "habilities_enum.h"
+#include "entities_enum.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -8,7 +8,7 @@ class EngineManager;
 class HabilityInfo
 {
 public:
-	HabilityInfo(Hability p_hability, float p_posX, float p_posY, float p_skillSize);
+	HabilityInfo(float p_posX, float p_posY, float p_skillSize, Entities p_playerEntity,int p_numHability);
 	~HabilityInfo();
 
 	void update(float p_activationTime, float p_cooldownDuration, bool p_enoughMana);

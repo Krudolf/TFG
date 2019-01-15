@@ -4,17 +4,17 @@
 
 #include <iostream>
 
-HabilityInfo::HabilityInfo(Hability p_hability, float p_posX, float p_posY, float p_skillSize)
+HabilityInfo::HabilityInfo(float p_posX, float p_posY, float p_skillSize, Entities p_playerEntity, int p_numHability)
 {
 	m_engineManager = &EngineManager::p();
 
 	m_path = "assets/habilitySheet.png";
 	m_engineManager->loadTexture(m_path);
 
-	int t_habilityNum = static_cast<int>(p_hability);
+	int t_playerNum = static_cast<int>(p_playerEntity);
 
-	int t_row		= t_habilityNum / 4;
-	int t_column	= t_habilityNum % 4;
+	int t_row		= p_numHability % 4;
+	int t_column	= t_playerNum % 4;
 
 	m_hability.setTexture(*m_engineManager->getTexture(m_path));
 	m_hability.setTextureRect(sf::IntRect(p_skillSize * t_row, p_skillSize * t_column, p_skillSize, p_skillSize));
