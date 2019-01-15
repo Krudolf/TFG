@@ -70,9 +70,10 @@ void Enemy::receiveDamage(float p_damage, Projectile* p_projectile)
 		}
 	}
 
-	if (m_health <= 0.f) {
+	if (m_health <= 0.f && !m_dead) {
 		m_dead = true;
 		m_health = 0.f;
+		p_projectile->getOwner()->receiveExperience(m_expToPlayer);
 	}
 }
 

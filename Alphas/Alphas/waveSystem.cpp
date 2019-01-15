@@ -47,16 +47,16 @@ void WaveSystem::createEnemy(EnemyType p_type)
 	switch (p_type)
 	{
 		case EnemyType::WARRIOR:
-			t_enemy = new EnemyWarrior(t_point.x, t_point.y, "assets/spritesheet.png");
+			t_enemy = new EnemyWarrior(t_point.x, t_point.y, "assets/spritesheet.png", m_wave);
 			break;
 		case EnemyType::CHARGER:
-			t_enemy = new EnemyCharger(t_point.x, t_point.y, "assets/spritesheet.png");
+			t_enemy = new EnemyCharger(t_point.x, t_point.y, "assets/spritesheet.png", m_wave);
 			break;
 		case EnemyType::RANGER:
-			t_enemy = new EnemyRanger(t_point.x, t_point.y, "assets/spritesheet.png");
+			t_enemy = new EnemyRanger(t_point.x, t_point.y, "assets/spritesheet.png", m_wave);
 			break;
 		case EnemyType::BOSS:
-			t_enemy = new EnemyBoss(t_point.x, t_point.y, "assets/spritesheet.png");
+			t_enemy = new EnemyBoss(t_point.x, t_point.y, "assets/spritesheet.png", m_wave);
 			break;
 	default:
 		break;

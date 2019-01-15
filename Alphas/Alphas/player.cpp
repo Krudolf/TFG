@@ -24,6 +24,13 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 
 	m_keyboard = true;
 
+	m_level = 1;
+	m_baseExperience = 25.f;
+	m_experienceFactor = 2.5f;
+	m_currentExperience = 0.f;
+	m_topExperience = m_baseExperience + (pow((m_level + 1), m_experienceFactor));
+
+
 	m_alive = true;
 	m_pasiveActive = false;
 	m_nearPotion = false;
@@ -122,6 +129,20 @@ void Player::receiveTrapDamage(float p_damage)
 		m_health = 0.f;
 		m_alive = false;
 	}
+}
+
+void Player::receiveExperience(float p_experience)
+{
+	m_currentExperience += p_experience;
+
+	if (m_currentExperience >= m_topExperience) {
+		m_level++;
+		levelStats();
+		m_currentExperience -= m_topExperience;
+		m_topExperience = m_baseExperience + (pow((m_level + 1), m_experienceFactor));
+	}
+
+	std::cout << "Level: " << m_level << ". Exp: " << m_currentExperience << " || Limit: " << m_topExperience << std::endl;
 }
 
 bool Player::enoughMana(float p_mana)
@@ -365,6 +386,7 @@ void Player::launchProjectile()
 			t_projectile = new ProjectileStraight(m_texturePath, m_bulletColor, m_faceDirection, m_posX, m_posY, m_damage, true, true);
 			t_projectile->setLifeTime(0.75f);
 		}
+		t_projectile->setOwner(this);
 
 		m_basicProjectiles.push_back(t_projectile);
 		ScreenGame::m_projectileVector.push_back(t_projectile);
@@ -456,7 +478,7 @@ void Player::update(double p_time, double p_deltaTime) {
 		}
 	}
 
-	if (m_nearPotion && ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::P)) || (!m_keyboard && sf::Joystick::isButtonPressed(0, (int)JoystickButton::X))))
+	if (m_nearPotion && ((m_keyboard && sf::Keyboard::isKeyPressed(sf::Keyboard::R)) || (!m_keyboard && sf::Joystick::isButtonPressed(0, (int)JoystickButton::X))))
 		pickPotion();
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
 		increaseHealth(200.f);

@@ -7,11 +7,17 @@
 #include "screenGame.h"
 
 
-EnemyRanger::EnemyRanger(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
+EnemyRanger::EnemyRanger(float p_posX, float p_posY, const char* p_path, int p_waveNumber) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {
-	m_damage = 10;
-	m_maxHealth *= 0.75;
-	m_health = m_maxHealth;
+	float t_damageFactor = p_waveNumber * 1.4f;
+	float t_healthFactor = p_waveNumber * 1.1f;
+	float t_expFactor = p_waveNumber * 1.05f;
+
+	m_expToPlayer = 8 + t_expFactor;
+
+	m_damage	= 10 + t_damageFactor;
+	m_maxHealth = 75 + t_healthFactor;
+	m_health	= m_maxHealth;
 
 	m_cooldownAtack = 5.f;
 

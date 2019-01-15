@@ -10,6 +10,8 @@
 
 Projectile::Projectile(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_playerPosX, float p_playerPosY, float p_damage) : Entity(p_texturePath, p_ent)
 {
+	m_owner = nullptr;
+
 	m_velocity = 600;
 	m_lifeTime = 2.f;
 	m_dieTime = m_engineManager->getMasterClockSeconds() + m_lifeTime;

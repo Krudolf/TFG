@@ -7,7 +7,7 @@ class EnemyRanger :
 	public Enemy
 {
 public:
-	EnemyRanger(float p_posX, float p_posY, const char* p_path);
+	EnemyRanger(float p_posX, float p_posY, const char* p_path, int p_waveNumber);
 	~EnemyRanger();
 
 	void atack();

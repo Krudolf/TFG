@@ -14,12 +14,20 @@
 
 #include <iostream>
 
-EnemyBoss::EnemyBoss(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY_BOSS)
+EnemyBoss::EnemyBoss(float p_posX, float p_posY, const char* p_path, int p_waveNumber) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY_BOSS)
 {
-	m_damage = 30;
+	m_wave = p_waveNumber;
+
+	float t_damageFactor = p_waveNumber * 2.5f;
+	float t_healthFactor = p_waveNumber * 20.f;
+	float t_expFactor = p_waveNumber * 5.f;
+
+	m_expToPlayer = 100 + t_expFactor;
+
+	m_damage = 30 + t_damageFactor;
 	m_baseVelocity *= 1.2f;
 	m_velocity *= 1.2f;
-	m_maxHealth = 500.f;
+	m_maxHealth = 500.f + t_healthFactor;
 	m_health = m_maxHealth;
 
 	m_secondProjectileTime = 0.f;
@@ -148,13 +156,13 @@ void EnemyBoss::createEnemy(EnemyType p_type)
 	switch (p_type)
 	{
 	case EnemyType::WARRIOR:
-		t_enemy = new EnemyWarrior(t_point.x, t_point.y, "assets/spritesheet.png");
+		t_enemy = new EnemyWarrior(t_point.x, t_point.y, "assets/spritesheet.png", m_wave);
 		break;
 	case EnemyType::CHARGER:
-		t_enemy = new EnemyCharger(t_point.x, t_point.y, "assets/spritesheet.png");
+		t_enemy = new EnemyCharger(t_point.x, t_point.y, "assets/spritesheet.png", m_wave);
 		break;
 	case EnemyType::RANGER:
-		t_enemy = new EnemyRanger(t_point.x, t_point.y, "assets/spritesheet.png");
+		t_enemy = new EnemyRanger(t_point.x, t_point.y, "assets/spritesheet.png", m_wave);
 		break;
 	default:
 		break;

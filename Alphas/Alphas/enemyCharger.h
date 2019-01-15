@@ -5,7 +5,7 @@ class EnemyCharger :
 	public Enemy
 {
 public:
-	EnemyCharger(float p_posX, float p_posY, const char* p_path);
+	EnemyCharger(float p_posX, float p_posY, const char* p_path, int p_waveNumber);
 	~EnemyCharger();
 
 	void moveBackwards() override;

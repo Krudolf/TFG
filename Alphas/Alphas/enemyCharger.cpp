@@ -9,9 +9,17 @@
 #include <iostream>
 
 
-EnemyCharger::EnemyCharger(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
+EnemyCharger::EnemyCharger(float p_posX, float p_posY, const char* p_path, int p_waveNumber) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {
-	m_damage = 20;
+	float t_damageFactor = p_waveNumber * 1.25f;
+	float t_healthFactor = p_waveNumber * 1.25f;
+	float t_expFactor = p_waveNumber * 1.15f;
+
+	m_expToPlayer = 12 + t_expFactor;
+
+	m_damage	= 20 + t_damageFactor;
+	m_maxHealth = 100 + t_healthFactor;
+	m_health	= m_maxHealth;
 
 	m_chargePhase	= false;
 	m_releasePhase	= false;

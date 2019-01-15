@@ -1,33 +1,25 @@
-﻿  Interface.cpp
-  PlayerInfo.cpp
-  StatsInfo.cpp
-  image.cpp
-  screenSelectPlayerCooperative.cpp
-  screenSelectPlayerSolo.cpp
-c:\users\krudo\desktop\tfg\alphas\alphas\image.cpp(17): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\image.cpp(31): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\image.cpp(44): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\image.cpp(58): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(23): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screenselectplayercooperative.cpp(63): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(24): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screenselectplayercooperative.cpp(68): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(35): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(37): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(38): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(39): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(46): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(53): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(57): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(58): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(59): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(60): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\playerinfo.cpp(61): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\screenselectplayersolo.cpp(46): warning C4018: '<': no coinciden signed/unsigned
-c:\users\krudo\desktop\tfg\alphas\alphas\interface.cpp(21): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\interface.cpp(23): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\interface.cpp(25): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\interface.cpp(30): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\krudo\desktop\tfg\alphas\alphas\interface.cpp(37): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
-c:\users\krudo\desktop\tfg\alphas\alphas\interface.cpp(37): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+﻿  enemyBoss.cpp
+  player.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(31): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(78): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(105): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(111): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(125): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(142): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(119): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(144): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(151): warning C4838: la conversión de 'double' en 'float' requiere una conversión de restricción
+c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(151): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(243): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(251): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(378): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(384): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(386): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\enemyboss.cpp(183): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(398): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(408): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(411): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(422): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\player.cpp(515): warning C4018: '<': no coinciden signed/unsigned
+  LINK : no se encontr¾ C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe o no lo gener¾ el ·ltimo vÝnculo incremental; ejecutando vÝnculo completo
   Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe

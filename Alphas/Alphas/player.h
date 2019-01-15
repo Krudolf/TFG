@@ -25,6 +25,8 @@ public:
 	void	receiveDamage(float p_damage);
 	void	receiveDamage(float p_damage, Projectile* p_projectile);
 	void	receiveTrapDamage(float p_damage);
+	void	receiveExperience(float p_experience);
+	virtual void	levelStats() = 0;
 
 	void	increaseHealth(float p_health);
 	void	increaseMana(float p_mana);
@@ -87,6 +89,12 @@ protected:
 	float	m_armor;
 	float	m_baseAtackSpeed;
 	float	m_atackSpeed;
+
+	int		m_level;
+	float	m_baseExperience;
+	float	m_experienceFactor;
+	float	m_currentExperience;
+	float	m_topExperience;
 
 	bool	m_pasiveActive;
 

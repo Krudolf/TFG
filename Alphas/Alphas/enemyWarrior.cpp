@@ -5,12 +5,18 @@
 
 #include <iostream>
 
-EnemyWarrior::EnemyWarrior(float p_posX, float p_posY, const char* p_path) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
+EnemyWarrior::EnemyWarrior(float p_posX, float p_posY, const char* p_path, int p_waveNumber) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {
-	m_damage = 5;
-	m_velocity *= 1.5;
-	m_maxHealth *= 1.5;
-	m_health = m_maxHealth;
+	float t_damageFactor = p_waveNumber * 1.1f;
+	float t_healthFactor = p_waveNumber * 1.2f;
+	float t_expFactor	 = p_waveNumber * 1.1f;
+
+	m_expToPlayer = 10 + t_expFactor;
+
+	m_velocity	*= 1.5;
+	m_damage	 = 5 + t_damageFactor;
+	m_maxHealth  = 150 + t_healthFactor;
+	m_health	 = m_maxHealth;
 }
 
 

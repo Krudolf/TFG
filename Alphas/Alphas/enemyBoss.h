@@ -10,7 +10,7 @@ class EnemyBoss :
 	public Enemy
 {
 public:
-	EnemyBoss(float p_posX, float p_posY, const char* p_path);
+	EnemyBoss(float p_posX, float p_posY, const char* p_path, int p_waveNumber);
 	~EnemyBoss();
 
 	void selectAttack();
@@ -58,7 +58,7 @@ private:
 	bool	m_rangeAttackInCooldown;
 	bool	m_chargeAttackInCooldown;
 
-
+	int		m_wave;
 
 };
 

@@ -34,6 +34,8 @@ protected:
 	bool	m_stunned;
 	bool	m_sticky;
 
+	float	m_expToPlayer;
+
 	float	m_maxHealth;
 	float	m_health;
 	float	m_damage;

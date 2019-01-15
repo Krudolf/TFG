@@ -1,6 +1,8 @@
 #pragma once
 #include "entity.h"
 
+class Player;
+
 class Projectile :
 	public Entity
 {
@@ -18,7 +20,12 @@ public:
 	void	setLifeTime(float p_lifeTime);
 	void	setReadyToDelete(bool p_readyToDelete) { m_readyToDelete = p_readyToDelete; };
 
+	void	setOwner(Player* p_owner) { m_owner = p_owner; };
+	Player*	getOwner() { return m_owner; };
+
 protected:
+	Player* m_owner;
+
 	int		m_velocity;
 	float	m_moveX;
 	float	m_moveY;
