@@ -270,14 +270,14 @@
     <ClInclude Include="tileSkewer.h">
       <Filter>Archivos de encabezado\gameEntities\tiles</Filter>
     </ClInclude>
-    <ClInclude Include="text.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="joystick_enum.h">
       <Filter>Archivos de encabezado\others</Filter>
     </ClInclude>
     <ClInclude Include="screenSelectPlayerCooperative.h">
       <Filter>Archivos de encabezado\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="text.h">
+      <Filter>Archivos de encabezado\interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -452,11 +452,11 @@
     <ClCompile Include="tileBlock.cpp">
       <Filter>Archivos de origen\gameEntities\tiles</Filter>
     </ClCompile>
-    <ClCompile Include="text.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="screenSelectPlayerCooperative.cpp">
       <Filter>Archivos de origen\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="text.cpp">
+      <Filter>Archivos de origen\interface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

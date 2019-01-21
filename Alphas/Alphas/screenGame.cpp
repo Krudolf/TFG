@@ -226,7 +226,7 @@ void ScreenGame::draw()
 
 	//Draw the map
 	m_sceneMap->draw();
-	//m_hashGrid->debug();
+	m_hashGrid->debug();
 
 	//Draw potions
 	for (auto t_potion : m_potionVector) {
@@ -244,7 +244,7 @@ void ScreenGame::draw()
 	}
 
 	m_engineManager->useInterfaceView();
-	m_interface->draw();
+	//m_interface->draw();
 }
 
 /*
