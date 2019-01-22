@@ -16,9 +16,7 @@ Game::Game()
 	m_engineManager->createWindow(1280, 720, "ALPHAS");
 
 	m_screenManager = &ScreenManager::p();
-	//m_screenManager->setCurrentScreen(new ScreenMenuHome());
-	m_screenManager->setCurrentScreen(new ScreenSelectPlayerSolo());
-	//m_screenManager->setCurrentScreen(new ScreenGame(Entities::PLAYER_YELLOW));
+	m_screenManager->setCurrentScreen(new ScreenMenuHome());
 	m_screenManager->init();
 
 	m_time			= 0.f;
@@ -49,7 +47,6 @@ void Game::run()
 		m_accumulator += m_elapsedTime;
 		
 		while (m_accumulator >= m_dt) {
-			//float t_deltaTime = std::min(m_frameTime, m_dt);
 			update(m_newTime, m_dt);
 
 			m_accumulator -= m_dt;

@@ -90,14 +90,10 @@ int main(int argc, char** argv){
     
     
     while(window.isOpen()){ 
-        //std::cout<<"estado: "<<state.GetEstado()<<std::endl;
         time = reloj.getElapsedTime().asMilliseconds();
         
-          if(state.GetEstado()==8){
-      
+        if(state.GetEstado()==8){
             Ganar(window, state,vista,selectPause,menu,boss);
-       
-        
         }        
         if(state.GetEstado()==7){
             Pausa(window, state,vista,selectPause,menu,boss);
