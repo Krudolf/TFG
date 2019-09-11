@@ -1,0 +1,17 @@
+﻿  screenGame.cpp
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(49): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(50): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(157): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(161): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(166): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(169): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(172): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(175): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(178): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(181): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(196): warning C4018: '<': no coinciden signed/unsigned
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(288): warning C4551: la llamada a la función no tiene lista de argumentos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(316): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(317): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\krudo\desktop\tfg\alphas\alphas\screengame.cpp(261): warning C4715: 'ScreenGame::getCooperativeMode': no todas las rutas de acceso de control devuelven un valor
+  Alphas.vcxproj -> C:\Users\krudo\Desktop\TFG\Alphas\Debug\Alphas.exe
