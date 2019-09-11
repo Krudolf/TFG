@@ -2,8 +2,6 @@
 #include "habilityInfo.h"
 #include "engineManager.h"
 
-#include <iostream>
-
 HabilityInfo::HabilityInfo(float p_posX, float p_posY, float p_skillSize, Entities p_playerEntity, int p_numHability)
 {
 	m_engineManager = &EngineManager::p();

@@ -3,12 +3,18 @@
 #include "buttonText.h"
 #include "engineManager.h"
 #include "screenManager.h"
+#include "text.h"
 
 #include "screenGameMode.h"
 #include "screenMenuHome.h"
 
 ScreenGameOver::ScreenGameOver()
 {
+	m_textGameOver = new Text("GAME OVER");
+	m_textGameOver->setPosition(CenterTop);
+	m_textGameOver->setSize(150);
+	m_textGameOver->centerOrigin();
+
 	m_buttonRetry = new ButtonText("RETRY", CenterList2_4);
 	m_buttonVector.push_back(m_buttonRetry);
 
@@ -21,6 +27,9 @@ ScreenGameOver::ScreenGameOver()
 
 ScreenGameOver::~ScreenGameOver()
 {
+	delete m_textGameOver;
+	m_textGameOver = nullptr;
+
 	for (int i = 0; i < m_buttonVector.size(); i++) {
 		delete m_buttonVector[i];
 		m_buttonVector[i] = nullptr;
@@ -60,6 +69,8 @@ void ScreenGameOver::update(double p_time, double p_deltaTime)
 
 void ScreenGameOver::draw()
 {
+	m_textGameOver->draw();
+
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();
 	}

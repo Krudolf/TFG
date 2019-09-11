@@ -12,8 +12,6 @@
 #include "tile.h"
 #include "joystick_enum.h"
 
-#include <iostream>
-
 
 Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_playerEntity) : Entity(p_path, p_playerEntity)
 {
@@ -24,12 +22,11 @@ Player::Player(float p_posX, float p_posY, const char* p_path, Entities p_player
 
 	m_keyboard = true;
 
-	m_level = 1;
+	m_level = 3;
 	m_baseExperience = 25.f;
 	m_experienceFactor = 2.5f;
 	m_currentExperience = 0.f;
 	m_topExperience = m_baseExperience + (pow((m_level + 1), m_experienceFactor));
-
 
 	m_alive = true;
 	m_pasiveActive = false;
@@ -141,8 +138,6 @@ void Player::receiveExperience(float p_experience)
 		m_currentExperience -= m_topExperience;
 		m_topExperience = m_baseExperience + (pow((m_level + 1), m_experienceFactor));
 	}
-
-	std::cout << "Level: " << m_level << ". Exp: " << m_currentExperience << " || Limit: " << m_topExperience << std::endl;
 }
 
 bool Player::enoughMana(float p_mana)
@@ -483,6 +478,7 @@ void Player::update(double p_time, double p_deltaTime) {
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
 		increaseHealth(200.f);
 		increaseMana(200.f);
+		receiveExperience(25.f);
 	}
 
 	move();

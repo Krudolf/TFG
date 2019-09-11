@@ -27,6 +27,8 @@ PlayerBlue::PlayerBlue(float p_posX, float p_posY, const char * p_path) : Player
 	m_hability1ManaConsumption = 20.f;
 	m_hability2ManaConsumption = 45.f;
 	m_hability3ManaConsumption = 65.f;
+
+	levelStats();
 }
 
 PlayerBlue::~PlayerBlue()

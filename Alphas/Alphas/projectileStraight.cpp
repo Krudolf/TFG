@@ -2,8 +2,6 @@
 #include "projectileStraight.h"
 #include "engineManager.h"
 
-#include <iostream>
-
 
 ProjectileStraight::ProjectileStraight(const char* p_texturePath, Entities p_ent, Direction p_dir, float p_entityPosX, float p_entityPosY, float p_damage, bool p_crossEnemy, bool p_makeDamage) : Projectile(p_texturePath, p_ent, p_dir, p_entityPosX, p_entityPosY, p_damage)
 {

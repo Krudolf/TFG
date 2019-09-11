@@ -4,8 +4,6 @@
 #include <math.h>
 #include "engineManager.h"
 
-#include <iostream>
-
 HashGrid::HashGrid()
 {
 }

@@ -2,6 +2,7 @@
 #include "screen.h"
 
 class ButtonText;
+class Text;
 
 class ScreenPause :
 	public Screen
@@ -16,6 +17,8 @@ public:
 
 private:
 	std::vector<Button*>	m_buttonVector;
+
+	Text*		m_textPause;
 
 	ButtonText* m_buttonContinue;
 	ButtonText*	m_buttonExitGame;

@@ -3,7 +3,6 @@
 #include "entity.h"
 #include "engineManager.h"
 #include "hashGrid.h"
-#include <iostream>
 
 //Constructor for other type of entities
 Entity::Entity(const char* p_path, Entities p_entity)

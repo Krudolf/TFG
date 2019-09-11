@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/Text.hpp>
 #include "Point.h"
+#include <string>
 
 class EngineManager;
 
@@ -13,6 +14,7 @@ public:
 
 	void centerOrigin();
 	void setText(const char* p_text)	{ m_text.setString(p_text); };
+	void setText(std::string p_text)	{ m_text.setString(p_text); };
 	void setSize(int p_textSize)		{ m_text.setCharacterSize(p_textSize); };
 	void setPosition(Point p_pos)		{ m_text.setPosition( p_pos.x, p_pos.y ); };
 	

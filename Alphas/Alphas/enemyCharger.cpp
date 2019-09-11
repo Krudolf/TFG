@@ -6,8 +6,6 @@
 #include "hashGrid.h"
 #include "tile.h"
 
-#include <iostream>
-
 
 EnemyCharger::EnemyCharger(float p_posX, float p_posY, const char* p_path, int p_waveNumber) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {

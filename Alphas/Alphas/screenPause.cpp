@@ -3,11 +3,17 @@
 #include "buttonText.h"
 #include "engineManager.h"
 #include "screenManager.h"
+#include "text.h"
 
 #include "screenMenuHome.h"
 
 ScreenPause::ScreenPause()
 {
+	m_textPause = new Text("PAUSA");
+	m_textPause->setPosition(CenterTop);
+	m_textPause->setSize(150);
+	m_textPause->centerOrigin();
+
 	m_buttonContinue = new ButtonText("CONTINUE", CenterList2_4);
 	m_buttonVector.push_back(m_buttonContinue);
 
@@ -20,6 +26,9 @@ ScreenPause::ScreenPause()
 
 ScreenPause::~ScreenPause()
 {
+	delete m_textPause;
+	m_textPause = nullptr;
+
 	for (int i = 0; i < m_buttonVector.size(); i++) {
 		delete m_buttonVector[i];
 		m_buttonVector[i] = nullptr;
@@ -65,6 +74,8 @@ void ScreenPause::update(double p_time, double p_deltaTime)
 
 void ScreenPause::draw()
 {
+	m_textPause->draw();
+
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();
 	}

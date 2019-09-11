@@ -21,6 +21,9 @@ public:
 	float	getDamage()		{ return m_damage; };
 	float	getArmor()		{ return m_armor; };
 	float	getAtackSpeed() { return m_atackSpeed; };
+	int		getLevel()		{ return m_level; };
+	float	getCurrentExp() { return m_currentExperience; };
+	float	getTopExp()		{ return m_topExperience; };
 
 	void	receiveDamage(float p_damage);
 	void	receiveDamage(float p_damage, Projectile* p_projectile);

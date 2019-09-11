@@ -27,6 +27,8 @@ PlayerGreen::PlayerGreen(float p_posX, float p_posY, const char * p_path) : Play
 	m_hability1ManaConsumption = 20.f;
 	m_hability2ManaConsumption = 60.f;
 	m_hability3ManaConsumption = 50.f;
+
+	levelStats();
 }
 
 

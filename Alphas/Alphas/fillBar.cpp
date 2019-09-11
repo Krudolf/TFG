@@ -36,6 +36,8 @@ void FillBar::update(float p_size, float p_posX, float p_posY)
 	float t_offsetY = 40.f;
 	m_background.setPosition(p_posX - t_offsetX, p_posY - t_offsetY);
 	m_upperground.setPosition((p_posX - m_sizeX / 2 + m_offset / 2) - t_offsetX, p_posY - t_offsetY);
+	if (p_size <= 0)
+		p_size = 0;
 	m_upperground.setScale(p_size, 1);
 }
 

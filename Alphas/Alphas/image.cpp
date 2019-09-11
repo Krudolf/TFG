@@ -72,6 +72,13 @@ void Image::changeFrameHability(int p_frame)
 	m_image.setTextureRect(sf::IntRect(0, 335 * p_frame, 512, 335));
 }
 
+void Image::setTextureRect(int p_width, int p_pos, bool p_center)
+{
+	m_image.setTextureRect(sf::IntRect(0, p_width * p_pos, p_width, p_width));
+	if (p_center)
+		m_image.setOrigin(m_image.getTextureRect().width / 2, m_image.getTextureRect().height / 2);
+}
+
 void Image::draw()
 {
 	m_engineManager->draw(m_image);

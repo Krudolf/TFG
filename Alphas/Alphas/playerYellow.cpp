@@ -27,6 +27,8 @@ PlayerYellow::PlayerYellow(float p_posX, float p_posY, const char * p_path) : Pl
 	m_hability1ManaConsumption = 30.f;
 	m_hability2ManaConsumption = 55.f;
 	m_hability3ManaConsumption = 40.f;
+	
+	levelStats();
 }
 
 

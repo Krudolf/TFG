@@ -3,6 +3,7 @@
 #include "entities_enum.h"
 
 class ButtonText;
+class Text;
 
 class ScreenGameOver :
 	public Screen
@@ -17,6 +18,8 @@ public:
 
 private:
 	std::vector<Button*>	m_buttonVector;
+
+	Text*	m_textGameOver;
 
 	ButtonText* m_buttonRetry;
 	ButtonText*	m_buttonGoMenu;

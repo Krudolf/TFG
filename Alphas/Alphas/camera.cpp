@@ -3,8 +3,6 @@
 #include "engineManager.h"
 #include "entity.h"
 
-#include <iostream>
-
 Camera::Camera()
 {
 	m_engineManager = &EngineManager::p();

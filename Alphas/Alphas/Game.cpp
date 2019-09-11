@@ -8,15 +8,14 @@
 #include "screenSelectPlayerSolo.h"
 #include "screenGame.h"
 
-#include <iostream>
-
 Game::Game()
 {
 	m_engineManager = &EngineManager::p();
 	m_engineManager->createWindow(1280, 720, "ALPHAS");
 
 	m_screenManager = &ScreenManager::p();
-	m_screenManager->setCurrentScreen(new ScreenMenuHome());
+	//m_screenManager->setCurrentScreen(new ScreenMenuHome());
+	m_screenManager->setCurrentScreen(new ScreenGame(Entities::PLAYER_GREEN, Entities::NONE));
 	m_screenManager->init();
 
 	m_time			= 0.f;
@@ -47,12 +46,12 @@ void Game::run()
 		m_accumulator += m_elapsedTime;
 		
 		while (m_accumulator >= m_dt) {
-			update(m_newTime, m_dt);
+			m_screenManager->update(m_newTime, m_dt);
 
 			m_accumulator -= m_dt;
 		}
 
-		draw();
+		m_screenManager->draw();
 	}
 }
 

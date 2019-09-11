@@ -3,8 +3,6 @@
 #include "engineManager.h"
 #include "player.h"
 
-#include <iostream>
-
 EnemyWarrior::EnemyWarrior(float p_posX, float p_posY, const char* p_path, int p_waveNumber) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY)
 {
 	float t_damageFactor = p_waveNumber * 1.1f;

@@ -6,21 +6,32 @@
 #include "button.h"
 #include "buttonText.h"
 #include "text.h"
+#include "image.h"
 
 
 ScreenOption::ScreenOption()
 {
-	m_buttonFocused = 0;
-
 	m_textAlphas = new Text("ALPHAS");
 	m_textAlphas->setPosition(CenterTop);
 	m_textAlphas->setSize(150);
 	m_textAlphas->centerOrigin();
 
-	m_buttonBack = new ButtonText("BACK", Down_right);
-	m_buttonVector.push_back(m_buttonBack);
+	m_buttonPlay = new ButtonText("JUGAR", LeftList1_3);
+	m_buttonVector.push_back(m_buttonPlay);
 
-	m_buttonBack->setIsFocused(true);
+	m_buttonOptions = new ButtonText("CONTROLES", LeftList2_3);
+	m_buttonVector.push_back(m_buttonOptions);
+
+	m_buttonQuit = new ButtonText("SALIR", LeftList3_3);
+	m_buttonVector.push_back(m_buttonQuit);
+
+	m_buttonOptions->setIsFocused(true);
+
+	m_keyboardImage		= new Image("assets/keyboard.png", RightList1_3);
+	m_keyboardImage->setScale(0.5, 0.5);
+
+	m_controllerImage	= new Image("assets/controller.png", RightList3_3);
+	m_controllerImage->setScale(0.5, 0.5);
 }
 
 
@@ -28,6 +39,12 @@ ScreenOption::~ScreenOption()
 {
 	delete m_textAlphas;
 	m_textAlphas = nullptr;
+
+	delete m_keyboardImage;
+	m_keyboardImage = nullptr;
+
+	delete m_controllerImage;
+	m_controllerImage = nullptr;
 
 	for (int i = 0; i < m_buttonVector.size(); i++) {
 		delete m_buttonVector[i];
@@ -43,26 +60,8 @@ void ScreenOption::init()
 
 void ScreenOption::update(double p_time, double p_deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_buttonFocused != 0 && m_engineManager->getKeyReleased()) {
-		m_engineManager->setKeyReleased(false);
-		m_buttonVector[m_buttonFocused]->setIsFocused(false);
-		m_buttonFocused--;
-		m_buttonVector[m_buttonFocused]->setIsFocused(true);
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_buttonFocused != m_buttonVector.size() - 1 && m_engineManager->getKeyReleased()) {
-		m_engineManager->setKeyReleased(false);
-		m_buttonVector[m_buttonFocused]->setIsFocused(false);
-		m_buttonFocused++;
-		m_buttonVector[m_buttonFocused]->setIsFocused(true);
-	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && m_engineManager->getKeyReleased()) {
-		m_engineManager->setKeyReleased(false);
-
-		if (m_buttonFocused == 0)
-			m_screenManager->changeScreen(new ScreenMenuHome());
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && m_engineManager->getKeyReleased()) {
 		m_engineManager->setKeyReleased(false);
 		m_screenManager->changeScreen(new ScreenMenuHome());
 	}
@@ -71,6 +70,9 @@ void ScreenOption::update(double p_time, double p_deltaTime)
 void ScreenOption::draw()
 {
 	m_textAlphas->draw();
+
+	m_keyboardImage->draw();
+	m_controllerImage->draw();
 
 	for (auto t_buttons : m_buttonVector) {
 		t_buttons->draw();

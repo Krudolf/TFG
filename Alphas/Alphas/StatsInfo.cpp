@@ -48,10 +48,11 @@ StatsInfo::~StatsInfo()
 
 void StatsInfo::update()
 {
-	std::ostringstream ss;
-	ss << getStatValue(m_owner);
+	std::stringstream t_string;
+	t_string.precision(1);
+	t_string << std::fixed << getStatValue(m_owner);
 
-	m_statNumber.setString(": " + ss.str());
+	m_statNumber.setString(": " + t_string.str());
 }
 
 void StatsInfo::draw()

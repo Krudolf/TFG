@@ -3,6 +3,7 @@
 
 class ButtonText;
 class Text;
+class Image;
 
 class ScreenOption :
 	public Screen
@@ -18,8 +19,14 @@ public:
 private:
 	std::vector<Button*> m_buttonVector;
 	
+	Image*	m_keyboardImage;
+	Image*	m_controllerImage;
+
 	Text*		m_textAlphas;
-	ButtonText* m_buttonBack;
+	
+	ButtonText* m_buttonPlay;
+	ButtonText* m_buttonOptions;
+	ButtonText* m_buttonQuit;
 
 	int	m_buttonFocused;
 };

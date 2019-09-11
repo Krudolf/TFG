@@ -7,6 +7,7 @@ class FillBar;
 class HabilityInfo;
 class StatsInfo;
 class Image;
+class Text;
 
 class PlayerInfo
 {
@@ -26,6 +27,9 @@ private:
 
 	FillBar*		m_healthBar;
 	FillBar*		m_manaBar;
+	FillBar*		m_experienceBar;
+
+	Text*			m_levelText;
 
 	HabilityInfo*	m_hability1;
 	HabilityInfo*	m_hability2;

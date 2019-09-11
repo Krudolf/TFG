@@ -21,6 +21,8 @@ public:
 	void changeFrameHability(int p_frame);
 
 	void setPosition(Point p_pos) { m_image.setPosition(p_pos.x, p_pos.y); };
+	void setScale(float p_x, float p_y) { m_image.setScale(p_x, p_y); };
+	void setTextureRect(int p_width, int p_pos, bool p_center);
 
 	int getWidth()	{ return m_width; };
 	int getHeight() { return m_height; };

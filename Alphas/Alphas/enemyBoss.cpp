@@ -12,8 +12,6 @@
 #include "fillBar.h"
 #include "tile.h"
 
-#include <iostream>
-
 EnemyBoss::EnemyBoss(float p_posX, float p_posY, const char* p_path, int p_waveNumber) : Enemy(p_posX, p_posY, p_path, Entities::ENEMY_BOSS)
 {
 	m_wave = p_waveNumber;

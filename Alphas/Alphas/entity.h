@@ -54,7 +54,7 @@ protected:
 	EngineManager*	m_engineManager;
 	Entities	m_entity;
 
-	HashGrid*	m_hashGrid;
+	HashGrid*				m_hashGrid;
 	std::vector<Entity*>	m_nearEntityVector;
 
 	const char*	m_texturePath;

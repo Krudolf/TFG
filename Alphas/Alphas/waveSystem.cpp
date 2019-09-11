@@ -8,7 +8,6 @@
 #include "screenGame.h"
 
 #include <cmath>
-#include <iostream>
 
 
 WaveSystem::WaveSystem(std::vector<Point>& p_spawnPoints)

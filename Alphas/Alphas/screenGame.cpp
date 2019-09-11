@@ -27,15 +27,16 @@
 #include "waveSystem.h"
 #include "hashgrid.h"
 
+
 #include "screenMenuHome.h"
 #include "screenGameOver.h"
 #include "screenPause.h"
 
-#include <iostream>
-
 ScreenGame::ScreenGame(Entities p_playerEntity1, Entities p_playerEntity2) : Screen()
 {
 	m_playerEntity = p_playerEntity1;
+
+	m_spriteSheetURL = "assets/spritesheet.png";
 
 	m_gamePause			= false;
 	m_gameOver			= false;
@@ -47,10 +48,10 @@ ScreenGame::ScreenGame(Entities p_playerEntity1, Entities p_playerEntity2) : Scr
 
 	float t_width = m_sceneMap->getWidth();
 	float t_height = m_sceneMap->getHeight();
-	m_spawnPointsVector.push_back({ 200.f, 200.f });
-	m_spawnPointsVector.push_back({ 200.f, t_height - 200.f });
-	m_spawnPointsVector.push_back({ t_width - 200.f, 200.f });
-	m_spawnPointsVector.push_back({ t_width - 200.f, t_height - 200.f });
+	m_spawnPointsVector.push_back({ 250.f, 250.f });
+	m_spawnPointsVector.push_back({ 250.f, t_height - 250.f });
+	m_spawnPointsVector.push_back({ t_width - 250.f, 250.f });
+	m_spawnPointsVector.push_back({ t_width - 250.f, t_height - 250.f });
 	/* ++++++++++++++++++++++++++ PLAYER ++++++++++++++++++++++++++ */
 	createPlayer(p_playerEntity1, true);
 	createPlayer(p_playerEntity2, false);
@@ -61,7 +62,7 @@ ScreenGame::ScreenGame(Entities p_playerEntity1, Entities p_playerEntity2) : Scr
 
 	/* ++++++++++++++++++++++++++ ENEMY ++++++++++++++++++++++++++ */
 	m_waveSystem = new WaveSystem(m_spawnPointsVector);
-	m_waveSystem->setWavenumber(1);
+	m_waveSystem->setWavenumber(3);
 	m_waveSystem->spawnNextWave();
 	
 	if(p_playerEntity2 == Entities::NONE)
@@ -162,22 +163,22 @@ void ScreenGame::update(double p_time, double p_deltaTime)
 				if (t_random < 10) {
 					Potion* t_potion;
 					if (t_random <= 3) {
-						t_potion = new PotionHealth("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::HEALTH);
+						t_potion = new PotionHealth(m_spriteSheetURL, m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::HEALTH);
 					}
 					else if (t_random > 3 && t_random <= 6) {
-						t_potion = new PotionMana("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::MANA);
+						t_potion = new PotionMana(m_spriteSheetURL, m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::MANA);
 					}
 					else if (t_random > 6 && t_random <= 7) {
-						t_potion = new PotionSpeed("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::SPEED);
+						t_potion = new PotionSpeed(m_spriteSheetURL, m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::SPEED);
 					}
 					else if (t_random > 7 && t_random <= 8) {
-						t_potion = new PotionDamage("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::DAMAGE);
+						t_potion = new PotionDamage(m_spriteSheetURL, m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::DAMAGE);
 					}
 					else if (t_random > 8 && t_random <= 9) {
-						t_potion = new PotionArmor("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ARMOR);
+						t_potion = new PotionArmor(m_spriteSheetURL, m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ARMOR);
 					}
 					else if (t_random > 9 && t_random <= 10) {
-						t_potion = new PotionAtackSpeed("assets/spritesheet.png", m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ATACK_SPEED);
+						t_potion = new PotionAtackSpeed(m_spriteSheetURL, m_enemyVector[i]->getPositionX(), m_enemyVector[i]->getPositionY(), PotionType::ATACK_SPEED);
 					}
 					m_potionVector.push_back(t_potion);
 				}
@@ -226,7 +227,7 @@ void ScreenGame::draw()
 
 	//Draw the map
 	m_sceneMap->draw();
-	m_hashGrid->debug();
+	//m_hashGrid->debug();
 
 	//Draw potions
 	for (auto t_potion : m_potionVector) {
@@ -244,7 +245,7 @@ void ScreenGame::draw()
 	}
 
 	m_engineManager->useInterfaceView();
-	//m_interface->draw();
+	m_interface->draw();
 }
 
 /*
@@ -322,17 +323,17 @@ void ScreenGame::createPlayer(Entities p_playerEntity, bool p_keyboardControll)
 	switch (p_playerEntity)
 	{
 	case Entities::PLAYER_BLUE:
-		t_player = new PlayerBlue(t_width, t_height, "assets/spritesheet.png");
+		t_player = new PlayerBlue(t_width, t_height, m_spriteSheetURL);
 		t_player->setKeyboardControll(p_keyboardControll);
 		m_playerVector.push_back(t_player);
 		break;
 	case Entities::PLAYER_GREEN:
-		t_player = new PlayerGreen(t_width, t_height, "assets/spritesheet.png");
+		t_player = new PlayerGreen(t_width, t_height, m_spriteSheetURL);
 		t_player->setKeyboardControll(p_keyboardControll);
 		m_playerVector.push_back(t_player);
 		break;
 	case Entities::PLAYER_YELLOW:
-		t_player = new PlayerYellow(t_width, t_height, "assets/spritesheet.png");
+		t_player = new PlayerYellow(t_width, t_height, m_spriteSheetURL);
 		t_player->setKeyboardControll(p_keyboardControll);	
 		m_playerVector.push_back(t_player);
 		break;

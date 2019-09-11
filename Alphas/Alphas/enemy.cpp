@@ -9,7 +9,6 @@
 #include "tile.h"
 
 #include <cmath>
-#include <iostream>
 
 
 Enemy::Enemy(float p_posX, float p_posY, const char* p_path, Entities p_entity) : Entity(p_path, p_entity)

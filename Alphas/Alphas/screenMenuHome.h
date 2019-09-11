@@ -3,6 +3,7 @@
 
 class ButtonText;
 class Text;
+class Image;
 
 class ScreenMenuHome :
 	public Screen
@@ -23,6 +24,8 @@ private:
 	ButtonText* m_buttonPlay;
 	ButtonText* m_buttonOptions;
 	ButtonText* m_buttonQuit;
+
+	Image*		m_playerImage;
 
 	int	m_buttonFocused;
 };

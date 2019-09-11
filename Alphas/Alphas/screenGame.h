@@ -57,6 +57,8 @@ private:
 	std::vector<Point>		m_spawnPointsVector;
 	std::vector<Entity*>	m_screenEntities;
 
+	const char*	m_spriteSheetURL;
+
 	bool	m_gameOver;
 	bool	m_gamePause;
 };

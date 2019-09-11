@@ -9,8 +9,6 @@
 #include "screenSelectPlayerCooperative.h"
 #include "text.h"
 
-#include <iostream>
-
 ScreenGameMode::ScreenGameMode()
 {
 	m_textAlphas = new Text("ALPHAS");
@@ -18,13 +16,13 @@ ScreenGameMode::ScreenGameMode()
 	m_textAlphas->setSize(150);
 	m_textAlphas->centerOrigin();
 
-	m_buttonPlay = new ButtonText("PLAY", LeftList1_3);
+	m_buttonPlay = new ButtonText("JUGAR", LeftList1_3);
 	m_buttonVectorStatic.push_back(m_buttonPlay);
 
-	m_buttonOptions = new ButtonText("OPTIONS", LeftList2_3);
+	m_buttonOptions = new ButtonText("CONTROLES", LeftList2_3);
 	m_buttonVectorStatic.push_back(m_buttonOptions);
 
-	m_buttonQuit = new ButtonText("EXIT", LeftList3_3);
+	m_buttonQuit = new ButtonText("SALIR", LeftList3_3);
 	m_buttonVectorStatic.push_back(m_buttonQuit);
 
 	m_buttonPlay->setIsFocused(true);
